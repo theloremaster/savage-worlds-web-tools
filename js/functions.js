@@ -1,5 +1,5 @@
-var showDebug = true;
-var alertFallback = true;
+var showDebug = false;
+var alertFallback = false;
 function debugConsole(message) {
 	if(showDebug) {
 

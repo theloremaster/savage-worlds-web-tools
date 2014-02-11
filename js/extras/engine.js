@@ -336,7 +336,7 @@ function updateLocalStats() {
 		var localStats = jQuery.parseJSON( localStorage.localStats );
 		statusHTML = "You have ";
 		statusHTML += localStats.length;
-		statusHTML += " items in your local view ";
+		statusHTML += " items in your local view<br />";
 		if(localStats.length > 0) {
 			statusHTML += "<button type=\"button\" class=\"btn btn-sm btn-danger small js-clear-local\">Clear</button> ";
 			statusHTML += "<button type=\"button\" class=\"btn btn-sm btn-success small js-view-local\">View</button> ";
