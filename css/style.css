@@ -61,3 +61,10 @@ fieldset {
 	color: #fff;
 	text-decoration: none;
 }
+legend {
+	border: none;
+	display: inline;
+	width: auto;
+	padding: 0 20px;
+	margin: 0;
+}

@@ -1,16 +1,27 @@
-#Savage Worlds Sci-Fi Companion Tools
+#Savage Worlds Web Tools
 
-## GitHub Hosted Application Page
-
+###GitHub Hosted Application Page
 [http://jdgwf.github.io/savage-worlds-web-tools/](http://jdgwf.github.io/savage-worlds-web-tools/)
 
-##Overview
+###Overview
+This is a collection of javascript web applications for the Savage Worlds pen and paper role playing system owned by Pinnacle Entertainment Group.
 
-This is a collection of Javascript Web Applications
+Fully Functional Tools Include:
 
-The tools will include:
+* Dice Roller
+* Mass Battle Calculator
+* Starship Creator (in early alpha, needing testing)
+	* TODO:
+		* Save to/from Local Storage
+			* 	Basic functions have been created - needs front end
+* Monster Search
+	* TODO:
+		* Data Entry still needed
 
-* Starship Creator (in early alpha)
+
+The roadmap for these tools include:
+
+* Character Creator (70-80% complete from another project, but not in this toolset yet)
 * Vehicle Creator (planned)
 * Power Armor Creator (planned)
 * Robot Creator (planned)
@@ -18,12 +29,7 @@ The tools will include:
 
 You should be able to double-click on the HTML file in any web modern web browser to use the tools.
 
-##TODO
 
-* Save to/from Local Storage
-	* 	Basic functions have been created - needs front end
-* Creation of a Manifest file for iOS/Android "Native" Homescreening
-* Styling
 
-##Disclaimer
+###Disclaimer
 This tool references the Savage Worlds game system, available from Pinnacle Entertainment Group at [www.peginc.com](http://www.peginc.com "Pinnacle Entertainment Group"). Savage Worlds and all associated logos and trademarks are copyrights of Pinnacle Entertainment Group. Used with permission. Pinnacle makes no representation or warranty as to the quality, viability, or suitability for purpose of this product.

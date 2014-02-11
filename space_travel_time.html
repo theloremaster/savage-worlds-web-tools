@@ -3,37 +3,39 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width">
-	<title>Extras Database</title>
+	<title>Space Travel Time Calculator</title>
 	<link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" type="text/css">
 	<link rel="stylesheet" href="./css/style.css?v=2014021103" type="text/css">
 	<link rel="icon" type="image/png" href="./img/sw_fan_78x50.png" />
 </head>
 <body class="">
-
 <div class="header-bar">
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
-				<h1><a href="./index.html" title="Savage Worlds Web Tools">Savage Worlds Web Tools</a> - Extras Database</h1>
+				<h1><a href="./index.html" title="Savage Worlds Web Tools">Savage Worlds Web Tools</a> - Space Travel Time Calculator</h1>
 			</div>
 		</div>
 	</div>
 </div>
 <div class="container">
-<div class="row">
-	<div class="col-md-3 columns">
-		<fieldset>
-		<div class="search-area"><label>Search Extras<br /><input type="text" value="" id="search-box" /></label><div id="book-checks"></div></div>
-		</fieldset>
-		<fieldset>
-		<div class="js-local-status"></div>
-		</fieldset>
-	</div>
+	<div class="row">
+		<div class="col-md-6 columns">
+			<h4>Distance Travelled &amp; Constant Acceleration Speed</h4>
+			<label title="The Ship's Accelleration/Decelleration Rating">Ship's AD Rating: <select class="js-select-speed">
 
-	<div class="col-md-9 columns">
-		<div id="search-results"></div>
+			</select>
+			</label><br />
+
+			<label>Distance: <select class="js-select-distance">
+			</select>
+			</label><br />
+		</div>
+		<div class="col-md-6 columns">
+			<h4>Travel Time Taken</h4>
+			<div class="js-time-results"></div>
+		</div>
 	</div>
-</div>
 
 	<div class="row">
 		<div class="col-md-12 footer">
@@ -48,15 +50,7 @@
 
 <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
 <script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
-<script src="./js/functions.js?v=2014021103"></script>
-
-<script src="./js/books.js?v=2014021103" type="text/javascript"></script>
-<script src="./js/extras/bestiary_deluxe.js?v=2014021103" type="text/javascript"></script>
-<script src="./js/extras/bestiary_fantasy.js?v=2014021103" type="text/javascript"></script>
-<script src="./js/extras/bestiary_horror.js?v=2014021103" type="text/javascript"></script>
-<script src="./js/extras/bestiary_savage_free.js?v=2014021103" type="text/javascript"></script>
-<script src="./js/extras/engine.js?v=2014021103" type="text/javascript"></script>
-
+<script src="./js/space_travel_time.js?v=2014021103" type="text/javascript"></script>
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -67,5 +61,4 @@
   ga('send', 'pageview');
 
 </script>
-
 </html>

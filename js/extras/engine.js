@@ -338,9 +338,8 @@ function updateLocalStats() {
 		statusHTML += localStats.length;
 		statusHTML += " items in your local view ";
 		if(localStats.length > 0) {
-			statusHTML += "<button type=\"button\" class=\"btn btn-sm btn-primary js-view-local\">View</button> ";
 			statusHTML += "<button type=\"button\" class=\"btn btn-sm btn-danger small js-clear-local\">Clear</button> ";
-			statusHTML += "<button type=\"button\" class=\"btn btn-sm btn-success small js-print-local\">Print</button> ";
+			statusHTML += "<button type=\"button\" class=\"btn btn-sm btn-success small js-view-local\">View</button> ";
 		}
 
 		$(".js-local-status").html( statusHTML );
@@ -356,11 +355,6 @@ function updateLocalStats() {
 				localStorage.localStats = JSON.stringify(Array());
 				updateLocalStats();
 			}
-		});
-
-		$('.js-print-local').off('click');
-		$(".js-print-local").click( function() {
-			window.open("./extras_view.html");
 		});
 
 		$('.js-add-local').off('click');

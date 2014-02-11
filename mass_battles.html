@@ -1,0 +1,174 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<title>Mass Battles</title>
+	<link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" type="text/css">
+	<link rel="stylesheet" href="./css/style.css?v=2014021103" type="text/css">
+	<link rel="icon" type="image/png" href="./img/sw_fan_78x50.png" />
+</head>
+<body class="">
+<div class="header-bar">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<h1><a href="./index.html" title="Savage Worlds Web Tools">Savage Worlds Web Tools</a> - Mass Battles</h1>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="container">
+
+	<div class="row">
+	<div class="col-md-6 columns">
+		<fieldset>
+			<input type="text" name="army1_name" value="Army #1" /><br />
+			<label>Tokens <input type="text" name="army1_tokens" value="10" style="width: 50px" /></label>
+			<label>Leaders' Knowledge: Battle<sup>*</sup> <input type="text" name="army1_skill" value="d10*" style="width: 50px" /></label>
+			<label>Leaders' Spirit<sup>*</sup> <input type="text" name="army1_spirit" value="d8*" style="width: 50px" /></label>
+			<h3>Battle Modifiers</h3>
+			<label>Artillery Support:
+				<select name="army1_artillery">
+					<option selected="selected" value="0">None</option>
+					<option value="1">Light</option>
+					<option value="2">Medium</option>
+					<option value="3">Heavy</option>
+				</select>
+			</label>
+			<label>Air Support:
+				<select name="army1_air">
+					<option selected="selected" value="0">None</option>
+					<option value="1">Light</option>
+					<option value="2">Medium</option>
+					<option value="3">Heavy</option>
+				</select>
+			</label>
+
+			<label>Situational Modifiers:
+				<select name="army1_situational">
+					<option value="-7">-7</option>
+					<option value="-6">-6</option>
+					<option value="-5">-5</option>
+					<option value="-4">-4</option>
+					<option value="-3">-3</option>
+					<option value="-2">-2</option>
+					<option value="-1">-1</option>
+					<option selected="selected" value="0">None</option>
+					<option value="1">+1</option>
+					<option value="2">+2</option>
+					<option value="3">+3</option>
+					<option value="4">+4</option>
+					<option value="5">+5</option>
+					<option value="6">+6</option>
+					<option value="7">+7</option>
+				</select>
+			</label>
+			<fieldset>
+				<legend>Morale Modifiers</legend>
+				<label><input type="checkbox" name="army1_fearless" /> 75% is undead or other fearless drones</label>
+				<label><input type="checkbox" name="army1_fortifified" /> Within Fortification</label>
+				<label><input type="checkbox" name="army1_cornered" /> Cannot Retreat (Cornered)</label>
+			</fieldset>
+		</fieldset>
+	</div>
+	<div class="col-md-6 columns">
+		<fieldset>
+			<input type="text" name="army2_name" value="Army #2" /><br />
+			<label>Tokens <input type="text" name="army2_tokens" value="10" style="width: 50px" /></label>
+			<label>Leaders' Knowledge: Battle<sup>*</sup> <input type="text" name="army2_skill" value="d10*" style="width: 50px" /></label>
+			<label>Leaders' Spirit<sup>*</sup> <input type="text" name="army2_spirit" value="d8*" style="width: 50px" /></label>
+			<h3>Battle Modifiers</h3>
+			<label>Artillery Support:
+				<select name="army2_artillery">
+					<option selected="selected" value="0">None</option>
+					<option value="1">Light</option>
+					<option value="2">Medium</option>
+					<option value="3">Heavy</option>
+				</select>
+			</label>
+			<label>Air Support:
+				<select name="army2_air">
+					<option selected="selected" value="0">None</option>
+					<option value="1">Light</option>
+					<option value="2">Medium</option>
+					<option value="3">Heavy</option>
+				</select>
+			</label>
+
+			<label>Situational Modifiers:
+				<select name="army2_situational">
+					<option value="-7">-7</option>
+					<option value="-6">-6</option>
+					<option value="-5">-5</option>
+					<option value="-4">-4</option>
+					<option value="-3">-3</option>
+					<option value="-2">-2</option>
+					<option value="-1">-1</option>
+					<option selected="selected" value="0">None</option>
+					<option value="1">+1</option>
+					<option value="2">+2</option>
+					<option value="3">+3</option>
+					<option value="4">+4</option>
+					<option value="5">+5</option>
+					<option value="6">+6</option>
+					<option value="7">+7</option>
+				</select>
+			</label>
+			<fieldset>
+				<legend>Morale Modifiers</legend>
+				<label><input type="checkbox" name="army2_fearless" /> 75% is undead or other fearless drones</label>
+				<label><input type="checkbox" name="army2_fortifified" /> Within Fortification</label>
+				<label><input type="checkbox" name="army2_cornered" /> Cannot Retreat (Cornered)</label>
+			</fieldset>
+		</fieldset>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-12 columns" style="text-align: center">
+		<p><sup>*</sup>If the leader is a wild card, put a * behind the d6 or whatever die he/she uses.</p>
+		<input type="button" class="button success" value="Run Round" id="run-round" />
+		<input type="button" class="button" value="Reset Form" id="reset-form" />
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-12 columns">
+		<fieldset>
+			<h3>Battle Results</h3>
+			<div id="results">
+				The Battle Has Not Commenced.
+			</div>
+		</fieldset>
+	</div>
+</div>
+
+	<div class="row">
+		<div class="col-md-12 footer">
+			<img src="./img/sw_fan_78x50.png" alt="Savage Worlds Fan Logo" />
+			<p>This tool references the Savage Worlds game system, available from Pinnacle Entertainment Group at <a href="http:/www.peginc.com" title="Pinnacle Entertainment Group">www.peginc.com</a>. Savage Worlds and all associated logos and trademarks are copyrights of Pinnacle Entertainment Group. Used with permission. Pinnacle makes no representation or warranty as to the quality, viability, or suitability for purpose of this product.</p>
+
+			<p>You can contribute to this project at <a href="https://github.com/jdgwf/savage-worlds-web-tools">https://github.com/jdgwf/savage-worlds-web-tools</a></p>
+		</div>
+	</div>
+
+</div>
+</body>
+
+<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+<script src="./js/functions.js?v=2014021103"></script>
+
+<script src="./js/dice.js?v=2014021103" type="text/javascript"></script>
+<script src="./js/mass-battles.js?v=2014021103" type="text/javascript"></script>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-41054868-5', 'jdgwf.github.io');
+  ga('send', 'pageview');
+
+</script>
+</html>

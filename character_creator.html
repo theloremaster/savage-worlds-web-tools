@@ -1,0 +1,179 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<title>Character Creator</title>
+	<link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" type="text/css">
+	<link rel="stylesheet" href="./css/style.css?v=2014021103" type="text/css">
+	<link rel="icon" type="image/png" href="./img/sw_fan_78x50.png" />
+</head>
+<body class="">
+<div class="header-bar">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<h1><a href="./index.html" title="Savage Worlds Web Tools">Savage Worlds Web Tools</a> - Character Creator</h1>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="container">
+
+<div class="row page-main">
+<div class="col-md-12 columns">
+<h3>In Development</h3><p>Currently working on Edges Data Entry, then on to Races</p>
+	<ul>
+		<li>Race: <span style="color: #bb0">working order, needs data entry</span></li>
+		<li>Rank: <span style="color: orange">half working, turned off completely (out of scope for Novice creation) -- needs advancement assigments</span></li>
+		<li>Attributes: <span style="color: #0d0">working order</span></li>
+		<li>Edges: <span style="color: #bb0">working order, needs data entry</span></li>
+		<li>Hindrances: <span style="color: #0d0">working order</span></li>
+		<li>Perks: <span style="color: #0d0">working order</span></li>
+		<li>Skills: <span style="color: #d00">TODO</span></li>
+		<li>Equipment: <span style="color: #d00">TODO</span><br /><br /></li>
+		<li><strong>Exporting/Importing</strong>: <span style="color: orange">Working internally, no user-side interface.</span><br />Note to hackers: see <em>current_character.exportChar();</em> and <em>current_character.importChar(importString);</em></li>
+		<li><strong>Printing</strong>: <span style="color: #d00">TODO</span></li>
+
+
+	</ul><div class="row">
+	<div class="col-md-12 columns">
+		<fieldset>
+		<legend>Character Info</legend>
+		<div class="row">
+			<div class="col-md-6 columns">
+					<div class="js-info-message chargen-section-message"></div>
+					<label class="pull-left right-padding">Name: <input name="char_name" type="text" /></label>
+
+			</div>
+			<div class="col-md-6 columns">
+				<label class="pull-left right-padding">Race: <select name="char_race"></select></label>
+				<label class="pull-left right-padding">Rank: <select name="char_rank"></select></label>
+				<label class="pull-left right-padding">Character Points: <select name="char_cps"></select></label>
+				<!-- <label class="pull-left right-padding">Gender: <input name="char_gender" type="text" /></label> -->
+			</div>
+		</div>
+		</fieldset>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-6 columns">
+		<fieldset>
+		<legend>Attributes</legend>
+			<div class="js-attr-message chargen-section-message"></div>
+			<label class="pull-left right-padding">Agility: <select class="auto-width js-attribute-select" rel="agility" name="char_attrib_agility"></select></label>
+			<label class="pull-left right-padding">Smarts: <select class="auto-width js-attribute-select" rel="smarts" name="char_attrib_smarts"></select></label>
+			<label class="pull-left right-padding">Spirit: <select class="auto-width js-attribute-select" rel="spirit" name="char_attrib_spirit"></select></label>
+			<label class="pull-left right-padding">Strength: <select class="auto-width js-attribute-select" rel="strength" name="char_attrib_strength"></select></label>
+			<label class="pull-left right-padding">Vigor: <select class="auto-width js-attribute-select" rel="vigor" name="char_attrib_vigor"></select></label>
+		</fieldset>
+	</div>
+
+	<div class="col-md-6 columns">
+		<fieldset>
+		<legend>Derived Stats</legend>
+			<label class="pull-left right-padding">Charisma: <input class="js-secondary-charisma short-text-field" readonly="readonly" type="text" /></label>
+			<label class="pull-left right-padding">Pace: <input class="js-secondary-pace short-text-field" readonly="readonly" type="text" /></label>
+			<label class="pull-left right-padding">Parry: <input class="js-secondary-parry short-text-field" readonly="readonly" type="text" /></label>
+			<label class="pull-left right-padding">Toughness: <input class="js-secondary-toughness short-text-field" readonly="readonly" type="text" /></label>
+
+		</fieldset>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-6 columns">
+		<fieldset>
+		<legend>Edges</legend>
+			<div class="js-edges-message"></div>
+			<div class="js-current-edges-list"></div>
+			<label class="pull-left right-padding js-add-edge-label">Add Edge: <select name="add_edge"></select> <button class="js-add-edge-button btn-xs btn btn-primary" type="button">Add</button></label>
+		</fieldset>
+	</div>
+
+	<div class="col-md-6 columns">
+		<fieldset>
+		<legend>Hindrances</legend>
+			<div class="js-hindrances-message"></div>
+			<div class="js-current-hindrances-list"></div>
+			<label class="pull-left right-padding">Add Hindrance: <select name="add_hindrance"></select> <button class="js-add-hindrance-button btn-xs btn btn-primary" type="button">Add</button></label>
+			<div class="js-current-perks-list"></div>
+		</fieldset>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-6 columns">
+		<fieldset>
+		<legend>Skills</legend>
+			<div class="js-skills-message"></div>
+			<div class="js-current-skills-list"></div>
+			<p>TODO: After Races &amp; Edges</p>
+		</fieldset>
+	</div>
+
+	<div class="col-md-6 columns">
+		<fieldset>
+		<legend>Equipment</legend>
+			<div class="js-equipment-message"></div>
+			<div class="js-current-equipment-list"></div>
+			<p>TODO: After Skills</p>
+		</fieldset>
+	</div>
+</div>
+
+</div>
+
+	<div class="row">
+		<div class="col-md-12 footer">
+			<img src="./img/sw_fan_78x50.png" alt="Savage Worlds Fan Logo" />
+			<p>This tool references the Savage Worlds game system, available from Pinnacle Entertainment Group at <a href="http:/www.peginc.com" title="Pinnacle Entertainment Group">www.peginc.com</a>. Savage Worlds and all associated logos and trademarks are copyrights of Pinnacle Entertainment Group. Used with permission. Pinnacle makes no representation or warranty as to the quality, viability, or suitability for purpose of this product.</p>
+
+			<p>You can contribute to this project at <a href="https://github.com/jdgwf/savage-worlds-web-tools">https://github.com/jdgwf/savage-worlds-web-tools</a></p>
+		</div>
+	</div>
+</div>
+</body>
+
+<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+<script src="./js/functions.js?v=2014021103"></script>
+
+
+<script src="./js/books.js?v=2014021103" type="text/javascript"></script>
+<script src="./js/chargen/skills.js?v=2014021103" type="text/javascript"></script>
+<script src="./js/chargen/edges.js?v=2014021103" type="text/javascript"></script>
+<script src="./js/chargen/equipment.js?v=2014021103" type="text/javascript"></script>
+<script src="./js/chargen/hindrances.js?v=2014021103" type="text/javascript"></script>
+<script src="./js/chargen/races.js?v=2014021103" type="text/javascript"></script>
+<script src="./js/chargen/character.js?v=2014021103" type="text/javascript"></script>
+<script src="./js/chargen/engine.js?v=2014021103" type="text/javascript"></script>
+<script type="text/javascript">
+
+		var localStats = jQuery.parseJSON( localStorage.localStats );
+		displayHTML = "";
+		for(lCounter = 0; lCounter < localStats.length; lCounter++) {
+			displayHTML += displayExtra(localStats[lCounter], lCounter);
+		}
+		if(localStats.length == 0) {
+			displayHTML = "There are no items in your chosen selection.";
+		} else {
+			displayHTML = "<button type=\"button\" style=\"margin-left: 10px\" class=\"btn btn-success pull-right\" onclick=\"window.print()\">Print</button>" + displayHTML;
+		}
+
+		$(".js-display-extra").html( "<button type=\"button\" style=\"margin-left: 10px\" class=\"btn btn-warning pull-right\" onclick=\"window.close()\">Close</button>" +  displayHTML );
+		$(".js-add-local").hide();
+</script>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-41054868-5', 'jdgwf.github.io');
+  ga('send', 'pageview');
+
+</script>
+
+</html>
