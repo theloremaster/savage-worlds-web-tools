@@ -1,0 +1,44 @@
+.js-info-stats {
+	padding: 10px;
+	background: #dedede;
+}
+table {
+	width: 100%;
+	border-top: 1px solid #333;
+	border-left: 1px solid #333;
+}
+table th, table td {
+	border-right: 1px solid #333;
+	border-bottom: 1px solid #333;
+	padding: 2px 5px;
+}
+table th {
+	background: #333;
+	color: #fff;
+}
+label {
+	display: block;
+}
+select,input[type="text"],textarea {
+	padding: 5px 10px;
+	display: block;
+	width: 100%;
+	resize: none;
+}
+.footer {
+	border-top: 2px solid #999;
+	padding: 10px 0;
+	margin: 30px 0 0 0;
+}
+.footer img {
+	float: left;
+	margin: 0 10px 10px 0;
+}
+.js-info-stats h3 {
+	margin: 0;
+	padding: 0;
+}
+.js-info-stats p {
+	margin: 0;
+	padding: 0;
+}

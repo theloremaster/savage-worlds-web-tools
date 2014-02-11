@@ -1,0 +1,70 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<title>Savage Worlds Starship Maker</title>
+	<link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" type="text/css">
+	<link rel="stylesheet" href="./css/style.css" type="text/css">
+</head>
+<body class="">
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<h1>Savage Worlds Starship Maker</h1>
+			<div class="js-info-stats"></div>
+		</div>
+
+	</div>
+	<div class="row">
+		<div class="col-md-6">
+			<h3>Details</h3>
+			<label>Ship Name<br />
+			<input type="text" value="" class="js-set-ship-name" /></label>
+
+			<label>Ship Description<br />
+			<textarea value="" class="js-set-ship-description"></textarea></label>
+
+			<label>Size<br />
+			<select class="js-select-size">
+				<option value="">- Select Starship Size -</option>
+				<option value="6">Small - Fighters, shuttles</option>
+				<option value="8">Medium - Bombers, large shuttles, scout ships</option>
+				<option value="10">Large - Freighters, corvettes, scientific exploration vessels</option>
+				<option value="12">Huge - Destroyers, bulk freighters, light cruisers</option>
+				<option value="14">Giant - Cruisers, small battleships or carriers</option>
+				<option value="16">Gargantuan - Battleships, carriers</option>
+			</select></label>
+
+		</div>
+		<div class="col-md-6">
+			<h3>BB Code</h3>
+			<textarea class="js-bb-code" style="height:200px" readonly="readonly"></textarea>
+		</div>
+	</div>
+	<div class="row js-select-modifications-container" style="display: none">
+		<div class="col-md-6">
+			<h3>Modifications</h3>
+			<div class="js-select-modifications"></div>
+		</div>
+		<div class="col-md-6">
+			<h3>Weapons</h3>
+			<div class="js-select-weapons"></div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12 footer">
+			<img src="./img/sw_fan_78x50.png" alt="Savage Worlds Fan Logo" />
+			<p>This tool references the Savage Worlds game system, available from Pinnacle Entertainment Group at <a href="http:/www.peginc.com" title="Pinnacle Entertainment Group">www.peginc.com</a>. Savage Worlds and all associated logos and trademarks are copyrights of Pinnacle Entertainment Group. Used with permission. Pinnacle makes no representation or warranty as to the quality, viability, or suitability for purpose of this product.</p>
+		</div>
+	</div>
+</div>
+</body>
+
+<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+<script src="./js/localstorage.js"></script>
+<script src="./js/starship_mods.js"></script>
+<script src="./js/vehicle_weapons.js"></script>
+<script src="./js/starships.js"></script>
+</html>
