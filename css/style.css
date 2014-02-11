@@ -42,3 +42,8 @@ select,input[type="text"],textarea {
 	margin: 0;
 	padding: 0;
 }
+fieldset {
+	border: solid 1px #ddd;
+	padding: 15px;
+	margin: 15px;
+}
