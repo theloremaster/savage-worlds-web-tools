@@ -216,7 +216,7 @@ function displayExtra(extra, indexNumber) {
 			extraHTML += extra.page;
 
 		if( extra.book.buyme )
-			extraHTML += " <a class=\"btn btn-success btn-sm\" href=\"" + extra.book.buyme + "\" target=\"buyme\" title=\"Click here to buy this book\">Get This Book</a>";
+			extraHTML += " <a class=\"btn btn-success btn-sm\" href=\"" + extra.book.buyme + "\" target=\"buyme\" title=\"Click here to buy this book\">Buy This Book</a>";
 		extraHTML += "<br />";
 		extraHTML += "&copy; " + extra.book.copyright + "</fieldset>";
 		extraHTML += "</div>";
