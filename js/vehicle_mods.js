@@ -229,15 +229,12 @@ var vehicle_modifications = Array(
 		description: "Motorcycles and other “ridden” vehicles offer no protection for their passengers. Crew get no Armor bonus should it sustain a Crew critical hit.",
 		get_max:  function(selected_vehicle) { return 1 },
 		get_mod_cost: function(selected_vehicle) {
-			return selected_vehicle.size / 2;
+			return 0;
 		},
 		get_cost: function(selected_vehicle) {
-			return 2000000 * selected_vehicle.size;
-		},
-		calc_weight: 10000, // the very last thing to be calculated
-		get_mod_effect: function(selected_vehicle) {
-			selected_vehicle.cost = selected_vehicle.cost - selected_vehicle.base_cost / 2;
+			return  (selected_vehicle.base_cost / 2 ) * -1;
 		}
+
 	},
 	{
 		name: "Four Wheel Drive",
