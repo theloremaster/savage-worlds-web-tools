@@ -81,7 +81,6 @@ function rollDice(numberOfDice, totalModifier) // 2d6+3 would be rollDice(2,3)
 
 	numberOfDice = numberOfDice.replace("*", "");
 
-
 	explodingDice = 0;
 	if(numberOfDice.indexOf("d") > -1) {
 		rollNumber = numberOfDice.substring(0, numberOfDice.indexOf("d")) / 1;
@@ -120,7 +119,6 @@ function rollDice(numberOfDice, totalModifier) // 2d6+3 would be rollDice(2,3)
 	rolls += "";
 
 	currentRoll++;
-
 
 	return returnTotal;
 }
@@ -233,7 +231,6 @@ function traitSuccessMargin(roll, targetNumber) {
 	return html;
 }
 
-
 function damageSuccessMargin(roll, toughness, armor, armorpiercing) {
 	debugConsole("damageSuccessMargin(roll: " + roll + ", toughness: " + toughness + ", armor: " + armor + ", armorpiercing: " + armorpiercing + ")");
 	armor = armor/1 - armorpiercing/1;
@@ -258,7 +255,6 @@ function damageSuccessMargin(roll, toughness, armor, armorpiercing) {
 	}
 	return html;
 }
-
 
 $("#roll-dice").click( function() {
 

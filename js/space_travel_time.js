@@ -2,7 +2,6 @@ auDistance = 149597870700; // meters
 speedOfLight = 299792458; // m/s
 gSpeed = 9.81; // m/s/s
 
-
 var speedList = Array(
 	0.10,
 	0.25,
@@ -66,7 +65,6 @@ var distanceList = Array(
 	50
 );
 
-
 function propogateDistanceOptions() {
 	html = ""
 	for(counter = 0; counter < distanceList.length; counter++) {
@@ -91,7 +89,6 @@ function propogateSpeedOptions() {
 $(".js-select-speed, .js-select-distance").change( function() {
 	calculateTime();
 });
-
 
 function calculateTime() {
 	speedSelect = $(".js-select-speed option:selected").val();

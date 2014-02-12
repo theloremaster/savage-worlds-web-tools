@@ -2,20 +2,6 @@
 Need to sort all installed vehicle mods during vehicle calculation by calc_weight,
 if calc_weight is empty or undefined, it should be assumed 5 */
 
-function simplify_cost(input_price) {
-	if(input_price > 1000000000) {
-		// it's a billion+
-		return input_price / 1000000000 + 'B';
-	} else if(input_price > 1000000) {
-		// it's a million+
-		return input_price / 1000000 + 'M';
-	} else if(input_price > 1000){
-		// it's a thousand+
-		return input_price / 1000 + 'K';
-	} else {
-		return input_price;
-	}
-}
 
 var vehicle_sizes = Array(
 	{
@@ -156,8 +142,6 @@ var vehicle_sizes = Array(
 
 );
 
-
-
 function sw_vehicle() {
 	this.vehicle_name = "(nameless)";
 	this.vehicle_description = "";
@@ -170,6 +154,8 @@ function sw_vehicle() {
 	this.ts = 0;
 	this.climb = 0;
 	this.toughness = 0;
+	this.base_toughness = 0;
+	this.base_cost = 0;
 	this.armor = 0;
 	this.mods = 0;
 	this.base_mods = 0;
@@ -197,15 +183,20 @@ function sw_vehicle() {
 		html_return = "";
 
 		html_return += "<h4>" + this.vehicle_name + "</h4>";
-		html_return += "<p>" + this.vehicle_description + "</p><br />";
+		html_return += "<p>";
+
+		html_return += this.vehicle_description + "</p><br />";
 
 		if(this.selected_size.vehicle_label) {
-			html_return += "<strong>" + this.selected_size.vehicle_label + " Starvehicle</strong>:";
+			html_return += "<strong>" + this.selected_size.vehicle_label + " Vehicle</strong>:";
 			html_return += " Acc/TS " + this.acc + "/" + this.ts + ", ";
-			html_return += "Climb " + this.climb + ", ";
+			if(this.aircraft)
+				html_return += "Climb " + this.climb + ", ";
 			html_return += "Toughness " + this.toughness + " (" + this.armor + "), ";
 			html_return += "Crew " + this.crew + ", ";
-			html_return += "Cost $" + simplify_cost(this.cost) + "" + "<br />";
+			html_return += "Size " + this.size + ", ";
+			html_return += "Cost $" + simplify_cost(this.cost) + "<br />";
+
 
 			html_return += "<strong>Energy Capacity</strong>: " + this.energy_capacity + "<br />";
 			html_return += "<strong>Mods Available</strong>: " + this.mods_available + "<br />";
@@ -257,12 +248,14 @@ function sw_vehicle() {
 			html_return += "\n";
 
 		if(this.selected_size.vehicle_label) {
-			html_return += "[b]" + this.selected_size.vehicle_label + " Starvehicle[/b]:";
+			html_return += "[b]" + this.selected_size.vehicle_label + " Vehicle[/b]:";
 			html_return += " Acc/TS " + this.acc + "/" + this.ts + ", ";
 			html_return += "Climb " + this.climb + ", ";
 			html_return += "Toughness " + this.toughness + " (" + this.armor + "), ";
 			html_return += "Crew " + this.crew + ", ";
+			html_return += "Size " + this.size + ", ";
 			html_return += "Cost $" + simplify_cost(this.cost) + "" + "\n";
+
 
 			html_return += "[b]Energy Capacity[/b]: " + this.energy_capacity + "\n";
 			html_return += "[b]Mods Available[/b]: " + this.mods_available + "\n";
@@ -341,11 +334,13 @@ function sw_vehicle() {
 		this.ts = 0;
 		this.climb = 0;
 		this.toughness = 0;
+		this.base_toughness = 0;
 		this.armor = 0;
 		this.mods = 0;
 		this.base_mods = 0;
 		this.crew = 0;
 		this.cost = 0;
+		this.base_cost = 0;
 		this.energy_capacity =  0;
 		this.base_energy_capacity =  0;
 		this.provisions = 0;
@@ -437,15 +432,18 @@ function sw_vehicle() {
 			this.aircraft = 0;
 			this.climb = this.selected_size.climb;
 			this.toughness = this.selected_size.toughness;
+			this.base_toughness = this.selected_size.toughness;
 			this.armor = this.selected_size.armor;
 			this.mods = this.selected_size.mods;
 			this.base_mods = this.selected_size.mods;
 			this.crew = this.selected_size.crew;
 			this.cost = this.selected_size.cost;
+			this.base_cost =  this.selected_size.cost;
 			this.energy_capacity = this.selected_size.energy_capacity;
 			this.base_energy_capacity = this.selected_size.energy_capacity;
 			this.provisions = this.selected_size.provisions;
 
+			this.selected_modifications.sort( sort_mods );
 			// Modify Vehicle as per mods
 			this.selected_modifications_list = {};
 			for(calcModCount = 0; calcModCount < this.selected_modifications.length; calcModCount++) {
@@ -465,6 +463,8 @@ function sw_vehicle() {
 			}
 
 			// Weaponise Vehicle as per weapons
+			this.selected_weapons.sort( sort_mods );
+
 			this.selected_weapons_list = {};
 			fixedWeaponModUsage = 0;
 			linkedWeaponModUsage = Array();
@@ -477,7 +477,6 @@ function sw_vehicle() {
 				if(this.selected_weapons[calcModCount].linked > 0)
 					weaponCost = weaponCost / 2;
 				this.mods = this.mods - weaponCost;
-
 
 				this.cost += this.selected_weapons[calcModCount].cost;
 
@@ -506,7 +505,6 @@ function sw_vehicle() {
 						this.selected_weapons_list[weaponListName]++;
 				}
 			}
-
 
 			this.mods_available = this.mods; // - sort_selected_modifications_list.length;
 
@@ -644,7 +642,10 @@ function propogate_size_select() {
 		if( current_vehicle.selected_size.size )
 			if(  current_vehicle.selected_size.size == vehicle_sizes[sizeCount].size )
 				isSelected = " selected='selected'";
-		selectOptions += "<option value='" + vehicle_sizes[sizeCount].size + "'" + isSelected + ">" + vehicle_sizes[sizeCount].vehicle_label + " - " + vehicle_sizes[sizeCount].examples + "</option>";
+		selectOptions += "<option value='" + vehicle_sizes[sizeCount].size + "'" + isSelected + ">" + vehicle_sizes[sizeCount].vehicle_label + " - Size " + vehicle_sizes[sizeCount].size;
+		if( vehicle_sizes[sizeCount].examples )
+			selectOptions += " - " + vehicle_sizes[sizeCount].examples;
+		selectOptions += "</option>";
 	}
 	$(".js-select-size").html(selectOptions);
 }
@@ -670,7 +671,7 @@ function propogate_add_mods() {
 			else
 				modifications_html += "<span class='glyphicon glyphicon-blank'></span>";
 
-			if( current_vehicle.mods_available >= mod_cost && ( vehicle_modifications[mod_count].max == "u" || vehicle_modifications[mod_count].max > vehicle_mod_count) )
+			if( current_vehicle.mods_available >= mod_cost && ( vehicle_modifications[mod_count].get_max(current_vehicle) == "u" || vehicle_modifications[mod_count].get_max(current_vehicle) > vehicle_mod_count) )
 				modifications_html += " <span ref='" + vehicle_modifications[mod_count].name  + "' class='js-add-mod glyphicon glyphicon-plus color-green'></span>";
 
 				modifications_html += "</td>";
@@ -679,10 +680,9 @@ function propogate_add_mods() {
 				modifications_html += "<td style='color: green'>" + vehicle_modifications[mod_count].name + "</td>";
 			else
 				modifications_html += "<td>" + vehicle_modifications[mod_count].name + "</td>";
-			modifications_html += "<td>" + vehicle_mod_count + "/" + vehicle_modifications[mod_count].max  + "</td>";
+			modifications_html += "<td>" + vehicle_mod_count + "/" + vehicle_modifications[mod_count].get_max(current_vehicle)  + "</td>";
 			modifications_html += "<td>" + mod_cost + "</td>";
 			modifications_html += "<td>" + simplify_cost(vehicle_modifications[mod_count].get_cost(current_vehicle)) + "</td>";
-
 
 			modifications_html += "</tr>";
 		}
@@ -696,7 +696,6 @@ function propogate_weapon_mods() {
 	weapon_mods_html = "<h4>Installed Weapons</h4>";
 	if(available_links.length > 0)
 		weapon_mods_html += "Available Links: " + (available_links.length - 1) + "<br />";
-
 
 	if(current_vehicle.selected_weapons.length > 0) {
 		weapon_mods_html += "<table><thead><tr>";
@@ -776,27 +775,24 @@ function propogate_weapon_mods() {
 			weapon_mods_html += "<td>" + mod_cost + "</td>";
 			weapon_mods_html += "<td>" + simplify_cost(vehicle_weapons[mod_count].cost ) + "</td>";
 
-
 			weapon_mods_html += "</tr>";
 		}
-
 
 		currentWeaponClass = vehicle_weapons[mod_count].classification;
 		weaponCount++;
 	}
 
-
 	$(".js-select-weapons").html(weapon_mods_html);
 }
 
 function refresh_vehicle_page() {
+	console.log("js-select-modifications-container called");
 	$(".js-info-stats").html( current_vehicle.create_stats_block() );
-
 
 	$(".js-bb-code").val( current_vehicle.export_bbcode() );
 
-	$(".js-set-vehicle-name").val(current_vehicle.vehicle_name);
-	$(".js-set-vehicle-description").val(current_vehicle.vehicle_description);
+	//$(".js-set-vehicle-name").val(current_vehicle.vehicle_name);
+	//$(".js-set-vehicle-description").val(current_vehicle.vehicle_description);
 
 	$('.js-set-vehicle-name').unbind('keyup');
 	$(".js-set-vehicle-name").keyup( function() {
@@ -810,7 +806,6 @@ function refresh_vehicle_page() {
 		refresh_vehicle_page();
 	});
 
-
 	propogate_size_select();
 	$('.js-select-size').unbind('change');
 	$(".js-select-size").change( function() {
@@ -819,6 +814,7 @@ function refresh_vehicle_page() {
 	});
 
 	if( current_vehicle.selected_size.vehicle_label ) {
+
 		propogate_add_mods();
 		$('.js-add-mod').unbind('click');
 		$(".js-add-mod").click( function() {
@@ -869,7 +865,6 @@ function refresh_vehicle_page() {
 		$(".js-select-modifications-container").fadeOut();
 	}
 }
-
 
 var current_vehicle;
 $(window).load(

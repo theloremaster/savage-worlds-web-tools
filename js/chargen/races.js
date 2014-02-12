@@ -26,7 +26,6 @@ var chargen_races = Array(
 		)
 	},
 
-
 	/*
 		Chronicles of Sol
 		===============================

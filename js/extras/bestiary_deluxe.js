@@ -149,7 +149,6 @@ extraDatabase = extraDatabase.concat(Array(
 	}
 ));
 
-
 extraDatabase = extraDatabase.concat(Array(
 	{
 		name: "Cat, Small",
@@ -202,7 +201,6 @@ extraDatabase = extraDatabase.concat(Array(
 	}
 ));
 
-
 extraDatabase = extraDatabase.concat(Array(
 	{
 		name: "Dog/Wolf",
@@ -249,7 +247,6 @@ extraDatabase = extraDatabase.concat(Array(
 		page: "p135"
 	}
 ));
-
 
 extraDatabase = extraDatabase.concat(Array(
 	{
@@ -309,7 +306,6 @@ extraDatabase = extraDatabase.concat(Array(
 		page: "p136"
 	}
 ));
-
 
 extraDatabase = extraDatabase.concat(Array(
 	{
@@ -478,7 +474,6 @@ extraDatabase = extraDatabase.concat(Array(
 	}
 ));
 
-
 extraDatabase = extraDatabase.concat(Array(
 	{
 		name: "Water Elemental",
@@ -536,7 +531,6 @@ extraDatabase = extraDatabase.concat(Array(
 		page: "p137"
 	}
 ));
-
 
 extraDatabase = extraDatabase.concat(Array(
 	{
@@ -597,7 +591,6 @@ extraDatabase = extraDatabase.concat(Array(
 		page: "p137"
 	}
 ));
-
 
 
 extraDatabase = extraDatabase.concat(Array(
@@ -661,7 +654,6 @@ extraDatabase = extraDatabase.concat(Array(
 ));
 
 
-
 extraDatabase = extraDatabase.concat(Array(
 	{
 		name: "Ghost",
@@ -704,7 +696,6 @@ extraDatabase = extraDatabase.concat(Array(
 		page: "p137"
 	}
 ));
-
 
 extraDatabase = extraDatabase.concat(Array(
 	{
@@ -750,7 +741,6 @@ extraDatabase = extraDatabase.concat(Array(
 		page: "p137-p138"
 	}
 ));
-
 
 extraDatabase = extraDatabase.concat(Array(
 	{
@@ -840,7 +830,6 @@ extraDatabase = extraDatabase.concat(Array(
 	}
 ));
 
-
 extraDatabase = extraDatabase.concat(Array(
 	{
 		name: "Lich",
@@ -892,7 +881,6 @@ extraDatabase = extraDatabase.concat(Array(
 		page: "p138"
 	}
 ));
-
 
 
 
@@ -948,7 +936,6 @@ extraDatabase = extraDatabase.concat(Array(
 	}
 ));
 
-
 extraDatabase = extraDatabase.concat(Array(
 	{
 		name: "Mech (Sentinel)",
@@ -997,7 +984,6 @@ extraDatabase = extraDatabase.concat(Array(
 		page: "p138"
 	}
 ));
-
 
 
 
@@ -1050,7 +1036,6 @@ extraDatabase = extraDatabase.concat(Array(
 	}
 ));
 
-
 extraDatabase = extraDatabase.concat(Array(
 	{
 		name: "Mule",
@@ -1099,7 +1084,6 @@ extraDatabase = extraDatabase.concat(Array(
 	}
 ));
 
-
 extraDatabase = extraDatabase.concat(Array(
 	{
 		name: "Ogre",
@@ -1140,7 +1124,6 @@ extraDatabase = extraDatabase.concat(Array(
 		page: "p139"
 	}
 ));
-
 
 
 extraDatabase = extraDatabase.concat(Array(
@@ -1185,7 +1168,6 @@ extraDatabase = extraDatabase.concat(Array(
 		page: "p139"
 	}
 ));
-
 
 extraDatabase = extraDatabase.concat(Array(
 	{
@@ -1233,7 +1215,6 @@ extraDatabase = extraDatabase.concat(Array(
 		page: "p139-p140"
 	}
 ));
-
 
 
 extraDatabase = extraDatabase.concat(Array(
@@ -1289,7 +1270,6 @@ extraDatabase = extraDatabase.concat(Array(
 ));
 
 
-
 extraDatabase = extraDatabase.concat(Array(
 	{
 		name: "Shark, Medium Maneater",
@@ -1329,7 +1309,6 @@ extraDatabase = extraDatabase.concat(Array(
 		page: "p140"
 	}
 ));
-
 
 extraDatabase = extraDatabase.concat(Array(
 	{
@@ -1376,7 +1355,6 @@ extraDatabase = extraDatabase.concat(Array(
 		page: "p140"
 	}
 ));
-
 
 extraDatabase = extraDatabase.concat(Array(
 	{
@@ -1470,7 +1448,6 @@ extraDatabase = extraDatabase.concat(Array(
 	}
 ));
 
-
 extraDatabase = extraDatabase.concat(Array(
 	{
 		name: "Spider, Giant",
@@ -1523,7 +1500,6 @@ extraDatabase = extraDatabase.concat(Array(
 	}
 ));
 
-
 extraDatabase = extraDatabase.concat(Array(
 	{
 		name: "Swarm",
@@ -1568,7 +1544,6 @@ extraDatabase = extraDatabase.concat(Array(
 		page: "p141"
 	}
 ));
-
 
 extraDatabase = extraDatabase.concat(Array(
 	{
@@ -1624,7 +1599,6 @@ extraDatabase = extraDatabase.concat(Array(
 		page: "p141"
 	}
 ));
-
 
 extraDatabase = extraDatabase.concat(Array(
 	{
@@ -1722,7 +1696,6 @@ extraDatabase = extraDatabase.concat(Array(
 	}
 ));
 
-
 extraDatabase = extraDatabase.concat(Array(
 	{
 		name: "Vampire, Young",
@@ -1805,7 +1778,6 @@ extraDatabase = extraDatabase.concat(Array(
 
 
 
-
 extraDatabase = extraDatabase.concat(Array(
 	{
 		name: "Werewolf",
@@ -1862,7 +1834,6 @@ extraDatabase = extraDatabase.concat(Array(
 		page: "p142"
 	}
 ));
-
 
 
 extraDatabase = extraDatabase.concat(Array(

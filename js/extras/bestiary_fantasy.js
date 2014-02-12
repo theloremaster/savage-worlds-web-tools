@@ -15,7 +15,6 @@ var currentBook = books_list[1];
 
 extraBooks = extraBooks.concat(currentBook);
 
-
 extraDatabase = extraDatabase.concat(Array(
 	{
 		name: "Arachnaurs",
@@ -70,7 +69,6 @@ extraDatabase = extraDatabase.concat(Array(
 	}
 ));
 
-
 extraDatabase = extraDatabase.concat(Array(
 	{
 		name: "Assassin",
@@ -114,7 +112,6 @@ extraDatabase = extraDatabase.concat(Array(
 		page: "p100-p101"
 	}
 ));
-
 
 extraDatabase = extraDatabase.concat(Array(
 	{
@@ -161,7 +158,6 @@ extraDatabase = extraDatabase.concat(Array(
 ));
 
 
-
 extraDatabase = extraDatabase.concat(Array(
 	{
 		name: "Bandit",
@@ -201,7 +197,6 @@ extraDatabase = extraDatabase.concat(Array(
 		page: "p101"
 	}
 ));
-
 
 extraDatabase = extraDatabase.concat(Array(
 	{
@@ -298,7 +293,6 @@ extraDatabase = extraDatabase.concat(Array(
 	}
 ));
 
-
 extraDatabase = extraDatabase.concat(Array(
 	{
 		name: "Bargest",
@@ -357,7 +351,6 @@ extraDatabase = extraDatabase.concat(Array(
 ));
 
 
-
 extraDatabase = extraDatabase.concat(Array(
 	{
 		name: "Bee, Giant",
@@ -409,7 +402,6 @@ extraDatabase = extraDatabase.concat(Array(
 		page: "p103"
 	}
 ));
-
 
 
 extraDatabase = extraDatabase.concat(Array(
@@ -467,7 +459,6 @@ extraDatabase = extraDatabase.concat(Array(
 	}
 ));
 
-
 extraDatabase = extraDatabase.concat(Array(
 	{
 		name: "Boar",
@@ -515,7 +506,6 @@ extraDatabase = extraDatabase.concat(Array(
 		page: "p103"
 	}
 ));
-
 
 extraDatabase = extraDatabase.concat(Array(
 	{
@@ -567,7 +557,6 @@ extraDatabase = extraDatabase.concat(Array(
 		page: "p105"
 	}
 ));
-
 
 extraDatabase = extraDatabase.concat(Array(
 	{
@@ -623,7 +612,6 @@ extraDatabase = extraDatabase.concat(Array(
 		page: "p105"
 	}
 ));
-
 
 extraDatabase = extraDatabase.concat(Array(
 	{
@@ -684,7 +672,6 @@ extraDatabase = extraDatabase.concat(Array(
 		page: "p105"
 	}
 ));
-
 
 extraDatabase = extraDatabase.concat(Array(
 	{
@@ -750,7 +737,6 @@ extraDatabase = extraDatabase.concat(Array(
 	}
 ));
 
-
 extraDatabase = extraDatabase.concat(Array(
 	{
 		name: "Caveman Warrior",
@@ -791,7 +777,6 @@ extraDatabase = extraDatabase.concat(Array(
 		page: "p106"
 	}
 ));
-
 
 extraDatabase = extraDatabase.concat(Array(
 	{
@@ -834,7 +819,6 @@ extraDatabase = extraDatabase.concat(Array(
 		page: "p106"
 	}
 ));
-
 
 extraDatabase = extraDatabase.concat(Array(
 	{
@@ -882,7 +866,6 @@ extraDatabase = extraDatabase.concat(Array(
 		page: "p106-p107"
 	}
 ));
-
 
 extraDatabase = extraDatabase.concat(Array(
 	{
@@ -933,7 +916,6 @@ extraDatabase = extraDatabase.concat(Array(
 		page: "p107"
 	}
 ));
-
 
 
 extraDatabase = extraDatabase.concat(Array(
@@ -994,7 +976,6 @@ extraDatabase = extraDatabase.concat(Array(
 
 
 
-
 extraDatabase = extraDatabase.concat(Array(
 	{
 		name: "Chimera",
@@ -1051,7 +1032,6 @@ extraDatabase = extraDatabase.concat(Array(
 ));
 
 
-
 extraDatabase = extraDatabase.concat(Array(
 	{
 		name: "Citizen",
@@ -1090,7 +1070,6 @@ extraDatabase = extraDatabase.concat(Array(
 		page: "p108"
 	}
 ));
-
 
 extraDatabase = extraDatabase.concat(Array(
 	{
@@ -1142,7 +1121,6 @@ extraDatabase = extraDatabase.concat(Array(
 ));
 
 
-
 extraDatabase = extraDatabase.concat(Array(
 	{
 		name: "Crocotta",
@@ -1189,7 +1167,6 @@ extraDatabase = extraDatabase.concat(Array(
 		page: "p108"
 	}
 ));
-
 
 
 extraDatabase = extraDatabase.concat(Array(
@@ -1240,7 +1217,6 @@ extraDatabase = extraDatabase.concat(Array(
 		page: "p108"
 	}
 ));
-
 
 
 
@@ -1317,7 +1293,6 @@ extraDatabase = extraDatabase.concat(Array(
 ));
 
 
-
 extraDatabase = extraDatabase.concat(Array(
 	{
 		name: "Changeling",
@@ -1373,7 +1348,6 @@ extraDatabase = extraDatabase.concat(Array(
 		page: "p109"
 	}
 ));
-
 
 
 extraDatabase = extraDatabase.concat(Array(
@@ -1455,7 +1429,6 @@ extraDatabase = extraDatabase.concat(Array(
 	}
 ));
 
-
 extraDatabase = extraDatabase.concat(Array(
 	{
 		name: "Demonic Soldier",
@@ -1512,7 +1485,6 @@ extraDatabase = extraDatabase.concat(Array(
 		page: "p110-111"
 	}
 ));
-
 
 extraDatabase = extraDatabase.concat(Array(
 	{
@@ -1580,7 +1552,6 @@ extraDatabase = extraDatabase.concat(Array(
 		page: "p111"
 	}
 ));
-
 
 
 extraDatabase = extraDatabase.concat(Array(
@@ -1663,7 +1634,6 @@ extraDatabase = extraDatabase.concat(Array(
 ));
 
 
-
 extraDatabase = extraDatabase.concat(Array(
 	{
 		name: "Succubus/Incubus",
@@ -1728,7 +1698,6 @@ extraDatabase = extraDatabase.concat(Array(
 ));
 
 
-
 extraDatabase = extraDatabase.concat(Array(
 	{
 		name: "Dire Wolf",
@@ -1775,7 +1744,6 @@ extraDatabase = extraDatabase.concat(Array(
 		page: "p112"
 	}
 ));
-
 
 extraDatabase = extraDatabase.concat(Array(
 	{
@@ -1825,7 +1793,6 @@ extraDatabase = extraDatabase.concat(Array(
 		page: "p112"
 	}
 ));
-
 
 extraDatabase = extraDatabase.concat(Array(
 	{
@@ -1904,7 +1871,6 @@ extraDatabase = extraDatabase.concat(Array(
 ));
 
 
-
 extraDatabase = extraDatabase.concat(Array(
 	{
 		name: "Dragon Man Soldier",
@@ -1962,7 +1928,6 @@ extraDatabase = extraDatabase.concat(Array(
 		page: "p114"
 	}
 ));
-
 
 extraDatabase = extraDatabase.concat(Array(
 	{
@@ -2027,7 +1992,6 @@ extraDatabase = extraDatabase.concat(Array(
 	}
 ));
 
-
 extraDatabase = extraDatabase.concat(Array(
 	{
 		name: "Drake",
@@ -2087,7 +2051,6 @@ extraDatabase = extraDatabase.concat(Array(
 	}
 ));
 
-
 extraDatabase = extraDatabase.concat(Array(
 	{
 		name: "Dryad",
@@ -2142,7 +2105,6 @@ extraDatabase = extraDatabase.concat(Array(
 	}
 ));
 
-
 extraDatabase = extraDatabase.concat(Array(
 	{
 		name: "Dwarf",
@@ -2185,7 +2147,6 @@ extraDatabase = extraDatabase.concat(Array(
 		page: "p115"
 	}
 ));
-
 
 extraDatabase = extraDatabase.concat(Array(
 	{
@@ -2287,7 +2248,6 @@ extraDatabase = extraDatabase.concat(Array(
 	}
 ));
 
-
 extraDatabase = extraDatabase.concat(Array(
 	{
 		name: "Water Elemental",
@@ -2349,7 +2309,6 @@ extraDatabase = extraDatabase.concat(Array(
 		page: "p116-117"
 	}
 ));
-
 
 extraDatabase = extraDatabase.concat(Array(
 	{
@@ -2414,7 +2373,6 @@ extraDatabase = extraDatabase.concat(Array(
 		page: "p115-p116"
 	}
 ));
-
 
 
 extraDatabase = extraDatabase.concat(Array(
@@ -2483,7 +2441,6 @@ extraDatabase = extraDatabase.concat(Array(
 	}
 ));
 
-
 extraDatabase = extraDatabase.concat(Array(
 	{
 		name: "Elf",
@@ -2528,7 +2485,6 @@ extraDatabase = extraDatabase.concat(Array(
 		page: "p117"
 	}
 ));
-
 
 extraDatabase = extraDatabase.concat(Array(
 	{
@@ -2576,7 +2532,6 @@ extraDatabase = extraDatabase.concat(Array(
 		page: "p117-p118"
 	}
 ));
-
 
 
 extraDatabase = extraDatabase.concat(Array(
@@ -2697,7 +2652,6 @@ extraDatabase = extraDatabase.concat(Array(
 	}
 ));
 
-
 extraDatabase = extraDatabase.concat(Array(
 	{
 		name: "Natural Gargoyle",
@@ -2750,7 +2704,6 @@ extraDatabase = extraDatabase.concat(Array(
 		page: "p118"
 	}
 ));
-
 
 extraDatabase = extraDatabase.concat(Array(
 	{
@@ -2818,7 +2771,6 @@ extraDatabase = extraDatabase.concat(Array(
 ));
 
 
-
 extraDatabase = extraDatabase.concat(Array(
 	{
 		name: "Ghost Blade",
@@ -2870,7 +2822,6 @@ extraDatabase = extraDatabase.concat(Array(
 		page: "p119"
 	}
 ));
-
 
 extraDatabase = extraDatabase.concat(Array(
 	{
@@ -2932,7 +2883,6 @@ extraDatabase = extraDatabase.concat(Array(
 
 
 
-
 extraDatabase = extraDatabase.concat(Array(
 	{
 		name: "Common Giant",
@@ -2986,7 +2936,6 @@ extraDatabase = extraDatabase.concat(Array(
 		page: "p120"
 	}
 ));
-
 
 
 
@@ -3053,7 +3002,6 @@ extraDatabase = extraDatabase.concat(Array(
 	}
 ));
 
-
 extraDatabase = extraDatabase.concat(Array(
 	{
 		name: "Frost Giant",
@@ -3117,7 +3065,6 @@ extraDatabase = extraDatabase.concat(Array(
 	}
 ));
 
-
 extraDatabase = extraDatabase.concat(Array(
 	{
 		name: "Sea Giant",
@@ -3171,7 +3118,6 @@ extraDatabase = extraDatabase.concat(Array(
 		page: "p121"
 	}
 ));
-
 
 
 extraDatabase = extraDatabase.concat(Array(
@@ -3230,7 +3176,6 @@ extraDatabase = extraDatabase.concat(Array(
 
 
 
-
 extraDatabase = extraDatabase.concat(Array(
 	{
 		name: "Goblin",
@@ -3279,7 +3224,6 @@ extraDatabase = extraDatabase.concat(Array(
 		page: "p121-p122"
 	}
 ));
-
 
 
 extraDatabase = extraDatabase.concat(Array(
@@ -3337,7 +3281,6 @@ extraDatabase = extraDatabase.concat(Array(
 ));
 
 
-
 extraDatabase = extraDatabase.concat(Array(
 	{
 		name: "Golden Ram",
@@ -3388,7 +3331,6 @@ extraDatabase = extraDatabase.concat(Array(
 		page: "p122"
 	}
 ));
-
 
 
 extraDatabase = extraDatabase.concat(Array(
@@ -3456,7 +3398,6 @@ extraDatabase = extraDatabase.concat(Array(
 		page: "p123"
 	}
 ));
-
 
 
 
@@ -3534,7 +3475,6 @@ extraDatabase = extraDatabase.concat(Array(
 	}
 ));
 
-
 extraDatabase = extraDatabase.concat(Array(
 	{
 		name: "Lava Golem",
@@ -3603,7 +3543,6 @@ extraDatabase = extraDatabase.concat(Array(
 ));
 
 
-
 extraDatabase = extraDatabase.concat(Array(
 	{
 		name: "Metal Golem",
@@ -3664,7 +3603,6 @@ extraDatabase = extraDatabase.concat(Array(
 		page: "p124"
 	}
 ));
-
 
 extraDatabase = extraDatabase.concat(Array(
 	{
@@ -3727,7 +3665,6 @@ extraDatabase = extraDatabase.concat(Array(
 	}
 ));
 
-
 extraDatabase = extraDatabase.concat(Array(
 	{
 		name: "Straw Golem",
@@ -3781,7 +3718,6 @@ extraDatabase = extraDatabase.concat(Array(
 		page: "p124"
 	}
 ));
-
 
 extraDatabase = extraDatabase.concat(Array(
 	{
@@ -3851,7 +3787,6 @@ extraDatabase = extraDatabase.concat(Array(
 	}
 ));
 
-
 extraDatabase = extraDatabase.concat(Array(
 	{
 		name: "Griffin",
@@ -3917,7 +3852,6 @@ extraDatabase = extraDatabase.concat(Array(
 	}
 ));
 
-
 extraDatabase = extraDatabase.concat(Array(
 	{
 		name: "Hag",
@@ -3970,7 +3904,6 @@ extraDatabase = extraDatabase.concat(Array(
 	}
 ));
 
-
 extraDatabase = extraDatabase.concat(Array(
 	{
 		name: "Half-Folk",
@@ -4012,7 +3945,6 @@ extraDatabase = extraDatabase.concat(Array(
 		page: "p126"
 	}
 ));
-
 
 extraDatabase = extraDatabase.concat(Array(
 	{
@@ -4065,7 +3997,6 @@ extraDatabase = extraDatabase.concat(Array(
 		page: "p126"
 	}
 ));
-
 
 extraDatabase = extraDatabase.concat(Array(
 	{
@@ -4130,7 +4061,6 @@ extraDatabase = extraDatabase.concat(Array(
 	}
 ));
 
-
 extraDatabase = extraDatabase.concat(Array(
 	{
 		name: "Hippogriff",
@@ -4186,7 +4116,6 @@ extraDatabase = extraDatabase.concat(Array(
 	}
 ));
 
-
 extraDatabase = extraDatabase.concat(Array(
 	{
 		name: "Hobgoblin",
@@ -4234,7 +4163,6 @@ extraDatabase = extraDatabase.concat(Array(
 		page: "p127"
 	}
 ));
-
 
 extraDatabase = extraDatabase.concat(Array(
 	{
@@ -4284,7 +4212,6 @@ extraDatabase = extraDatabase.concat(Array(
 		page: "p127"
 	}
 ));
-
 
 extraDatabase = extraDatabase.concat(Array(
 	{
@@ -4346,7 +4273,6 @@ extraDatabase = extraDatabase.concat(Array(
 		page: "p128"
 	}
 ));
-
 
 extraDatabase = extraDatabase.concat(Array(
 	{
@@ -4464,7 +4390,6 @@ extraDatabase = extraDatabase.concat(Array(
 	}
 ));
 
-
 extraDatabase = extraDatabase.concat(Array(
 	{
 		name: "Khazok",
@@ -4512,7 +4437,6 @@ extraDatabase = extraDatabase.concat(Array(
 	}
 ));
 
-
 extraDatabase = extraDatabase.concat(Array(
 	{
 		name: "Knight",
@@ -4553,7 +4477,6 @@ extraDatabase = extraDatabase.concat(Array(
 		page: "p130"
 	}
 ));
-
 
 extraDatabase = extraDatabase.concat(Array(
 	{
@@ -4597,7 +4520,6 @@ extraDatabase = extraDatabase.concat(Array(
 	}
 ));
 
-
 extraDatabase = extraDatabase.concat(Array(
 	{
 		name: "Holy/Unholy Knight",
@@ -4640,7 +4562,6 @@ extraDatabase = extraDatabase.concat(Array(
 		page: "p130"
 	}
 ));
-
 
 extraDatabase = extraDatabase.concat(Array(
 	{
@@ -4697,7 +4618,6 @@ extraDatabase = extraDatabase.concat(Array(
 	}
 ));
 
-
 extraDatabase = extraDatabase.concat(Array(
 	{
 		name: "Liche",
@@ -4752,7 +4672,6 @@ extraDatabase = extraDatabase.concat(Array(
 	}
 ));
 
-
 extraDatabase = extraDatabase.concat(Array(
 	{
 		name: "Lizard Men",
@@ -4800,7 +4719,6 @@ extraDatabase = extraDatabase.concat(Array(
 	}
 ));
 
-
 extraDatabase = extraDatabase.concat(Array(
 	{
 		name: "Mage",
@@ -4847,7 +4765,6 @@ extraDatabase = extraDatabase.concat(Array(
 		page: "p132"
 	}
 ));
-
 
 extraDatabase = extraDatabase.concat(Array(
 	{
@@ -4898,7 +4815,6 @@ extraDatabase = extraDatabase.concat(Array(
 	}
 ));
 
-
 extraDatabase = extraDatabase.concat(Array(
 	{
 		name: "Archmage",
@@ -4944,7 +4860,6 @@ extraDatabase = extraDatabase.concat(Array(
 		page: "p132"
 	}
 ));
-
 
 extraDatabase = extraDatabase.concat(Array(
 	{
@@ -5003,7 +4918,6 @@ extraDatabase = extraDatabase.concat(Array(
 		page: "p133"
 	}
 ));
-
 
 extraDatabase = extraDatabase.concat(Array(
 	{
@@ -5068,7 +4982,6 @@ extraDatabase = extraDatabase.concat(Array(
 	}
 ));
 
-
 extraDatabase = extraDatabase.concat(Array(
 	{
 		name: "Woolly Mammoth",
@@ -5126,7 +5039,6 @@ extraDatabase = extraDatabase.concat(Array(
 		page: "p133"
 	}
 ));
-
 
 extraDatabase = extraDatabase.concat(Array(
 	{
@@ -5188,7 +5100,6 @@ extraDatabase = extraDatabase.concat(Array(
 ));
 
 
-
 extraDatabase = extraDatabase.concat(Array(
 	{
 		name: "Medusa",
@@ -5239,7 +5150,6 @@ extraDatabase = extraDatabase.concat(Array(
 	}
 ));
 
-
 extraDatabase = extraDatabase.concat(Array(
 	{
 		name: "Common Mercenary",
@@ -5280,7 +5190,6 @@ extraDatabase = extraDatabase.concat(Array(
 		page: "p134"
 	}
 ));
-
 
 extraDatabase = extraDatabase.concat(Array(
 	{
@@ -5370,7 +5279,6 @@ extraDatabase = extraDatabase.concat(Array(
 	}
 ));
 
-
 extraDatabase = extraDatabase.concat(Array(
 	{
 		name: "Mermaid",
@@ -5422,7 +5330,6 @@ extraDatabase = extraDatabase.concat(Array(
 		page: "p135"
 	}
 ));
-
 
 extraDatabase = extraDatabase.concat(Array(
 	{

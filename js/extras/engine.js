@@ -73,7 +73,6 @@ function exportToSQL() {
 		sql += "'" + JSON.stringify(extraDatabase[lCount].blurb).replace("'", "\\'") + "', ";
 		sql += "'" + extraDatabase[lCount].image.replace("'", "\\'") + "' ";
 
-
 	//	sql += "'" + extraDatabase[lCount].name + "', ";
 		sql +=");\n";
 	}
@@ -96,7 +95,6 @@ function displayExtra(extra, indexNumber) {
 			if(extra.outdated > 0)
 				extraHTML += "<h4>This entry may be outdated by an entry in Savage Worlds: Deluxe (2011)</h4>";
 
-
 		// Description
 
 		if(extra.image2 || extra.image) {
@@ -107,7 +105,6 @@ function displayExtra(extra, indexNumber) {
 				extraHTML += "<img width=\"200px\" src=\"" + extra.image2  + "\" alt=\"" + extra.name + "\" /><br />";
 			extraHTML += "</div>";
 		}
-
 
 		if(typeof(extra.blurb) == "string") {
 			if(extra.blurb)
@@ -160,7 +157,6 @@ function displayExtra(extra, indexNumber) {
 			extraHTML += "<strong>Toughness:</strong> " + extra.toughness + " (" + extra.armor + ")<br />";
 		else
 			extraHTML += "<strong>Toughness:</strong> " + extra.toughness + "<br />";
-
 
 		//Hindrances
 		if(extra.hindrances)
@@ -360,7 +356,6 @@ function updateLocalStats() {
 		$('.js-add-local').off('click');
 		$(".js-add-local").click( function() {
 
-
 			addExtra = extraDatabase[ $(this).attr("ref")];
 			console.log(addExtra);
 			if(addExtra) {
@@ -402,7 +397,5 @@ $(document).ready( function() {
 			$("#search-results").html( defaultSearchMessage() );
 		updateLocalStats();
 	});
-
-
 
 });

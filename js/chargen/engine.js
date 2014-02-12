@@ -187,7 +187,6 @@ function chargen_make_hindrance_options() {
 			majorMinor = "Major";
 		}
 
-
 		if( !current_character.has_hindrance( chargen_hindrances[hindCount].name ) ) {
 			if( current_character.qualifies_for( chargen_hindrances[hindCount] ) ) {
 				html += "<option value=\"" + chargen_hindrances[hindCount].name + " (" + majorMinor + ")\">" + chargen_hindrances[hindCount].name + " (" + majorMinor + ")</option>";
@@ -196,7 +195,6 @@ function chargen_make_hindrance_options() {
 			}
 
 		}
-
 
 
 		optgroup_name = chargen_hindrances[hindCount].book.name;
@@ -233,7 +231,6 @@ function chargen_make_edge_options() {
 					html += "</optgroup>";
 				html += "<optgroup label=\"" + chargen_edges[edgeCount].category + "\">";
 			}
-
 
 			if( !current_character.has_edge( chargen_edges[edgeCount].name ) ) {
 				if ( current_character.qualifies_for( chargen_edges[edgeCount] ) )
@@ -316,7 +313,6 @@ function refresh_chargen_page() {
 	});
 
 
-
 	$('.js-specify-field').unbind('keyup');
 	$(".js-specify-field").keyup( function() {
 		indexNum = $(this).attr("rel");
@@ -354,7 +350,6 @@ function refresh_chargen_page() {
 }
 
 
-
 $("input[name=char_name]").keyup( function() {
 	current_character.set_name( $("input[name=char_name]").val() );
 });
@@ -363,7 +358,6 @@ $("select[name=char_race]").change( function() {
 	current_character.set_race( $("select[name=char_race] option:selected").val() );
 	refresh_chargen_page();
 });
-
 
 $("select[name=char_rank]").change( function() {
 	current_character.set_rank( $("select[name=char_rank] option:selected").val() );

@@ -157,7 +157,6 @@ function MassBattles() {
 
 
 
-
 		$("#results").html(resultsHTML);
 	}
 	this.makeMoraleTest = function (dieRoll, totalModifiers) {

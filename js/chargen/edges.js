@@ -423,7 +423,6 @@ var chargen_edges = Array(
 	}
 );
 
-
 /* chargen_edges.sort(
 	function(a, b)
 	{

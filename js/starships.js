@@ -1,18 +1,3 @@
-function simplify_cost(input_price) {
-	if(input_price > 1000000000) {
-		// it's a billion+
-		return input_price / 1000000000 + 'B';
-	} else if(input_price > 1000000) {
-		// it's a million+
-		return input_price / 1000000 + 'M';
-	} else if(input_price > 1000){
-		// it's a thousand+
-		return input_price / 1000 + 'K';
-	} else {
-		return input_price;
-	}
-}
-
 var starship_sizes = Array(
 	{
 		ship_label: "Small",
@@ -152,8 +137,6 @@ var starship_sizes = Array(
 
 );
 
-
-
 function sw_starship() {
 	this.ship_name = "(nameless)";
 	this.ship_description = "";
@@ -191,7 +174,9 @@ function sw_starship() {
 		html_return = "";
 
 		html_return += "<h4>" + this.ship_name + "</h4>";
-		html_return += "<p>" + this.ship_description + "</p><br />";
+		html_return += "<p>";
+
+		html_return += this.ship_description + "</p><br />";
 
 		if(this.selected_size.ship_label) {
 			html_return += "<strong>" + this.selected_size.ship_label + " Starship</strong>:";
@@ -199,7 +184,8 @@ function sw_starship() {
 			html_return += "Climb " + this.climb + ", ";
 			html_return += "Toughness " + this.toughness + " (" + this.armor + "), ";
 			html_return += "Crew " + this.crew + ", ";
-			html_return += "Cost $" + simplify_cost(this.cost) + "" + "<br />";
+			html_return += "Size " + this.size + ", ";
+			html_return += "Cost $" + simplify_cost(this.cost) + "<br />";
 
 			html_return += "<strong>Energy Capacity</strong>: " + this.energy_capacity + "<br />";
 			html_return += "<strong>Mods Available</strong>: " + this.mods_available + "<br />";
@@ -252,11 +238,14 @@ function sw_starship() {
 
 		if(this.selected_size.ship_label) {
 			html_return += "[b]" + this.selected_size.ship_label + " Starship[/b]:";
+
 			html_return += " Acc/TS " + this.acc + "/" + this.ts + ", ";
 			html_return += "Climb " + this.climb + ", ";
 			html_return += "Toughness " + this.toughness + " (" + this.armor + "), ";
 			html_return += "Crew " + this.crew + ", ";
+			html_return += "Size " + this.size + ", ";
 			html_return += "Cost $" + simplify_cost(this.cost) + "" + "\n";
+
 
 			html_return += "[b]Energy Capacity[/b]: " + this.energy_capacity + "\n";
 			html_return += "[b]Mods Available[/b]: " + this.mods_available + "\n";
@@ -439,6 +428,7 @@ function sw_starship() {
 			this.base_energy_capacity = this.selected_size.energy_capacity;
 			this.provisions = this.selected_size.provisions;
 
+			this.selected_modifications.sort( sort_mods );
 			// Modify Ship as per mods
 			this.selected_modifications_list = {};
 			for(calcModCount = 0; calcModCount < this.selected_modifications.length; calcModCount++) {
@@ -458,6 +448,7 @@ function sw_starship() {
 			}
 
 			// Weaponise Ship as per weapons
+			this.selected_weapons.sort( sort_mods );
 			this.selected_weapons_list = {};
 			fixedWeaponModUsage = 0;
 			linkedWeaponModUsage = Array();
@@ -470,7 +461,6 @@ function sw_starship() {
 				if(this.selected_weapons[calcModCount].linked > 0)
 					weaponCost = weaponCost / 2;
 				this.mods = this.mods - weaponCost;
-
 
 				this.cost += this.selected_weapons[calcModCount].cost;
 
@@ -499,7 +489,6 @@ function sw_starship() {
 						this.selected_weapons_list[weaponListName]++;
 				}
 			}
-
 
 			this.mods_available = this.mods; // - sort_selected_modifications_list.length;
 
@@ -637,7 +626,10 @@ function propogate_size_select() {
 		if( current_starship.selected_size.size )
 			if(  current_starship.selected_size.size == starship_sizes[sizeCount].size )
 				isSelected = " selected='selected'";
-		selectOptions += "<option value='" + starship_sizes[sizeCount].size + "'" + isSelected + ">" + starship_sizes[sizeCount].ship_label + " - " + starship_sizes[sizeCount].examples + "</option>";
+		selectOptions += "<option value='" + starship_sizes[sizeCount].size + "'" + isSelected + ">" + starship_sizes[sizeCount].ship_label + " - Size " + starship_sizes[sizeCount].size;
+		if( starship_sizes[sizeCount].examples )
+			selectOptions += " - " + starship_sizes[sizeCount].examples;
+		selectOptions += "</option>";
 	}
 	$(".js-select-size").html(selectOptions);
 }
@@ -663,7 +655,7 @@ function propogate_add_mods() {
 			else
 				modifications_html += "<span class='glyphicon glyphicon-blank'></span>";
 
-			if( current_starship.mods_available >= mod_cost && ( starship_modifications[mod_count].max == "u" || starship_modifications[mod_count].max > starship_mod_count) )
+			if( current_starship.mods_available >= mod_cost && ( starship_modifications[mod_count].get_max(current_starship) == "u" || starship_modifications[mod_count].get_max(current_starship) > starship_mod_count) )
 				modifications_html += " <span ref='" + starship_modifications[mod_count].name  + "' class='js-add-mod glyphicon glyphicon-plus color-green'></span>";
 
 				modifications_html += "</td>";
@@ -672,10 +664,9 @@ function propogate_add_mods() {
 				modifications_html += "<td style='color: green'>" + starship_modifications[mod_count].name + "</td>";
 			else
 				modifications_html += "<td>" + starship_modifications[mod_count].name + "</td>";
-			modifications_html += "<td>" + starship_mod_count + "/" + starship_modifications[mod_count].max  + "</td>";
+			modifications_html += "<td>" + starship_mod_count + "/" + starship_modifications[mod_count].get_max(current_starship)  + "</td>";
 			modifications_html += "<td>" + mod_cost + "</td>";
 			modifications_html += "<td>" + simplify_cost(starship_modifications[mod_count].get_cost(current_starship)) + "</td>";
-
 
 			modifications_html += "</tr>";
 		}
@@ -689,7 +680,6 @@ function propogate_weapon_mods() {
 	weapon_mods_html = "<h4>Installed Weapons</h4>";
 	if(available_links.length > 0)
 		weapon_mods_html += "Available Links: " + (available_links.length - 1) + "<br />";
-
 
 	if(current_starship.selected_weapons.length > 0) {
 		weapon_mods_html += "<table><thead><tr>";
@@ -769,15 +759,12 @@ function propogate_weapon_mods() {
 			weapon_mods_html += "<td>" + mod_cost + "</td>";
 			weapon_mods_html += "<td>" + simplify_cost(vehicle_weapons[mod_count].cost ) + "</td>";
 
-
 			weapon_mods_html += "</tr>";
 		}
-
 
 		currentWeaponClass = vehicle_weapons[mod_count].classification;
 		weaponCount++;
 	}
-
 
 	$(".js-select-weapons").html(weapon_mods_html);
 }
@@ -785,11 +772,10 @@ function propogate_weapon_mods() {
 function refresh_starship_page() {
 	$(".js-info-stats").html( current_starship.create_stats_block() );
 
-
 	$(".js-bb-code").val( current_starship.export_bbcode() );
 
-	$(".js-set-ship-name").val(current_starship.ship_name);
-	$(".js-set-ship-description").val(current_starship.ship_description);
+//	$(".js-set-ship-name").val(current_starship.ship_name);
+//	$(".js-set-ship-description").val(current_starship.ship_description);
 
 	$('.js-set-ship-name').unbind('keyup');
 	$(".js-set-ship-name").keyup( function() {
@@ -802,7 +788,6 @@ function refresh_starship_page() {
 		current_starship.set_ship_description( $(".js-set-ship-description").val() );
 		refresh_starship_page();
 	});
-
 
 	propogate_size_select();
 	$('.js-select-size').unbind('change');
@@ -862,7 +847,6 @@ function refresh_starship_page() {
 		$(".js-select-modifications-container").fadeOut();
 	}
 }
-
 
 var current_starship;
 $(window).load(

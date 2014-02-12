@@ -55,7 +55,6 @@ function chargen_char() {
 		pace: 0
 	}
 
-
 	this.perk_points = 0;
 	this.power_points = 0;
 
@@ -129,7 +128,6 @@ function chargen_char() {
 					vigor: 4
 				};
 
-
 				this.cost_to_raise = {
 					agility: 1,
 					smarts: 1,
@@ -166,12 +164,10 @@ function chargen_char() {
 		return -1;
 	}
 
-
 	this.set_rank = set_rank;
 	function set_rank(rankName) {
 		this.rank = this.get_rank(rankName);
 	}
-
 
 	this.qualifies_for = qualifies_for;
 	function qualifies_for(edgeOrHindrance) {
@@ -211,7 +207,6 @@ function chargen_char() {
 						found_edge = true;
 				}
 			}
-
 
 			if( requires_edge && !found_edge )
 				does_qualify = false;
@@ -347,7 +342,6 @@ function chargen_char() {
 	this.add_skill = add_skill;
 	function add_skill(skillName) {
 
-
 	}
 
 	this.get_hindrance = get_hindrance;
@@ -462,7 +456,6 @@ function chargen_char() {
 		this.secondary.charisma = 0;
 		this.power_points = 0;
 
-
 		this.attribute_points = 5;
 		this.edges_available = 0;
 		this.hindrances_major = 0;
@@ -500,7 +493,6 @@ function chargen_char() {
 				}
 			}
 		}
-
 
 		this.hindrances = Array();
 		for(hindCount = 0; hindCount < this.hindrances_selected.length; hindCount++){
@@ -554,7 +546,6 @@ function chargen_char() {
 			this.perks = this.perks.concat(this.perks_selected[perkCount].short_name);
 			this.perk_points = this.perk_points - this.perks_selected[perkCount].cost;
 		}
-
 
 		// TODO After Skills
 		this.secondary.parry = 0;

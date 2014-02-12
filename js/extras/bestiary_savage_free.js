@@ -11,7 +11,6 @@ if(typeof(extraDatabase) == "undefined")
 if(typeof(extraBooks) == "undefined")
 	var extraBooks = Array();
 
-
 var currentBook = books_list[5];
 
 extraBooks = extraBooks.concat(currentBook);
@@ -64,7 +63,6 @@ extraDatabase = extraDatabase.concat(Array(
 	}
 ));
 
-
 extraDatabase = extraDatabase.concat(Array(
 	{
 		name: "Acolyte, Cultist",
@@ -115,7 +113,6 @@ extraDatabase = extraDatabase.concat(Array(
 		page: ""
 	}
 ));
-
 
 
 extraDatabase = extraDatabase.concat(Array(
@@ -180,7 +177,6 @@ extraDatabase = extraDatabase.concat(Array(
 	}
 ));
 
-
 extraDatabase = extraDatabase.concat(Array(
 	{
 		name: "Dark Stalker",
@@ -243,7 +239,6 @@ extraDatabase = extraDatabase.concat(Array(
 		page: ""
 	}
 ));
-
 
 extraDatabase = extraDatabase.concat(Array(
 	{
@@ -327,7 +322,6 @@ extraDatabase = extraDatabase.concat(Array(
 ));
 
 
-
 extraDatabase = extraDatabase.concat(Array(
 	{
 		name: "Men in Black",
@@ -383,7 +377,6 @@ extraDatabase = extraDatabase.concat(Array(
 		page: ""
 	}
 ));
-
 
 
 extraDatabase = extraDatabase.concat(Array(
