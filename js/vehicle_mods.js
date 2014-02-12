@@ -83,7 +83,7 @@ var vehicle_modifications = Array(
 	},
 	{
 		name: "AMCM",
-		description: "Dropping bombs uses Knowledge (Bombardier) rather than Shooting. Craft must be in atmosphere to drop bombs. Night, cloud cover, rain, very high altitude attacks (GM’s call) or other factors that might interfere with the bomb’s targeting systems inflicts a –2 penalty.",
+		description: "Anti-Missile Counter Measures are integrated jammers and decoys. They add +2 to Driving, Piloting or Knowledge (Electronics) rolls made to evade missile attacks.",
 		get_max: function(selected_vehicle) { return 1 },
 		get_mod_cost: function(selected_vehicle) {
 			return 1;
@@ -92,17 +92,7 @@ var vehicle_modifications = Array(
 			return 5000 * selected_vehicle.size;
 		},
 	},
-	{
-		name: "AMCM",
-		description: "Dropping bombs uses Knowledge (Bombardier) rather than Shooting. Craft must be in atmosphere to drop bombs. Night, cloud cover, rain, very high altitude attacks (GM’s call) or other factors that might interfere with the bomb’s targeting systems inflicts a –2 penalty.",
-		get_max: function(selected_vehicle) { return 1 },
-		get_mod_cost: function(selected_vehicle) {
-			return 1;
-		},
-		get_cost: function(selected_vehicle) {
-			return 5000 * selected_vehicle.size;
-		},
-	},
+
 	{
 		name: "Amphibious",
 		description: "The vehicle may move at half Acc/Top Speed while in water.",

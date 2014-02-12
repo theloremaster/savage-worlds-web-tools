@@ -14,6 +14,7 @@ Fully Functional Tools Include:
 	* TODO:
 		* Save to/from Local Storage
 			* 	Basic functions have been created - needs front end
+* Vehicle Creator (in early alpha, needing testing, TODO as Starship Creator above)
 * Monster Search
 	* TODO:
 		* Data Entry still needed
@@ -22,7 +23,7 @@ Fully Functional Tools Include:
 The roadmap for these tools include:
 
 * Character Creator (70-80% complete from another project, but not in this toolset yet)
-* Vehicle Creator (planned)
+
 * Power Armor Creator (planned)
 * Robot Creator (planned)
 * World Creator (planned)
