@@ -664,7 +664,7 @@ function propogate_add_mods() {
 				modifications_html += "<span class='glyphicon glyphicon-blank'></span>";
 
 			if( current_starship.mods_available >= mod_cost && ( starship_modifications[mod_count].max == "u" || starship_modifications[mod_count].max > starship_mod_count) )
-				modifications_html += "<span ref='" + starship_modifications[mod_count].name  + "' class='js-add-mod glyphicon glyphicon-plus color-green'></span>";
+				modifications_html += " <span ref='" + starship_modifications[mod_count].name  + "' class='js-add-mod glyphicon glyphicon-plus color-green'></span>";
 
 				modifications_html += "</td>";
 
