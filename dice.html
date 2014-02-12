@@ -32,7 +32,7 @@ col-md-6 columns">
 			<li>d12 with wild die subtract 4: <a onclick="$('input[name=roll]').val('d12* - 4');$('#trait-check').attr('checked', 'checked')">d12* - 4</a> (trait test)</li>
 			<li>d12 but substract d6 then add 6: <a onclick="$('input[name=roll]').val('d12 - d6 + 6');$('#damage-check').attr('checked', 'checked')">d12 - d6 + 6</a> (damage test)</li>
 		</ul>
-		<input type="button" style="width: 100%" class="btn btn-success" id="roll-dice" value="Roll" />
+
 	</div>
 
 	<div class="</script>
@@ -68,10 +68,9 @@ col-md-6 columns">
 </div>
 
 <div class="row">
-	<div class="</script>
-col-md-12 columns">
-
+	<div class="col-md-12 columns">
 		<fieldset>
+			<input type="button" class="btn btn-success" id="roll-dice" value="Generate Rolls With Above Settings" />
 			<h3>Results</h3>
 			<div id="results"></div>
 			<div id="success-results"></div>

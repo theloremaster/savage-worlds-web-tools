@@ -645,17 +645,29 @@ function propogate_size_select() {
 function propogate_add_mods() {
 	modifications_html = "<table>";
 	modifications_html += "<thead><tr>";
+	modifications_html += "<th>&nbsp;</th>";
 	modifications_html += "<th>Name</th>";
-	modifications_html += "<th>Used/Maximum</th>";
+	modifications_html += "<th>Used/Max</th>";
 	modifications_html += "<th>Mod Cost</th>";
 	modifications_html += "<th>Cost</th>";
-	modifications_html += "<th>&nbsp;</th>";
 	modifications_html += "</tr></thead><tbody>";
 	for(mod_count = 0; mod_count < starship_modifications.length; mod_count++) {
 		starship_mod_count = current_starship.get_modification_count(starship_modifications[mod_count].name);
 		mod_cost = starship_modifications[mod_count].get_mod_cost(current_starship);
 		if( current_starship.mods_available >= mod_cost || starship_mod_count > 0) {
 			modifications_html += "<tr title='" + starship_modifications[mod_count].description + "'>";
+			modifications_html += "<td style='white-space: nowrap;'>";
+
+			if(  starship_mod_count > 0 )
+				modifications_html += "<span ref='" + starship_modifications[mod_count].name  + "' class='js-remove-mod glyphicon glyphicon-minus color-red'></span>";
+			else
+				modifications_html += "<span class='glyphicon glyphicon-blank'></span>";
+
+			if( current_starship.mods_available >= mod_cost && ( starship_modifications[mod_count].max == "u" || starship_modifications[mod_count].max > starship_mod_count) )
+				modifications_html += "<span ref='" + starship_modifications[mod_count].name  + "' class='js-add-mod glyphicon glyphicon-plus color-green'></span>";
+
+				modifications_html += "</td>";
+
 			if(  starship_mod_count > 0 )
 				modifications_html += "<td style='color: green'>" + starship_modifications[mod_count].name + "</td>";
 			else
@@ -664,15 +676,7 @@ function propogate_add_mods() {
 			modifications_html += "<td>" + mod_cost + "</td>";
 			modifications_html += "<td>" + simplify_cost(starship_modifications[mod_count].get_cost(current_starship)) + "</td>";
 
-			modifications_html += "<td style='white-space: nowrap;'>";
-			if(  starship_mod_count > 0 )
-				modifications_html += "<button style='height: 25px; width: 25px; display: inline-block;' ref='" + starship_modifications[mod_count].name  + "' class='js-remove-mod' type='button'>-</button>";
-			else
-				modifications_html += "<span style='height: 25px; width: 25px; display: inline-block;'>&nbsp;</span>";
-			if( current_starship.mods_available >= mod_cost && ( starship_modifications[mod_count].max == "u" || starship_modifications[mod_count].max > starship_mod_count) )
-				modifications_html += "<button style='height: 25px; width: 25px; display: inline-block;' ref='" + starship_modifications[mod_count].name  + "' class='js-add-mod' type='button'>+</button>";
 
-				modifications_html += "</td>";
 			modifications_html += "</tr>";
 		}
 	}
@@ -722,7 +726,7 @@ function propogate_weapon_mods() {
 			}
 			weapon_mods_html += "</td>";
 			weapon_mods_html += "<td>";
-			weapon_mods_html += "<button type='button' class='js-remove-weapon' ref='" + weapon_count + "'>Remove</button>";
+			weapon_mods_html += "<button type='button' class='js-remove-weapon btn btn-danger  btn-xs' ref='" + weapon_count + "'>Remove</button>";
 			weapon_mods_html += "</td>";
 			weapon_mods_html += "</td>";
 			weapon_mods_html += "</tr>";
@@ -747,7 +751,6 @@ function propogate_weapon_mods() {
 			weapon_mods_html += "<th>Name</th>";
 			weapon_mods_html += "<th>Mod Cost</th>";
 			weapon_mods_html += "<th>Cost</th>";
-			weapon_mods_html += "<th>&nbsp;</th>";
 			weapon_mods_html += "</tr></thead><tbody>";
 		}
 
@@ -755,19 +758,17 @@ function propogate_weapon_mods() {
 		if( current_starship.mods_available >= mod_cost ) {
 			weapon_mods_html += "<tr title='" + vehicle_weapons[mod_count].description + "'>";
 			if(  starship_mod_count > 0 )
-				weapon_mods_html += "<td style='color: green'>" + vehicle_weapons[mod_count].name + "</td>";
+				weapon_mods_html += "<td style='color: green'>";
 			else
-				weapon_mods_html += "<td>" + vehicle_weapons[mod_count].name + "</td>";
+				weapon_mods_html += "<td>";
+
+			if( current_starship.mods_available >= mod_cost )
+				weapon_mods_html += "<button style='height: 25px; display: inline-block;' ref='" + vehicle_weapons[mod_count].name  + "' class='js-add-weapon  btn btn-success btn-xs' type='button'>Install</button> ";
+			weapon_mods_html += vehicle_weapons[mod_count].name + "</td>";
 
 			weapon_mods_html += "<td>" + mod_cost + "</td>";
 			weapon_mods_html += "<td>" + simplify_cost(vehicle_weapons[mod_count].cost ) + "</td>";
 
-			weapon_mods_html += "<td style='white-space: nowrap;'>";
-
-			if( current_starship.mods_available >= mod_cost )
-				weapon_mods_html += "<button style='height: 25px; display: inline-block;' ref='" + vehicle_weapons[mod_count].name  + "' class='js-add-weapon' type='button'>Install</button>";
-
-			weapon_mods_html += "</td>";
 
 			weapon_mods_html += "</tr>";
 		}
