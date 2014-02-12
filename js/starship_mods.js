@@ -19,7 +19,7 @@ var starship_modifications = Array(
 	{
 		name: "Armor",
 		description: "Increases a ship’s Armor value by +2. Due to the nature of space and the size and shape of starships, all Armor is considered Heavy Armor.",
-		max: "u",
+		max: selected_vehicle.size,
 		get_mod_cost: function(selected_starship) {
 			return 1;
 		},
@@ -79,7 +79,7 @@ var starship_modifications = Array(
 		},
 	},
 	{
-		name: "Defelector Screens",
+		name: "Deflector Screens",
 		description: "The vessel is protected by an energy field that deflects incoming ballistic attacks (it has no effect against lasers). Attackers must subtract –2 from their Shooting rolls. Mod cost is 2 for Small to Large ships, and 3 for Huge to Gargantuan vessels.",
 		max: "u",
 		get_mod_cost: function(selected_starship) {
