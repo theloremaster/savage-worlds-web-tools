@@ -39,7 +39,7 @@ var starship_modifications = Array(
 		description: "The ship’s AI can operate all systems — from locomotion to weapons to opening or closing hatches. It has a skill level of d10 in these tasks, but is an “Extra” and does not receive a Wild Die. The AI does not suffer from multi-action penalties if given simultaneous tasks. In combat, the AI acts on the captain’s Action Card. Giving the AI a short verbal command is a free action.",
 		max: 1,
 		get_mod_cost: function(selected_starship) {
-			return 1;
+			return 0;
 		},
 		get_cost: function(selected_starship) {
 			return 10000 * selected_starship.size;
@@ -83,10 +83,12 @@ var starship_modifications = Array(
 		description: "The vessel is protected by an energy field that deflects incoming ballistic attacks (it has no effect against lasers). Attackers must subtract –2 from their Shooting rolls. Mod cost is 2 for Small to Large ships, and 3 for Huge to Gargantuan vessels.",
 		max: "u",
 		get_mod_cost: function(selected_starship) {
-			if( selected_starship.size < 12)
-				return 2;
-			if( selected_starship.size >= 12)
+			if( selected_starship.size >= 25)
+				return 5;
+			if( selected_starship.size >= 13)
 				return 3;
+			if( selected_starship.size >= 6)
+				return 2;
 
 		},
 		get_cost: function(selected_starship) {
@@ -236,7 +238,7 @@ var starship_modifications = Array(
 			return 2;
 		},
 		get_cost: function(selected_starship) {
-			return 5000 * selected_starship.size;
+			return 100000 * selected_starship.size;
 		},
 		get_mod_effect: function(selected_starship) {
 			selected_starship.ts +=  50;
@@ -248,10 +250,10 @@ var starship_modifications = Array(
 		description: "The ship trades power and speed for additional room. Each time this is taken, reduce Acc by 5 and Top Speed by 50 to gain half the ship’s Size in Mod slots.",
 		max: 3,
 		get_mod_cost: function(selected_starship) {
-			return 2;
+			return 0;
 		},
 		get_cost: function(selected_starship) {
-			return 5000 * selected_starship.size;
+			return 0;
 		},
 		get_mod_effect: function(selected_starship) {
 			selected_starship.ts -=  50;
@@ -319,7 +321,7 @@ var starship_modifications = Array(
 		description: "Tractor beams are specialized starship weapons designed to hold an enemy ship in place and pull it to the “attacker.” Ships can only affect vessels of smaller Size. Their range is quite short (about 1000 yards), so they must get a Short Range result on the Chase table to use the weapon. This is an opposed Knowledge (Electronics) roll at –4 vs the defender’s Piloting (or Knowledge (Electronics) in Large or larger ships). If the attacker is successful, the enemy ship is caught and pulled into contact in 2d6 rounds. A captive’s ship’s life support systems remain active, but all locomotion and weapons are shut down.",
 		max: "u",
 		get_mod_cost: function(selected_starship) {
-			return selected_starship.size / 2;
+			return 5;
 		},
 		get_cost: function(selected_starship) {
 			return 1000000;
