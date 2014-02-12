@@ -188,17 +188,19 @@ function sw_vehicle() {
 		html_return += this.vehicle_description + "</p><br />";
 
 		if(this.selected_size.vehicle_label) {
-			html_return += "<strong>" + this.selected_size.vehicle_label + " Vehicle</strong>:";
-			html_return += " Acc/TS " + this.acc + "/" + this.ts + ", ";
+			html_return += "<strong>" + this.selected_size.vehicle_label + " Vehicle</strong>: ";
+			html_return += "Size " + this.size + ", ";
+			html_return += "Acc/TS " + this.acc + "/" + this.ts + ", ";
 			if(this.aircraft)
 				html_return += "Climb " + this.climb + ", ";
 			html_return += "Toughness " + this.toughness + " (" + this.armor + "), ";
 			html_return += "Crew " + this.crew + ", ";
-			html_return += "Size " + this.size + ", ";
+
 			html_return += "Cost $" + simplify_cost(this.cost) + "<br />";
 
 
-			html_return += "<strong>Energy Capacity</strong>: " + this.energy_capacity + "<br />";
+			if(this.energy_capacity > 0)
+				html_return += "<strong>Energy Capacity</strong>: " + this.energy_capacity + "<br />";
 			html_return += "<strong>Mods Available</strong>: " + this.mods_available + "<br />";
 
 			html_return += "<strong>Notes</strong>: ";
@@ -248,16 +250,17 @@ function sw_vehicle() {
 			html_return += "\n";
 
 		if(this.selected_size.vehicle_label) {
-			html_return += "[b]" + this.selected_size.vehicle_label + " Vehicle[/b]:";
-			html_return += " Acc/TS " + this.acc + "/" + this.ts + ", ";
+			html_return += "[b]" + this.selected_size.vehicle_label + " Vehicle[/b]: ";
+			html_return += "Size " + this.size + ", ";
+			html_return += "Acc/TS " + this.acc + "/" + this.ts + ", ";
 			html_return += "Climb " + this.climb + ", ";
 			html_return += "Toughness " + this.toughness + " (" + this.armor + "), ";
 			html_return += "Crew " + this.crew + ", ";
-			html_return += "Size " + this.size + ", ";
+
 			html_return += "Cost $" + simplify_cost(this.cost) + "" + "\n";
 
-
-			html_return += "[b]Energy Capacity[/b]: " + this.energy_capacity + "\n";
+			if(this.energy_capacity > 0)
+				html_return += "[b]Energy Capacity[/b]: " + this.energy_capacity + "\n";
 			html_return += "[b]Mods Available[/b]: " + this.mods_available + "\n";
 
 			html_return += "[b]Notes[/b]: ";
