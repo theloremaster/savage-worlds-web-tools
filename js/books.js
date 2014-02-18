@@ -39,12 +39,21 @@ books_list[4] = {
 	id: 5,
 	name: "Sci-Fi Companion",
 	publisher: "Pinnacle Entertainment Group",
-	year: "2013",
-	copyright: "2011 Pinnacle Entertainment Group"
+	year: "2014",
+	copyright: "2014 Pinnacle Entertainment Group"
 }
 
 books_list[5] = {
 	id: 6,
+	name: "Super Powers Companion",
+	publisher: "Pinnacle Entertainment Group",
+	year: "2014",
+	copyright: "2014 Pinnacle Entertainment Group"
+}
+
+
+books_list[6] = {
+	id: 7,
 	name: "Savage Free Bestiary",
 	publisher: "(Unknown) Pinnacle Enterainment Group, Butch Curry, Andrea \“Lord Lance\” Parducci and probably others",
 	year: "",
@@ -52,8 +61,8 @@ books_list[5] = {
 	copyright: "Butch Curry, Open?"
 }
 
-books_list[6] = {
-	id: 7,
+books_list[7] = {
+	id: 8,
 	name: "The Chronicles of Sol",
 	publisher: "Jeffrey D. Gordon",
 	year: "2014",

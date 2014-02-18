@@ -15,8 +15,9 @@ function localstorage_parse_data() {
 function save_to_localstorage(saveJSON) {
 	itemObj = JSON.parse(saveJSON);
 	storageObject = {
-		name: itemObj.ship_name,
+		name: itemObj.item_name,
 		type: itemObj.object_type,
+		size: itemObj.size,
 		saved: new Date(),
 		data: saveJSON,
 	};

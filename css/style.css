@@ -45,6 +45,21 @@ select,input[type="text"],textarea {
 	margin: 0;
 	padding: 0;
 }
+.js-alert-container {
+	margin-top: 20px;
+}
+
+.fade {
+  opacity: 0;
+  -webkit-transition: opacity 1s linear;
+  -moz-transition: opacity 1s linear;
+  -o-transition: opacity 1s linear;
+  transition: opacity 1s linear;
+}
+.fade.in {
+  opacity: 1;
+}
+
 fieldset {
 	border: solid 1px #ddd;
 	padding: 15px;
@@ -57,6 +72,13 @@ fieldset {
 	background: #333;
 	color: #fff;
 }
+
+.action-bar {
+	background: #666;
+	color: #fff;
+	padding: 5px 0;
+}
+
 .header-bar a {
 	text-decoration: none;
 }

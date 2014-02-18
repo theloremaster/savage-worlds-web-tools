@@ -11,7 +11,7 @@ if(typeof(extraDatabase) == "undefined")
 if(typeof(extraBooks) == "undefined")
 	var extraBooks = Array();
 
-var currentBook = books_list[5];
+var currentBook = books_list[6];
 
 extraBooks = extraBooks.concat(currentBook);
 

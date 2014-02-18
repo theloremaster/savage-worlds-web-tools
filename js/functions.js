@@ -50,3 +50,13 @@ function simplify_cost(input_price) {
 		return input_price;
 	}
 }
+
+function createAlert(messageText, alertClass) {
+	if( !alertClass )
+		alertClass = "info";
+	dismissButton = '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>';
+	html = "<div class='alert fade in alert-" + alertClass + "'>" + dismissButton + messageText+ "</div>";
+
+	$(".js-alert-container").html( html );
+	window.setTimeout(function() { $(".alert").alert('close'); }, 2000);
+}

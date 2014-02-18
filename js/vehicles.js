@@ -143,7 +143,7 @@ var vehicle_sizes = Array(
 );
 
 function sw_vehicle() {
-	this.vehicle_name = "(nameless)";
+	this.item_name = "(nameless)";
 	this.vehicle_description = "";
 
 	this.vehicle_vehicle_label = "";
@@ -182,7 +182,7 @@ function sw_vehicle() {
 		this.calculate_vehicle();
 		html_return = "";
 
-		html_return += "<h4>" + this.vehicle_name + "</h4>";
+		html_return += "<h4>" + this.item_name + "</h4>";
 		html_return += "<p>";
 
 		html_return += this.vehicle_description + "</p><br />";
@@ -243,7 +243,7 @@ function sw_vehicle() {
 		this.calculate_vehicle();
 		html_return = "";
 
-		html_return += "[b][size=18]" + this.vehicle_name + "[/size][/b]\n";
+		html_return += "[b][size=18]" + this.item_name + "[/size][/b]\n";
 		if(this.vehicle_description)
 			html_return += "" + this.vehicle_description + "\n\n";
 		else
@@ -306,7 +306,7 @@ function sw_vehicle() {
 		exportObject = {};
 		exportObject.size = this.size;
 		exportObject.object_type = "vehicle";
-		exportObject.vehicle_name = this.vehicle_name;
+		exportObject.item_name = this.item_name;
 		exportObject.vehicle_description = this.vehicle_description;
 		exportObject.mods = Array();
 		for(modCounter = 0; modCounter < this.selected_modifications.length; modCounter++)
@@ -327,7 +327,7 @@ function sw_vehicle() {
 
 	this.reset_data = reset_data;
 	function reset_data() {
-		this.vehicle_name = "(nameless)";
+		this.item_name = "(nameless)";
 		this.vehicle_description = "";
 
 		this.vehicle_vehicle_label = "";
@@ -371,7 +371,7 @@ function sw_vehicle() {
 		if(typeof importedVehicleObj =='object') {
 			this.reset_data();
 			this.set_size(importedVehicleObj.size);
-			this.set_vehicle_name(importedVehicleObj.vehicle_name);
+			this.set_item_name(importedVehicleObj.item_name);
 			this.set_vehicle_description(importedVehicleObj.vehicle_description);
 
 			for(modCounter = 0; modCounter < importedVehicleObj.mods.length; modCounter++)
@@ -514,9 +514,9 @@ function sw_vehicle() {
 		}
 	}
 
-	this.set_vehicle_name = set_vehicle_name;
-	function set_vehicle_name(newValue) {
-		this.vehicle_name = newValue;
+	this.set_item_name = set_item_name;
+	function set_item_name(newValue) {
+		this.item_name = newValue;
 	}
 
 	this.set_vehicle_description = set_vehicle_description;
@@ -789,17 +789,18 @@ function propogate_weapon_mods() {
 }
 
 function refresh_vehicle_page() {
-	console.log("js-select-modifications-container called");
 	$(".js-info-stats").html( current_vehicle.create_stats_block() );
 
 	$(".js-bb-code").val( current_vehicle.export_bbcode() );
 
-	//$(".js-set-vehicle-name").val(current_vehicle.vehicle_name);
+	$(".js-json-code").val( current_vehicle.export_json() );
+
+	//$(".js-set-vehicle-name").val(current_vehicle.item_name);
 	//$(".js-set-vehicle-description").val(current_vehicle.vehicle_description);
 
 	$('.js-set-vehicle-name').unbind('keyup');
 	$(".js-set-vehicle-name").keyup( function() {
-		current_vehicle.set_vehicle_name( $(".js-set-vehicle-name").val() );
+		current_vehicle.set_item_name( $(".js-set-vehicle-name").val() );
 		refresh_vehicle_page();
 	});
 
@@ -869,10 +870,93 @@ function refresh_vehicle_page() {
 	}
 }
 
+
+
+$(".js-import-data").click( function() {
+	if( $(".js-import-code").val() != "" ) {
+		current_vehicle.import_json( $(".js-import-code").val() );
+		$(".js-set-vehicle-name").val(current_vehicle.item_name);
+		$(".js-set-vehicle-description").val(current_vehicle.vehicle_description);
+		$(".js-import-code").val('');
+		createAlert( "Your vehicle has been imported.", "success" );
+	}
+});
+
+$(".js-save-item").click( function() {
+	if( current_vehicle.size > 0 && current_vehicle.item_name != "" && current_vehicle.item_name != "(nameless)") {
+		save_to_localstorage( current_vehicle.export_json() );
+		propogateLoadList();
+		createAlert( "Your vehicle has been saved.", "success" );
+	} else {
+		createAlert( "Please name your vehicle and select a size before saving", "danger"  );
+	}
+} );
+
+function propogateLoadList() {
+	currentVehicles = localstorage_parse_data();
+	html = "<ul class='list-unstyled'>";
+	for(lsCounter = 0; lsCounter < currentVehicles.length; lsCounter++) {
+		if(currentVehicles[lsCounter].type == "vehicle") {
+			html += "<li style='display:block;overflow:hidden; padding: 2px; margin: 2px; border-bottom: 1px solid #dedede;'>";
+			html += "<label style='display: inline; font-weight: normal'>";
+			html += "<input type='radio' name='selected_load' value='" + lsCounter + "' /> ";
+			html += currentVehicles[lsCounter].name + " (Size " + currentVehicles[lsCounter].size + ")"; //  - " + currentVehicles[lsCounter].saved;
+			html += "</label>";
+			html += "<button ref='" + lsCounter + "' class='js-delete-data btn btn-danger pull-right btn-xs' type='button'>Delete</button>";
+			html += "</li>";
+		}
+	}
+	html += "</ul>";
+
+	$(".js-load-list").html( html );
+
+	$(".js-delete-data").click( function() {
+		if( confirm("Are you sure you want to delete this item?") ) {
+			selectedItemIndex = $(this).attr("ref");
+			delete_item_from_localstorage(selectedItemIndex);
+
+			propogateLoadList();
+		}
+
+	} );
+
+
+}
+
+function loadSelectedItem() {
+	selectedItemIndex = $("input[name=selected_load]:checked").val();
+
+	if(selectedItemIndex != "") {
+		selectedItem = get_data_from_localstorage(selectedItemIndex);
+		current_vehicle.import_json( selectedItem );
+		$(".js-set-vehicle-name").val(current_vehicle.item_name);
+		$(".js-set-vehicle-description").val(current_vehicle.ship_description);
+		createAlert( "Your vehicle has been loaded.", "success" );
+	}
+}
+
+$(".js-load-data").click( function() {
+	loadSelectedItem();
+	propogateLoadList();
+} );
+
+
+
+$(".js-new-item").click( function() {
+	if( confirm("Are you sure you want to clear your current vehicle?")) {
+		current_starship = new sw_starship();
+		refresh_starship_page();
+		$(".js-set-vehicle-name").val("");
+		$(".js-set-vehicle-description").val("");
+		propogateLoadList();
+	}
+} );
+
 var current_vehicle;
 $(window).load(
 	function(){
 		current_vehicle = new sw_vehicle();
 		refresh_vehicle_page();
+		propogateLoadList();
 	}
 );

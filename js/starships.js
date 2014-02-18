@@ -138,7 +138,7 @@ var starship_sizes = Array(
 );
 
 function sw_starship() {
-	this.ship_name = "(nameless)";
+	this.item_name = "(nameless)";
 	this.ship_description = "";
 
 	this.ship_ship_label = "";
@@ -173,7 +173,7 @@ function sw_starship() {
 		this.calculate_ship();
 		html_return = "";
 
-		html_return += "<h4>" + this.ship_name + "</h4>";
+		html_return += "<h4>" + this.item_name + "</h4>";
 		html_return += "<p>";
 
 		html_return += this.ship_description + "</p><br />";
@@ -232,7 +232,7 @@ function sw_starship() {
 		this.calculate_ship();
 		html_return = "";
 
-		html_return += "[b][size=18]" + this.ship_name + "[/size][/b]\n";
+		html_return += "[b][size=18]" + this.item_name + "[/size][/b]\n";
 		if(this.ship_description)
 			html_return += "" + this.ship_description + "\n\n";
 		else
@@ -296,7 +296,7 @@ function sw_starship() {
 		exportObject = {};
 		exportObject.size = this.size;
 		exportObject.object_type = "starship";
-		exportObject.ship_name = this.ship_name;
+		exportObject.item_name = this.item_name;
 		exportObject.ship_description = this.ship_description;
 		exportObject.mods = Array();
 		for(modCounter = 0; modCounter < this.selected_modifications.length; modCounter++)
@@ -317,7 +317,7 @@ function sw_starship() {
 
 	this.reset_data = reset_data;
 	function reset_data() {
-		this.ship_name = "(nameless)";
+		this.item_name = "(nameless)";
 		this.ship_description = "";
 
 		this.ship_ship_label = "";
@@ -359,7 +359,7 @@ function sw_starship() {
 		if(typeof importedShipObj =='object') {
 			this.reset_data();
 			this.set_size(importedShipObj.size);
-			this.set_ship_name(importedShipObj.ship_name);
+			this.set_item_name(importedShipObj.item_name);
 			this.set_ship_description(importedShipObj.ship_description);
 
 			for(modCounter = 0; modCounter < importedShipObj.mods.length; modCounter++)
@@ -498,9 +498,9 @@ function sw_starship() {
 		}
 	}
 
-	this.set_ship_name = set_ship_name;
-	function set_ship_name(newValue) {
-		this.ship_name = newValue;
+	this.set_item_name = set_item_name;
+	function set_item_name(newValue) {
+		this.item_name = newValue;
 	}
 
 	this.set_ship_description = set_ship_description;
@@ -777,12 +777,14 @@ function refresh_starship_page() {
 
 	$(".js-bb-code").val( current_starship.export_bbcode() );
 
-//	$(".js-set-ship-name").val(current_starship.ship_name);
+	$(".js-json-code").val( current_starship.export_json() );
+
+//	$(".js-set-ship-name").val(current_starship.item_name);
 //	$(".js-set-ship-description").val(current_starship.ship_description);
 
 	$('.js-set-ship-name').unbind('keyup');
 	$(".js-set-ship-name").keyup( function() {
-		current_starship.set_ship_name( $(".js-set-ship-name").val() );
+		current_starship.set_item_name( $(".js-set-ship-name").val() );
 		refresh_starship_page();
 	});
 
@@ -851,10 +853,89 @@ function refresh_starship_page() {
 	}
 }
 
+$(".js-import-data").click( function() {
+	if( $(".js-import-code").val() != "" ) {
+		current_starship.import_json( $(".js-import-code").val() );
+		$(".js-set-ship-name").val(current_starship.item_name);
+		$(".js-set-ship-description").val(current_starship.ship_description);
+		$(".js-import-code").val('');
+		createAlert( "Your ship has been imported.", "success" );
+	}
+});
+
+$(".js-save-item").click( function() {
+	if( current_starship.size > 0 && current_starship.item_name != "" && current_starship.item_name != "(nameless)") {
+		save_to_localstorage( current_starship.export_json() );
+		propogateLoadList();
+		createAlert( "Your ship has been saved.", "success" );
+	} else {
+		createAlert( "Please name your ship and select a size before saving", "danger"  );
+	}
+} );
+
+function propogateLoadList() {
+	currentVehicles = localstorage_parse_data();
+	html = "<ul class='list-unstyled'>";
+	for(lsCounter = 0; lsCounter < currentVehicles.length; lsCounter++) {
+		if(currentVehicles[lsCounter].type == "starship") {
+			html += "<li style='display:block;overflow:hidden; padding: 2px; margin: 2px; border-bottom: 1px solid #dedede;'>";
+			html += "<label style='display: inline; font-weight: normal'>";
+			html += "<input type='radio' name='selected_load' value='" + lsCounter + "' /> ";
+			html += currentVehicles[lsCounter].name + " (Size " + currentVehicles[lsCounter].size + ")"; //  - " + currentVehicles[lsCounter].saved;
+			html += "</label>";
+			html += "<button ref='" + lsCounter + "' class='js-delete-data btn btn-danger pull-right btn-xs' type='button'>Delete</button>";
+			html += "</li>";
+		}
+	}
+	html += "</ul>";
+
+	$(".js-load-list").html( html );
+
+	$(".js-delete-data").click( function() {
+		if( confirm("Are you sure you want to delete this item?") ) {
+			selectedItemIndex = $(this).attr("ref");
+			delete_item_from_localstorage(selectedItemIndex);
+
+			propogateLoadList();
+		}
+
+	} );
+
+
+}
+
+function loadSelectedItem() {
+	selectedItemIndex = $("input[name=selected_load]:checked").val();
+
+	if(selectedItemIndex != "") {
+		selectedItem = get_data_from_localstorage(selectedItemIndex);
+		current_starship.import_json( selectedItem );
+		$(".js-set-ship-name").val(current_starship.item_name);
+		$(".js-set-ship-description").val(current_starship.ship_description);
+		createAlert( "Your ship has been loaded.", "success" );
+	}
+}
+
+$(".js-load-data").click( function() {
+	loadSelectedItem();
+} );
+
+
+$(".js-new-item").click( function() {
+	if( confirm("Are you sure you want to clear your current ship?")) {
+		current_starship = new sw_starship();
+		refresh_starship_page();
+		$(".js-set-ship-name").val("");
+		$(".js-set-ship-description").val("");
+		propogateLoadList();
+	}
+} );
+
 var current_starship;
 $(window).load(
 	function(){
 		current_starship = new sw_starship();
 		refresh_starship_page();
+		propogateLoadList();
 	}
 );

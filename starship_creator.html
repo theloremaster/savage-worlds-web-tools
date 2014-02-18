@@ -5,7 +5,7 @@
 	<meta name="viewport" content="width=device-width">
 	<title>Starship Creator</title>
 	<link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" type="text/css">
-	<link rel="stylesheet" href="./css/style.css?v=2014021201" type="text/css">
+	<link rel="stylesheet" href="./css/style.css?v=2014021801" type="text/css">
 	<link rel="icon" type="image/png" href="./img/sw_fan_78x50.png" />
 </head>
 <body class="">
@@ -14,11 +14,82 @@
 		<div class="row">
 			<div class="col-sm-12">
 				<h1><a href="./index.html" title="Savage Worlds Web Tools">Savage Worlds Web Tools</a> - Starship Creator</h1>
+				<p>This is the Starship Creator. It should be currently feature-complete.</p>
 			</div>
 		</div>
 	</div>
 </div>
+<div class="action-bar">
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-12">
+				<button type="button" class="btn btn-default js-new-item">New</button>
+				<button type="button" class="btn btn-default" data-toggle="modal" data-target=".js-load-dialog">Load</button>
+				<button type="button" class="btn btn-default js-save-item">Save</button>
+				<button type="button" class="btn btn-default" data-toggle="modal" data-target=".js-export-dialog">Export</button>
+				<button type="button" class="btn btn-default" data-toggle="modal" data-target=".js-import-dialog">Import</button>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="js-export-dialog modal fade">
+	<div class="modal-dialog">
+    	<div class="modal-content">
+      		<div class="modal-header">
+				<h4 class="modal-title">Export Ship</h4>
+			</div>
+			<div class="modal-body">
+				<h5>BB Code</h5>
+				<textarea class="js-bb-code" style="height:150px" readonly="readonly"></textarea>
+			</div>
+			<div class="modal-body">
+				<h5>JSON</h5>
+				<textarea class="js-json-code" style="height:150px" readonly="readonly"></textarea>
+			</div>
+      		<div class="modal-footer">
+        		<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+      		</div>
+		</div>
+	</div>
+</div>
+
+<div class="js-load-dialog modal fade">
+	<div class="modal-dialog">
+    	<div class="modal-content">
+      		<div class="modal-header">
+				<h4 class="modal-title">Load Ship</h4>
+			</div>
+			<div class="modal-body js-load-list">
+
+			</div>
+      		<div class="modal-footer">
+        		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        		<button type="button" class="btn btn-primary js-load-data" data-dismiss="modal">Load</button>
+      		</div>
+		</div>
+	</div>
+</div>
+
+<div class="js-import-dialog modal fade">
+	<div class="modal-dialog">
+    	<div class="modal-content">
+      		<div class="modal-header">
+				<h4 class="modal-title">Import Ship</h4>
+			</div>
+			<div class="modal-body">
+				<h5>Paste exported JSON code below</h5>
+				<textarea class="js-import-code" style="height:150px"></textarea>
+			</div>
+      		<div class="modal-footer">
+        		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        		<button type="button" class="btn btn-primary js-import-data" data-dismiss="modal">Import</button>
+      		</div>
+		</div>
+	</div>
+</div>
+
 <div class="container">
+	<div class="js-alert-container"></div>
 	<div class="row">
 		<div class="col-sm-12 js-info-stats"></div>
 	</div>
@@ -34,31 +105,21 @@
 			<label>Size<br />
 			<select class="js-select-size">
 				<option value="">- Select Starship Size -</option>
-				<option value="6">Small - Fighters, shuttles</option>
-				<option value="8">Medium - Bombers, large shuttles, scout ships</option>
-				<option value="10">Large - Freighters, corvettes, scientific exploration vessels</option>
-				<option value="12">Huge - Destroyers, bulk freighters, light cruisers</option>
-				<option value="14">Giant - Cruisers, small battleships or carriers</option>
-				<option value="16">Gargantuan - Battleships, carriers</option>
 			</select></label>
+			<div class="js-select-modifications-container">
+				<h3>Modifications</h3>
+				<div class="js-select-modifications"></div>
+			</div>
+		</div>
+		<div class="col-sm-6">
+			<div class="js-select-modifications-container">
+				<h3>Weapons</h3>
+				<div class="js-select-weapons"></div>
+			</div>
 
 		</div>
-		<div class="col-sm-6">
+	</div>
 
-			<h3>BB Code</h3>
-			<textarea class="js-bb-code" style="height:200px" readonly="readonly"></textarea>
-		</div>
-	</div>
-	<div class="row js-select-modifications-container" style="display: none">
-		<div class="col-sm-6">
-			<h3>Modifications</h3>
-			<div class="js-select-modifications"></div>
-		</div>
-		<div class="col-sm-6">
-			<h3>Weapons</h3>
-			<div class="js-select-weapons"></div>
-		</div>
-	</div>
 	<div class="row">
 		<div class="col-sm-12 footer">
 			<img src="./img/sw_fan_78x50.png" alt="Savage Worlds Fan Logo" />
@@ -72,17 +133,26 @@
 
 <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
 <script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
-<script src="./js/functions.js?v=2014021201"></script>
-<script src="./js/localstorage.js?v=2014021201"></script>
-<script src="./js/starship_mods.js?v=2014021201"></script>
-<script src="./js/vehicle_weapons.js?v=2014021201"></script>
-<script src="./js/starships.js?v=2014021201"></script>
+<script src="./js/functions.js?v=2014021801"></script>
+<script src="./js/localstorage.js?v=2014021801"></script>
+<script src="./js/starship_mods.js?v=2014021801"></script>
+<script src="./js/vehicle_weapons.js?v=2014021801"></script>
+<script src="./js/starships.js?v=2014021801"></script>
 <script>
 	$(".js-bb-code").click( function() {
 		$(this).focus();
 		$(this).select();
 	});
 	$(".js-bb-code").mousedown( function() {
+		$(this).focus();
+		$(this).select();
+	});
+
+	$(".js-json-code").click( function() {
+		$(this).focus();
+		$(this).select();
+	});
+	$(".js-json-code").mousedown( function() {
 		$(this).focus();
 		$(this).select();
 	});

@@ -11,13 +11,17 @@ Fully Functional Tools Include:
 * Dice Roller
 * Mass Battle Calculator
 * Starship Creator (in early alpha, needing testing)
-	* TODO:
-		* Save to/from Local Storage
-			* 	Basic functions have been created - needs front end
-* Vehicle Creator (in early alpha, needing testing, TODO as Starship Creator above)
+* Vehicle Creator (in early alpha, needing testing)
 * Monster Search
 	* TODO:
 		* Data Entry still needed
+			* Savage Worlds Deluxe - Complete
+			* Fantasy Companion - mostly complete 99/ of approx 150 entries
+			* Horror Companion - has only a test entry / of approx 130 entries
+			* Savage Free Bestiary - has 7 entries
+			* Sci-Fi Companion - has no entries
+			* Super Powers Companion - has no entries
+			
 
 
 The roadmap for these tools include:
