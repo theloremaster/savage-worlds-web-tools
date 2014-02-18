@@ -60,3 +60,4 @@ function createAlert(messageText, alertClass) {
 	$(".js-alert-container").html( html );
 	window.setTimeout(function() { $(".alert").alert('close'); }, 2000);
 }
+
