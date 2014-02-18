@@ -1,0 +1,11 @@
+{
+  "name": "Savage Worlds Web Tools",
+  "description": "This web app is a collection of tools to help make your preperation and gameplay in Savage Worlds pen and paper role playing system.",
+  "version": "0.1",
+  "app": {
+    "background": {
+      "scripts": ["js/background.js"]
+    }
+  },
+  "icons": { "16": "img/sw_fan-16.png", "128": "img/sw_fan-128.png" }
+}
