@@ -60,7 +60,7 @@ var vehicle_sizes = Array(
 		armor: 10,
 		mods: 40,
 		crew: 300,
-		cost: 50000000,
+		cost: 12000,
 		energy_capacity: 0,
 		provisions: 0
 	},
