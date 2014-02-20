@@ -18,6 +18,10 @@ function debugConsole(message) {
 	}
 
 }
+function nav_go(url) {
+	// To keep home-paged apps from jumping to external browser
+    window.location.assign(url);
+}
 
 function sort_mods(a,b) {
 	if( typeof(a.calc_weight) == "undefined")
