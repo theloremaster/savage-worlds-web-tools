@@ -18,7 +18,7 @@ function debugConsole(message) {
 	}
 
 }
-function nav_go(url) {
+function app_nav_go(url) {
 	// To keep home-paged apps from jumping to external browser
     window.location.assign(url);
 }

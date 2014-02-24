@@ -12,12 +12,13 @@ Fully Functional Tools Include:
 * Mass Battle Calculator
 * Starship Creator (in early alpha, needing testing)
 * Vehicle Creator (in early alpha, needing testing)
+* Walker Creator (in early alpha, needing testing)
 * Monster Search
 	* TODO:
 		* Data Entry still needed
 			* Savage Worlds Deluxe - Complete
 			* Fantasy Companion - mostly complete 99/ of approx 150 entries
-			* Horror Companion - has only a test entry / of approx 130 entries
+			* Horror Companion - has only a test entry (1) / of approx 130 entries
 			* Savage Free Bestiary - has 7 entries
 			* Sci-Fi Companion - has no entries
 			* Super Powers Companion - has no entries
@@ -27,7 +28,6 @@ Fully Functional Tools Include:
 The roadmap for these tools include:
 
 * Character Creator (70-80% complete from another project, but not in this toolset yet)
-
 * Power Armor Creator (planned)
 * Robot Creator (planned)
 * World Creator (planned)

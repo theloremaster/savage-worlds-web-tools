@@ -310,11 +310,11 @@ var vehicle_modifications = Array(
 	{
 		name: "Missile Launcher",
 		description: "Allows up to four Light or two Heavy (or AT) missiles to be fired at once.",
-		get_max: function(selected_starship) { return "u" },
-		get_mod_cost: function(selected_starship) {
+		get_max: function(selected_vehicle) { return "u" },
+		get_mod_cost: function(selected_vehicle) {
 			return 1;
 		},
-		get_cost: function(selected_starship) {
+		get_cost: function(selected_vehicle) {
 			return 50000;
 		}
 	},
@@ -421,11 +421,11 @@ var vehicle_modifications = Array(
 	{
 		name: "Torpedo Tube",
 		description: "Each tube allows up to two Light or one Heavy torpedo to be fired at once (at one or two targets, as desired).",
-		get_max: function(selected_starship) { return "u" },
-		get_mod_cost: function(selected_starship) {
+		get_max: function(selected_vehicle) { return "u" },
+		get_mod_cost: function(selected_vehicle) {
 			return 1;
 		},
-		get_cost: function(selected_starship) {
+		get_cost: function(selected_vehicle) {
 			return 500000;
 		}
 	},
