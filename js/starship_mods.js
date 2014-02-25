@@ -162,6 +162,12 @@ var starship_modifications = Array(
 		},
 		get_cost: function(selected_starship) {
 			return 100000;
+		},
+		is_available: function(selected_starship) {
+			if(selected_starship.size >= 16)
+				return true;
+			else
+				return false;
 		}
 	},
 	{
@@ -235,7 +241,7 @@ var starship_modifications = Array(
 		description: "Each purchase increases the ship’s Acc by 5 and Top Speed by 50. (This cannot be taken with Speed Reduction.)",
 		get_max: function(selected_starship) { return "u" },
 		get_mod_cost: function(selected_starship) {
-			return 2;
+			return 1;
 		},
 		get_cost: function(selected_starship) {
 			return 100000 * selected_starship.size;
@@ -281,6 +287,12 @@ var starship_modifications = Array(
 		},
 		get_cost: function(selected_starship) {
 			return 5000000;
+		},
+		is_available: function(selected_starship) {
+			if(selected_starship.size >= 12)
+				return true;
+			else
+				return false;
 		}
 	},
 	{

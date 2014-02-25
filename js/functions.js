@@ -18,10 +18,13 @@ function debugConsole(message) {
 	}
 
 }
-function app_nav_go(url) {
-	// To keep home-paged apps from jumping to external browser
+
+$(".ios_app_click").click( function(event) {
+	event.preventDefault();
+	url = $(this).attr("href");
     window.location.assign(url);
-}
+    return false;
+});
 
 function sort_mods(a,b) {
 	if( typeof(a.calc_weight) == "undefined")

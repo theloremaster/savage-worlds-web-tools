@@ -436,17 +436,31 @@ function sw_starship() {
 			this.selected_modifications_list = {};
 			for(calcModCount = 0; calcModCount < this.selected_modifications.length; calcModCount++) {
 				//this.selected_modifications_list += "<li>" + this.selected_modifications[modCount].name + "</li>";
-				this.mods = this.mods - this.selected_modifications[calcModCount].get_mod_cost(this);
-				this.cost += this.selected_modifications[calcModCount].get_cost(this);
-				if( this.selected_modifications[calcModCount].get_mod_effect )
-					this.selected_modifications[calcModCount].get_mod_effect(this);
 
-				// Linked weapons are displayed elsewhere...
-				if(this.selected_modifications[calcModCount].name != "Linked") {
-					if( typeof(this.selected_modifications_list[this.selected_modifications[calcModCount].name]) == "undefined")
-						this.selected_modifications_list[this.selected_modifications[calcModCount].name] = 1;
-					else
-						this.selected_modifications_list[this.selected_modifications[calcModCount].name]++;
+
+				is_available = true;
+				if( this.selected_modifications[calcModCount].is_available ) {
+					is_available = this.selected_modifications[calcModCount].is_available(this);
+				}
+
+				if( !is_available ) {
+					createAlert(this.selected_modifications[calcModCount].name + " is no longer availble for this configuration. Removing.", "warning");
+					this.remove_mod(this.selected_modifications[calcModCount].name);
+					this.calculate_ship();
+					return;
+				} else {
+					this.mods = this.mods - this.selected_modifications[calcModCount].get_mod_cost(this);
+					this.cost += this.selected_modifications[calcModCount].get_cost(this);
+					if( this.selected_modifications[calcModCount].get_mod_effect )
+						this.selected_modifications[calcModCount].get_mod_effect(this);
+
+					// Linked weapons are displayed elsewhere...
+					if(this.selected_modifications[calcModCount].name != "Linked") {
+						if( typeof(this.selected_modifications_list[this.selected_modifications[calcModCount].name]) == "undefined")
+							this.selected_modifications_list[this.selected_modifications[calcModCount].name] = 1;
+						else
+							this.selected_modifications_list[this.selected_modifications[calcModCount].name]++;
+					}
 				}
 			}
 
@@ -458,38 +472,57 @@ function sw_starship() {
 			otherWeaponModUsage = 0;
 			for(calcModCount = 0; calcModCount < this.selected_weapons.length; calcModCount++) {
 				//this.selected_modifications_list += "<li>" + this.selected_weapons[modCount].name + "</li>";
-				weaponCost = this.selected_weapons[calcModCount].mods;
-				if(this.selected_weapons[calcModCount].fixed > 0)
-					weaponCost = weaponCost / 2;
-				if(this.selected_weapons[calcModCount].linked > 0)
-					weaponCost = weaponCost / 2;
-				this.mods = this.mods - weaponCost;
 
-				this.cost += this.selected_weapons[calcModCount].cost;
-
-				weaponListName = this.selected_weapons[calcModCount].name;
-				if(this.selected_weapons[calcModCount].fixed > 0) {
-					if(this.selected_weapons[calcModCount].linked > 0) {
-						weaponListName = weaponListName + " (linked<span class='hide'>" + this.selected_weapons[calcModCount].linked + "</span>, fixed)";
-					} else {
-						weaponListName = weaponListName + " (fixed)";
-					}
-				} else {
-					if(this.selected_weapons[calcModCount].linked > 0) {
-						weaponListName = weaponListName + " (linked<span class='hide'>" + this.selected_weapons[calcModCount].linked + "</span>)";
-					}
+				is_available = true;
+				if( this.selected_weapons[calcModCount].is_available ) {
+					is_available = this.selected_weapons[calcModCount].is_available(this);
 				}
-				if( typeof(this.selected_weapons_list[weaponListName]) == "undefined") {
-					if( this.selected_weapons[calcModCount].missiles_per )
-						this.selected_weapons_list[weaponListName] = this.selected_weapons[calcModCount].missiles_per;
-					else
-						this.selected_weapons_list[weaponListName] = 1;
 
+				if( !is_available ) {
+					createAlert(this.selected_weapons[calcModCount].name + " is no longer availble for this configuration. Removing.", "warning");
+					this.remove_weapon(calcModCount);
+					this.calculate_ship();
+					return;
 				} else {
-					if( this.selected_weapons[calcModCount].missiles_per )
-						this.selected_weapons_list[weaponListName] += this.selected_weapons[calcModCount].missiles_per;
-					else
-						this.selected_weapons_list[weaponListName]++;
+
+					weaponCost = this.selected_weapons[calcModCount].mods;
+					if(this.selected_weapons[calcModCount].fixed > 0)
+						weaponCost = weaponCost / 2;
+					if(this.selected_weapons[calcModCount].linked > 0)
+						weaponCost = weaponCost / 2;
+					this.mods = this.mods - weaponCost;
+
+					this.cost += this.selected_weapons[calcModCount].cost;
+
+
+
+					weaponListName = this.selected_weapons[calcModCount].name;
+					if(this.selected_weapons[calcModCount].fixed > 0) {
+						fixedLabel = "fixed";
+						if( this.selected_weapons[calcModCount].fixed != 1)
+							fixedLabel = "fixed - " + this.selected_weapons[calcModCount].fixed;
+						if(this.selected_weapons[calcModCount].linked > 0) {
+							weaponListName = weaponListName + " (linked<span class='hide'>" + this.selected_weapons[calcModCount].linked + "</span>, " + fixedLabel +")";
+						} else {
+							weaponListName = weaponListName + " (" + fixedLabel + ")";
+						}
+					} else {
+						if(this.selected_weapons[calcModCount].linked > 0) {
+							weaponListName = weaponListName + " (linked<span class='hide'>" + this.selected_weapons[calcModCount].linked + "</span>)";
+						}
+					}
+					if( typeof(this.selected_weapons_list[weaponListName]) == "undefined") {
+						if( this.selected_weapons[calcModCount].missiles_per )
+							this.selected_weapons_list[weaponListName] = this.selected_weapons[calcModCount].missiles_per;
+						else
+							this.selected_weapons_list[weaponListName] = 1;
+
+					} else {
+						if( this.selected_weapons[calcModCount].missiles_per )
+							this.selected_weapons_list[weaponListName] += this.selected_weapons[calcModCount].missiles_per;
+						else
+							this.selected_weapons_list[weaponListName]++;
+					}
 				}
 			}
 
@@ -649,7 +682,11 @@ function propogate_add_mods() {
 	for(mod_count = 0; mod_count < starship_modifications.length; mod_count++) {
 		starship_mod_count = current_starship.get_modification_count(starship_modifications[mod_count].name);
 		mod_cost = starship_modifications[mod_count].get_mod_cost(current_starship);
-		if( current_starship.mods_available >= mod_cost || starship_mod_count > 0) {
+		is_available = true;
+		if( starship_modifications[mod_count].is_available )
+			is_available = starship_modifications[mod_count].is_available (current_starship);
+
+		if( (current_starship.mods_available >= mod_cost || starship_mod_count > 0 ) && is_available ) {
 			modifications_html += "<tr title='" + starship_modifications[mod_count].description + "'>";
 			modifications_html += "<td style='white-space: nowrap;'>";
 
@@ -661,7 +698,7 @@ function propogate_add_mods() {
 			if( current_starship.mods_available >= mod_cost && ( starship_modifications[mod_count].get_max(current_starship) == "u" || starship_modifications[mod_count].get_max(current_starship) > starship_mod_count) )
 				modifications_html += " <span ref='" + starship_modifications[mod_count].name  + "' class='js-add-mod glyphicon glyphicon-plus color-green'></span>";
 
-				modifications_html += "</td>";
+			modifications_html += "</td>";
 
 			if(  starship_mod_count > 0 )
 				modifications_html += "<td style='color: green'>" + starship_modifications[mod_count].name + "</td>";
@@ -696,11 +733,19 @@ function propogate_weapon_mods() {
 			weapon_mods_html += "</td>";
 			weapon_mods_html += "<td>";
 			fixedcheck = "";
-		//	if(current_starship.selected_weapons[weapon_count].linked == 0) {
-				if(current_starship.selected_weapons[weapon_count].fixed > 0)
-					fixedcheck = "checked='checked'";
-				weapon_mods_html += "<label style='display: inline;font-weight: normal;'><input type='checkbox' class='js-fix-weapon' ref='" + weapon_count + "' " + fixedcheck + "/> Fixed</label>";
-		//	}
+
+			if(current_starship.selected_weapons[weapon_count].fixed > 0)
+				fixedcheck = "checked='checked'";
+//			weapon_mods_html += "<label style='display: inline;font-weight: normal;'><input type='checkbox' class='js-fix-weapon' ref='" + weapon_count + "' " + fixedcheck + "/> Fixed</label>";
+
+			weapon_mods_html += "<label style='display: inline;font-weight: normal;'><select class=\"js-fix-weapon\">";
+			weapon_mods_html += "<option value=\"0\">- Not Fixed -</option>";
+			weapon_mods_html += "<option value=\"bow\">Fixed to Bow</option>";
+			weapon_mods_html += "<option value=\"stern\">Fixed to Stern</option>";
+			weapon_mods_html += "<option value=\"port\">Fixed to Port</option>";
+			weapon_mods_html += "<option value=\"starboard\">Fixed to Starboard</option>";
+			weapon_mods_html += "</select></label>";
+
 
 			if(available_links.length > 0) { // && current_starship.selected_weapons[weapon_count].fixed == 0) {
 				weapon_mods_html += "<select class='js-link-weapon' ref='" + weapon_count + "'>";
@@ -747,8 +792,13 @@ function propogate_weapon_mods() {
 			weapon_mods_html += "</tr></thead><tbody>";
 		}
 
+		is_available = true;
+		if( vehicle_weapons[mod_count].is_available )
+			is_available = vehicle_weapons[mod_count].is_available (current_starship);
+
+
 		mod_cost = vehicle_weapons[mod_count].mods;
-		if( current_starship.mods_available >= mod_cost ) {
+		if( current_starship.mods_available >= mod_cost && is_available) {
 			weapon_mods_html += "<tr title='" + vehicle_weapons[mod_count].description + "'>";
 			if(  starship_mod_count > 0 )
 				weapon_mods_html += "<td style='color: green'>";
@@ -836,14 +886,10 @@ function refresh_starship_page() {
 			refresh_starship_page();
 		});
 
-		$('.js-fix-weapon').unbind('click');
-		$(".js-fix-weapon").click( function() {
+		$('.js-fix-weapon').unbind('change');
+		$(".js-fix-weapon").change( function() {
 			weaponIndex = $(this).attr("ref");
-			if($(this).is(":checked")) {
-				current_starship.fix_weapon( weaponIndex, 1 );
-			} else {
-				current_starship.fix_weapon( weaponIndex, 0 );
-			}
+			current_starship.fix_weapon( weaponIndex, $(this).val() );
 			refresh_starship_page();
 		});
 

@@ -292,46 +292,204 @@ var vehicle_weapons = Array(
 		notes: "AP 25, HW."
 	},
 	{
-		name: "Large Mass Driver",
+		name: "Mass Driver (Size 1)",
 		classification: "Mass Drivers",
 		description: "Mass drivers are large, space-based, rail systems used to magnetically accelerate heavy projectiles at high speed, causing devastating damage wherever they impact. The ranges listed below are practical limits. In space the actual range is infinite. Projectiles are made of dense metallic materials (rocks) such as can be found easily in asteroids or planets with no manufacturing capability, making them favorite weapons for long-range military vessels that need to supply from natural materials (5 shots per hour can be mined from most asteroids).",
-		range: "150/300/600",
-		damgage: "8d10",
-		rof: 1,
-		shots: 20,
-		missiles_per: 0,
-		linkable: 0,
-		mods: 3,
-		cost: 600000,
-		notes: "HW. Projectiles are 100 pound, basketball-sized spheres that cost $500 each."
-	},
-	{
-		name: "Heavy Mass Driver",
-		classification: "Mass Drivers",
-		description: "Mass drivers are large, space-based, rail systems used to magnetically accelerate heavy projectiles at high speed, causing devastating damage wherever they impact. The ranges listed below are practical limits. In space the actual range is infinite. Projectiles are made of dense metallic materials (rocks) such as can be found easily in asteroids or planets with no manufacturing capability, making them favorite weapons for long-range military vessels that need to supply from natural materials (5 shots per hour can be mined from most asteroids).",
-		range: "200/400/800",
-		damgage: "9d10",
+		range: "100/200/400",
+		damgage: "1d12",
 		rof: 1,
 		shots: 15,
 		missiles_per: 0,
 		linkable: 0,
-		mods: 4,
-		cost: 1000000,
-		notes: "HW. Projectiles are 500 pound, 3’ diameter spheres that cost $1000 each."
+		mods: 1,
+		cost: 100000,
+		notes: "Hw. Projectiles are 10 pound spheres that cost $100 each.",
+		is_available: function(selected_starship) {
+			if(selected_starship.size / 2 >= 1)
+				return true;
+			else
+				return false;
+		}
 	},
 	{
-		name: "Super-Heavy Mass Driver",
+		name: "Mass Driver (Size 2)",
 		classification: "Mass Drivers",
 		description: "Mass drivers are large, space-based, rail systems used to magnetically accelerate heavy projectiles at high speed, causing devastating damage wherever they impact. The ranges listed below are practical limits. In space the actual range is infinite. Projectiles are made of dense metallic materials (rocks) such as can be found easily in asteroids or planets with no manufacturing capability, making them favorite weapons for long-range military vessels that need to supply from natural materials (5 shots per hour can be mined from most asteroids).",
-		range: "250/500/1000",
-		damgage: "10d10",
+		range: "100/200/400",
+		damgage: "2d12",
 		rof: 1,
-		shots: 10,
+		shots: 15,
 		missiles_per: 0,
 		linkable: 0,
-		mods: 6,
-		cost: 2000000,
-		notes: "HW. Projectiles are 1000 pound, 5’ diameter spheres that cost $2000 each."
+		mods: 1,
+		cost: 200000,
+		notes: "Hw. Projectiles are 20 pound spheres that cost $200 each.",
+		is_available: function(selected_starship) {
+			if(selected_starship.size / 2 >= 2)
+				return true;
+			else
+				return false;
+		}
+	},
+	{
+		name: "Mass Driver (Size 3)",
+		classification: "Mass Drivers",
+		description: "Mass drivers are large, space-based, rail systems used to magnetically accelerate heavy projectiles at high speed, causing devastating damage wherever they impact. The ranges listed below are practical limits. In space the actual range is infinite. Projectiles are made of dense metallic materials (rocks) such as can be found easily in asteroids or planets with no manufacturing capability, making them favorite weapons for long-range military vessels that need to supply from natural materials (5 shots per hour can be mined from most asteroids).",
+		range: "100/200/400",
+		damgage: "3d12",
+		rof: 1,
+		shots: 15,
+		missiles_per: 0,
+		linkable: 0,
+		mods: 1,
+		cost: 300000,
+		notes: "Hw. Projectiles are 30 pound spheres that cost $300 each.",
+		is_available: function(selected_starship) {
+			if(selected_starship.size / 2 >= 3)
+				return true;
+			else
+				return false;
+		}
+	},
+	{
+		name: "Mass Driver (Size 4)",
+		classification: "Mass Drivers",
+		description: "Mass drivers are large, space-based, rail systems used to magnetically accelerate heavy projectiles at high speed, causing devastating damage wherever they impact. The ranges listed below are practical limits. In space the actual range is infinite. Projectiles are made of dense metallic materials (rocks) such as can be found easily in asteroids or planets with no manufacturing capability, making them favorite weapons for long-range military vessels that need to supply from natural materials (5 shots per hour can be mined from most asteroids).",
+		range: "100/200/400",
+		damgage: "4d12",
+		rof: 1,
+		shots: 15,
+		missiles_per: 0,
+		linkable: 0,
+		mods: 1,
+		cost: 400000,
+		notes: "Hw. Projectiles are 40 pound spheres that cost $400 each.",
+		is_available: function(selected_starship) {
+			if(selected_starship.size / 2 >= 4)
+				return true;
+			else
+				return false;
+		}
+	},
+	{
+		name: "Mass Driver (Size 5)",
+		classification: "Mass Drivers",
+		description: "Mass drivers are large, space-based, rail systems used to magnetically accelerate heavy projectiles at high speed, causing devastating damage wherever they impact. The ranges listed below are practical limits. In space the actual range is infinite. Projectiles are made of dense metallic materials (rocks) such as can be found easily in asteroids or planets with no manufacturing capability, making them favorite weapons for long-range military vessels that need to supply from natural materials (5 shots per hour can be mined from most asteroids).",
+		range: "100/200/400",
+		damgage: "5d12",
+		rof: 1,
+		shots: 15,
+		missiles_per: 0,
+		linkable: 0,
+		mods: 1,
+		cost: 500000,
+		notes: "Hw. Projectiles are 50 pound spheres that cost $500 each.",
+		is_available: function(selected_starship) {
+			if(selected_starship.size / 2 >= 5)
+				return true;
+			else
+				return false;
+		}
+	},
+	{
+		name: "Mass Driver (Size 6)",
+		classification: "Mass Drivers",
+		description: "Mass drivers are large, space-based, rail systems used to magnetically accelerate heavy projectiles at high speed, causing devastating damage wherever they impact. The ranges listed below are practical limits. In space the actual range is infinite. Projectiles are made of dense metallic materials (rocks) such as can be found easily in asteroids or planets with no manufacturing capability, making them favorite weapons for long-range military vessels that need to supply from natural materials (5 shots per hour can be mined from most asteroids).",
+		range: "100/200/400",
+		damgage: "6d12",
+		rof: 1,
+		shots: 15,
+		missiles_per: 0,
+		linkable: 0,
+		mods: 1,
+		cost: 600000,
+		notes: "Hw. Projectiles are 60 pound spheres that cost $600 each.",
+		is_available: function(selected_starship) {
+			if(selected_starship.size / 2 >= 6)
+				return true;
+			else
+				return false;
+		}
+	},
+	{
+		name: "Mass Driver (Size 7)",
+		classification: "Mass Drivers",
+		description: "Mass drivers are large, space-based, rail systems used to magnetically accelerate heavy projectiles at high speed, causing devastating damage wherever they impact. The ranges listed below are practical limits. In space the actual range is infinite. Projectiles are made of dense metallic materials (rocks) such as can be found easily in asteroids or planets with no manufacturing capability, making them favorite weapons for long-range military vessels that need to supply from natural materials (5 shots per hour can be mined from most asteroids).",
+		range: "100/200/400",
+		damgage: "7d12",
+		rof: 1,
+		shots: 15,
+		missiles_per: 0,
+		linkable: 0,
+		mods: 1,
+		cost: 700000,
+		notes: "Hw. Projectiles are 70 pound spheres that cost $700 each.",
+		is_available: function(selected_starship) {
+			if(selected_starship.size / 2 >= 7)
+				return true;
+			else
+				return false;
+		}
+	},
+	{
+		name: "Mass Driver (Size 8)",
+		classification: "Mass Drivers",
+		description: "Mass drivers are large, space-based, rail systems used to magnetically accelerate heavy projectiles at high speed, causing devastating damage wherever they impact. The ranges listed below are practical limits. In space the actual range is infinite. Projectiles are made of dense metallic materials (rocks) such as can be found easily in asteroids or planets with no manufacturing capability, making them favorite weapons for long-range military vessels that need to supply from natural materials (5 shots per hour can be mined from most asteroids).",
+		range: "100/200/400",
+		damgage: "8d12",
+		rof: 1,
+		shots: 15,
+		missiles_per: 0,
+		linkable: 0,
+		mods: 8,
+		cost: 100000,
+		notes: "Hw. Projectiles are 80 pound spheres that cost $800 each.",
+		is_available: function(selected_starship) {
+			if(selected_starship.size / 2 >= 8)
+				return true;
+			else
+				return false;
+		}
+	},
+	{
+		name: "Mass Driver (Size 9)",
+		classification: "Mass Drivers",
+		description: "Mass drivers are large, space-based, rail systems used to magnetically accelerate heavy projectiles at high speed, causing devastating damage wherever they impact. The ranges listed below are practical limits. In space the actual range is infinite. Projectiles are made of dense metallic materials (rocks) such as can be found easily in asteroids or planets with no manufacturing capability, making them favorite weapons for long-range military vessels that need to supply from natural materials (5 shots per hour can be mined from most asteroids).",
+		range: "100/200/400",
+		damgage: "9d12",
+		rof: 1,
+		shots: 15,
+		missiles_per: 0,
+		linkable: 0,
+		mods: 1,
+		cost: 900000,
+		notes: "Hw. Projectiles are 90 pound spheres that cost $90 each.",
+		is_available: function(selected_starship) {
+			if(selected_starship.size / 2 >= 9)
+				return true;
+			else
+				return false;
+		}
+	},
+	{
+		name: "Mass Driver (Size 10)",
+		classification: "Mass Drivers",
+		description: "Mass drivers are large, space-based, rail systems used to magnetically accelerate heavy projectiles at high speed, causing devastating damage wherever they impact. The ranges listed below are practical limits. In space the actual range is infinite. Projectiles are made of dense metallic materials (rocks) such as can be found easily in asteroids or planets with no manufacturing capability, making them favorite weapons for long-range military vessels that need to supply from natural materials (5 shots per hour can be mined from most asteroids).",
+		range: "100/200/400",
+		damgage: "10d12",
+		rof: 1,
+		shots: 15,
+		missiles_per: 0,
+		linkable: 0,
+		mods: 1,
+		cost: 1000000,
+		notes: "Hw. Projectiles are 100 pound spheres that cost $1000 each.",
+		is_available: function(selected_starship) {
+			if(selected_starship.size / 2 >= 11)
+				return true;
+			else
+				return false;
+		}
 	},
 	{
 		name: "Light Missile",
