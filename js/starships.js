@@ -486,9 +486,9 @@ function sw_starship() {
 				} else {
 
 					weaponCost = this.selected_weapons[calcModCount].mods;
-					if(this.selected_weapons[calcModCount].fixed > 0)
+					if(this.selected_weapons[calcModCount].fixed )
 						weaponCost = weaponCost / 2;
-					if(this.selected_weapons[calcModCount].linked > 0)
+					if(this.selected_weapons[calcModCount].linked )
 						weaponCost = weaponCost / 2;
 					this.mods = this.mods - weaponCost;
 
