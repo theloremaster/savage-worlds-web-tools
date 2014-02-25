@@ -565,7 +565,7 @@ function sw_walker() {
 	function fix_weapon(weaponIndex, fixedValue) {
 		weaponIndex = weaponIndex / 1;
 
-		this.selected_weapons[weaponIndex].fixed = (fixedValue / 1);
+		this.selected_weapons[weaponIndex].fixed = fixedValue;
 	}
 
 	this.get_linked_weapons = get_linked_weapons;

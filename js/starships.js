@@ -497,7 +497,7 @@ function sw_starship() {
 
 
 					weaponListName = this.selected_weapons[calcModCount].name;
-					if(this.selected_weapons[calcModCount].fixed > 0) {
+					if(this.selected_weapons[calcModCount].fixed) {
 						fixedLabel = "fixed";
 						if( this.selected_weapons[calcModCount].fixed != 1)
 							fixedLabel = "fixed - " + this.selected_weapons[calcModCount].fixed;
@@ -598,8 +598,7 @@ function sw_starship() {
 	this.fix_weapon = fix_weapon;
 	function fix_weapon(weaponIndex, fixedValue) {
 		weaponIndex = weaponIndex / 1;
-
-		this.selected_weapons[weaponIndex].fixed = (fixedValue / 1);
+		this.selected_weapons[weaponIndex].fixed = fixedValue;
 	}
 
 	this.get_linked_weapons = get_linked_weapons;
@@ -734,16 +733,35 @@ function propogate_weapon_mods() {
 			weapon_mods_html += "<td>";
 			fixedcheck = "";
 
-			if(current_starship.selected_weapons[weapon_count].fixed > 0)
-				fixedcheck = "checked='checked'";
+//			if(current_starship.selected_weapons[weapon_count].fixed > 0)
+//				fixedcheck = "checked='checked'";
 //			weapon_mods_html += "<label style='display: inline;font-weight: normal;'><input type='checkbox' class='js-fix-weapon' ref='" + weapon_count + "' " + fixedcheck + "/> Fixed</label>";
 
-			weapon_mods_html += "<label style='display: inline;font-weight: normal;'><select class=\"js-fix-weapon\">";
-			weapon_mods_html += "<option value=\"0\">- Not Fixed -</option>";
-			weapon_mods_html += "<option value=\"bow\">Fixed to Bow</option>";
-			weapon_mods_html += "<option value=\"stern\">Fixed to Stern</option>";
-			weapon_mods_html += "<option value=\"port\">Fixed to Port</option>";
-			weapon_mods_html += "<option value=\"starboard\">Fixed to Starboard</option>";
+			weapon_mods_html += "<label style='display: inline;font-weight: normal;'><select ref='" + weapon_count + "' class=\"js-fix-weapon\">";
+			if(current_starship.selected_weapons[weapon_count].fixed == 0)
+				weapon_mods_html += "<option selected='selected' value=\"0\">- Not Fixed -</option>";
+			else
+				weapon_mods_html += "<option value=\"0\">- Not Fixed -</option>";
+
+			if(current_starship.selected_weapons[weapon_count].fixed == "bow" || current_starship.selected_weapons[weapon_count].fixed == 1)
+				weapon_mods_html += "<option selected='selected' value=\"bow\">Fixed to Bow</option>";
+			else
+				weapon_mods_html += "<option value=\"bow\">Fixed to Bow</option>";
+
+			if(current_starship.selected_weapons[weapon_count].fixed == "stern")
+				weapon_mods_html += "<option selected='selected' value=\"stern\">Fixed to Stern</option>";
+			else
+				weapon_mods_html += "<option value=\"stern\">Fixed to Stern</option>";
+
+			if(current_starship.selected_weapons[weapon_count].fixed == "port")
+				weapon_mods_html += "<option selected='selected' value=\"port\">Fixed to Port</option>";
+			else
+				weapon_mods_html += "<option value=\"port\">Fixed to Port</option>";
+
+			if(current_starship.selected_weapons[weapon_count].fixed == "starboard")
+				weapon_mods_html += "<option selected='selected' value=\"starboard\">Fixed to Starboard</option>";
+			else
+				weapon_mods_html += "<option value=\"starboard\">Fixed to Starboard</option>";
 			weapon_mods_html += "</select></label>";
 
 
