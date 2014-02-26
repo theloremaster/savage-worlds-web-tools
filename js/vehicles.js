@@ -381,10 +381,10 @@ function sw_vehicle() {
 			for(weaponCounter = 0; weaponCounter < importedVehicleObj.weapons.length; weaponCounter++) {
 				this.add_weapon( importedVehicleObj.weapons[weaponCounter].name );
 
-				if( importedVehicleObj.weapons[weaponCounter].fixed > 0)
+				if( importedVehicleObj.weapons[weaponCounter].fixed)
 					this.fix_weapon( this.selected_weapons.length - 1, importedVehicleObj.weapons[weaponCounter].fixed );
 
-				if( importedVehicleObj.weapons[weaponCounter].linked > 0)
+				if( importedVehicleObj.weapons[weaponCounter].linked)
 					this.link_weapon( this.selected_weapons.length - 1, importedVehicleObj.weapons[weaponCounter].linked);
 
 			}
@@ -501,23 +501,23 @@ function sw_vehicle() {
 					return;
 				} else {
 					weaponCost = this.selected_weapons[calcModCount].mods;
-					if(this.selected_weapons[calcModCount].fixed > 0)
+					if(this.selected_weapons[calcModCount].fixed)
 						weaponCost = weaponCost / 2;
-					if(this.selected_weapons[calcModCount].linked > 0)
+					if(this.selected_weapons[calcModCount].linked)
 						weaponCost = weaponCost / 2;
 					this.mods = this.mods - weaponCost;
 
 					this.cost += this.selected_weapons[calcModCount].cost;
 
 					weaponListName = this.selected_weapons[calcModCount].name;
-					if(this.selected_weapons[calcModCount].fixed > 0) {
-						if(this.selected_weapons[calcModCount].linked > 0) {
+					if(this.selected_weapons[calcModCount].fixed) {
+						if(this.selected_weapons[calcModCount].linked) {
 							weaponListName = weaponListName + " (linked<span class='hide'>" + this.selected_weapons[calcModCount].linked + "</span>, fixed)";
 						} else {
 							weaponListName = weaponListName + " (fixed)";
 						}
 					} else {
-						if(this.selected_weapons[calcModCount].linked > 0) {
+						if(this.selected_weapons[calcModCount].linked) {
 							weaponListName = weaponListName + " (linked<span class='hide'>" + this.selected_weapons[calcModCount].linked + "</span>)";
 						}
 					}
@@ -619,7 +619,7 @@ function sw_vehicle() {
 		if( numberOfLinks > 0 ){
 
 			for(linked_weapon_count = 0; linked_weapon_count < this.selected_weapons.length; linked_weapon_count++) {
-				if(this.selected_weapons[linked_weapon_count].linked > 0) {
+				if(this.selected_weapons[linked_weapon_count].linked) {
 					// unset any links that were removed...
 					if(this.selected_weapons[linked_weapon_count].linked > numberOfLinks)
 						this.selected_weapons[linked_weapon_count].linked  = 0;
@@ -746,7 +746,7 @@ function propogate_weapon_mods() {
 			weapon_mods_html += "<td>";
 			fixedcheck = "";
 		//	if(current_vehicle.selected_weapons[weapon_count].linked == 0) {
-				if(current_vehicle.selected_weapons[weapon_count].fixed > 0)
+				if(current_vehicle.selected_weapons[weapon_count].fixed)
 					fixedcheck = "checked='checked'";
 				weapon_mods_html += "<label style='display: inline;font-weight: normal;'><input type='checkbox' class='js-fix-weapon' ref='" + weapon_count + "' " + fixedcheck + "/> Fixed</label>";
 		//	}

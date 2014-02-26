@@ -46,3 +46,7 @@ CACHE MANIFEST
 ./img/sw_fan_78x50.png
 ./mass_battles.html
 ./index.html
+./fonts/glyphicons-halflings-regular.eot
+./fonts/glyphicons-halflings-regular.svg
+./fonts/glyphicons-halflings-regular.ttf
+./fonts/glyphicons-halflings-regular.woff
