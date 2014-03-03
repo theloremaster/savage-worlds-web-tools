@@ -341,7 +341,7 @@ var vehicle_weapons = Array(
 		shots: 15,
 		missiles_per: 0,
 		linkable: 0,
-		mods: 1,
+		mods: 2,
 		cost: 300000,
 		notes: "Hw. Projectiles are 30 pound spheres that cost $300 each.",
 		is_available: function(selected_starship) {
@@ -361,7 +361,7 @@ var vehicle_weapons = Array(
 		shots: 15,
 		missiles_per: 0,
 		linkable: 0,
-		mods: 1,
+		mods: 2,
 		cost: 400000,
 		notes: "Hw. Projectiles are 40 pound spheres that cost $400 each.",
 		is_available: function(selected_starship) {
@@ -381,7 +381,7 @@ var vehicle_weapons = Array(
 		shots: 15,
 		missiles_per: 0,
 		linkable: 0,
-		mods: 1,
+		mods: 3,
 		cost: 500000,
 		notes: "Hw. Projectiles are 50 pound spheres that cost $500 each.",
 		is_available: function(selected_starship) {
@@ -401,7 +401,7 @@ var vehicle_weapons = Array(
 		shots: 15,
 		missiles_per: 0,
 		linkable: 0,
-		mods: 1,
+		mods: 3,
 		cost: 600000,
 		notes: "Hw. Projectiles are 60 pound spheres that cost $600 each.",
 		is_available: function(selected_starship) {
@@ -421,7 +421,7 @@ var vehicle_weapons = Array(
 		shots: 15,
 		missiles_per: 0,
 		linkable: 0,
-		mods: 1,
+		mods: 4,
 		cost: 700000,
 		notes: "Hw. Projectiles are 70 pound spheres that cost $700 each.",
 		is_available: function(selected_starship) {
@@ -441,7 +441,7 @@ var vehicle_weapons = Array(
 		shots: 15,
 		missiles_per: 0,
 		linkable: 0,
-		mods: 8,
+		mods: 4,
 		cost: 100000,
 		notes: "Hw. Projectiles are 80 pound spheres that cost $800 each.",
 		is_available: function(selected_starship) {
@@ -461,7 +461,7 @@ var vehicle_weapons = Array(
 		shots: 15,
 		missiles_per: 0,
 		linkable: 0,
-		mods: 1,
+		mods: 5,
 		cost: 900000,
 		notes: "Hw. Projectiles are 90 pound spheres that cost $90 each.",
 		is_available: function(selected_starship) {
@@ -481,7 +481,7 @@ var vehicle_weapons = Array(
 		shots: 15,
 		missiles_per: 0,
 		linkable: 0,
-		mods: 1,
+		mods: 5,
 		cost: 1000000,
 		notes: "Hw. Projectiles are 100 pound spheres that cost $1000 each.",
 		is_available: function(selected_starship) {

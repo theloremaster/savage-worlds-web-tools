@@ -48,7 +48,7 @@ var power_armor_sizes = Array(
 		pace: 4,
 		toughness: 0,
 		armor: 12,
-		mods: 5,
+		mods: 12,
 		crew: 1,
 		cost: 2000000,
 		weight: 300,
@@ -76,7 +76,10 @@ function sw_power_armor() {
 	this.mods = 0;
 	this.base_mods = 0;
 	this.crew = 0;
+	this.has_weapon_mount = 0;
+	this.flying_pace = 0;
 	this.cost = 0;
+	this.vehicle_weapon_mod_points = 0;
 	this.energy_capacity =  0;
 	this.base_energy_capacity =  0;
 	this.provisions = 0;
@@ -108,7 +111,7 @@ function sw_power_armor() {
 			html_return += "Size " + this.size + ", ";
 			html_return += "Acc/TS " + this.acc + "/" + this.ts + ", ";
 			if(this.aircraft)
-				html_return += "Climb " + this.climb + ", ";
+				html_return += "Climb " + this.climb + ", Flying Pace: " + this.flying_pace + ", ";
 			html_return += "Toughness " + this.toughness + " (" + this.armor + "), ";
 			html_return += "Crew " + this.crew + ", ";
 
@@ -259,6 +262,11 @@ function sw_power_armor() {
 		this.base_mods = 0;
 		this.crew = 0;
 		this.cost = 0;
+		this.flying_pace = 0;
+		this.strength_bonus = 0;
+		this.aircraft = 0;
+		this.has_weapon_mount = 0;
+		this.vehicle_weapon_mod_points = 0;
 		this.base_cost = 0;
 		this.energy_capacity =  0;
 		this.base_energy_capacity =  0;
@@ -347,12 +355,19 @@ function sw_power_armor() {
 
 		// Get base stats from size
 		if( this.selected_size.power_armor_label ) {
+
+			this.strength_bonus = 0;
+			this.aircraft = 0;
+			this.has_weapon_mount = 0;
+			this.vehicle_weapon_mod_points = 0;
+
 			this.power_armor_label = this.selected_size.power_armor_label;
 			this.examples = this.selected_size.examples;
 			this.size = this.selected_size.size;
 			this.acc = this.selected_size.acc;
 			this.ts = this.selected_size.ts;
 			this.aircraft = 0;
+			this.strength_bonus = 0;
 			this.climb = this.selected_size.climb;
 			this.toughness = this.selected_size.toughness;
 			this.base_toughness = this.selected_size.toughness;
@@ -367,7 +382,6 @@ function sw_power_armor() {
 			this.provisions = this.selected_size.provisions;
 			this.weight = this.selected_size.weight;
 			this.pace = this.selected_size.pace;
-
 
 			this.selected_modifications.sort( sort_mods );
 			// Modify Power Armor as per mods
@@ -678,41 +692,45 @@ function propogate_weapon_mods() {
 
 	currentWeaponClass = "";
 	weaponCount = 0;
-	for(mod_count = 0; mod_count < vehicle_weapons.length; mod_count++) {
-		if(currentWeaponClass != vehicle_weapons[mod_count].classification) {
-			if(weaponCount > 0) {
-				if(currentWeaponClass != vehicle_weapons[mod_count].classification) {
-					weapon_mods_html += "</tbody></table>";
+	if(current_power_armor.has_weapon_mount == 0) {
+		weapon_mods_html += "<p>To add a vehicle weapon, you'll require a Weapon Mount</p>";
+	} else {
+		for(mod_count = 0; mod_count < vehicle_weapons.length; mod_count++) {
+			if(currentWeaponClass != vehicle_weapons[mod_count].classification) {
+				if(weaponCount > 0) {
+					if(currentWeaponClass != vehicle_weapons[mod_count].classification) {
+						weapon_mods_html += "</tbody></table>";
+					}
 				}
+				weaponCount = 0;
+				weapon_mods_html += "<h5>" + vehicle_weapons[mod_count].classification + "</h5><table><thead><tr>";
+				weapon_mods_html += "<th>Name</th>";
+				weapon_mods_html += "<th>Mod Cost</th>";
+				weapon_mods_html += "<th>Cost</th>";
+				weapon_mods_html += "</tr></thead><tbody>";
 			}
-			weaponCount = 0;
-			weapon_mods_html += "<h5>" + vehicle_weapons[mod_count].classification + "</h5><table><thead><tr>";
-			weapon_mods_html += "<th>Name</th>";
-			weapon_mods_html += "<th>Mod Cost</th>";
-			weapon_mods_html += "<th>Cost</th>";
-			weapon_mods_html += "</tr></thead><tbody>";
+
+			mod_cost = vehicle_weapons[mod_count].mods;
+			if( current_power_armor.vehicle_weapon_mod_points >= mod_cost ) {
+				weapon_mods_html += "<tr title='" + vehicle_weapons[mod_count].description + "'>";
+				if(  power_armor_mod_count > 0 )
+					weapon_mods_html += "<td style='color: green'>";
+				else
+					weapon_mods_html += "<td>";
+
+				if( current_power_armor.vehicle_weapon_mod_points >= mod_cost )
+					weapon_mods_html += "<button style='height: 25px; display: inline-block;' ref='" + vehicle_weapons[mod_count].name  + "' class='js-add-weapon  btn btn-success btn-xs' type='button'>Install</button> ";
+				weapon_mods_html += vehicle_weapons[mod_count].name + "</td>";
+
+				weapon_mods_html += "<td>" + mod_cost + "</td>";
+				weapon_mods_html += "<td>" + simplify_cost(vehicle_weapons[mod_count].cost ) + "</td>";
+
+				weapon_mods_html += "</tr>";
+			}
+
+			currentWeaponClass = vehicle_weapons[mod_count].classification;
+			weaponCount++;
 		}
-
-		mod_cost = vehicle_weapons[mod_count].mods;
-		if( current_power_armor.mods_available >= mod_cost ) {
-			weapon_mods_html += "<tr title='" + vehicle_weapons[mod_count].description + "'>";
-			if(  power_armor_mod_count > 0 )
-				weapon_mods_html += "<td style='color: green'>";
-			else
-				weapon_mods_html += "<td>";
-
-			if( current_power_armor.mods_available >= mod_cost )
-				weapon_mods_html += "<button style='height: 25px; display: inline-block;' ref='" + vehicle_weapons[mod_count].name  + "' class='js-add-weapon  btn btn-success btn-xs' type='button'>Install</button> ";
-			weapon_mods_html += vehicle_weapons[mod_count].name + "</td>";
-
-			weapon_mods_html += "<td>" + mod_cost + "</td>";
-			weapon_mods_html += "<td>" + simplify_cost(vehicle_weapons[mod_count].cost ) + "</td>";
-
-			weapon_mods_html += "</tr>";
-		}
-
-		currentWeaponClass = vehicle_weapons[mod_count].classification;
-		weaponCount++;
 	}
 
 	$(".js-select-weapons").html(weapon_mods_html);
@@ -799,8 +817,6 @@ function refresh_power_armor_page() {
 		$(".js-select-modifications-container").fadeOut();
 	}
 }
-
-
 
 $(".js-import-data").click( function() {
 	if( $(".js-import-code").val() != "" ) {

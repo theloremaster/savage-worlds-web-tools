@@ -41,7 +41,7 @@ var walker_sizes = Array(
 	{
 		walker_label: "Heavy",
 		examples: "50 feet tall",
-		strength: "d12+8",
+		strength: 8,
 		pace: 12,
 		size: 10,
 		acc: 0,

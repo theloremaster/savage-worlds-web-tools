@@ -13,6 +13,7 @@ Fully Functional Tools Include:
 * Starship Creator (in early alpha, needing testing)
 * Vehicle Creator (in early alpha, needing testing)
 * Walker Creator (in early alpha, needing testing)
+* Power Armor Creator (in early alpha, needing testing)
 * Monster Search
 	* TODO:
 		* Data Entry still needed
@@ -28,7 +29,6 @@ Fully Functional Tools Include:
 The roadmap for these tools include:
 
 * Character Creator (70-80% complete from another project, but not in this toolset yet)
-* Power Armor Creator (planned)
 * Robot Creator (planned)
 * World Creator (planned)
 
