@@ -111,9 +111,9 @@ function sw_power_armor() {
 			html_return += "Size " + this.size + ", ";
 			html_return += "Acc/TS " + this.acc + "/" + this.ts + ", ";
 			if(this.aircraft)
-				html_return += "Climb " + this.climb + ", Flying Pace: " + this.flying_pace + ", ";
-			html_return += "Toughness " + this.toughness + " (" + this.armor + "), ";
-			html_return += "Crew " + this.crew + ", ";
+				html_return += "Climb " + this.climb + ", Flying Pace " + this.flying_pace + ", ";
+			html_return += "Toughness +" + this.armor + ", ";
+//			html_return += "Crew " + this.crew + ", ";
 
 			html_return += "Cost $" + simplify_cost(this.cost) + "<br />";
 
@@ -121,6 +121,8 @@ function sw_power_armor() {
 			if(this.energy_capacity > 0)
 				html_return += "<strong>Energy Capacity</strong>: " + this.energy_capacity + "<br />";
 			html_return += "<strong>Mods Available</strong>: " + this.mods_available + "<br />";
+			if( this.has_weapon_mount )
+				html_return += "<strong>Weapon Mods Available</strong>: " + this.vehicle_weapon_mod_points + "<br />";
 
 			html_return += "<strong>Notes</strong>: ";
 
@@ -420,7 +422,7 @@ function sw_power_armor() {
 					weaponCost = weaponCost / 2;
 				if(this.selected_weapons[calcModCount].linked > 0)
 					weaponCost = weaponCost / 2;
-				this.mods = this.mods - weaponCost;
+				this.vehicle_weapon_mod_points = this.vehicle_weapon_mod_points - weaponCost;
 
 				if( this.selected_weapons[calcModCount].get_weight )
 					this.weight += this.selected_weapons[calcModCount].get_weight(this);
@@ -659,7 +661,7 @@ function propogate_weapon_mods() {
 		//	if(current_power_armor.selected_weapons[weapon_count].linked == 0) {
 				if(current_power_armor.selected_weapons[weapon_count].fixed > 0)
 					fixedcheck = "checked='checked'";
-				weapon_mods_html += "<label style='display: inline;font-weight: normal;'><input type='checkbox' class='js-fix-weapon' ref='" + weapon_count + "' " + fixedcheck + "/> Fixed</label>";
+				weapon_mods_html += "<label style='display: inline;font-weight: normal;'>";
 		//	}
 
 			if(available_links.length > 0) { // && current_power_armor.selected_weapons[weapon_count].fixed == 0) {
