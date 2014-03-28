@@ -1,6 +1,6 @@
 CACHE MANIFEST
-# rev 2014032812
-# 2014-03-28:v12
+# rev 2014032813
+# 2014-03-28:v13
 
 CACHE:
 http://jdgwf.github.io/savage-worlds-web-tools/extras_view.html
@@ -58,4 +58,5 @@ http://jdgwf.github.io/savage-worlds-web-tools/fonts/glyphicons-halflings-regula
 
 
 FALLBACK:
-NETWORK: *
+NETWORK:
+*
