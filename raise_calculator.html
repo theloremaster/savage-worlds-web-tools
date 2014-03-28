@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width">
-	<title>Flexible Dice Roller</title>
+	<title>Raise Calculator</title>
 	<meta name="description" value="Roll some Savage Dice. This little tool should be able to handle pretty much any combo you throw at it. It'll even handle damage rolling and wound calculation for you if you wish.">
 	<link rel="stylesheet" href="./css/bootstrap.min.css?v=2014030301" type="text/css">
 	<link rel="stylesheet" href="./css/style.css?v=2014030301" type="text/css">
@@ -19,63 +19,36 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-12">
-				<h1><a class="ios_app_click" href="./index.html" title="Savage Worlds Web Tools">Savage Worlds Web Tools</a> - Flexible Dice Roller</h1>
-				<p>Roll some Savage Dice. This little tool should be able to handle pretty much any combo you throw at it. It'll even handle damage rolling and wound calculation for you if you wish.</p>
+				<h1><a class="ios_app_click" href="./index.html" title="Savage Worlds Web Tools">Savage Worlds Web Tools</a> - Raise Calculator</h1>
+				<p>Do you get confused in the middle of a game how many wounds someone gets with a certain number? We undertstand! The numbers sometimes get lost in the story. Here's something that'll help.</p>
 			</div>
 		</div>
 	</div>
 </div>
 <div class="container">
 <div class="row">
-	<div class="col-sm-6 columns">
-		<fieldset>
-		<label>Dice: <input type="text" name="roll" value="d8* + 2" /></label>
-		Designate your Trait roll with an * for wild die rolling, just about anything (logical) can be put here<br />
-		Examples
-		<ul class="no-bullet">
-			<li>d8 add 2: <a onclick="$('input[name=roll]').val('d8* + 2');$('#trait-check').attr('checked', 'checked')">d8* + 2</a> (trait test)</li>
-			<li>d8 with wild die + d6: <a onclick="$('input[name=roll]').val('d8 + d6');$('#damage-check').attr('checked', 'checked')">d8 + d6</a> (damage test)</li>
-			<li>d12 with wild die subtract 4: <a onclick="$('input[name=roll]').val('d12* - 4');$('#trait-check').attr('checked', 'checked')">d12* - 4</a> (trait test)</li>
-			<li>d12 but substract d6 then add 6: <a onclick="$('input[name=roll]').val('d12 - d6 + 6');$('#damage-check').attr('checked', 'checked')">d12 - d6 + 6</a> (damage test)</li>
-		</ul>
 
-	</div>
 
 	<div class="col-sm-6 columns">
 
 		<fieldset>
-			<h3>Roll Type</h3>
+			<h3>Roll Specifics</h3>
+					<label>Roll: <input pattern="\d*" type="text" class="raise-calc-input" name="roll" value="5" /></label>
 
-				<div class="row">
-					<div class="col-sm-6 columns">
-							<fieldset class="pull-left"><label><input type="radio" id="trait-check" checked="checked" name="roll-type" value="trait" /> Trait Roll</label>
-								<label>Target Number: <input type="text" name="target-number" value="4" /></label>
-							</fieldset>
+					<label>Target Number / Base Toughness: <input pattern="\d*" class="raise-calc-input" type="text" name="target-number" value="4" /></label>
+					<label>Armor (if any): <input pattern="\d*" class="raise-calc-input" type="text" name="armor" value="0" /></label>
+					<label>Weapon AP (if any): <input pattern="\d*" class="raise-calc-input" type="text" name="weapon-ap" value="0" /></label>
 
-					</div>
-
-					<div class="col-sm-6 columns">
-						<fieldset class="pull-left"><label><input type="radio" id="damage-check" name="roll-type" value="damage" /> Damage Roll</label>
-							<label>Toughness: <input type="text" name="toughness" value="5" /></label>
-							<label>Armor: <input type="text" name="armor" value="1" /></label>
-							<label>Weapon AP: <input type="text" name="weapon-ap" value="0" /></label>
-						</fieldset>
-					</div>
-				</div>
 
 		</fieldset>
-
 	</div>
-</div>
 
-<div class="row">
-	<div class="col-sm-12 columns">
+	<div class="col-sm-6 columns">
 		<fieldset>
-			<input type="button" class="btn btn-success" id="roll-dice" value="Generate Rolls With Above Settings" />
 			<h3>Results</h3>
-			<div id="results"></div>
-			<div id="success-results"></div>
-			<div id="rolls"></div>
+			<div class="js-results"></div>
+			<h3>Damage Results</h3>
+			<div class="js-damage-results"></div>
 		</fieldset>
 
 	</div>
@@ -100,6 +73,7 @@
 <script src="./js/bootstrap.min.js?v=2014030301"></script>
 <script src="./js/functions.js?v=2014030301"></script>
 <script src="./js/dice.js?v=2014030301"></script>
+<script src="./js/raise_calculator.js?v=2014030301"></script>
 <script>
 alwaysExplodingDice = true;
 </script>
