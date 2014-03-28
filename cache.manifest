@@ -58,5 +58,4 @@ http://jdgwf.github.io/savage-worlds-web-tools/fonts/glyphicons-halflings-regula
 
 
 FALLBACK:
-NETWORK:
-*
+NETWORK: *
