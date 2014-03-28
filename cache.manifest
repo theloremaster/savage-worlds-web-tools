@@ -1,59 +1,59 @@
 CACHE MANIFEST
-# rev 2014032803
-# 2014-03-28:v3
+# rev 2014032805
+# 2014-03-28:v5
 
-extras_view.html
-vehicle_creator.html
-extras.html
-space_travel_time.html
-dice.html
-starship_creator.html
-character_creator.html
-mass_battles.html
-raise_calculator.html
-index.html
+http://jdgwf.github.io/savage-worlds-web-tools/extras_view.html
+http://jdgwf.github.io/savage-worlds-web-tools/vehicle_creator.html
+http://jdgwf.github.io/savage-worlds-web-tools/extras.html
+http://jdgwf.github.io/savage-worlds-web-tools/space_travel_time.html
+http://jdgwf.github.io/savage-worlds-web-tools/dice.html
+http://jdgwf.github.io/savage-worlds-web-tools/starship_creator.html
+http://jdgwf.github.io/savage-worlds-web-tools/character_creator.html
+http://jdgwf.github.io/savage-worlds-web-tools/mass_battles.html
+http://jdgwf.github.io/savage-worlds-web-tools/raise_calculator.html
+http://jdgwf.github.io/savage-worlds-web-tools/index.html
 
-js/books.js
-js/functions.js
-js/vehicle_mods.js
-js/vehicles.js
-js/raise_calculator.js
-js/starship_mods.js
-js/vehicle_weapons.js
-js/chargen/engine.js
-js/chargen/character.js
-js/chargen/equipment.js
-js/chargen/edges.js
-js/chargen/skills.js
-js/chargen/hindrances.js
-js/chargen/races.js
-js/jquery-1.10.2.min.js
-js/mass-battles.js
-js/background.js
-js/extras/bestiary_super_powers.js
-js/extras/bestiary_deluxe.js
-js/extras/engine.js
-js/extras/bestiary_savage_free.js
-js/extras/bestiary_horror.js
-js/extras/bestiary_scifi.js
-js/extras/bestiary_fantasy.js
-js/bootstrap.min.js
-js/dice.js
-js/localstorage.js
-js/space_travel_time.js
-js/starships.js
+http://jdgwf.github.io/savage-worlds-web-tools/js/books.js
+http://jdgwf.github.io/savage-worlds-web-tools/js/functions.js
+http://jdgwf.github.io/savage-worlds-web-tools/js/vehicle_mods.js
+http://jdgwf.github.io/savage-worlds-web-tools/js/vehicles.js
+http://jdgwf.github.io/savage-worlds-web-tools/js/raise_calculator.js
+http://jdgwf.github.io/savage-worlds-web-tools/js/starship_mods.js
+http://jdgwf.github.io/savage-worlds-web-tools/js/vehicle_weapons.js
+http://jdgwf.github.io/savage-worlds-web-tools/js/chargen/engine.js
+http://jdgwf.github.io/savage-worlds-web-tools/js/chargen/character.js
+http://jdgwf.github.io/savage-worlds-web-tools/js/chargen/equipment.js
+http://jdgwf.github.io/savage-worlds-web-tools/js/chargen/edges.js
+http://jdgwf.github.io/savage-worlds-web-tools/js/chargen/skills.js
+http://jdgwf.github.io/savage-worlds-web-tools/js/chargen/hindrances.js
+http://jdgwf.github.io/savage-worlds-web-tools/js/chargen/races.js
+http://jdgwf.github.io/savage-worlds-web-tools/js/jquery-1.10.2.min.js
+http://jdgwf.github.io/savage-worlds-web-tools/js/mass-battles.js
+http://jdgwf.github.io/savage-worlds-web-tools/js/background.js
+http://jdgwf.github.io/savage-worlds-web-tools/js/extras/bestiary_super_powers.js
+http://jdgwf.github.io/savage-worlds-web-tools/js/extras/bestiary_deluxe.js
+http://jdgwf.github.io/savage-worlds-web-tools/js/extras/engine.js
+http://jdgwf.github.io/savage-worlds-web-tools/js/extras/bestiary_savage_free.js
+http://jdgwf.github.io/savage-worlds-web-tools/js/extras/bestiary_horror.js
+http://jdgwf.github.io/savage-worlds-web-tools/js/extras/bestiary_scifi.js
+http://jdgwf.github.io/savage-worlds-web-tools/js/extras/bestiary_fantasy.js
+http://jdgwf.github.io/savage-worlds-web-tools/js/bootstrap.min.js
+http://jdgwf.github.io/savage-worlds-web-tools/js/dice.js
+http://jdgwf.github.io/savage-worlds-web-tools/js/localstorage.js
+http://jdgwf.github.io/savage-worlds-web-tools/js/space_travel_time.js
+http://jdgwf.github.io/savage-worlds-web-tools/js/starships.js
 
-css/style.css
-css/bootstrap.min.css
+http://jdgwf.github.io/savage-worlds-web-tools/css/style.css
+http://jdgwf.github.io/savage-worlds-web-tools/css/bootstrap.min.css
 
-img/sw_fan-16.png
-img/sw_fan-128.png
-img/sw_fan_78x50.png
+http://jdgwf.github.io/savage-worlds-web-tools/img/sw_fan-16.png
+http://jdgwf.github.io/savage-worlds-web-tools/img/sw_fan-128.png
+http://jdgwf.github.io/savage-worlds-web-tools/img/sw_fan_78x50.png
 
-fonts/glyphicons-halflings-regular.eot
-fonts/glyphicons-halflings-regular.svg
-fonts/glyphicons-halflings-regular.ttf
-fonts/glyphicons-halflings-regular.woff
+http://jdgwf.github.io/savage-worlds-web-tools/fonts/glyphicons-halflings-regular.eot
+http://jdgwf.github.io/savage-worlds-web-tools/fonts/glyphicons-halflings-regular.svg
+http://jdgwf.github.io/savage-worlds-web-tools/fonts/glyphicons-halflings-regular.ttf
+http://jdgwf.github.io/savage-worlds-web-tools/fonts/glyphicons-halflings-regular.woff
 
 
 FALLBACK:
