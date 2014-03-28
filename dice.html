@@ -5,8 +5,8 @@
 	<meta name="viewport" content="width=device-width">
 	<title>Flexible Dice Roller</title>
 	<meta name="description" value="Roll some Savage Dice. This little tool should be able to handle pretty much any combo you throw at it. It'll even handle damage rolling and wound calculation for you if you wish.">
-	<link rel="stylesheet" href="./css/bootstrap.min.css?v=2014030301" type="text/css">
-	<link rel="stylesheet" href="./css/style.css?v=2014030301" type="text/css">
+	<link rel="stylesheet" href="./css/bootstrap.min.css?v=2014032901" type="text/css">
+	<link rel="stylesheet" href="./css/style.css?v=2014032901" type="text/css">
 	<link rel="icon" type="image/png" href="./img/sw_fan_78x50.png" />
 	<link rel="apple-touch-icon" href="./img/sw_fan_256.png">
 	<meta name="apple-mobile-web-app-capable" content="yes" />
@@ -27,8 +27,9 @@
 </div>
 <div class="container">
 <div class="row">
-	<div class="col-sm-6 columns">
+	<div class="col-sm-6">
 		<fieldset>
+		<legend>Dice</legend>
 		<label>Dice: <input type="text" name="roll" value="d8* + 2" /></label>
 		Designate your Trait roll with an * for wild die rolling, just about anything (logical) can be put here<br />
 		Examples
@@ -41,39 +42,44 @@
 
 	</div>
 
-	<div class="col-sm-6 columns">
+	<div class="col-sm-6">
 
 		<fieldset>
-			<h3>Roll Type</h3>
+			<legend>Roll Type</legend>
 
 				<div class="row">
-					<div class="col-sm-6 columns">
-							<fieldset class="pull-left"><label><input type="radio" id="trait-check" checked="checked" name="roll-type" value="trait" /> Trait Roll</label>
+					<div class="col-xs-6">
+							<fieldset><label><input type="radio" id="trait-check" checked="checked" name="roll-type" value="trait" /> Trait Roll</label>
 								<label>Target Number: <input type="text" name="target-number" value="4" /></label>
 							</fieldset>
 
 					</div>
 
-					<div class="col-sm-6 columns">
-						<fieldset class="pull-left"><label><input type="radio" id="damage-check" name="roll-type" value="damage" /> Damage Roll</label>
-							<label>Toughness: <input type="text" name="toughness" value="5" /></label>
+					<div class="col-xs-6">
+						<fieldset><label><input type="radio" id="damage-check" name="roll-type" value="damage" /> Damage Roll</label>
+							<label>Base Toughness: <input type="text" name="toughness" value="5" /></label>
 							<label>Armor: <input type="text" name="armor" value="1" /></label>
 							<label>Weapon AP: <input type="text" name="weapon-ap" value="0" /></label>
+
+
 						</fieldset>
+
 					</div>
+
 				</div>
 
 		</fieldset>
-
+		<br /> <input type="button" class="btn btn-success" id="roll-dice" value="Generate Rolls With Above Settings" />
 	</div>
 </div>
 
 <div class="row">
-	<div class="col-sm-12 columns">
+	<div class="col-sm-12">
 		<fieldset>
-			<input type="button" class="btn btn-success" id="roll-dice" value="Generate Rolls With Above Settings" />
-			<h3>Results</h3>
-			<div id="results"></div>
+			<legend>Results</legend>
+
+
+			<div id="results">( Press the Generate Rolls button above )</div>
 			<div id="success-results"></div>
 			<div id="rolls"></div>
 		</fieldset>
@@ -96,10 +102,10 @@
 </div>
 </body>
 
-<script src="./js/jquery-1.10.2.min.js?v=2014030301"></script>
-<script src="./js/bootstrap.min.js?v=2014030301"></script>
-<script src="./js/functions.js?v=2014030301"></script>
-<script src="./js/dice.js?v=2014030301"></script>
+<script src="./js/jquery-1.10.2.min.js?v=2014032901"></script>
+<script src="./js/bootstrap.min.js?v=2014032901"></script>
+<script src="./js/functions.js?v=2014032901"></script>
+<script src="./js/dice.js?v=2014032901"></script>
 <script>
 alwaysExplodingDice = true;
 </script>

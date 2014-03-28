@@ -5,8 +5,8 @@
 	<meta name="viewport" content="width=device-width">
 	<title>Vehicle Creator</title>
 	<meta name="description" value="This is the Vehicle Creator. It should be currently feature-complete.">
-	<link rel="stylesheet" href="./css/bootstrap.min.css?v=2014030301" type="text/css">
-	<link rel="stylesheet" href="./css/style.css?v=2014030301" type="text/css">
+	<link rel="stylesheet" href="./css/bootstrap.min.css?v=2014032901" type="text/css">
+	<link rel="stylesheet" href="./css/style.css?v=2014032901" type="text/css">
 	<link rel="icon" type="image/png" href="./img/sw_fan_78x50.png" />
 	<link rel="apple-touch-icon" href="./img/sw_fan_256.png">
 	<meta name="apple-mobile-web-app-capable" content="yes" />
@@ -100,27 +100,28 @@
 	</div>
 	<div class="row">
 		<div class="col-sm-6">
-			<h3>Details</h3>
-			<label>Vehicle Name<br />
-			<input type="text" value="" class="js-set-vehicle-name" /></label>
+			<fieldset>
+				<legend>Details</legend>
+				<label>Vehicle Name<br />
+				<input type="text" value="" class="js-set-vehicle-name" /></label>
 
-			<label>Vehicle Description<br />
-			<textarea value="" class="js-set-vehicle-description"></textarea></label>
+				<label>Vehicle Description<br />
+				<textarea value="" class="js-set-vehicle-description"></textarea></label>
 
-			<label>Size<br />
-			<select class="js-select-size">
-				<option value="">- Select Vehicle Size -</option>
-			</select></label>
+				<label>Size<br />
+				<select class="js-select-size">
+					<option value="">- Select Vehicle Size -</option>
+				</select></label>
+			</fieldset>
 
-			<div class="js-select-modifications-container">
-				<h3>Modifications</h3>
+			<fieldset class="js-select-modifications-container">
+				<legend>Modifications</legend>
 				<div class="js-select-modifications"></div>
-			</div>
+			</fieldset>
 
 		</div>
 		<div class="col-sm-6">
 			<div class="js-select-modifications-container">
-				<h3>Weapons</h3>
 				<div class="js-select-weapons"></div>
 			</div>
 		</div>
@@ -139,13 +140,13 @@
 </div>
 </body>
 
-<script src="./js/jquery-1.10.2.min.js?v=2014030301"></script>
-<script src="./js/bootstrap.min.js?v=2014030301"></script>
-<script src="./js/functions.js?v=2014030301"></script>
-<script src="./js/localstorage.js?v=2014030301"></script>
-<script src="./js/vehicle_mods.js?v=2014030301"></script>
-<script src="./js/vehicle_weapons.js?v=2014030301"></script>
-<script src="./js/vehicles.js?v=2014030301"></script>
+<script src="./js/jquery-1.10.2.min.js?v=2014032901"></script>
+<script src="./js/bootstrap.min.js?v=2014032901"></script>
+<script src="./js/functions.js?v=2014032901"></script>
+<script src="./js/localstorage.js?v=2014032901"></script>
+<script src="./js/vehicle_mods.js?v=2014032901"></script>
+<script src="./js/vehicle_weapons.js?v=2014032901"></script>
+<script src="./js/vehicles.js?v=2014032901"></script>
 
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

@@ -5,8 +5,8 @@
 	<meta name="viewport" content="width=device-width">
 	<title>Character Creator</title>
 	<meta name="description" value="This web app is a rudimentary Character Creator for the Savage Worlds pen and paper role playing game.">
-	<link rel="stylesheet" href="./css/bootstrap.min.css?v=2014030301" type="text/css">
-	<link rel="stylesheet" href="./css/style.css?v=2014030301" type="text/css">
+	<link rel="stylesheet" href="./css/bootstrap.min.css?v=2014032901" type="text/css">
+	<link rel="stylesheet" href="./css/style.css?v=2014032901" type="text/css">
 	<link rel="icon" type="image/png" href="./img/sw_fan_78x50.png" />
 	<link rel="apple-touch-icon" href="./img/sw_fan_256.png">
 	<meta name="apple-mobile-web-app-capable" content="yes" />
@@ -27,8 +27,10 @@
 <div class="container">
 
 <div class="row page-main">
-<div class="col-md-12 columns">
-<h3>In Development</h3><p>Currently working on Edges Data Entry, then on to Races</p>
+<div class="col-md-12">
+<fieldset>
+<legend>In Development</legend>
+<p>Currently working on Edges Data Entry, then on to Races</p>
 	<ul>
 		<li>Race: <span style="color: #bb0">working order, needs data entry</span></li>
 		<li>Rank: <span style="color: orange">half working, turned off completely (out of scope for Novice creation) -- needs advancement assigments</span></li>
@@ -41,17 +43,19 @@
 		<li><strong>Exporting/Importing</strong>: <span style="color: orange">Working internally, no user-side interface.</span><br />Note to hackers: see <em>current_character.exportChar();</em> and <em>current_character.importChar(importString);</em></li>
 		<li><strong>Printing</strong>: <span style="color: #d00">TODO</span></li>
 
-	</ul><div class="row">
-	<div class="col-md-12 columns">
+	</ul>
+</fieldset>
+<div class="row">
+	<div class="col-md-12">
 		<fieldset>
 		<legend>Character Info</legend>
 		<div class="row">
-			<div class="col-md-6 columns">
+			<div class="col-md-6">
 					<div class="js-info-message chargen-section-message"></div>
 					<label class="pull-left right-padding">Name: <input name="char_name" type="text" /></label>
 
 			</div>
-			<div class="col-md-6 columns">
+			<div class="col-md-6">
 				<label class="pull-left right-padding">Race: <select name="char_race"></select></label>
 				<label class="pull-left right-padding">Rank: <select name="char_rank"></select></label>
 				<label class="pull-left right-padding">Character Points: <select name="char_cps"></select></label>
@@ -63,7 +67,7 @@
 </div>
 
 <div class="row">
-	<div class="col-md-6 columns">
+	<div class="col-md-6">
 		<fieldset>
 		<legend>Attributes</legend>
 			<div class="js-attr-message chargen-section-message"></div>
@@ -75,7 +79,7 @@
 		</fieldset>
 	</div>
 
-	<div class="col-md-6 columns">
+	<div class="col-md-6">
 		<fieldset>
 		<legend>Derived Stats</legend>
 			<label class="pull-left right-padding">Charisma: <input class="js-secondary-charisma short-text-field" readonly="readonly" type="text" /></label>
@@ -88,7 +92,7 @@
 </div>
 
 <div class="row">
-	<div class="col-md-6 columns">
+	<div class="col-md-6">
 		<fieldset>
 		<legend>Edges</legend>
 			<div class="js-edges-message"></div>
@@ -97,7 +101,7 @@
 		</fieldset>
 	</div>
 
-	<div class="col-md-6 columns">
+	<div class="col-md-6">
 		<fieldset>
 		<legend>Hindrances</legend>
 			<div class="js-hindrances-message"></div>
@@ -108,7 +112,7 @@
 	</div>
 </div>
 <div class="row">
-	<div class="col-md-6 columns">
+	<div class="col-md-6">
 		<fieldset>
 		<legend>Skills</legend>
 			<div class="js-skills-message"></div>
@@ -117,7 +121,7 @@
 		</fieldset>
 	</div>
 
-	<div class="col-md-6 columns">
+	<div class="col-md-6">
 		<fieldset>
 		<legend>Equipment</legend>
 			<div class="js-equipment-message"></div>
@@ -143,18 +147,18 @@
 </div>
 </body>
 
-<script src="./js/jquery-1.10.2.min.js?v=2014030301"></script>
-<script src="./js/bootstrap.min.js?v=2014030301"></script>
-<script src="./js/functions.js?v=2014030301"></script>
+<script src="./js/jquery-1.10.2.min.js?v=2014032901"></script>
+<script src="./js/bootstrap.min.js?v=2014032901"></script>
+<script src="./js/functions.js?v=2014032901"></script>
 
-<script src="./js/books.js?v=2014030301" type="text/javascript"></script>
-<script src="./js/chargen/skills.js?v=2014030301" type="text/javascript"></script>
-<script src="./js/chargen/edges.js?v=2014030301" type="text/javascript"></script>
-<script src="./js/chargen/equipment.js?v=2014030301" type="text/javascript"></script>
-<script src="./js/chargen/hindrances.js?v=2014030301" type="text/javascript"></script>
-<script src="./js/chargen/races.js?v=2014030301" type="text/javascript"></script>
-<script src="./js/chargen/character.js?v=2014030301" type="text/javascript"></script>
-<script src="./js/chargen/engine.js?v=2014030301" type="text/javascript"></script>
+<script src="./js/books.js?v=2014032901" type="text/javascript"></script>
+<script src="./js/chargen/skills.js?v=2014032901" type="text/javascript"></script>
+<script src="./js/chargen/edges.js?v=2014032901" type="text/javascript"></script>
+<script src="./js/chargen/equipment.js?v=2014032901" type="text/javascript"></script>
+<script src="./js/chargen/hindrances.js?v=2014032901" type="text/javascript"></script>
+<script src="./js/chargen/races.js?v=2014032901" type="text/javascript"></script>
+<script src="./js/chargen/character.js?v=2014032901" type="text/javascript"></script>
+<script src="./js/chargen/engine.js?v=2014032901" type="text/javascript"></script>
 <script type="text/javascript">
 
 		var localStats = jQuery.parseJSON( localStorage.localStats );

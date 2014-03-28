@@ -247,9 +247,9 @@ function damageSuccessMargin(roll, toughness, armor, armorpiercing) {
 			html += "Shaken";
 		} else {
 			if( raises == 1) {
-				html += "Success with a wound";
+				html += "Shaken and a wound";
 			} else {
-				html += "Success with " + raises + " wounds";
+				html += "Shaken and " + raises + " wounds";
 			}
 		}
 	}

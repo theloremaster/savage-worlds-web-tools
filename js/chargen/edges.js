@@ -106,7 +106,11 @@ var chargen_edges = Array(
 		char_effects: function( characterObject ) {
 			characterObject.secondary.charisma = characterObject.secondary.charisma + 2;
 		},
-		incompatible: {},
+		incompatible: {
+			hindrances: Array(
+				"Ugly"
+			)
+		},
 		page: "p32"
 	},
 	{
@@ -120,7 +124,11 @@ var chargen_edges = Array(
 		char_effects: function( characterObject ) {
 			characterObject.secondary.charisma = characterObject.secondary.charisma + 2;
 		},
-		incompatible: {},
+		incompatible: {
+			hindrances: Array(
+				"Ugly"
+			)
+		},
 		page: "p32"
 	},
 	{
@@ -224,7 +232,11 @@ var chargen_edges = Array(
 		},
 		char_effects: function( characterObject ) {
 		},
-		incompatible: {},
+		incompatible: {
+			hindrances: Array(
+				"Bad Luck"
+			)
+		},
 		page: "p33"
 	},
 	{
@@ -237,7 +249,11 @@ var chargen_edges = Array(
 		},
 		char_effects: function( characterObject ) {
 		},
-		incompatible: {},
+		incompatible: {
+			hindrances: Array(
+				"Bad Luck"
+			)
+		},
 		page: "p33"
 	},
 	{

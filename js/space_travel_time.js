@@ -2,6 +2,8 @@ auDistance = 149597870700; // meters
 speedOfLight = 299792458; // m/s
 gSpeed = 9.81; // m/s/s
 
+earth_to_moon_distance = 384400000/ 149597870700;
+
 var speedList = Array(
 	0.10,
 	0.25,
@@ -30,7 +32,7 @@ var speedList = Array(
 );
 
 var distanceList = Array(
-	0.00000257,
+	earth_to_moon_distance,
 	0.1,
 	0.25,
 	0.5,
@@ -69,7 +71,7 @@ function propogateDistanceOptions() {
 	html = ""
 	for(counter = 0; counter < distanceList.length; counter++) {
 		distanceLabel = distanceList[counter] + " AU";
-		if(distanceList[counter] == 0.00000257)
+		if(distanceList[counter] == earth_to_moon_distance)
 			distanceLabel = "Earth to Moon";
 		html += "<option value=\"" + distanceList[counter] + "\">" + distanceLabel + "</option>";
 	}
@@ -93,24 +95,24 @@ $(".js-select-speed, .js-select-distance").change( function() {
 function calculateTime() {
 	speedSelect = $(".js-select-speed option:selected").val();
 	distanceSelect = $(".js-select-distance option:selected").val();
-	communicationTime = estimateCommunicationTime(distanceSelect);
+	communicationTime = calculateCommunicationTime(distanceSelect);
 	travelTime = estimateTravelTime(distanceSelect, speedSelect);
 	maxSpeed = estimateMaxSpeed(distanceSelect, speedSelect);
-	percentSpeedOfLight = Math.round( (maxSpeed / speedOfLight ) * 100 ) / 100;
+	percentSpeedOfLight = Math.round( (maxSpeed / speedOfLight ) * 100 ) ;
 
 	$(".js-time-results").html(
-		"Distance: " + distanceSelect + " AU (" + Math.round(distanceSelect * auDistance).toLocaleString() + " Km)<br />" +
-		"It takes " + humanifyTime(communicationTime) + " for a radio message to travel this distance<br />" +
-		"A ship with an AD Rating of " + speedSelect + "G will have a travel time of " + humanifyTime(travelTime) + "<br />"
-		+ "That ship reaches a speed of " + ( maxSpeed ).toLocaleString() + " m/s or " + percentSpeedOfLight + "% the speed of light<br />"
+		"<p>Distance: " + distanceSelect + " AU (" + Math.round(distanceSelect * auDistance / 1000).toLocaleString() + " Km)</p>" +
+		"<p>It takes " + humanifyTime(communicationTime) + " for a radio message to travel this distance</p>" +
+		"<p>A ship with an AD Rating of " + speedSelect + "G will have a travel time of " + humanifyTime(travelTime) + "</p>"
+		+ "<p>That ship reaches a speed of " + ( maxSpeed ).toLocaleString() + " m/s or " + percentSpeedOfLight + "% the speed of light</p>"
 	);
 }
 propogateDistanceOptions();
 propogateSpeedOptions()
 calculateTime();
 
-function estimateCommunicationTime(distanceInAU) {
-	return Math.round( (distanceInAU * auDistance / speedOfLight) ); // in seconds
+function calculateCommunicationTime(distanceInAU) {
+	return Math.round( (distanceInAU * auDistance / speedOfLight) * 100 ) / 100 ; // in seconds
 }
 
 function estimateTravelTime(distanceInAU, accRatingInG) {
@@ -150,7 +152,8 @@ function humanifyTime(timeInSeconds) {
 		minutes++;
 	}
 
-	seconds = timeInSeconds;
+	// round to 2 significant digits.
+	seconds = Math.round(timeInSeconds * 100 ) / 100;
 
 	returnString = "";
 	if (days > 0)
@@ -163,7 +166,7 @@ function humanifyTime(timeInSeconds) {
 		returnString += seconds + " seconds ";
 
 	if ( returnString == "")
-		returnString = "less than a second.";
+		returnString = "less than a second";
 
 	return returnString;
 

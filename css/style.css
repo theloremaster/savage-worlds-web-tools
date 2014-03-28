@@ -63,7 +63,7 @@ select,input[type="text"],textarea {
 fieldset {
 	border: solid 1px #ddd;
 	padding: 15px;
-	margin: 15px;
+	margin: 15px 0 0 0;
 }
 .full-width {
 	width: 100%;

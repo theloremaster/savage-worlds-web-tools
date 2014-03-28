@@ -9,11 +9,12 @@ This is a collection of javascript web applications for the Savage Worlds pen an
 Fully Functional Tools Include:
 
 * Dice Roller
+* Raise Calculator
 * Mass Battle Calculator
-* Starship Creator (in early alpha, needing testing)
-* Vehicle Creator (in early alpha, needing testing)
-* Walker Creator (in early alpha, needing testing)
-* Power Armor Creator (in early alpha, needing testing)
+* Starship Creator (in early beta, needing testing)
+* Vehicle Creator (in early beta, needing testing)
+* Walker Creator (in early beta, needing testing)
+* Power Armor Creator (in early beta, needing testing)
 * Monster Search
 	* TODO:
 		* Data Entry still needed
@@ -23,12 +24,10 @@ Fully Functional Tools Include:
 			* Savage Free Bestiary - has 7 entries
 			* Sci-Fi Companion - has no entries
 			* Super Powers Companion - has no entries
-			
-
+* Character Creator (very early alpha, 50-70% complete from another project)
 
 The roadmap for these tools include:
 
-* Character Creator (70-80% complete from another project, but not in this toolset yet)
 * Robot Creator (planned)
 * World Creator (planned)
 

@@ -684,7 +684,7 @@ function propogate_add_mods() {
 
 function propogate_weapon_mods() {
 	available_links = current_walker.get_linked_weapons();
-	weapon_mods_html = "<h4>Installed Weapons</h4>";
+	weapon_mods_html = "<fieldset><legend>Installed Weapons</legend>";
 	if(available_links.length > 0)
 		weapon_mods_html += "Available Links: " + (available_links.length - 1) + "<br />";
 
@@ -732,7 +732,7 @@ function propogate_weapon_mods() {
 	} else {
 		weapon_mods_html += "No installed weapons<br />";
 	}
-	weapon_mods_html += "<h4>Available Weapons</h4>";
+	weapon_mods_html += "</fieldset><fieldset><legend>Available Weapons</legend>";
 
 	currentWeaponClass = "";
 	weaponCount = 0;
@@ -773,6 +773,7 @@ function propogate_weapon_mods() {
 
 			weapon_mods_html += "</tr>";
 		}
+		weapon_mods_html += "</fieldset>";
 
 		currentWeaponClass = vehicle_weapons[mod_count].classification;
 		weaponCount++;

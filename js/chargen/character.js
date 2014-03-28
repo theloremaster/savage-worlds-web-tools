@@ -196,7 +196,6 @@ function chargen_char() {
 				if( !this.rank_is_at_least(edgeOrHindrance.prereqs.rank) )
 					does_qualify = false;
 			}
-			console.log
 
 			requires_edge = false;
 			if( edgeOrHindrance.prereqs.edges) {
@@ -228,31 +227,21 @@ function chargen_char() {
 
 		if( edgeOrHindrance.incompatible ) {
 
-			incompatible_edge = false;
 			if( edgeOrHindrance.incompatible.edges) {
-				incompatible_edge = true;
-				found_edge = false;
 				for(qualifyCount = 0; qualifyCount < edgeOrHindrance.incompatible.edges.length; qualifyCount++ ) {
-					if( this.has_edge(edgeOrHindrance.incompatible.edges[qualifyCount]) )
-						found_edge = false;
+					if( this.has_edge(edgeOrHindrance.incompatible.edges[qualifyCount]) ) {
+						does_qualify = false;
+					}
 				}
 			}
-
-			if( incompatible_edge && !found_edge )
-				does_qualify = false;
-
-			incompatible_hindrance = false;
 			if( edgeOrHindrance.incompatible.hindrances) {
-				incompatible_hindrance = true;
-				found_hindrance = true;
 				for(qualifyCount = 0; qualifyCount < edgeOrHindrance.incompatible.hindrances.length; qualifyCount++ ) {
-					if( this.has_hindrance(edgeOrHindrance.incompatible.hindrances[qualifyCount]) )
-						found_hindrance = false;
+					if( this.has_hindrance(edgeOrHindrance.incompatible.hindrances[qualifyCount]) ) {
+						does_qualify = false;
+					}
 				}
 			}
 
-			if( incompatible_hindrance && !found_hindrance )
-				does_qualify = false;
 		}
 
 		return does_qualify;
