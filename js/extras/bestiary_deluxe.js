@@ -252,7 +252,7 @@ extraDatabase = extraDatabase.concat(Array(
 	{
 		name: "Drake",
 		wildcard: 1,
-		image: "",
+		image: "http://img2.wikia.nocookie.net/__cb20080714125534/finalfantasy/images/5/52/Greater_Drake_ffx-2.jpg",
 		blurb: "Drakes are non-flying dragons with animal intelligence (rather than the more human-like sentience of true dragons). They are much more aggressive in direct combat than their distant cousins, however.",
 		attributes: {
 			agility: "d6",
@@ -311,7 +311,7 @@ extraDatabase = extraDatabase.concat(Array(
 	{
 		name: "Dragon",
 		wildcard: 1,
-		image: "",
+		image: "http://www.gamefront.com/wp-content/uploads/2008/12/red-dragon.jpg",
 		blurb: "Dragons are fire-breathing monsters that bring doom and despair to the villages they ravage. Such creatures should not be fought lightly as they are more than a match for even a party of experienced adventurers. These beasts are quite intelligent as well, and use all of their advantages when confronted by would-be dragon- slayers.",
 		attributes: {
 			agility: "d8",
@@ -386,7 +386,7 @@ extraDatabase = extraDatabase.concat(Array(
 	{
 		name: "Earth Elemental",
 		wildcard: 0,
-		image: "",
+		image: "http://www.elfwood.com/art/o/m/omarmorsy/earth_elemental.jpg",
 		blurb: "Earth elementals manifest as five-foot tall, vaguely man-shaped collections of earth and stone. Though amazingly strong, they are also quite slow and ponderous.",
 		attributes: {
 			agility: "d6",
@@ -428,7 +428,7 @@ extraDatabase = extraDatabase.concat(Array(
 	{
 		name: "Fire Elemental",
 		wildcard: 0,
-		image: "",
+		image: "http://th08.deviantart.net/fs70/PRE/f/2010/036/7/d/Fire_elemental_by_javi_ure.jpg",
 		blurb: "Fire elementals appear as man-shaped flame.",
 		attributes: {
 			agility: "d12+1",
@@ -478,7 +478,7 @@ extraDatabase = extraDatabase.concat(Array(
 	{
 		name: "Water Elemental",
 		wildcard: 0,
-		image: "",
+		image: "http://www.santharia.com/pictures/quellion/quellion_pics/water_elemental.jpg",
 		blurb: "Water spirits are frothing, man-shaped creatures of water and sea-foam.",
 		attributes: {
 			agility: "d8",
@@ -536,7 +536,7 @@ extraDatabase = extraDatabase.concat(Array(
 	{
 		name: "Air Elemental",
 		wildcard: 0,
-		image: "",
+		image: "http://www.santharia.com/pictures/quellion/quellion_pics/air_elemental.jpg",
 		blurb: "Air elementals manifest as sentient whirlwinds.",
 		attributes: {
 			agility: "d12",
@@ -701,7 +701,7 @@ extraDatabase = extraDatabase.concat(Array(
 	{
 		name: "Goblin",
 		wildcard: 0,
-		image: "",
+		image: "http://cdn.obsidianportal.com/assets/62147/goblins2.jpg",
 		blurb: "Goblins of myth and legend are far more sinister creatures than some games and fiction portray. In the original tales, they were terrifying creatures that stole into homes in the middle of the night to steal and eat unruly children. The statistics here work for both dark “fairy tale” goblins as well as those found alongside orcs in contemporary roleplaying games.",
 		attributes: {
 			agility: "d8",
@@ -1088,7 +1088,7 @@ extraDatabase = extraDatabase.concat(Array(
 	{
 		name: "Ogre",
 		wildcard: 0,
-		image: "",
+		image: "http://cdn.obsidianportal.com/assets/161371/Ogre_Warlord.jpg",
 		blurb: "Ogres are kin to orcs and lesser giants. They are often taken in by orc clans, who respect the dumb brutes for their savagery and strength. Orcs often pit their “pet” ogres in savage combats against their rivals’ ogres.",
 		attributes: {
 			agility: "d6",
@@ -1130,7 +1130,7 @@ extraDatabase = extraDatabase.concat(Array(
 	{
 		name: "Orc",
 		wildcard: 0,
-		image: "",
+		image: "https://www.frontlinegaming.org/wp-content/uploads/2013/01/4e_DnD_Orcs_by_RalphHorsley1.jpeg",
 		blurb: "Orcs are savage, green-skinned humanoids with pig-like features, including snouts and sometimes even tusks. They have foul temperaments, and rarely take prisoners.",
 		attributes: {
 			agility: "d6",
@@ -1173,7 +1173,7 @@ extraDatabase = extraDatabase.concat(Array(
 	{
 		name: "Orc Chieftan",
 		wildcard: 1,
-		image: "",
+		image: "http://fc09.deviantart.net/fs71/f/2013/098/0/0/orc_chieftain_final_by_director_16-d60veug.jpg",
 		blurb: "The leader of small orc clans is always the most deadly brute in the bunch. Orc chieftains generally have a magical item or two in settings where such things are relatively common (most “swords and sorcery” worlds).",
 		attributes: {
 			agility: "d8",
@@ -1604,7 +1604,7 @@ extraDatabase = extraDatabase.concat(Array(
 	{
 		name: "Vampire, Ancient",
 		wildcard: 1,
-		image: "",
+		image: "http://static.ddmcdn.com/gif/vampire-power-1.jpg",
 		tags: "undead,",
 		blurb: "Blood-drinkers of lore are common in many fantasy games. The statistics below are for a vampire somewhat below the legendary Dracula, but far above those bloodsuckers fresh from the grave (detailed next). The abilities listed below are standard—the GM may want to add other Edges as befits the vampire’s previous lifestyle.",
 		attributes: {
@@ -1700,7 +1700,7 @@ extraDatabase = extraDatabase.concat(Array(
 	{
 		name: "Vampire, Young",
 		wildcard: 0,
-		image: "",
+		image: "http://upload.wikimedia.org/wikipedia/commons/f/f8/VampireE3.jpg",
 		tags: "undead,",
 		blurb: "Blood-drinkers of lore are common in many fantasy games. This is a relatively young vampire minion.",
 		attributes: {

@@ -102,3 +102,9 @@ legend {
 .color-blue {
 	color: #428bca;
 }
+.js-smarty-comment {
+	color: #ccc;
+}
+.js-smarty-comment strong {
+	color: #fcfcfc;
+}

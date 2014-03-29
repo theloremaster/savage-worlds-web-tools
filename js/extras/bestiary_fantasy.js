@@ -981,7 +981,7 @@ extraDatabase = extraDatabase.concat(Array(
 		name: "Chimera",
 		tags: "",
 		wildcard: 0,
-		image: "",
+		image: "http://img2.wikia.nocookie.net/__cb20120615060217/dragonsdogma/images/0/06/Chimera01.png",
 		blurb: "A chimera has the head of a lion, the body of a goat, and the tail of a dragon, complete with a dragon’s head at the tip. The creature’s leonine head can breathe fire. A few chimera can also breathe fire from their dragon-headed tail.",
 		attributes: {
 			agility: "d8",
@@ -1174,7 +1174,7 @@ extraDatabase = extraDatabase.concat(Array(
 		name: "Cyclops",
 		tags: "giant,giants,",
 		wildcard: 0,
-		image: "",
+		image: "http://www.cartuneland.com/cyclops1.jpg",
 		blurb: "Cyclopses are a race of one-eyed giants. Despite raising herds of goats, they have a taste for human flesh. In some legends, they crafted lightning bolts for the gods.",
 		attributes: {
 			agility: "d6",
@@ -1798,7 +1798,7 @@ extraDatabase = extraDatabase.concat(Array(
 	{
 		name: "Dragon",
 		wildcard: 1,
-		image: "",
+		image: "http://www.gamefront.com/wp-content/uploads/2008/12/red-dragon.jpg",
 		blurb: "This dragon is the standard fire-breathing variety common to European mythology. If you want to use different types of dragons in your game, the Variant Dragons sidebar (p113) contains some ideas on how to make them different.",
 		attributes: {
 			agility: "d8",
@@ -1876,7 +1876,7 @@ extraDatabase = extraDatabase.concat(Array(
 		name: "Dragon Man Soldier",
 		tags: "dragon,dragon men,",
 		wildcard: 0,
-		image: "",
+		image: "http://suptg.thisisnotatrueending.com/archive/10417239/images/1276223355554.jpg",
 		blurb: Array(
 			"Dragon men are bipedal dragons, slightly taller than an average human. Scholars have long debated whether they are a natural species, a mutated dragon embryo, or the result of some ancient arcane experiment. The race consists of two castes—warriors and sorcerers.",
 			"They are sometimes found working with true dragons, and it seems beyond coincidence that the color of their scales usually matches that of their dragon lord. If you are using the Variant Dragon options (p113), dragon men can also have different breath weapons ."
@@ -1934,7 +1934,7 @@ extraDatabase = extraDatabase.concat(Array(
 		name: "Dragon Man Sorcerer",
 		tags: "dragon,dragon men,",
 		wildcard: 1,
-		image: "",
+		image: "http://i42.tinypic.com/2qjayk5.png",
 		blurb: Array(
 			"Dragon men are bipedal dragons, slightly taller than an average human. Scholars have long debated whether they are a natural species, a mutated dragon embryo, or the result of some ancient arcane experiment. The race consists of two castes—warriors and sorcerers.",
 			"They are sometimes found working with true dragons, and it seems beyond coincidence that the color of their scales usually matches that of their dragon lord. If you are using the Variant Dragon options (p113), dragon men can also have different breath weapons."
@@ -1996,7 +1996,7 @@ extraDatabase = extraDatabase.concat(Array(
 	{
 		name: "Drake",
 		wildcard: 1,
-		image: "",
+		image: "http://img2.wikia.nocookie.net/__cb20080714125534/finalfantasy/images/5/52/Greater_Drake_ffx-2.jpg",
 		blurb: "Drakes are non-flying dragons with animal intelligence (rather than the more human-like sentience of true dragons). They are much more aggressive in direct combat than their distant cousins, however.",
 		attributes: {
 			agility: "d6",
@@ -2826,8 +2826,9 @@ extraDatabase = extraDatabase.concat(Array(
 extraDatabase = extraDatabase.concat(Array(
 	{
 		name: "Ghoul",
+		alternate_names: "undead,",
 		wildcard: 0,
-		image: "",
+		image: "http://fc06.deviantart.net/fs70/f/2010/276/7/d/ghoul_by_kelsm-d300tgr.jpg",
 		blurb: Array (
 			"Ghouls are vile scavengers, feasting off carrion and unfortunate victims who cross their path."
 		),
@@ -2943,7 +2944,7 @@ extraDatabase = extraDatabase.concat(Array(
 	{
 		name: "Fire Giant",
 		wildcard: 0,
-		image: "",
+		image: "http://www.wizards.com/dnd/images/dun200_firegiant.jpg",
 		blurb: Array (
 			"Giants come in several forms, but all share two common features—they are tall and they enjoy human flesh. Fortunately, they are also rather stupid.",
 			"Fire giants prefer to dwell in hot places, such as near volcanoes or in the middle of scorching-hot deserts. Their ruddy complexion and flame-red hair makes them easy to identify."
@@ -3006,7 +3007,7 @@ extraDatabase = extraDatabase.concat(Array(
 	{
 		name: "Frost Giant",
 		wildcard: 0,
-		image: "",
+		image: "http://img1.wikia.nocookie.net/__cb20110621041734/forgottenrealms/images/7/74/Frost_giant.png",
 		blurb: Array (
 			"Giants come in several forms, but all share two common features—they are tall and they enjoy human flesh. Fortunately, they are also rather stupid.",
 			"Frost giants live in high mountains, above the snow line, or in the frozen reaches of the world. They build vast stone forts, from which they rule over lesser races, such as orcs and goblins, as veritable gods. Their skin is pale blue, and their hair as white as snow."
@@ -3180,7 +3181,7 @@ extraDatabase = extraDatabase.concat(Array(
 	{
 		name: "Goblin",
 		wildcard: 0,
-		image: "",
+		image: "http://cdn.obsidianportal.com/assets/62147/goblins2.jpg",
 		blurb: Array (
 			"Goblins of myth and legend are far more sinister creatures than some games and fiction portray. In the original tales, they were terrifying creatures that stole into homes in the middle of the night to steal and eat unruly children. The statistics here work for both dark “fairy tale” goblins as well as those found alongside orcs in contemporary roleplaying games."
 		),
@@ -3230,7 +3231,7 @@ extraDatabase = extraDatabase.concat(Array(
 	{
 		name: "Goblin Shaman",
 		wildcard: 0,
-		image: "",
+		image: "http://fc01.deviantart.net/fs71/f/2010/107/4/f/wow_goblin_shaman_concept_art_by_nightlybrian212.jpg",
 		blurb: Array (
 			"Goblins of myth and legend are far more sinister creatures than some games and fiction portray. In the original tales, they were terrifying creatures that stole into homes in the middle of the night to steal and eat unruly children. The statistics here work for both dark “fairy tale” goblins as well as those found alongside orcs in contemporary roleplaying games.",
 			"Goblin shamans serve as advisors to goblin lords. Their arcane talents give them a position of respect within the tribe."
@@ -3337,7 +3338,7 @@ extraDatabase = extraDatabase.concat(Array(
 	{
 		name: "Corpse Golem",
 		wildcard: 0,
-		image: "",
+		image: "http://img4.wikia.nocookie.net/__cb20100814131953/dragonage/images/4/4b/Harvester_golem.png",
 		blurb: Array (
 			"Golems are magical constructs, given life through the imprisonment of a spirit within the golem’s body. Creating one is costly and laborious, and few mages have the requisite knowledge. Despite being inhabited by a spirit, golems cannot talk.",
 			"The vilest golems are those crafted from the body parts of corpses. Depending on the creator, the golem may be stitched together from the parts of one species or multiple species. Some corpse golems utilize animal parts."
@@ -3405,7 +3406,7 @@ extraDatabase = extraDatabase.concat(Array(
 	{
 		name: "Glass Golem",
 		wildcard: 0,
-		image: "",
+		image: "http://940ee6dce6677fa01d25-0f55c9129972ac85d6b1f4e703468e6b.r99.cf2.rackcdn.com/products/pictures/1013449.jpg",
 		blurb: Array (
 			"Golems are magical constructs, given life through the imprisonment of a spirit within the golem’s body. Creating one is costly and laborious, and few mages have the requisite knowledge. Despite being inhabited by a spirit, golems cannot talk.",
 			"These unusual constructs are crafted to resemble a stained glass warrior and are most often used as guardians in temples. Unlike other golems, they are almost two- dimensional, being no thicker than a pane of glass."
@@ -3479,7 +3480,7 @@ extraDatabase = extraDatabase.concat(Array(
 	{
 		name: "Lava Golem",
 		wildcard: 0,
-		image: "",
+		image: "http://fc02.deviantart.net/fs49/f/2009/168/0/5/Lava_Golem_by_Vij_8.jpg",
 		blurb: Array (
 			"Golems are magical constructs, given life through the imprisonment of a spirit within the golem’s body. Creating one is costly and laborious, and few mages have the requisite knowledge. Despite being inhabited by a spirit, golems cannot talk.",
 			"Although superficially similar to stone golems, lava golems have fiery ichor running through their rock bodies. Their eyes glow red and their fists are superheated."
@@ -3547,7 +3548,7 @@ extraDatabase = extraDatabase.concat(Array(
 	{
 		name: "Metal Golem",
 		wildcard: 0,
-		image: "",
+		image: "http://th02.deviantart.net/fs7/PRE/i/2005/159/2/5/iron_golem_by_muninsnape.jpg",
 		blurb: Array (
 			"Golems are magical constructs, given life through the imprisonment of a spirit within the golem’s body. Creating one is costly and laborious, and few mages have the requisite knowledge. Despite being inhabited by a spirit, golems cannot talk.",
 			"Typically crafted in humanoid form from iron or bronze, metal golems are among the most powerful golems. Some creators give their iron golems long swords instead of hands, allowing them to attack more often."
@@ -3608,7 +3609,7 @@ extraDatabase = extraDatabase.concat(Array(
 	{
 		name: "Stone Golem",
 		wildcard: 0,
-		image: "",
+		image: "http://4.bp.blogspot.com/-OM8U5jk53ao/TlqKIELs8qI/AAAAAAAAAKQ/QKcOvwxuTRk/s1600/stonegolem.jpg",
 		blurb: Array (
 			"Golems are magical constructs, given life through the imprisonment of a spirit within the golem’s body. Creating one is costly and laborious, and few mages have the requisite knowledge. Despite being inhabited by a spirit, golems cannot talk.",
 			"Stone golems are the traditional animated statue. As with most golems, they are shaped in the form of warriors and serve as guardians."
@@ -3669,7 +3670,7 @@ extraDatabase = extraDatabase.concat(Array(
 	{
 		name: "Straw Golem",
 		wildcard: 0,
-		image: "",
+		image: "http://www.entertainmentearth.com/images/AUTOIMAGES/MS019lg.jpg",
 		blurb: Array (
 			"Golems are magical constructs, given life through the imprisonment of a spirit within the golem’s body. Creating one is costly and laborious, and few mages have the requisite knowledge. Despite being inhabited by a spirit, golems cannot talk.",
 			"Straw golems are most often designed to resemble scarecrows. As well as scaring off birds and natural predators such as wolves, they can bolster a village’s militia in times of invasion."
@@ -3723,7 +3724,7 @@ extraDatabase = extraDatabase.concat(Array(
 	{
 		name: "Grave Guardian",
 		wildcard: 0,
-		image: "",
+		image: "http://gerezon.se/wp-content/uploads/2013/11/spit-tombguardian.jpg",
 		blurb: Array (
 			"Grave guardians are placed in tombs to watch over the valuables entombed with the deceased. They resemble blackened corpses, with long talons and yellow eyes. Their orders are simple—destroy any creature entering the tomb, and hunt down and retrieve any stolen items."
 		),
@@ -3791,7 +3792,7 @@ extraDatabase = extraDatabase.concat(Array(
 	{
 		name: "Griffin",
 		wildcard: 0,
-		image: "",
+		image: "http://img4.wikia.nocookie.net/__cb20120819183320/mythology/images/f/f1/Griffin.jpg",
 		blurb: Array (
 			"Griffins have the body of a lion and the head and wings of an eagle. They are fierce predators, swooping down on their foes to pin them. Once their prey is trapped and helpless, they tear them open with their sharp beaks."
 		),

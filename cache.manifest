@@ -1,6 +1,7 @@
 CACHE MANIFEST
-# rev 2014032813-grrrr
-# 2014-03-28:v13-grrrrr
+# rev 2014032820
+# 2014-03-28:v20
+# Last one for the day - Probably
 
 CACHE:
 http://jdgwf.github.io/savage-worlds-web-tools/extras_view.html
@@ -43,6 +44,7 @@ http://jdgwf.github.io/savage-worlds-web-tools/js/dice.js
 http://jdgwf.github.io/savage-worlds-web-tools/js/localstorage.js
 http://jdgwf.github.io/savage-worlds-web-tools/js/space_travel_time.js
 http://jdgwf.github.io/savage-worlds-web-tools/js/starships.js
+http://jdgwf.github.io/savage-worlds-web-tools/js/smarty-comment.js
 
 http://jdgwf.github.io/savage-worlds-web-tools/css/style.css
 http://jdgwf.github.io/savage-worlds-web-tools/css/bootstrap.min.css
@@ -56,7 +58,7 @@ http://jdgwf.github.io/savage-worlds-web-tools/fonts/glyphicons-halflings-regula
 http://jdgwf.github.io/savage-worlds-web-tools/fonts/glyphicons-halflings-regular.ttf
 http://jdgwf.github.io/savage-worlds-web-tools/fonts/glyphicons-halflings-regular.woff
 
-
 FALLBACK:
+
 NETWORK:
 *

@@ -18,9 +18,9 @@ extraBooks = extraBooks.concat(currentBook);
 extraDatabase = extraDatabase.concat(Array(
 	{
 		name: "Acolyte",
-		alternate_names: "",
+		alternate_names: "cult,cultist,",
 		wildcard: 0,
-		image: "",
+		image: "http://www.arkhamdrive-in.com/Graphics/Stills/SP12-cultists.jpg",
 		blurb: "Acolytes are non-powered clerics, or cultists; they’re the lowest level of a clerical or a religious organization, lacking the ability to manifest miracles. They’re often led by a more powerful cleric.",
 		attributes: {
 			agility: "d6",
@@ -68,7 +68,7 @@ extraDatabase = extraDatabase.concat(Array(
 		name: "Acolyte, Cultist",
 		alternate_names: "",
 		wildcard: 0,
-		image: "",
+		image: "http://th08.deviantart.net/fs71/PRE/i/2012/316/5/a/cthulhu_cultist___lucca_comics_and_games_2012_by_cookingmaru-d5kra97.jpg",
 		blurb: "Acolytes are non-powered clerics, or cultists; they’re the lowest level of a clerical or a religious organization, lacking the ability to manifest miracles. They’re often led by a more powerful cleric.",
 		attributes: {
 			agility: "d6",
