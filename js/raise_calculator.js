@@ -1,14 +1,14 @@
 function do_success_calc() {
-	roll = $("input[name='roll'").val();
+	roll = $("input[name='roll']").val();
 	roll = roll / 1;
 
-	target_number = $("input[name='target-number'").val();
+	target_number = $("input[name='target-number']").val();
 	target_number = target_number / 1;
 
-	armor = $("input[name='armor'").val();
+	armor = $("input[name='armor']").val();
 	armor = armor / 1;
 
-	armorpiercing = $("input[name='weapon-ap'").val();
+	armorpiercing = $("input[name='weapon-ap']").val();
 	armorpiercing = armorpiercing / 1;
 
 
