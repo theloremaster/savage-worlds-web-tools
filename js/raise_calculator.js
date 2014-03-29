@@ -21,4 +21,6 @@ $(".raise-calc-input").keyup( function() {
 	do_success_calc();
 });
 
-do_success_calc();
+$(document).ready( function() {
+	do_success_calc();
+});
