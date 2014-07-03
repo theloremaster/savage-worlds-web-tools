@@ -1,4 +1,5 @@
 var baseRolls = [];
+var baseRollSides = [];
 var wildDieRolls = [];
 var currentRoll = 0;
 var alwaysExplodingDice = 0;
@@ -25,6 +26,7 @@ function rollDie(numberOfSides, explodingDie, wildDie)
 			keepRolling = 0;
 		}
 		baseRolls[currentRoll].push(roll);
+		baseRollSides[currentRoll].push(numberOfSides);
 		debugConsole("rollDie() die roll: " + roll);
 		totalRoll += roll;
 	}
@@ -70,6 +72,7 @@ function rollDice(numberOfDice, totalModifier) // 2d6+3 would be rollDice(2,3)
 
 	wildDieRolls[currentRoll] = Array();
 	baseRolls[currentRoll] = Array();
+	baseRollSides[currentRoll] = Array();
 
 	if(numberOfDice.indexOf("*") > 0)
 		wildDie = 1;
@@ -129,15 +132,12 @@ function parseBit(inputString) {
 	debugConsole("parseBit(): inputString = " + inputString);
 
 	if(inputString.indexOf("d") > -1)
-		value = rollDice(inputString.replace("-", "").replace("+", ""), 0);
+		value = rollDice(inputString, 0);
 	else
 		if(inputString.indexOf("e") > -1)
-			value = rollDice(inputString.replace("-", "").replace("+", ""), 0);
+			value = rollDice(inputString, 0);
 		else
-			value = inputString.replace("-", "").replace("+", "") / 1;
-
-	if(inputString[0] == "-")
-		value = value * -1;
+			value = inputString / 1;
 
 	return value;
 }
@@ -146,9 +146,16 @@ function parseRoll(inputString) {
 	// remove all spaces...
 
 	inputString = inputString.replace(/ /g, "");
-	inputString = inputString.replace(/\+/g, " +");
-	inputString = inputString.replace(/\-/g, " -");
 	inputString = inputString.toLowerCase();
+
+	// parse mathematical expressions
+	inputString = inputString.replace(/\+/g, " + ");
+	inputString = inputString.replace(/x/g, " x ");
+	inputString = inputString.replace(/\//g, " / ");
+	inputString = inputString.replace(/\-/g, " - ");
+	inputString = inputString.replace(/\)/g, " ) ");
+	inputString = inputString.replace(/\(/g, " ( ");
+
 	debugConsole("parseRoll(): inputString = " + inputString);
 	// look for modifier(s)....
 	total = 0;
@@ -158,11 +165,55 @@ function parseRoll(inputString) {
 
 	if(inputString.indexOf(" ") > 0) {
 		items = inputString.split(" ");
-		for(count = 0; count < items.length; count++)
-			total += parseBit(items[count]);
+
+		current_function = "+";
+		for(count = 0; count < items.length; count++) {
+			debugConsole("parseRoll(): bit#" + count + " = " + items[count]);
+			debugConsole("parseRoll(): current_function#" + count + " = " + current_function);
+			if(
+				items[count] != "+"
+					&&
+				items[count] != "x"
+					&&
+				items[count] != "-"
+					&&
+				items[count] != "/"
+			) {
+				// parse the bit
+				if(current_function == "+") {
+					debugConsole("parseRoll(): current_function = " + current_function);
+					total += parseBit( items[count]) / 1;
+				} else {
+					if(current_function == "-") {
+						debugConsole("parseRoll(): current_function = " + current_function);
+						total -= parseBit( items[count]) / 1;
+					} else {
+						if(current_function == "x") {
+							debugConsole("parseRoll(): current_function = " + current_function);
+							if(total == 0) {
+								total = items[count] / 1;
+							} else {
+								total = total * parseBit( items[count]) / 1;
+							}
+						} else {
+							debugConsole("parseRoll(): current_function = " + current_function);
+							if(current_function == "/") {
+								total = total / parseBit( items[count]) / 1;
+							} else {
+								// ignore parentheticals for now
+							}
+						}
+					}
+				}
+			} else {
+				// change what it does...
+				current_function = items[count];
+			}
+
+		}
 
 	} else {
-		total += parseBit(inputString);
+		total += parseBit( inputString);
 	}
 
 	return total;
@@ -174,7 +225,7 @@ function displayRolls() {
 		// each die roll section
 
 		if(typeof(baseRolls[lCurrentRoll]) != "undefined") {
-			html += "die roll #" + (lCurrentRoll + 1) + ": ";
+			html += "die roll #" + (lCurrentRoll + 1) + " (d" + baseRollSides[lCurrentRoll] + "): ";
 			for(lCurrentDie = 0; lCurrentDie < baseRolls[lCurrentRoll].length; lCurrentDie++) {
 					if(typeof(baseRolls[lCurrentRoll][lCurrentDie]) != "undefined") {
 						html += baseRolls[lCurrentRoll][lCurrentDie];
@@ -186,7 +237,7 @@ function displayRolls() {
 		// print out wild die rolls if exists
 		if(typeof(wildDieRolls[lCurrentRoll]) != "undefined") {
 			if(wildDieRolls[lCurrentRoll].length > 0)
-				html += "<br />Wild Die for die roll #" + (lCurrentRoll + 1) + ": ";
+				html += "<br />Wild Die for die roll #" + (lCurrentRoll + 1) + " (d6): ";
 			for(lCurrentDie = 0; lCurrentDie < wildDieRolls[lCurrentRoll].length; lCurrentDie++) {
 
 				if(typeof(wildDieRolls[lCurrentRoll][lCurrentDie]) != "undefined") {

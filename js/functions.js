@@ -1,4 +1,4 @@
-var showDebug = false;
+var showDebug = true;
 var alertFallback = false;
 function debugConsole(message) {
 	if(showDebug) {
