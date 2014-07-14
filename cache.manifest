@@ -1,7 +1,7 @@
 CACHE MANIFEST
-# rev 2014070301
-# 2014-07-03:v1
-# Update to for Safari JS error
+# rev 2014071501
+# 2014-07-15:v1
+# Update to Grunt Uglifying and Less Compiling
 
 CACHE:
 http://jdgwf.github.io/savage-worlds-web-tools/extras_view.html
@@ -23,6 +23,11 @@ http://jdgwf.github.io/savage-worlds-web-tools/js/background.js
 http://jdgwf.github.io/savage-worlds-web-tools/js/bootstrap.min.js
 http://jdgwf.github.io/savage-worlds-web-tools/js/swwt.min.js
 
+http://jdgwf.github.io/savage-worlds-web-tools/js/creator.power_armor.min.js
+http://jdgwf.github.io/savage-worlds-web-tools/js/creator.starship.min.js
+http://jdgwf.github.io/savage-worlds-web-tools/js/creator.walker.min.js
+http://jdgwf.github.io/savage-worlds-web-tools/js/creator.robot.min.js
+http://jdgwf.github.io/savage-worlds-web-tools/js/creator.vehicle.min.js
 
 http://jdgwf.github.io/savage-worlds-web-tools/css/style.css
 http://jdgwf.github.io/savage-worlds-web-tools/css/bootstrap.min.css
