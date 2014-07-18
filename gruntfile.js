@@ -41,7 +41,7 @@ module.exports = function(grunt) {
 			},
 			scripts: {
 				// Which files to watch (all .js files recursively in the js src directory)
-				files: ['js/src/*.js','js/src/extras/*js','js/src/chargen/*js'],
+				files: ['js/src/*.js','js/src/extras/*js','js/src/chargen/*js','js/src/creators/*js'],
 				tasks: ['uglify'],
 				options: {
 					nospawn: true

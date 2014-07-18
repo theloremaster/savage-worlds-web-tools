@@ -109,10 +109,12 @@ function sw_power_armor() {
 		if(this.selected_size.power_armor_label) {
 			html_return += "<strong>" + this.selected_size.power_armor_label + " Power Armor</strong>: ";
 			html_return += "Size " + this.size + ", ";
+			if(this.acc > 0)
 			html_return += "Acc/TS " + this.acc + "/" + this.ts + ", ";
 			if(this.aircraft)
 				html_return += "Climb " + this.climb + ", Flying Pace " + this.flying_pace + ", ";
 			html_return += "Toughness +" + this.armor + ", ";
+			html_return += "Pace " + this.pace + ", ";
 //			html_return += "Crew " + this.crew + ", ";
 
 			html_return += "Cost $" + simplify_cost(this.cost) + "<br />";
@@ -417,12 +419,14 @@ function sw_power_armor() {
 			otherWeaponModUsage = 0;
 			for(calcModCount = 0; calcModCount < this.selected_weapons.length; calcModCount++) {
 				//this.selected_modifications_list += "<li>" + this.selected_weapons[modCount].name + "</li>";
-				weaponCost = this.selected_weapons[calcModCount].mods;
+				weaponModCost = this.selected_weapons[calcModCount].mods;
 				if(this.selected_weapons[calcModCount].fixed > 0)
-					weaponCost = weaponCost / 2;
+					weaponModCost = weaponModCost / 2;
 				if(this.selected_weapons[calcModCount].linked > 0)
-					weaponCost = weaponCost / 2;
-				this.vehicle_weapon_mod_points = this.vehicle_weapon_mod_points - weaponCost;
+					weaponModCost = weaponModCost / 2;
+				this.vehicle_weapon_mod_points = this.vehicle_weapon_mod_points - weaponModCost;
+
+				this.mods_available += weaponModCost; // I assume that weapons on a mount don't cost any more mod points that the mount point itself
 
 				if( this.selected_weapons[calcModCount].get_weight )
 					this.weight += this.selected_weapons[calcModCount].get_weight(this);

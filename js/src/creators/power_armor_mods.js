@@ -248,12 +248,11 @@ var power_armor_modifications = Array(
 		get_weight: function(selected_power_armor) {
 			return 0;
 		}
-
 	},
 	{
 		name: "Strength Enhancement",
 		description: "Increases Strength by one die type each time it’s taken. After d12, add +1 per servo (d12+1, d12+2, etc).",
-		get_max: function(selected_power_armor) { return 1 },
+		get_max: function(selected_power_armor) { return "u" },
 		get_mod_cost: function(selected_power_armor) {
 			return 1;
 		},
