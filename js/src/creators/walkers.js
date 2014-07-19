@@ -5,7 +5,7 @@ if calc_weight is empty or undefined, it should be assumed 5 */
 
 var walker_sizes = Array(
 	{
-		walker_label: "Light",
+		size_label: "Light",
 		examples: "20 feet tall",
 		strength: 4,
 		pace: 24,
@@ -22,7 +22,7 @@ var walker_sizes = Array(
 		provisions: 0
 	},
 	{
-		walker_label: "Medium",
+		size_label: "Medium",
 		examples: "30 feet tall",
 		strength: 6,
 		pace: 18,
@@ -39,7 +39,7 @@ var walker_sizes = Array(
 		provisions: 0
 	},
 	{
-		walker_label: "Heavy",
+		size_label: "Heavy",
 		examples: "50 feet tall",
 		strength: 8,
 		pace: 12,
@@ -56,7 +56,7 @@ var walker_sizes = Array(
 		provisions: 0
 	},
 	{
-		walker_label: "Super Heavy",
+		size_label: "Super Heavy",
 		examples: "80 feet tall",
 		strength: 10,
 		pace: 8,
@@ -73,7 +73,7 @@ var walker_sizes = Array(
 		provisions: 0
 	},
 	{
-		walker_label: "Titan",
+		size_label: "Titan",
 		examples: "120 feet tall",
 		strength: 12,
 		pace: 8,
@@ -92,865 +92,227 @@ var walker_sizes = Array(
 
 );
 
-function sw_walker() {
-	this.item_name = "(nameless)";
-	this.walker_description = "";
+var walker_modifications = Array(
 
-	this.walker_walker_label = "";
-	this.examples = "";
-	this.strength = "";
-	this.size = 0;
-	this.object_type = "walker",
-	this.acc = 0;
-	this.pace = 0;
-	this.ts = 0;
-	this.climb = 0;
-	this.toughness = 0;
-	this.base_toughness = 0;
-	this.base_cost = 0;
-	this.armor = 0;
-	this.mods = 0;
-	this.base_mods = 0;
-	this.crew = 0;
-	this.cost = 0;
-	this.energy_capacity =  0;
-	this.base_energy_capacity =  0;
-	this.provisions = 0;
+	{
+		name: "AMCM",
+		description: "Anti-Missile Counter Measures are integrated jammers and decoys. They add +2 to Driving, Piloting or Knowledge (Electronics) rolls made to evade missile attacks.",
+		get_max: function(selected_walker) { return 1 },
+		get_mod_cost: function(selected_walker) {
+			return 1;
+		},
+		get_cost: function(selected_walker) {
+			return 5000 * selected_walker.size;
+		},
+	},
 
-	this.aircraft = 0;
+	{
+		name: "Armor",
+		description: "Increases a walker’s Armor value by +2. All walker Armor is considered Heavy Armor.",
+		get_max: function(selected_walker) { return selected_walker.size },
+		get_mod_cost: function(selected_walker) {
+			return 1;
+		},
+		get_cost: function(selected_walker) {
+			return 10000 * selected_walker.size;
+		},
+		get_mod_effect: function(selected_walker) {
+			selected_walker.armor++;
+			selected_walker.armor++;
 
-	this.selected_size = 0;
-
-	this.selected_modifications = Array();
-	this.selected_modifications_list = {};
-
-	this.mods_available = 0;
-
-	this.selected_weapons = Array();
-	this.selected_weapons_list = Array();
-
-	this.create_stats_block = create_stats_block;
-	function create_stats_block() {
-		this.calculate_walker();
-		html_return = "";
-
-		html_return += "<h4>" + this.item_name + "</h4>";
-		html_return += "<p>";
-
-		html_return += this.walker_description + "</p><br />";
-
-		if(this.selected_size.walker_label) {
-			html_return += "<strong>" + this.selected_size.walker_label + " Walker</strong>: ";
-			html_return += "Size " + this.size + ", ";
-			html_return += "Strength d12+" + this.strength + ", ";
-			html_return += "Pace " + this.pace + " (2d6 Run), ";
-			if(this.aircraft)
-				html_return += "Climb " + this.climb + ", ";
-			html_return += "Toughness " + this.toughness + " (" + this.armor + "), ";
-			html_return += "Crew " + this.crew + ", ";
-
-			html_return += "Cost $" + simplify_cost(this.cost) + "<br />";
-
-
-			if(this.energy_capacity > 0)
-				html_return += "<strong>Energy Capacity</strong>: " + this.energy_capacity + "<br />";
-			html_return += "<strong>Mods Available</strong>: " + this.mods_available + "<br />";
-
-			html_return += "<strong>Notes</strong>: ";
-
-			this.sort_selected_modifications_list();
-			for(var modName in this.selected_modifications_list){
-				html_return += modName;
-				if(this.selected_modifications_list[modName] > 1)
-  					html_return += " x" + this.selected_modifications_list[modName];
-  				html_return += ", ";
-			}
-
-			html_return += "<br />";
-
-			html_return += "<strong>Weapons</strong>: ";
-			this.sort_selected_weapons_list();
-			for(var weaponName in this.selected_weapons_list){
-				html_return += weaponName;
-				if(this.selected_weapons_list[weaponName] > 1)
-  					html_return += " x" + this.selected_weapons_list[weaponName];
-  				html_return += ", ";
-			}
-
-			html_return += "<br />";
-
-			if( this.get_modification_count("Shields") > 0) {
-				html_return += "<strong>Shields</strong>: ";
-				html_return += this.size * 10;
-				html_return += " - may recover  " + this.size + "/round<br />";
-			}
-		} else {
-			html_return += "A walker size must be selected.";
+			selected_walker.toughness++;
+			selected_walker.toughness++;
 		}
+	},
+	{
+		name: "Close Combat Weapon",
+		description: "Some walkers are equipped with chain- blades or swords designed to cut through the hard armor of rival mechs, buildings, or enemy tanks. They have AP equal to the mech’s Size and cause Str+2d10 damage (Heavy Weapon). The pilot uses the lower of his Fighting or Piloting to hit. The TN to hit an enemy mech or vehicle is 4, plus or minus normal speed or Size modifiers. Walkers aren’t subject to all the normal rules of close combat, but GMs can use those as the basis for situational modifiers based on specific circumstances (such as multiple mechs ganging up on a foe).",
+		get_max: function(selected_walker) { return 2 },
+		get_mod_cost: function(selected_walker) {
+			return selected_walker.size / 2;
+		},
+		get_cost: function(selected_walker) {
+			return 75000;
+		},
+	},
+	{
+		name: "Deflector Screens",
+		description: "The vessel is protected by an energy field that deflects incoming ballistic attacks (it has no effect against lasers). Attackers must subtract –2 from their Shooting rolls. Mod cost is 2 for Small to Large walkers, and 3 for Huge to Gargantuan vessels.",
+		get_max: function(selected_walker) { return 1 },
+		get_mod_cost: function(selected_walker) {
 
-		return html_return;
-	}
+			return 2;
 
-	this.export_bbcode = export_bbcode;
-	function export_bbcode() {
-		this.calculate_walker();
-		html_return = "";
-
-		html_return += "[b][size=18]" + this.item_name + "[/size][/b]\n";
-		if(this.walker_description)
-			html_return += "" + this.walker_description + "\n\n";
-		else
-			html_return += "\n";
-
-		if(this.selected_size.walker_label) {
-			html_return += "[b]" + this.selected_size.walker_label + " Walker[/b]: ";
-			html_return += "Size " + this.size + ", ";
-			html_return += "Strength d12+" + this.strength + ", ";
-			html_return += "Pace " + this.pace + " (2d6 Run), ";
-			html_return += "Toughness " + this.toughness + " (" + this.armor + "), ";
-			html_return += "Crew " + this.crew + ", ";
-
-			html_return += "Cost $" + simplify_cost(this.cost) + "" + "\n";
-
-			if(this.energy_capacity > 0)
-				html_return += "[b]Energy Capacity[/b]: " + this.energy_capacity + "\n";
-			html_return += "[b]Mods Available[/b]: " + this.mods_available + "\n";
-
-			html_return += "[b]Notes[/b]: ";
-
-			this.sort_selected_modifications_list();
-			for(var modName in this.selected_modifications_list){
-				html_return += modName;
-				if(this.selected_modifications_list[modName] > 1)
-  					html_return += " x" + this.selected_modifications_list[modName];
-  				html_return += ", ";
-			}
-
-			html_return += "\n";
-
-			html_return += "[b]Weapons[/b]: ";
-			this.sort_selected_weapons_list();
-			for(var weaponName in this.selected_weapons_list){
-				html_return += weaponName;
-				if(this.selected_weapons_list[weaponName] > 1)
-  					html_return += " x" + this.selected_weapons_list[weaponName];
-  				html_return += ", ";
-			}
-
-			html_return += "\n";
-
-			if( this.get_modification_count("Shields") > 0) {
-				html_return += "[b]Shields[/b]: ";
-				html_return += this.size * 10;
-				html_return += " - may recover  " + this.size + "/round\n";
-			}
-		} else {
-			html_return += "A walker size must be selected.";
+		},
+		get_cost: function(selected_walker) {
+			return 10000 * selected_walker.size;
+		},
+	},
+	{
+		name: "Electromagnetic Shielding",
+		description: "Adds +6 to the walker’s effective Toughness from EMP missiles (see page 25).",
+		get_max: function(selected_walker) { return "u" },
+		get_mod_cost: function(selected_walker) {
+			return 2;
+		},
+		get_cost: function(selected_walker) {
+			return 5000 * selected_walker.size;
+		},
+	},
+	{
+		name: "Jump Jets",
+		description: "Powerful rockets give walkers the ability to propel themselves high in the air—to clear obstacles or perform “death from above” attacks on foes. To jump, the pilot uses an action to make a Piloting roll to both maneuver his walker and manage his power reserves. Each round spent jumping increases his height 50 feet for Light walkers, 30 feet for Mediums, and 20 feet for Heavies. Each subsequent round spent jumping (essentially flying) afterwards inflicts a –2 to the Piloting roll, cumulative to a maximum of –6. Failure means the walker descends immediately (a critical failure results in a fall—see Falling, page 59).",
+		get_max: function(selected_walker) { return 1 },
+		get_mod_cost: function(selected_walker) {
+			return selected_walker.size / 2;
+		},
+		get_cost: function(selected_walker) {
+			return selected_walker.size / 2;
+		},
+	},
+	{
+		name: "Linked",
+		description: "Up to four direct-fire weapons of the same type may be linked and fired as one, increasing the damage by +2 per weapon and reducing the total number of Mods required. Total all Linked weapons in a set first, then halve their required Mods. (If Linking Fixed weapons, halve the total.)",
+		get_max: function(selected_walker) { return "u" },
+		get_mod_cost: function(selected_walker) {
+			return 0;
+		},
+		get_cost: function(selected_walker) {
+			return 0;
+		},
+	},
+	{
+		name: "Missile Launcher",
+		description: "Allows up to four Light or two Heavy (or AT) missiles to be fired at once.",
+		get_max: function(selected_walker) { return "u" },
+		get_mod_cost: function(selected_walker) {
+			return 1;
+		},
+		get_cost: function(selected_walker) {
+			return 50000;
 		}
-
-		for(removeHideCounter = 1; removeHideCounter < 31; removeHideCounter++)
-			html_return = html_return.replace("<span class='hide'>" + removeHideCounter + "</span>", "");
-
-		return html_return;
-	}
-
-	this.export_json = export_json;
-	function export_json() {
-		exportObject = {};
-		exportObject.size = this.size;
-		exportObject.object_type = "walker";
-		exportObject.item_name = this.item_name;
-		exportObject.walker_description = this.walker_description;
-		exportObject.mods = Array();
-		for(modCounter = 0; modCounter < this.selected_modifications.length; modCounter++)
-			exportObject.mods = exportObject.mods.concat( this.selected_modifications[modCounter].name );
-		exportObject.weapons = Array();
-		for(weaponCounter = 0; weaponCounter < this.selected_weapons.length; weaponCounter++) {
-			weapon_item = {
-				name: this.selected_weapons[weaponCounter].name,
-				fixed: this.selected_weapons[weaponCounter].fixed,
-				linked: this.selected_weapons[weaponCounter].linked,
-			};
-			exportObject.weapons = exportObject.weapons.concat( weapon_item );
+	},
+	{
+		name: "Pace",
+		description: "Increases the mech’s Pace by +4. (This cannot be taken with Speed Reduction.)",
+		get_max: function(selected_walker) { return 3 },
+		get_mod_cost: function(selected_walker) {
+			return 1;
+		},
+		get_cost: function(selected_walker) {
+			return 4000 * selected_walker.size;
+		},
+		get_mod_effect: function(selected_walker) {
+			selected_walker.pace = selected_walker.pace + 4;
 		}
-
-		return JSON.stringify(exportObject);
-
-	}
-
-	this.reset_data = reset_data;
-	function reset_data() {
-		this.item_name = "(nameless)";
-		this.walker_description = "";
-
-		this.walker_walker_label = "";
-		this.examples = "";
-		this.strength = "";
-		this.size = 0;
-		this.acc = 0;
-		this.pace = 0;
-		this.ts = 0;
-		this.climb = 0;
-		this.toughness = 0;
-		this.base_toughness = 0;
-		this.armor = 0;
-		this.mods = 0;
-		this.base_mods = 0;
-		this.crew = 0;
-		this.cost = 0;
-		this.base_cost = 0;
-		this.energy_capacity =  0;
-		this.base_energy_capacity =  0;
-		this.provisions = 0;
-
-		this.selected_size = 0;
-
-		this.selected_modifications = Array();
-		this.selected_modifications_list = {};
-
-		this.mods_available = 0;
-
-		this.selected_weapons = Array();
-		this.selected_weapons_list = Array();
-	}
-
-	this.import_json = import_json;
-	function import_json(importedWalker) {
-		try {
-			importedWalkerObj= JSON.parse(importedWalker);
+	},
+	{
+		name: "Passenger Compartment",
+		description: "Cramped space for four passengers. Rescue mechs often use this Modification.",
+		get_max: function(selected_walker) { return 1 },
+		get_mod_cost: function(selected_walker) {
+			return 1;
+		},
+		get_cost: function(selected_walker) {
+			return 5000;
 		}
-		catch(e) {
-
+	},
+	{
+		name: "Reinforced Frame",
+		description: "Increases Toughness of the chassis by +2.",
+		get_max: function(selected_walker) { return 3 },
+		get_mod_cost: function(selected_walker) {
+			return 1;
+		},
+		get_cost: function(selected_walker) {
+			return 10000 * selected_walker.size;
+		},
+		get_mod_effect: function(selected_walker) {
+			selected_walker.toughness = selected_walker.toughness + 4;
 		}
-
-		if(typeof importedWalkerObj =='object') {
-			this.reset_data();
-			this.set_size(importedWalkerObj.size);
-			this.set_item_name(importedWalkerObj.item_name);
-			this.set_walker_description(importedWalkerObj.walker_description);
-
-			for(modCounter = 0; modCounter < importedWalkerObj.mods.length; modCounter++)
-				this.add_mod( importedWalkerObj.mods[modCounter] );
-
-			for(weaponCounter = 0; weaponCounter < importedWalkerObj.weapons.length; weaponCounter++) {
-				this.add_weapon( importedWalkerObj.weapons[weaponCounter].name );
-
-				if( importedWalkerObj.weapons[weaponCounter].fixed)
-					this.fix_weapon( this.selected_weapons.length - 1, importedWalkerObj.weapons[weaponCounter].fixed );
-
-				if( importedWalkerObj.weapons[weaponCounter].linked)
-					this.link_weapon( this.selected_weapons.length - 1, importedWalkerObj.weapons[weaponCounter].linked);
-
-			}
-
-			refresh_walker_page();
+	},
+	{
+		name: "Sensor Suite",
+		description: "+4 Notice vs sound, motion, strong chemicals, radiation, or electrical fields up to 1000 yards.",
+		get_max: function(selected_walker) { return 1 },
+		get_mod_cost: function(selected_walker) {
+			return 1;
+		},
+		get_cost: function(selected_walker) {
+			return 50000;
 		}
-	}
-
-	this.sort_selected_modifications_list = sort_selected_modifications_list;
-	function sort_selected_modifications_list() {
-		var keyList = Object.keys(this.selected_modifications_list);
-
-		keyList.sort();
-
-    	var newList = {};
-
-		for (var keyCount = 0; keyCount < keyList.length; keyCount++) {
-			keyName = keyList[keyCount];
-		    newList[keyName] = this.selected_modifications_list[keyName];
+	},
+	{
+		name: "Shields",
+		description: "The walker is protected by an ablative energy field that absorbs 10×Size points of damage before it’s depleted. Apply all damage to the shield first, then any left over to the mech (AP counts as usual). Active shields detonate missiles and torpedoes before they hit, reducing their damage total by half. A walker may regenerate its Size in shield points if it makes no attacks in a round.",
+		get_max: function(selected_walker) { return 1 },
+		get_mod_cost: function(selected_walker) {
+			return selected_walker.size / 2;
+		},
+		get_cost: function(selected_walker) {
+			return 50000 * selected_walker.size;
+		},
+	},
+	{
+		name: "Sloped Armor",
+		description: "Non-energy, ballistic attacks against this vessel suffer a –2 penalty. It has no effect on energy attacks.",
+		get_max: function(selected_walker) { return 1 },
+		get_mod_cost: function(selected_walker) {
+			return 2;
+		},
+		get_cost: function(selected_walker) {
+			return 5000 * selected_walker.size;
+		},
+	},
+	{
+		name: "Speed Reduction",
+		description: "The walker sacrifices speed for additional room. Subtract 2 from Pace and add half its Size in Mod slots (round down).",
+		get_max: function(selected_walker) { return 3 },
+		get_mod_cost: function(selected_walker) {
+			return 0;
+		},
+		get_cost: function(selected_walker) {
+			return 20000 * selected_walker.size;
+		},
+		get_mod_effect: function(selected_walker) {
+			selected_walker.pace -=  2;
+			selected_walker.mods += selected_walker.base_mods / 2;
 		}
-		this.selected_modifications_list = newList;
-	}
-
-	this.sort_selected_weapons_list = sort_selected_weapons_list;
-	function sort_selected_weapons_list() {
-		var keyList = Object.keys(this.selected_weapons_list);
-
-		keyList.sort();
-
-    	var newList = {};
-
-		for (var keyCount = 0; keyCount < keyList.length; keyCount++) {
-			keyName = keyList[keyCount];
-		    newList[keyName] = this.selected_weapons_list[keyName];
+	},
+	{
+		name: "Stealth System",
+		description: "Radar-absorbing paint, heat baffles, scramblers, and other devices make the walker difficult to detect by vision or sensors. Those trying to attack or spot the mech subtract 4 from their rolls. The effect is triggered as a free action, but is negated any round in which the walker fires a weapon or emits some other non- cloakable signal such as radio signal or active sensor search.",
+		get_max: function(selected_walker) { return 1 },
+		get_mod_cost: function(selected_walker) {
+			return selected_walker.size;
+		},
+		get_cost: function(selected_walker) {
+			return 50000 * selected_walker.size;
 		}
-		this.selected_weapons_list = newList;
-	}
-
-	this.calculate_walker = calculate_walker;
-	function calculate_walker() {
-
-		// Get base stats from size
-		if( this.selected_size.walker_label ) {
-			this.walker_label = this.selected_size.walker_label;
-			this.examples = this.selected_size.examples;
-			this.strength = this.selected_size.strength;
-			this.size = this.selected_size.size;
-			this.acc = this.selected_size.acc;
-			this.pace = this.selected_size.pace;
-			this.ts = this.selected_size.ts;
-			this.aircraft = 0;
-			this.climb = this.selected_size.climb;
-			this.toughness = this.selected_size.toughness;
-			this.base_toughness = this.selected_size.toughness;
-			this.armor = this.selected_size.armor;
-			this.mods = this.selected_size.mods;
-			this.base_mods = this.selected_size.mods;
-			this.crew = this.selected_size.crew;
-			this.cost = this.selected_size.cost;
-			this.base_cost =  this.selected_size.cost;
-			this.energy_capacity = this.selected_size.energy_capacity;
-			this.base_energy_capacity = this.selected_size.energy_capacity;
-			this.provisions = this.selected_size.provisions;
-
-			this.selected_modifications.sort( sort_mods );
-			// Modify Walker as per mods
-			this.selected_modifications_list = {};
-			for(calcModCount = 0; calcModCount < this.selected_modifications.length; calcModCount++) {
-				//this.selected_modifications_list += "<li>" + this.selected_modifications[modCount].name + "</li>";
-
-				is_available = true;
-				if( this.selected_modifications[calcModCount].is_available ) {
-					is_available = this.selected_modifications[calcModCount].is_available(this);
-				}
-
-				if( !is_available ) {
-					createAlert(this.selected_modifications[calcModCount].name + " is no longer availble for this configuration. Removing.", "warning");
-					this.remove_mod(this.selected_modifications[calcModCount].name);
-					this.calculate_walker();
-					return;
-				} else {
-
-					this.mods = this.mods - this.selected_modifications[calcModCount].get_mod_cost(this);
-					this.cost += this.selected_modifications[calcModCount].get_cost(this);
-					if( this.selected_modifications[calcModCount].get_mod_effect )
-						this.selected_modifications[calcModCount].get_mod_effect(this);
-
-					// Linked weapons are displayed elsewhere...
-					if(this.selected_modifications[calcModCount].name != "Linked") {
-						if( typeof(this.selected_modifications_list[this.selected_modifications[calcModCount].name]) == "undefined")
-							this.selected_modifications_list[this.selected_modifications[calcModCount].name] = 1;
-						else
-							this.selected_modifications_list[this.selected_modifications[calcModCount].name]++;
-					}
-				}
-			}
-
-			// Weaponise Walker as per weapons
-			this.selected_weapons.sort( sort_mods );
-
-			this.selected_weapons_list = {};
-			fixedWeaponModUsage = 0;
-			linkedWeaponModUsage = Array();
-			otherWeaponModUsage = 0;
-			for(calcModCount = 0; calcModCount < this.selected_weapons.length; calcModCount++) {
-					//this.selected_modifications_list += "<li>" + this.selected_weapons[modCount].name + "</li>";
-				is_available = true;
-				if( this.selected_weapons[calcModCount].is_available ) {
-					is_available = this.selected_weapons[calcModCount].is_available(this);
-				}
-
-				if( !is_available ) {
-					createAlert(this.selected_weapons[calcModCount].name + " is no longer availble for this configuration. Removing.", "warning");
-					this.remove_weapon(calcModCount);
-					this.calculate_ship();
-					return;
-				} else {
-					weaponCost = this.selected_weapons[calcModCount].mods;
-					if(this.selected_weapons[calcModCount].fixed)
-						weaponCost = weaponCost / 2;
-					if(this.selected_weapons[calcModCount].linked)
-						weaponCost = weaponCost / 2;
-					this.mods = this.mods - weaponCost;
-
-					this.cost += this.selected_weapons[calcModCount].cost;
-
-					weaponListName = this.selected_weapons[calcModCount].name;
-					if(this.selected_weapons[calcModCount].fixed) {
-						if(this.selected_weapons[calcModCount].linked) {
-							weaponListName = weaponListName + " (linked<span class='hide'>" + this.selected_weapons[calcModCount].linked + "</span>, fixed)";
-						} else {
-							weaponListName = weaponListName + " (fixed)";
-						}
-					} else {
-						if(this.selected_weapons[calcModCount].linked) {
-							weaponListName = weaponListName + " (linked<span class='hide'>" + this.selected_weapons[calcModCount].linked + "</span>)";
-						}
-					}
-					if( typeof(this.selected_weapons_list[weaponListName]) == "undefined") {
-						if( this.selected_weapons[calcModCount].missiles_per )
-							this.selected_weapons_list[weaponListName] = this.selected_weapons[calcModCount].missiles_per;
-						else
-							this.selected_weapons_list[weaponListName] = 1;
-
-					} else {
-						if( this.selected_weapons[calcModCount].missiles_per )
-							this.selected_weapons_list[weaponListName] += this.selected_weapons[calcModCount].missiles_per;
-						else
-							this.selected_weapons_list[weaponListName]++;
-					}
-				}
-			}
-
-			this.mods_available = this.mods; // - sort_selected_modifications_list.length;
-
+	},
+	{
+		name: "Strength Enhancement ",
+		description: "Add +2 to the walker’s Strength.",
+		get_max: function(selected_walker) { return 1 },
+		get_mod_cost: function(selected_walker) {
+			return 1;
+		},
+		get_cost: function(selected_walker) {
+			return 5000 * selected_walker.size;
+		},
+		get_mod_effect: function(selected_walker) {
+			selected_walker.strength +=  2;
 		}
-	}
-
-	this.set_item_name = set_item_name;
-	function set_item_name(newValue) {
-		this.item_name = newValue;
-	}
-
-	this.set_walker_description = set_walker_description;
-	function set_walker_description(newValue) {
-		this.walker_description = newValue;
-	}
-
-	this.add_mod = add_mod;
-	function add_mod(modName) {
-		return_value = 0;
-		for(addModCount = 0; addModCount < walker_modifications.length; addModCount++) {
-			if(modName.toLowerCase() == walker_modifications[addModCount].name.toLowerCase()) {
-				newMod = jQuery.extend({}, walker_modifications[addModCount]);
-				this.selected_modifications = this.selected_modifications.concat( newMod  );
-				return;
-			}
+	},
+	{
+		name: "Targeting System",
+		description: "The walker’s internal sensors and computers are linked to all attached weapons. This compensates for movement, range, multi-actions, and the like, negating up to two points of Shooting penalties.",
+		get_max: function(selected_walker) { return 1 },
+		get_mod_cost: function(selected_walker) {
+			return 1;
+		},
+		get_cost: function(selected_walker) {
+			return 10000  * selected_walker.size;
 		}
-
-		return return_value;
-	}
-
-	this.add_weapon = add_weapon;
-	function add_weapon(weaponName) {
-		return_value = 0;
-		for(addWeaponCount = 0; addWeaponCount < vehicle_weapons.length; addWeaponCount++) {
-			if(weaponName.toLowerCase() == vehicle_weapons[addWeaponCount].name.toLowerCase()) {
-//				newWeapon = new vehicle_weapons[addWeaponCount];
-				newWeapon = jQuery.extend({}, vehicle_weapons[addWeaponCount]);
-				newWeapon.linked = 0;
-				newWeapon.fixed = 0;
-				this.selected_weapons = this.selected_weapons.concat( newWeapon );
-				return;
-			}
-		}
-
-		return return_value;
-	}
-
-	this.remove_mod = remove_mod;
-	function remove_mod(modName) {
-		for(removeModCount = 0; removeModCount < this.selected_modifications.length; removeModCount++) {
-			if(modName.toLowerCase() == this.selected_modifications[removeModCount].name.toLowerCase()) {
-				this.selected_modifications.splice(removeModCount, 1);
-				return;
-			}
-		}
-	}
-
-	this.remove_weapon = remove_weapon;
-	function remove_weapon(weaponIndex) {
-		weaponIndex = weaponIndex / 1;
-		this.selected_weapons.splice(weaponIndex, 1);
-	}
-
-	this.link_weapon = link_weapon;
-	function link_weapon(weaponIndex, linkIndex) {
-		weaponIndex = weaponIndex / 1;
-
-		this.selected_weapons[weaponIndex].linked = (linkIndex / 1);
-	}
-
-	this.fix_weapon = fix_weapon;
-	function fix_weapon(weaponIndex, fixedValue) {
-		weaponIndex = weaponIndex / 1;
-
-		this.selected_weapons[weaponIndex].fixed = fixedValue;
-	}
-
-	this.get_linked_weapons = get_linked_weapons;
-	function get_linked_weapons() {
-		numberOfLinks = this.get_modification_count("Linked");
-		returnVal = Array();
-		if( numberOfLinks > 0 ){
-
-			for(linked_weapon_count = 0; linked_weapon_count < this.selected_weapons.length; linked_weapon_count++) {
-				if(this.selected_weapons[linked_weapon_count].linked) {
-					// unset any links that were removed...
-					if(this.selected_weapons[linked_weapon_count].linked > numberOfLinks)
-						this.selected_weapons[linked_weapon_count].linked  = 0;
-					else
-						returnVal[this.selected_weapons[linked_weapon_count].linked] = this.selected_weapons[linked_weapon_count].name;
-				}
-			}
-			while(returnVal.length < numberOfLinks + 1) {
-				for(linked_weapon_count = returnVal.length; linked_weapon_count < numberOfLinks + 1; linked_weapon_count++) {
-					returnVal[linked_weapon_count] = "";
-				}
-			}
-		} else {
-			// unlink all weapons as all links have disappeared
-			for(linked_weapon_count = 0; linked_weapon_count < this.selected_weapons.length; linked_weapon_count++) {
-				this.selected_weapons[linked_weapon_count].linked  = 0;
-			}
-			returnVal = Array();
-		}
-
-		return returnVal;
-
-	}
-
-	this.get_modification_count = get_modification_count;
-	function get_modification_count(modName) {
-		return_value = 0;
-		for(modCount = 0; modCount < this.selected_modifications.length; modCount++) {
-			if(modName.toLowerCase() == this.selected_modifications[modCount].name.toLowerCase())
-				return_value++;
-		}
-
-		return return_value;
-	}
-
-	this.set_size = set_size;
-	function set_size(sizeNumber) {
-		for(sizeCount = 0; sizeCount < walker_sizes.length; sizeCount++) {
-			if(sizeNumber == walker_sizes[sizeCount].size) {
-				this.selected_size = walker_sizes[sizeCount];
-			}
-		}
-	}
-}
-
-function propogate_size_select() {
-	selectOptions = "<option value=''>- Select Walker Size -</option>";
-	for(sizeCount = 0; sizeCount < walker_sizes.length; sizeCount++) {
-		isSelected = "";
-		if( current_walker.selected_size.size )
-			if(  current_walker.selected_size.size == walker_sizes[sizeCount].size )
-				isSelected = " selected='selected'";
-		selectOptions += "<option value='" + walker_sizes[sizeCount].size + "'" + isSelected + ">" + walker_sizes[sizeCount].walker_label + " - Size " + walker_sizes[sizeCount].size;
-		if( walker_sizes[sizeCount].examples )
-			selectOptions += " - " + walker_sizes[sizeCount].examples;
-		selectOptions += "</option>";
-	}
-	$(".js-select-size").html(selectOptions);
-}
-
-function propogate_add_mods() {
-	modifications_html = "<table>";
-	modifications_html += "<thead><tr>";
-	modifications_html += "<th>&nbsp;</th>";
-	modifications_html += "<th>Name</th>";
-	modifications_html += "<th>Used/Max</th>";
-	modifications_html += "<th>Mod Cost</th>";
-	modifications_html += "<th>Cost</th>";
-	modifications_html += "</tr></thead><tbody>";
-	for(mod_count = 0; mod_count < walker_modifications.length; mod_count++) {
-		walker_mod_count = current_walker.get_modification_count(walker_modifications[mod_count].name);
-		mod_cost = walker_modifications[mod_count].get_mod_cost(current_walker);
-
-		is_available = true;
-		if( walker_modifications[mod_count].is_available )
-			is_available = walker_modifications[mod_count].is_available (current_walker);
-
-		if( (current_walker.mods_available >= mod_cost || walker_mod_count > 0 ) && is_available ) {
-			modifications_html += "<tr title='" + walker_modifications[mod_count].description + "'>";
-			modifications_html += "<td style='white-space: nowrap;'>";
-
-			if(  walker_mod_count > 0 )
-				modifications_html += "<span ref='" + walker_modifications[mod_count].name  + "' class='js-remove-mod glyphicon glyphicon-minus color-red'></span>";
-			else
-				modifications_html += "<span class='glyphicon glyphicon-blank'></span>";
-
-			if( current_walker.mods_available >= mod_cost && ( walker_modifications[mod_count].get_max(current_walker) == "u" || walker_modifications[mod_count].get_max(current_walker) > walker_mod_count) )
-				modifications_html += " <span ref='" + walker_modifications[mod_count].name  + "' class='js-add-mod glyphicon glyphicon-plus color-green'></span>";
-
-			modifications_html += "</td>";
-
-			if(  walker_mod_count > 0 )
-				modifications_html += "<td style='color: green'>" + walker_modifications[mod_count].name + "</td>";
-			else
-				modifications_html += "<td>" + walker_modifications[mod_count].name + "</td>";
-			modifications_html += "<td>" + walker_mod_count + "/" + walker_modifications[mod_count].get_max(current_walker)  + "</td>";
-			modifications_html += "<td>" + mod_cost + "</td>";
-			modifications_html += "<td>" + simplify_cost(walker_modifications[mod_count].get_cost(current_walker)) + "</td>";
-
-			modifications_html += "</tr>";
-		}
-	}
-	modifications_html += "</tbody></table>";
-	$(".js-select-modifications").html(modifications_html);
-}
-
-function propogate_weapon_mods() {
-	available_links = current_walker.get_linked_weapons();
-	weapon_mods_html = "<fieldset><legend>Installed Weapons</legend>";
-	if(available_links.length > 0)
-		weapon_mods_html += "Available Links: " + (available_links.length - 1) + "<br />";
-
-	if(current_walker.selected_weapons.length > 0) {
-		weapon_mods_html += "<table><thead><tr>";
-		weapon_mods_html += "<th>Name</th>";
-		weapon_mods_html += "<th colspan='3'>&nbsp;</th>";
-		weapon_mods_html += "</tr></thead><tbody>";
-		for(weapon_count = 0; weapon_count < current_walker.selected_weapons.length; weapon_count++) {
-			weapon_mods_html += "<tr>";
-			weapon_mods_html += "<td>";
-			weapon_mods_html += current_walker.selected_weapons[weapon_count].name;
-			weapon_mods_html += "</td>";
-			weapon_mods_html += "<td>";
-			fixedcheck = "";
-		//	if(current_walker.selected_weapons[weapon_count].linked == 0) {
-				if(current_walker.selected_weapons[weapon_count].fixed)
-					fixedcheck = "checked='checked'";
-				weapon_mods_html += "<label style='display: inline;font-weight: normal;'><input type='checkbox' class='js-fix-weapon' ref='" + weapon_count + "' " + fixedcheck + "/> Fixed</label>";
-		//	}
-
-			if(available_links.length > 0) { // && current_walker.selected_weapons[weapon_count].fixed == 0) {
-				weapon_mods_html += "<select class='js-link-weapon' ref='" + weapon_count + "'>";
-				weapon_mods_html += "<option value='0'>Unlinked</option>";
-				for(link_count = 1; link_count < available_links.length; link_count++) {
-					linkedcheck = "";
-					if(current_walker.selected_weapons[weapon_count].linked == link_count)
-						linkedcheck = "selected='selected'";
-
-					if(typeof(available_links[link_count]) == "undefined" || available_links[link_count] == "undefined" || available_links[link_count] == "" || available_links[link_count] == current_walker.selected_weapons[weapon_count].name)
-						weapon_mods_html += "<option value='" + link_count + "' " + linkedcheck + ">Link #" + link_count + "</option>";
-				}
-				weapon_mods_html += "</select>";
-			} else {
-				weapon_mods_html += "&nbsp;";
-			}
-			weapon_mods_html += "</td>";
-			weapon_mods_html += "<td>";
-			weapon_mods_html += "<button type='button' class='js-remove-weapon btn btn-danger  btn-xs' ref='" + weapon_count + "'>Remove</button>";
-			weapon_mods_html += "</td>";
-			weapon_mods_html += "</td>";
-			weapon_mods_html += "</tr>";
-		}
-		weapon_mods_html += "</tbody></table>";
-	} else {
-		weapon_mods_html += "No installed weapons<br />";
-	}
-	weapon_mods_html += "</fieldset><fieldset><legend>Available Weapons</legend>";
-
-	currentWeaponClass = "";
-	weaponCount = 0;
-	for(mod_count = 0; mod_count < vehicle_weapons.length; mod_count++) {
-		if(currentWeaponClass != vehicle_weapons[mod_count].classification) {
-			if(weaponCount > 0) {
-				if(currentWeaponClass != vehicle_weapons[mod_count].classification) {
-					weapon_mods_html += "</tbody></table>";
-				}
-			}
-			weaponCount = 0;
-			weapon_mods_html += "<h5>" + vehicle_weapons[mod_count].classification + "</h5><table><thead><tr>";
-			weapon_mods_html += "<th>Name</th>";
-			weapon_mods_html += "<th>Mod Cost</th>";
-			weapon_mods_html += "<th>Cost</th>";
-			weapon_mods_html += "</tr></thead><tbody>";
-		}
-
-		mod_cost = vehicle_weapons[mod_count].mods;
-
-		is_available = true;
-		if( vehicle_weapons[mod_count].is_available )
-			is_available = vehicle_weapons[mod_count].is_available(current_walker);
-
-		if( current_walker.mods_available >= mod_cost && is_available ) {
-			weapon_mods_html += "<tr title='" + vehicle_weapons[mod_count].description + "'>";
-			if(  walker_mod_count > 0 )
-				weapon_mods_html += "<td style='color: green'>";
-			else
-				weapon_mods_html += "<td>";
-
-			if( current_walker.mods_available >= mod_cost )
-				weapon_mods_html += "<button style='height: 25px; display: inline-block;' ref='" + vehicle_weapons[mod_count].name  + "' class='js-add-weapon  btn btn-success btn-xs' type='button'>Install</button> ";
-			weapon_mods_html += vehicle_weapons[mod_count].name + "</td>";
-
-			weapon_mods_html += "<td>" + mod_cost + "</td>";
-			weapon_mods_html += "<td>" + simplify_cost(vehicle_weapons[mod_count].cost ) + "</td>";
-
-			weapon_mods_html += "</tr>";
-		}
-		weapon_mods_html += "</fieldset>";
-
-		currentWeaponClass = vehicle_weapons[mod_count].classification;
-		weaponCount++;
-	}
-
-	$(".js-select-weapons").html(weapon_mods_html);
-}
-
-function refresh_walker_page() {
-	$(".js-info-stats").html( current_walker.create_stats_block() );
-
-	$(".js-bb-code").val( current_walker.export_bbcode() );
-
-	$(".js-json-code").val( current_walker.export_json() );
-
-	//$(".js-set-walker-name").val(current_walker.item_name);
-	//$(".js-set-walker-description").val(current_walker.walker_description);
-
-	$('.js-set-walker-name').unbind('keyup');
-	$(".js-set-walker-name").keyup( function() {
-		current_walker.set_item_name( $(".js-set-walker-name").val() );
-		refresh_walker_page();
-	});
-
-	$('.js-set-walker-description').unbind('keyup');
-	$(".js-set-walker-description").keyup( function() {
-		current_walker.set_walker_description( $(".js-set-walker-description").val() );
-		refresh_walker_page();
-	});
-
-	propogate_size_select();
-	$('.js-select-size').unbind('change');
-	$(".js-select-size").change( function() {
-		current_walker.set_size( $(".js-select-size option:selected").val() );
-		refresh_walker_page();
-	});
-
-	if( current_walker.selected_size.walker_label ) {
-
-		propogate_add_mods();
-		$('.js-add-mod').unbind('click');
-		$(".js-add-mod").click( function() {
-			current_walker.add_mod( $(this).attr("ref") );
-			refresh_walker_page();
-		});
-
-		$('.js-remove-mod').unbind('click');
-		$(".js-remove-mod").click( function() {
-			current_walker.remove_mod( $(this).attr("ref") );
-			refresh_walker_page();
-		});
-
-		propogate_weapon_mods();
-		$('.js-add-weapon').unbind('click');
-		$(".js-add-weapon").click( function() {
-			current_walker.add_weapon( $(this).attr("ref") );
-			refresh_walker_page();
-		});
-
-		$('.js-remove-weapon').unbind('click');
-		$(".js-remove-weapon").click( function() {
-			current_walker.remove_weapon( $(this).attr("ref") );
-			refresh_walker_page();
-		});
-
-		$('.js-link-weapon').unbind('change');
-		$(".js-link-weapon").change( function() {
-			weaponIndex = $(this).attr("ref");
-			linkIndex =  $(this).val();
-			current_walker.link_weapon( weaponIndex, linkIndex );
-			refresh_walker_page();
-		});
-
-		$('.js-fix-weapon').unbind('click');
-		$(".js-fix-weapon").click( function() {
-			weaponIndex = $(this).attr("ref");
-			if($(this).is(":checked")) {
-				current_walker.fix_weapon( weaponIndex, 1 );
-			} else {
-				current_walker.fix_weapon( weaponIndex, 0 );
-			}
-			refresh_walker_page();
-		});
-
-		$(".js-select-modifications-container").fadeIn();
-	} else {
-		$(".js-select-modifications-container").fadeOut();
-	}
-}
-
-
-
-$(".js-import-data").click( function() {
-	if( $(".js-import-code").val() != "" ) {
-		current_walker.import_json( $(".js-import-code").val() );
-		$(".js-set-walker-name").val(current_walker.item_name);
-		$(".js-set-walker-description").val(current_walker.walker_description);
-		$(".js-import-code").val('');
-		createAlert( "Your walker has been imported.", "success" );
-	}
-});
-
-$(".js-save-item").click( function() {
-	if( current_walker.size > 0 && current_walker.item_name != "" && current_walker.item_name != "(nameless)") {
-		save_to_localstorage( current_walker.export_json() );
-		propogateLoadList();
-		createAlert( "Your walker has been saved.", "success" );
-	} else {
-		createAlert( "Please name your walker and select a size before saving", "danger"  );
-	}
-} );
-
-function propogateLoadList() {
-	currentWalkers = localstorage_parse_data();
-	html = "<ul class='list-unstyled'>";
-	for(lsCounter = 0; lsCounter < currentWalkers.length; lsCounter++) {
-		if(currentWalkers[lsCounter].type == "walker") {
-			html += "<li style='display:block;overflow:hidden; padding: 2px; margin: 2px; border-bottom: 1px solid #dedede;'>";
-			html += "<label style='display: inline; font-weight: normal'>";
-			html += "<input type='radio' name='selected_load' value='" + lsCounter + "' /> ";
-			html += currentWalkers[lsCounter].name + " (Size " + currentWalkers[lsCounter].size + ")"; //  - " + currentWalkers[lsCounter].saved;
-			html += "</label>";
-			html += "<button ref='" + lsCounter + "' class='js-delete-data btn btn-danger pull-right btn-xs' type='button'>Delete</button>";
-			html += "</li>";
-		}
-	}
-	html += "</ul>";
-
-	$(".js-load-list").html( html );
-
-	$(".js-delete-data").click( function() {
-		if( confirm("Are you sure you want to delete this item?") ) {
-			selectedItemIndex = $(this).attr("ref");
-			delete_item_from_localstorage(selectedItemIndex);
-
-			propogateLoadList();
-		}
-
-	} );
-
-
-}
-
-function loadSelectedItem() {
-	selectedItemIndex = $("input[name=selected_load]:checked").val();
-
-	if(selectedItemIndex != "") {
-		selectedItem = get_data_from_localstorage(selectedItemIndex);
-		current_walker.import_json( selectedItem );
-		$(".js-set-walker-name").val(current_walker.item_name);
-		$(".js-set-walker-description").val(current_walker.ship_description);
-		createAlert( "Your walker has been loaded.", "success" );
-	}
-}
-
-$(".js-load-data").click( function() {
-	loadSelectedItem();
-	propogateLoadList();
-} );
-
-
-
-$(".js-new-item").click( function() {
-	if( confirm("Are you sure you want to clear your current walker?")) {
-		current_starship = new sw_starship();
-		refresh_starship_page();
-		$(".js-set-walker-name").val("");
-		$(".js-set-walker-description").val("");
-		propogateLoadList();
-	}
-} );
-
-var current_walker;
-$(window).load(
-	function(){
-		current_walker = new sw_walker();
-		refresh_walker_page();
-		propogateLoadList();
 	}
 );

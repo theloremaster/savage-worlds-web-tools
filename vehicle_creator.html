@@ -104,10 +104,10 @@
 			<fieldset>
 				<legend>Details</legend>
 				<label>Vehicle Name<br />
-				<input type="text" value="" class="js-set-vehicle-name" /></label>
+				<input type="text" value="" class="js-set-name" /></label>
 
 				<label>Vehicle Description<br />
-				<textarea value="" class="js-set-vehicle-description"></textarea></label>
+				<textarea value="" class="js-set-description"></textarea></label>
 
 				<label>Size<br />
 				<select class="js-select-size">
@@ -144,7 +144,39 @@
 <script src="./js/jquery-1.10.2.min.js"></script>
 <script src="./js/bootstrap.min.js"></script>
 <script src="./js/swwt.min.js"></script>
-<script src="./js/creator.vehicle.min.js"></script>
+<script>
+
+
+sw_vehicle.prototype = new creator_base();
+function sw_vehicle() {
+	creator_base.apply( this, arguments );
+}
+
+
+$(".js-new-item").click( function() {
+	if( confirm("Are you sure you want to clear your current vehicle?")) {
+		current_selected_object.init("vehicle", "Vehicle", vehicle_sizes, vehicle_modifications);
+		refresh_creator_page();
+		propogateLoadList();
+	}
+} );
+
+var current_selected_object;
+$(window).load(
+	function(){
+		current_selected_object = new sw_vehicle();
+		current_selected_object.init("vehicle", "Vehicle", vehicle_sizes, vehicle_modifications);
+		if( typeof(localStorage["current_" + current_selected_object.object_type]) != "undefined" && localStorage["current_" + current_selected_object.object_type]) {
+			current_selected_object.import_json( localStorage["current_" + current_selected_object.object_type] );
+			$(".js-set-name").val(current_selected_object.item_name);
+			$(".js-set-description").val(current_selected_object.object_description);
+		}
+		refresh_creator_page();
+		propogateLoadList();
+	}
+);
+</script>
+
 
 <script>var smarty_comment_section = 'vehicle_creator';</script>
 <script>

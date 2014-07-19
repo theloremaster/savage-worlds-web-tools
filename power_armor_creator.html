@@ -103,14 +103,14 @@
 		<div class="col-sm-6">
 			<h3>Details</h3>
 			<label>Power Armor Name<br />
-			<input type="text" value="" class="js-set-power_armor-name" /></label>
+			<input type="text" value="" class="js-set-name" /></label>
 
 			<label>Power Armor Description<br />
-			<textarea value="" class="js-set-power_armor-description"></textarea></label>
+			<textarea value="" class="js-set-description"></textarea></label>
 
 			<label>Size<br />
 			<select class="js-select-size">
-				<option value="">- Select Power Armor Size -</option>
+				<option value="">- Select CHANGEME Size -</option>
 			</select></label>
 
 			<div class="js-select-modifications-container">
@@ -144,7 +144,37 @@
 <script src="./js/jquery-1.10.2.min.js"></script>
 <script src="./js/bootstrap.min.js"></script>
 <script src="./js/swwt.min.js"></script>
-<script src="./js/creator.power_armor.min.js"></script>
+<script>
+
+sw_power_armor.prototype = new creator_base();
+function sw_power_armor() {
+	creator_base.apply( this, arguments );
+}
+
+
+$(".js-new-item").click( function() {
+	if( confirm("Are you sure you want to clear your current Power Armor?")) {
+		current_selected_object.init("power_armor", "Power Armor", power_armor_sizes, power_armor_modifications);
+		refresh_creator_page();
+		propogateLoadList();
+	}
+} );
+
+var current_selected_object;
+$(window).load(
+	function(){
+		current_selected_object = new sw_power_armor();
+		current_selected_object.init("power_armor", "Power Armor", power_armor_sizes, power_armor_modifications);
+		if( typeof(localStorage["current_" + current_selected_object.object_type]) != "undefined" && localStorage["current_" + current_selected_object.object_type]) {
+			current_selected_object.import_json( localStorage["current_" + current_selected_object.object_type] );
+			$(".js-set-name").val(current_selected_object.item_name);
+			$(".js-set-description").val(current_selected_object.object_description);
+		}
+		refresh_creator_page();
+		propogateLoadList();
+	}
+);
+</script>
 
 <script>var smarty_comment_section = 'power_armor_creator';</script>
 <script>

@@ -21,12 +21,7 @@ module.exports = function(grunt) {
 					sourceMapName: 'js/sourcemap.map'
 				},
 				files: {
-					'js/swwt.min.js' : ['js/src/*.js', 'js/src/chargen/edges.js','js/src/chargen/hindrances.js','js/src/chargen/equipment.js','js/src/chargen/skills.js','js/src/chargen/races.js','js/src/chargen/races.js', 'js/src/chargen/engine.js', 'js/src/chargen/character.js', 'js/src/extras/*.js', 'js/src/creators/vehicle_weapons.js'],
-					'js/creator.walker.min.js' : [ 'js/src/creators/walker*.js'],
-					'js/creator.vehicle.min.js' : ['js/src/creators/vehicle_mods.js', 'js/src/creators/vehicles.js'],
-					'js/creator.power_armor.min.js' : [ 'js/src/creators/power_armor*.js'],
-					'js/creator.starship.min.js' : [ 'js/src/creators/starship*.js'],
-					'js/creator.robot.min.js' : [ 'js/src/creators/robot*.js'],
+					'js/swwt.min.js' : ['js/src/*.js', 'js/src/chargen/edges.js','js/src/chargen/hindrances.js','js/src/chargen/equipment.js','js/src/chargen/skills.js','js/src/chargen/races.js','js/src/chargen/races.js', 'js/src/chargen/engine.js', 'js/src/chargen/character.js', 'js/src/extras/*.js', 'js/src/creators/*.js'],
 				}
 			}
 		},

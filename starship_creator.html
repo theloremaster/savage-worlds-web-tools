@@ -104,10 +104,10 @@
 			<fieldset>
 				<legend>Details</legend>
 				<label>Ship Name<br />
-				<input type="text" value="" class="js-set-ship-name" /></label>
+				<input type="text" value="" class="js-set-name" /></label>
 
 				<label>Ship Description<br />
-				<textarea value="" class="js-set-ship-description"></textarea></label>
+				<textarea value="" class="js-set-description"></textarea></label>
 
 				<label>Size<br />
 				<select class="js-select-size">
@@ -143,28 +143,38 @@
 <script src="./js/jquery-1.10.2.min.js"></script>
 <script src="./js/bootstrap.min.js"></script>
 <script src="./js/swwt.min.js"></script>
-<script src="./js/creator.starship.min.js"></script>
+<script src="./js/swwt.min.js"></script>
 
-<script>var smarty_comment_section = 'starship_creator';</script>
 <script>
-	$(".js-bb-code").click( function() {
-		$(this).focus();
-		$(this).select();
-	});
-	$(".js-bb-code").mousedown( function() {
-		$(this).focus();
-		$(this).select();
-	});
 
-	$(".js-json-code").click( function() {
-		$(this).focus();
-		$(this).select();
-	});
+sw_starship.prototype = new creator_base();
+function sw_starship() {
+	creator_base.apply( this, arguments );
+}
 
-	$(".js-json-code").mousedown( function() {
-		$(this).focus();
-		$(this).select();
-	});
+
+$(".js-new-item").click( function() {
+	if( confirm("Are you sure you want to clear your current starship?")) {
+		current_selected_object.init("starship", "Starship", starship_sizes, starship_modifications);
+		refresh_creator_page();
+		propogateLoadList();
+	}
+} );
+
+var current_selected_object;
+$(window).load(
+	function(){
+		current_selected_object = new sw_starship();
+		current_selected_object.init("starship", "Starship", starship_sizes, starship_modifications);
+		if( typeof(localStorage["current_" + current_selected_object.object_type]) != "undefined" && localStorage["current_" + current_selected_object.object_type]) {
+			current_selected_object.import_json( localStorage["current_" + current_selected_object.object_type] );
+			$(".js-set-name").val(current_selected_object.item_name);
+			$(".js-set-description").val(current_selected_object.object_description);
+		}
+		refresh_creator_page();
+		propogateLoadList();
+	}
+);
 </script>
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
