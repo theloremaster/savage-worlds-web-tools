@@ -107,9 +107,6 @@ function calculateTime() {
 		+ "<p>That ship reaches a speed of " + ( maxSpeed ).toLocaleString() + " m/s or " + percentSpeedOfLight + "% the speed of light</p>"
 	);
 }
-propogateDistanceOptions();
-propogateSpeedOptions()
-calculateTime();
 
 function calculateCommunicationTime(distanceInAU) {
 	return Math.round( (distanceInAU * auDistance / speedOfLight) * 100 ) / 100 ; // in seconds

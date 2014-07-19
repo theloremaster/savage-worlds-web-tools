@@ -152,15 +152,6 @@ function sw_walker() {
 	creator_base.apply( this, arguments );
 }
 
-
-$(".js-new-item").click( function() {
-	if( confirm("Are you sure you want to clear your current walker?")) {
-		current_selected_object.init("walker", "Walker", walker_sizes, walker_modifications);
-		refresh_creator_page();
-		propogateLoadList();
-	}
-} );
-
 var current_selected_object;
 $(window).load(
 	function(){

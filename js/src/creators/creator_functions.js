@@ -314,8 +314,8 @@ $(".js-load-data").click( function() {
 
 
 $(".js-new-item").click( function() {
-	if( confirm("Are you sure you want to clear your current ship?")) {
-		current_selected_object = new sw_starship();
+	if( confirm("Are you sure you want to clear your current " + current_selected_object.object_label + "?")) {
+		current_selected_object.reset();
 		//();
 		$(".js-set-name").val("");
 		$(".js-set-description").val("");
