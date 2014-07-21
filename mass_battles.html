@@ -168,7 +168,18 @@
 <script src="./js/swwt.min.js"></script>
 
 <script>var smarty_comment_section = 'mass_battles';</script>
+<script>
+$(document).ready( function() {
+	mass_battles = new MassBattles();
+	$("#run-round").click( function() {
+		mass_battles.getRoundResults();
+	});
+	$("#reset-form").click( function() {
+		mass_battles.resetForm();
+	});
+});
 
+</script>
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),

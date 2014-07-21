@@ -177,12 +177,3 @@ function MassBattles() {
 	}
 }
 
-$(document).ready( function() {
-	mass_battles = new MassBattles();
-	$("#run-round").click( function() {
-		mass_battles.getRoundResults();
-	});
-	$("#reset-form").click( function() {
-		mass_battles.resetForm();
-	});
-});

@@ -153,14 +153,6 @@ function sw_vehicle() {
 }
 
 
-$(".js-new-item").click( function() {
-	if( confirm("Are you sure you want to clear your current vehicle?")) {
-		current_selected_object.init("vehicle", "Vehicle", vehicle_sizes, vehicle_modifications);
-		refresh_creator_page();
-		propogateLoadList();
-	}
-} );
-
 var current_selected_object;
 $(window).load(
 	function(){
