@@ -59,10 +59,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p135"
-	}
-));
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Bear, Large",
 		wildcard: 0,
@@ -103,10 +100,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p135"
-	}
-));
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Bull",
 		wildcard: 0,
@@ -146,10 +140,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p135"
-	}
-));
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Cat, Small",
 		wildcard: 0,
@@ -198,10 +189,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p135"
-	}
-));
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Dog/Wolf",
 		wildcard: 0,
@@ -245,10 +233,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p135"
-	}
-));
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Drake",
 		wildcard: 1,
@@ -304,10 +289,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p136"
-	}
-));
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Dragon",
 		wildcard: 1,
@@ -379,10 +361,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p136"
-	}
-));
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Earth Elemental",
 		wildcard: 0,
@@ -421,10 +400,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p136"
-	}
-));
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Fire Elemental",
 		wildcard: 0,
@@ -471,10 +447,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p136"
-	}
-));
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Water Elemental",
 		wildcard: 0,
@@ -529,10 +502,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p137"
-	}
-));
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Air Elemental",
 		wildcard: 0,
@@ -589,11 +559,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p137"
-	}
-));
-
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Giant Worm",
 		wildcard: 1,
@@ -650,11 +616,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p137"
-	}
-));
-
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Ghost",
 		wildcard: 0,
@@ -694,10 +656,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p137"
-	}
-));
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Goblin",
 		wildcard: 0,
@@ -739,10 +698,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p137-p138"
-	}
-));
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Horse, Riding",
 		tags: "animal,",
@@ -783,10 +739,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p138"
-	}
-));
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Horse, War",
 		tags: "animal,",
@@ -827,10 +780,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p138"
-	}
-));
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Lich",
 		tags: "undead,",
@@ -879,12 +829,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p138"
-	}
-));
-
-
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Lion",
 		wildcard: 0,
@@ -933,10 +878,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p138"
-	}
-));
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Mech (Sentinel)",
 		wildcard: 0,
@@ -982,12 +924,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p138"
-	}
-));
-
-
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Minotaur",
 		wildcard: 0,
@@ -1033,10 +970,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p139"
-	}
-));
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Mule",
 		tags: "animal,",
@@ -1081,10 +1015,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p139"
-	}
-));
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Ogre",
 		wildcard: 0,
@@ -1122,11 +1053,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p139"
-	}
-));
-
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Orc",
 		wildcard: 0,
@@ -1166,10 +1093,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p139"
-	}
-));
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Orc Chieftan",
 		wildcard: 1,
@@ -1213,11 +1137,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p139-p140"
-	}
-));
-
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Shark, Great White",
 		tags: "animal,",
@@ -1266,11 +1186,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p140"
-	}
-));
-
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Shark, Medium Maneater",
 		tags: "animal,",
@@ -1307,10 +1223,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p140"
-	}
-));
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Skeleton",
 		wildcard: 0,
@@ -1353,10 +1266,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p140"
-	}
-));
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Snake, Constrictor",
 		tags: "animal,",
@@ -1393,10 +1303,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p140"
-	}
-));
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Snake, Venomous",
 		tags: "animal,",
@@ -1445,10 +1352,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p140"
-	}
-));
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Spider, Giant",
 		wildcard: 0,
@@ -1497,10 +1401,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p140"
-	}
-));
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Swarm",
 		tags: "animal,",
@@ -1542,10 +1443,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p141"
-	}
-));
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Troll",
 		wildcard: 0,
@@ -1597,10 +1495,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p141"
-	}
-));
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Vampire, Ancient",
 		wildcard: 1,
@@ -1693,10 +1588,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p141"
-	}
-));
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Vampire, Young",
 		wildcard: 0,
@@ -1773,12 +1665,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p142"
-	}
-));
-
-
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Werewolf",
 		wildcard: 0,
@@ -1832,11 +1719,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p142"
-	}
-));
-
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Zombie",
 		wildcard: 0,

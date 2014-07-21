@@ -15,7 +15,6 @@ var currentBook = books_list[4];
 
 extraBooks = extraBooks.concat(currentBook);
 
-
 extraDatabase = extraDatabase.concat(Array(
 /*
 	{

@@ -60,10 +60,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: ""
-	}
-));
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Acolyte, Cultist",
 		alternate_names: "",
@@ -111,11 +108,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: ""
-	}
-));
-
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Damned Children",
 		alternate_names: "",
@@ -174,10 +167,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: ""
-	}
-));
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Dark Stalker",
 		alternate_names: "",
@@ -237,10 +227,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: ""
-	}
-));
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Grays",
 		alternate_names: "",
@@ -318,11 +305,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: ""
-	}
-));
-
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Men in Black",
 		alternate_names: "",
@@ -375,11 +358,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: ""
-	}
-));
-
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Nordic",
 		alternate_names: "",

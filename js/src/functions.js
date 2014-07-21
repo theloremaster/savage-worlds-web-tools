@@ -22,6 +22,8 @@ function debugConsole(message) {
 $(".ios_app_click").click( function(event) {
 	event.preventDefault();
 	url = $(this).attr("href");
+	if($(this).hasClass("btn-danger"))
+		alert("This function is still under development and will not work as expected");
     window.location.assign(url);
     return false;
 });

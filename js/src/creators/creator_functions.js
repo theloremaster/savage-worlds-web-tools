@@ -316,9 +316,9 @@ $(".js-load-data").click( function() {
 $(".js-new-item").click( function() {
 	if( confirm("Are you sure you want to clear your current " + current_selected_object.object_label + "?")) {
 		current_selected_object.reset();
-		//();
 		$(".js-set-name").val("");
 		$(".js-set-description").val("");
+		refresh_creator_page();
 		propogateLoadList();
 	}
 } );
