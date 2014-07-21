@@ -1,7 +1,7 @@
 CACHE MANIFEST
-# rev 2014071901
-# 2014-07-19:v1
-# Major rewrite to creators -- unified attempt
+# rev 2014072101
+# 2014-07-21:v1
+# Starting of iPad - portrait size adjustments
 
 CACHE:
 http://jdgwf.github.io/savage-worlds-web-tools/extras_view.html
@@ -22,12 +22,7 @@ http://jdgwf.github.io/savage-worlds-web-tools/js/jquery-1.10.2.min.js
 http://jdgwf.github.io/savage-worlds-web-tools/js/background.js
 http://jdgwf.github.io/savage-worlds-web-tools/js/bootstrap.min.js
 http://jdgwf.github.io/savage-worlds-web-tools/js/swwt.min.js
-
-http://jdgwf.github.io/savage-worlds-web-tools/js/creator.power_armor.min.js
-http://jdgwf.github.io/savage-worlds-web-tools/js/creator.starship.min.js
-http://jdgwf.github.io/savage-worlds-web-tools/js/creator.walker.min.js
-http://jdgwf.github.io/savage-worlds-web-tools/js/creator.robot.min.js
-http://jdgwf.github.io/savage-worlds-web-tools/js/creator.vehicle.min.js
+http://jdgwf.github.io/savage-worlds-web-tools/js/sourcemap.map
 
 http://jdgwf.github.io/savage-worlds-web-tools/css/style.css
 http://jdgwf.github.io/savage-worlds-web-tools/css/bootstrap.min.css
