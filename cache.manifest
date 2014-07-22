@@ -1,7 +1,7 @@
 CACHE MANIFEST
 # rev 2014072102
-# 2014-07-21:v2
-# Update to cache.manifest
+# 2014-07-21:v3
+# A few last minute bugfixes and cache-up
 
 CACHE:
 http://jdgwf.github.io/savage-worlds-web-tools/extras_view.html
