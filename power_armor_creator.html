@@ -152,13 +152,6 @@ function sw_power_armor() {
 }
 
 
-$(".js-new-item").click( function() {
-	if( confirm("Are you sure you want to clear your current Power Armor?")) {
-		current_selected_object.init("power_armor", "Power Armor", power_armor_sizes, power_armor_modifications);
-		refresh_creator_page();
-		propogate_load_list();
-	}
-} );
 
 var current_selected_object;
 $(window).load(
