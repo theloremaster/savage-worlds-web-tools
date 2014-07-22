@@ -188,15 +188,16 @@ function propogate_weapon_mods() {
 
 
 
-function propogateLoadList() {
-	currentLoadData = localstorage_parse_data();
+function propogate_load_list() {
+	console.log(current_selected_object.object_type);
+	current_load_data = localstorage_parse_data();
 	html = "<ul class='list-unstyled'>";
-	for(lsCounter = 0; lsCounter < currentLoadData.length; lsCounter++) {
-		if(currentLoadData[lsCounter].type == "power_armor") {
+	for(lsCounter = 0; lsCounter < current_load_data.length; lsCounter++) {
+		if(current_load_data[lsCounter].type == current_selected_object.object_type) {
 			html += "<li style='display:block;overflow:hidden; padding: 2px; margin: 2px; border-bottom: 1px solid #dedede;'>";
 			html += "<label style='display: inline; font-weight: normal'>";
 			html += "<input type='radio' name='selected_load' value='" + lsCounter + "' /> ";
-			html += currentLoadData[lsCounter].name + " (Size " + currentLoadData[lsCounter].size + ")"; //  - " + currentPowerArmors[lsCounter].saved;
+			html += current_load_data[lsCounter].name + " (Size " + current_load_data[lsCounter].size + ")"; //  - " + currentPowerArmors[lsCounter].saved;
 			html += "</label>";
 			html += "<button ref='" + lsCounter + "' class='js-delete-data btn btn-danger pull-right btn-xs' type='button'>Delete</button>";
 			html += "</li>";
@@ -211,7 +212,7 @@ function propogateLoadList() {
 			selectedItemIndex = $(this).attr("ref");
 			delete_item_from_localstorage(selectedItemIndex);
 
-			propogateLoadList();
+			propogate_load_list();
 		}
 
 	} );
@@ -234,7 +235,7 @@ $(".js-save-item").click( function() {
 
 		if(current_selected_object.item_name != "" && current_selected_object.item_name != "(nameless)") {
 			save_to_localstorage( current_selected_object.export_json() );
-			propogateLoadList();
+			propogate_load_list();
 			createAlert( "Your " + current_selected_object.object_label+ " has been saved.", "success" );
 		} else {
 			createAlert( "Please name your " + current_selected_object.object_label+ " before saving", "danger"  );
@@ -245,7 +246,7 @@ $(".js-save-item").click( function() {
 } );
 
 
-function loadSelectedItem() {
+function load_selected_item() {
 	selectedItemIndex = $("input[name=selected_load]:checked").val();
 
 	if(selectedItemIndex != "") {
@@ -259,8 +260,8 @@ function loadSelectedItem() {
 }
 
 $(".js-load-data").click( function() {
-	loadSelectedItem();
-	propogateLoadList();
+	load_selected_item();
+	propogate_load_list();
 } );
 
 
@@ -268,7 +269,7 @@ $(".js-load-data").click( function() {
 $(".js-save-item").click( function() {
 	if( current_selected_object && current_selected_object.size > 0 && current_selected_object.item_name != "" && current_selected_object.item_name != "(nameless)") {
 		save_to_localstorage( current_selected_object.export_json() );
-		propogateLoadList();
+		propogate_load_list();
 		createAlert( "Your ship has been saved.", "success" );
 	} else {
 		createAlert( "Please name your ship and select a size before saving", "danger"  );
@@ -276,50 +277,18 @@ $(".js-save-item").click( function() {
 } );
 
 
-function propogateLoadList() {
-	currentVehicles = localstorage_parse_data();
-	html = "<ul class='list-unstyled'>";
-	for(lsCounter = 0; lsCounter < currentVehicles.length; lsCounter++) {
-		if(currentVehicles[lsCounter].type == "starship") {
-			html += "<li style='display:block;overflow:hidden; padding: 2px; margin: 2px; border-bottom: 1px solid #dedede;'>";
-			html += "<label style='display: inline; font-weight: normal'>";
-			html += "<input type='radio' name='selected_load' value='" + lsCounter + "' /> ";
-			html += currentVehicles[lsCounter].name + " (Size " + currentVehicles[lsCounter].size + ")"; //  - " + currentVehicles[lsCounter].saved;
-			html += "</label>";
-			html += "<button ref='" + lsCounter + "' class='js-delete-data btn btn-danger pull-right btn-xs' type='button'>Delete</button>";
-			html += "</li>";
-		}
-	}
-	html += "</ul>";
-
-	$(".js-load-list").html( html );
-
-	$(".js-delete-data").click( function() {
-		if( confirm("Are you sure you want to delete this item?") ) {
-			selectedItemIndex = $(this).attr("ref");
-			delete_item_from_localstorage(selectedItemIndex);
-
-			propogateLoadList();
-		}
-
-	} );
-
-
-}
-
-
 $(".js-load-data").click( function() {
-	loadSelectedItem();
+	load_selected_item();
 } );
 
 
 $(".js-new-item").click( function() {
 	if( confirm("Are you sure you want to clear your current " + current_selected_object.object_label + "?")) {
 		current_selected_object.reset();
-		//();
 		$(".js-set-name").val("");
 		$(".js-set-description").val("");
-		propogateLoadList();
+		refresh_creator_page();
+		propogate_load_list();
 	}
 } );
 

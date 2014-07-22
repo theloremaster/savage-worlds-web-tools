@@ -230,7 +230,6 @@ creator_base.prototype = {
 
 		if(typeof importedObj =='object') {
 			this.reset();
-			console.log(importedObj);
 			this.set_size(importedObj.size);
 			this.set_name(importedObj.item_name);
 			if( typeof(importedObj.object_description) != "undefined")

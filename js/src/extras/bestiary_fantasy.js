@@ -66,10 +66,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p100"
-	}
-));
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Assassin",
 		wildcard: 0,
@@ -110,10 +107,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p100-p101"
-	}
-));
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Assassin, Master",
 		wildcard: 0,
@@ -154,11 +148,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p101"
-	}
-));
-
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Bandit",
 		wildcard: 0,
@@ -195,10 +185,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p101"
-	}
-));
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Bandit Chief",
 		wildcard: 1,
@@ -237,10 +224,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p102"
-	}
-));
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Basilisk",
 		alternate_names: "cockatrice",
@@ -290,10 +274,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p102"
-	}
-));
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Bargest",
 		alternate_names: "",
@@ -347,11 +328,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p102-103"
-	}
-));
-
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Bee, Giant",
 		alternate_names: "",
@@ -400,11 +377,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p103"
-	}
-));
-
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Bird of Prey",
 		tags: "animal,",
@@ -456,10 +429,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p103"
-	}
-));
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Boar",
 		tags: "animal,",
@@ -504,10 +474,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p103"
-	}
-));
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Lava Border Elemental",
 		tags: "",
@@ -555,10 +522,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p105"
-	}
-));
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Mud Border Elemental",
 		tags: "",
@@ -610,10 +574,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p105"
-	}
-));
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Sand Border Elemental",
 		tags: "",
@@ -670,10 +631,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p105"
-	}
-));
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Steam Border Elemental",
 		tags: "",
@@ -734,10 +692,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p105"
-	}
-));
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Caveman Warrior",
 		tags: "",
@@ -775,10 +730,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p106"
-	}
-));
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Caveman Chieftan",
 		tags: "",
@@ -817,10 +769,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p106"
-	}
-));
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Caveman Shaman",
 		tags: "",
@@ -864,10 +813,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p106-p107"
-	}
-));
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Centaur",
 		tags: "",
@@ -914,11 +860,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p107"
-	}
-));
-
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Centipede, Giant",
 		tags: "",
@@ -971,12 +913,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p107"
-	}
-));
-
-
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Chimera",
 		tags: "",
@@ -1028,11 +965,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p107"
-	}
-));
-
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Citizen",
 		tags: "farmer,crafter,blacksmith,normal,dude,guy,waitress,bartender,average,joe,",
@@ -1068,10 +1001,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p108"
-	}
-));
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Crab, Giant",
 		tags: "",
@@ -1117,11 +1047,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p108"
-	}
-));
-
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Crocotta",
 		tags: "",
@@ -1165,11 +1091,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p108"
-	}
-));
-
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Cyclops",
 		tags: "giant,giants,",
@@ -1215,12 +1137,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p108"
-	}
-));
-
-
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Black Knight",
 		tags: "demon,devil,",
@@ -1289,11 +1206,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p109"
-	}
-));
-
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Changeling",
 		tags: "demon,devil,",
@@ -1346,11 +1259,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p109"
-	}
-));
-
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Collector",
 		tags: "demon,devil,",
@@ -1426,10 +1335,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p110"
-	}
-));
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Demonic Soldier",
 		tags: "demon,devil,",
@@ -1483,10 +1389,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p110-111"
-	}
-));
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Imp",
 		tags: "demon,devil,",
@@ -1550,11 +1453,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p111"
-	}
-));
-
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Lasher",
 		tags: "demon,devil,",
@@ -1630,11 +1529,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p111"
-	}
-));
-
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Succubus/Incubus",
 		tags: "demon,devil,",
@@ -1694,11 +1589,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p111-p112"
-	}
-));
-
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Dire Wolf",
 		wildcard: 0,
@@ -1742,10 +1633,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p112"
-	}
-));
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Dissolver",
 		wildcard: 0,
@@ -1791,10 +1679,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p112"
-	}
-));
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Dragon",
 		wildcard: 1,
@@ -1867,11 +1752,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p112-p113"
-	}
-));
-
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Dragon Man Soldier",
 		tags: "dragon,dragon men,",
@@ -1926,10 +1807,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p114"
-	}
-));
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Dragon Man Sorcerer",
 		tags: "dragon,dragon men,",
@@ -1989,10 +1867,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p114"
-	}
-));
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Drake",
 		wildcard: 1,
@@ -2048,10 +1923,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p114"
-	}
-));
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Dryad",
 		wildcard: 0,
@@ -2102,10 +1974,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p115"
-	}
-));
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Dwarf",
 		wildcard: 0,
@@ -2145,10 +2014,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p115"
-	}
-));
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Earth Elemental",
 		wildcard: 0,
@@ -2191,10 +2057,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p116"
-	}
-));
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Fire Elemental",
 		wildcard: 0,
@@ -2245,10 +2108,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p116"
-	}
-));
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Water Elemental",
 		wildcard: 0,
@@ -2307,10 +2167,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p116-117"
-	}
-));
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Air Elemental",
 		wildcard: 0,
@@ -2371,11 +2228,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p115-p116"
-	}
-));
-
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Elephant, War",
 		wildcard: 0,
@@ -2438,10 +2291,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p117"
-	}
-));
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Elf",
 		wildcard: 0,
@@ -2483,10 +2333,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p117"
-	}
-));
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Fire Salamander",
 		wildcard: 0,
@@ -2530,11 +2377,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p117-p118"
-	}
-));
-
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Frost Wolf",
 		wildcard: 0,
@@ -2591,10 +2434,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p118"
-	}
-));
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Fury",
 		wildcard: 0,
@@ -2649,10 +2489,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p118"
-	}
-));
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Natural Gargoyle",
 		wildcard: 0,
@@ -2702,10 +2539,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p118"
-	}
-));
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Stone Gargoyle",
 		wildcard: 0,
@@ -2767,11 +2601,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p118-p119"
-	}
-));
-
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Ghost Blade",
 		wildcard: 1,
@@ -2820,10 +2650,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p119"
-	}
-));
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Ghoul",
 		alternate_names: "undead,",
@@ -2879,12 +2706,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p119-p120"
-	}
-));
-
-
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Common Giant",
 		wildcard: 0,
@@ -2935,12 +2757,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p120"
-	}
-));
-
-
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Fire Giant",
 		wildcard: 0,
@@ -3000,10 +2817,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p120"
-	}
-));
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Frost Giant",
 		wildcard: 0,
@@ -3063,10 +2877,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p121"
-	}
-));
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Sea Giant",
 		wildcard: 0,
@@ -3117,11 +2928,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p121"
-	}
-));
-
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Glide Monkeys",
 		wildcard: 0,
@@ -3172,12 +2979,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p121"
-	}
-));
-
-
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Goblin",
 		wildcard: 0,
@@ -3223,11 +3025,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p121-p122"
-	}
-));
-
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Goblin Shaman",
 		wildcard: 0,
@@ -3278,11 +3076,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p122"
-	}
-));
-
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Golden Ram",
 		wildcard: 0,
@@ -3330,11 +3124,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p122"
-	}
-));
-
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Corpse Golem",
 		wildcard: 0,
@@ -3397,12 +3187,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p123"
-	}
-));
-
-
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Glass Golem",
 		wildcard: 0,
@@ -3473,10 +3258,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p123"
-	}
-));
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Lava Golem",
 		wildcard: 0,
@@ -3540,11 +3322,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p123-p124"
-	}
-));
-
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Metal Golem",
 		wildcard: 0,
@@ -3602,10 +3380,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p124"
-	}
-));
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Stone Golem",
 		wildcard: 0,
@@ -3663,10 +3438,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p124"
-	}
-));
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Straw Golem",
 		wildcard: 0,
@@ -3717,10 +3489,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p124"
-	}
-));
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Grave Guardian",
 		wildcard: 0,
@@ -3785,10 +3554,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p124-p125"
-	}
-));
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Griffin",
 		wildcard: 0,
@@ -3850,10 +3616,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p125"
-	}
-));
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Hag",
 		wildcard: 0,
@@ -3902,10 +3665,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p125-p126"
-	}
-));
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Half-Folk",
 		tags: "halfling,halflings,hobbit,hobbits,",
@@ -3944,10 +3704,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p126"
-	}
-));
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Harpy",
 		tags: "",
@@ -3996,10 +3753,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p126"
-	}
-));
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Hellhound",
 		tags: "",
@@ -4059,10 +3813,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p126-p127"
-	}
-));
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Hippogriff",
 		tags: "",
@@ -4114,10 +3865,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p127"
-	}
-));
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Hobgoblin",
 		tags: "",
@@ -4162,10 +3910,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p127"
-	}
-));
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Horse, Elven",
 		tags: "",
@@ -4211,10 +3956,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p127"
-	}
-));
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Hydra",
 		tags: "",
@@ -4272,10 +4014,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p128"
-	}
-));
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Jabber Birds",
 		tags: "",
@@ -4319,10 +4058,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p128-p129"
-	}
-));
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Jinni",
 		tags: "",
@@ -4388,10 +4124,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p129"
-	}
-));
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Khazok",
 		tags: "",
@@ -4435,10 +4168,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p129"
-	}
-));
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Knight",
 		tags: "",
@@ -4476,10 +4206,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p130"
-	}
-));
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Veteran Knight",
 		tags: "",
@@ -4518,10 +4245,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p130"
-	}
-));
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Holy/Unholy Knight",
 		tags: "",
@@ -4561,10 +4285,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p130"
-	}
-));
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Knowledge Eater",
 		tags: "",
@@ -4616,10 +4337,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p130-p131"
-	}
-));
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Liche",
 		tags: "undead,zombie,",
@@ -4670,10 +4388,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p131"
-	}
-));
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Lizard Men",
 		tags: "lizard man,",
@@ -4717,10 +4432,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p131"
-	}
-));
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Mage",
 		tags: "magic user,wizard,seer,sorcerer,warlock,conjurer,illusionist,caster,",
@@ -4764,10 +4476,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p132"
-	}
-));
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Mage",
 		tags: "magic user,wizard,seer,sorcerer,warlock,conjurer,illusionist,caster,",
@@ -4813,10 +4522,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p132"
-	}
-));
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Archmage",
 		tags: "magic user,wizard,seer,sorcerer,warlock,conjurer,illusionist,caster,mage,",
@@ -4859,10 +4565,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p132"
-	}
-));
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Mage Bane",
 		tags: "",
@@ -4917,10 +4620,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p133"
-	}
-));
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Frost Mammoth",
 		tags: "",
@@ -4980,10 +4680,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p133"
-	}
-));
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Woolly Mammoth",
 		tags: "",
@@ -5038,10 +4735,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p133"
-	}
-));
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Manticore",
 		tags: "",
@@ -5097,11 +4791,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p134"
-	}
-));
-
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Medusa",
 		tags: "",
@@ -5148,10 +4838,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p134"
-	}
-));
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Common Mercenary",
 		tags: "",
@@ -5189,10 +4876,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p134"
-	}
-));
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Common Mercenary",
 		tags: "",
@@ -5232,10 +4916,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p135"
-	}
-));
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Mercenary Captain",
 		tags: "",
@@ -5277,10 +4958,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p135"
-	}
-));
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Mermaid",
 		tags: "",
@@ -5329,10 +5007,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p135"
-	}
-));
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Methusaleh Tree",
 		tags: "",
@@ -5389,10 +5064,7 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p136"
-	}
-));
-
-extraDatabase = extraDatabase.concat(Array(
+	},
 	{
 		name: "Moss Man",
 		tags: "",
@@ -5417,7 +5089,7 @@ extraDatabase = extraDatabase.concat(Array(
 		pace: "5",
 		parry: "5",
 		toughness: "6",
-		treasure: "Worthwhile per 5 mermaids",
+		treasure: "None",
 		armor: "",
 
 		abilities: Array(
@@ -5437,5 +5109,1375 @@ extraDatabase = extraDatabase.concat(Array(
 		book: currentBook,
 
 		page: "p136"
+	},
+	{
+		name: "Guardian Mummies",
+		tags: "guardian mummy,mummy,undead",
+		wildcard: 0,
+		image: "",
+		blurb: Array(
+			"Mummies are undead whose bodies have been dried and preserved. The spirit is bound to the corpse through powerful necromantic rituals known only to a select few priests. In your setting, you may allow a more powerful version of the zombie power to create these horrors.",
+			"The most common type of mummy, these creatures were servants and soldiers placed in tombs to guard them for all eternity."
+		),
+		attributes: {
+			agility: "d4",
+			smarts: "d6",
+			spirit: "d10",
+			strength: "d12+2",
+			vigor: "d12"
+		},
+		skills: {
+			'Fighting' : "d8",
+			'Intimidation' : "d8"
+		},
+		charisma: "",
+		pace: "4",
+		parry: "6",
+		toughness: "10",
+		treasure: "Meager",
+		armor: "",
+
+		abilities: Array(
+			{
+				name: "Arcane Resistance",
+				description: "+2 Armor versus magic, and +2 to rolls made to resist magical effects."
+			},
+			{
+				name: "Fear",
+				description: "Anyone seeing a guardian mummy must make a Fear check."
+			},
+			{
+				name: "Fist",
+				description: "Str+d6"
+			},
+			{
+				name: "Mummy Rot",
+				description: "Anyone touched by a mummy, whether he is damaged or not, must make a Vigor roll. Failure means the character has “mummy rot” and suffers an immediate wound."
+			},
+			{
+				name: "Shuffling Gait",
+				description: "Guardian mummies roll a d4 running die."
+			},
+			{
+				name: "Undead",
+				description: "+2 Toughness; +2 to recover from being Shaken; Immune to poison and disease; No additional damage from called"
+			},
+			{
+				name: "Weakness (Fire)",
+				description: "Mummies take +4 damage from fire."
+			}
+		),
+		book: currentBook,
+
+		page: "p136"
+	},
+	{
+		name: "Mummy Lord",
+		tags: "mummies,mummy,undead",
+		wildcard: 0,
+		image: "",
+		blurb: Array(
+			"Mummies are undead whose bodies have been dried and preserved. The spirit is bound to the corpse through powerful necromantic rituals known only to a select few priests. In your setting, you may allow a more powerful version of the zombie power to create these horrors.",
+			"Mummy lords were priests and mages preserved for eternity and granted an unearthly life through arcane rituals."
+		),
+		attributes: {
+			agility: "d4",
+			smarts: "d10",
+			spirit: "d12",
+			strength: "d12+4",
+			vigor: "d12"
+		},
+		skills: {
+			'Fighting' : "d10",
+			'Intimidation' : "d10",
+			'Notice' : "d8",
+			'Spellcasting' : "d10"
+		},
+		charisma: "",
+		pace: "4",
+		parry: "7",
+		toughness: "13",
+		treasure: "Rich",
+		armor: "3",
+
+		abilities: Array(
+			{
+				name: "Arcane Background (Magic)",
+				description: "A mummy typically has 30 Power Points and knows barrier (wall of darkness), bolt (swarm of tiny skulls), deflection (shield of swirling skulls), fear (unearthly cry), obscurement (area of darkness), and zombie (ritual preparation)."
+			},
+			{
+				name: "Fearless",
+				description: "Mummy lords are immune to Fear and Intimidation."
+			},
+			{
+				name: "Fist",
+				description: "Str+d6"
+			},
+			{
+				name: "Improved Arcane Resistance",
+				description: "+4 Armor versus magic, and +4 to rolls made to resist magic effects."
+			},
+			{
+				name: "Mummy Rot",
+				description: "Anyone touched by a mummy, whether he is damaged or not, must make a Vigor roll. Failure means the character has “mummy rot” and suffers an immediate wound."
+			},
+			{
+				name: "Shuffling Gait",
+				description: "Guardian mummies roll a d4 running die."
+			},
+			{
+				name: "Undead",
+				description: "+2 Toughness; +2 to recover from being Shaken; Immune to poison and disease; No additional damage from called"
+			},
+			{
+				name: "Weakness (Fire)",
+				description: "Mummies take +4 damage from fire."
+			}
+		),
+		book: currentBook,
+
+		page: "p137"
+	},
+	{
+		name: "Guardian Naga",
+		tags: "",
+		wildcard: 0,
+		image: "",
+		blurb: Array(
+			"Naga are giant snakes with the head of women. In Buddhist mythology, the naga tried to follow Buddha’s teaching and become a monk, transforming into human form to nfiltrate the monks. Buddha discovered the ploy and told the naga it was a beast, not a human, and therefore could not be ordained. Still loyal to the Buddhist faith, the naga became a temple guardian. In a fantasy campaign, nagas serve as guardians of temples to the gods of good."
+		),
+		attributes: {
+			agility: "d8",
+			smarts: "d10",
+			spirit: "d10",
+			strength: "d12",
+			vigor: "d10"
+		},
+		skills: {
+			'Fighting' : "d8",
+			'Intimidation' : "d8",
+			'Notice' : "d10",
+			'Persuasion' : "d10",
+			'Stealth' : "d4",
+			'Taunt' : "d8"
+		},
+		charisma: "",
+		pace: "7",
+		parry: "6",
+		toughness: "10",
+		treasure: "Worthwhile",
+		armor: "0",
+
+		abilities: Array(
+			{
+				name: "Bite",
+				description: "Str+d4"
+			},
+			{
+				name: "Constrict",
+				description: "A naga may choose to constrict a foe in her coils by making a Fighting attack. The round it entangles and each round thereafter it causes Str+d8 damage. The prey may attempt to escape by getting a raise on an opposed Strength roll. Given its large size, a naga may constrict one foe and bite another, suffering the standard multi- action penalty."
+			},
+			{
+				name: "Hypnotic Gaze",
+				description: "The naga can use the puppet power using her Smarts instead of an arcane skill. She can use and maintain the power indefinitely, but may only affect one target at a time."
+			},
+			{
+				name: "Quick",
+				description: "A naga is frighteningly quick for its size, and redraws cards of 5 or less."
+			},
+			{
+				name: "Shape Change",
+				description: "As an action, a naga can change into female human form with a Smarts roll at –2. Changing back into naga form requires a Smarts roll."
+			},
+			{
+				name: "Size+3",
+				description: "A naga is 15’ long and about a foot in diameter."
+			},
+			{
+				name: "Strong Willed",
+				description: "A naga cannot be swayed by threats or taunts. She receives a +2 bonus to defend against Tests of Will."
+			}
+		),
+		book: currentBook,
+
+		page: "p137"
+	},
+	{
+		name: "Corrupt Naga",
+		tags: "",
+		wildcard: 0,
+		image: "",
+		blurb: Array(
+			"Naga are giant snakes with the head of women. In Buddhist mythology, the naga tried to follow Buddha’s teaching and become a monk, transforming into human form to nfiltrate the monks. Buddha discovered the ploy and told the naga it was a beast, not a human, and therefore could not be ordained. Still loyal to the Buddhist faith, the naga became a temple guardian. In a fantasy campaign, nagas serve as guardians of temples to the gods of good.",
+			"In a fantasy setting, there is no reason why a naga cannot follow the gods of evil. Unlike guardian naga, who are forbidden from joining the priesthood and learning magic, corrupt naga are powerful spellcasters. Some even go so far as to form their own cults, with the naga as living gods."
+		),
+		attributes: {
+			agility: "d8",
+			smarts: "d10",
+			spirit: "d10",
+			strength: "d12",
+			vigor: "d10"
+		},
+		skills: {
+			'Fighting' : "d8",
+			'Intimidation' : "d12",
+			'Notice' : "d10",
+			'Stealth' : "d4",
+			'Taunt' : "d8"
+		},
+		charisma: "",
+		pace: "7",
+		parry: "6",
+		toughness: "10",
+		treasure: "Worthwhile",
+		armor: "0",
+
+		abilities: Array(
+			{
+				name: "Bite",
+				description: "Str+d4"
+			},
+			{
+				name: "Constrict",
+				description: "A naga may choose to constrict a foe in her coils by making a Fighting attack. The round it entangles and each round thereafter it causes Str+d8 damage. The prey may attempt to escape by getting a raise on an opposed Strength roll. Given its large size, a naga may constrict one foe and bite another, suffering the standard multi- action penalty."
+			},
+			{
+				name: "Hypnotic Gaze",
+				description: "The naga can use the puppet power using her Smarts instead of an arcane skill. She can use and maintain the power indefinitely, but may only affect one target at a time."
+			},
+			{
+				name: "Magic",
+				description: "Corrupt nagas practice arcane magic. They have 30 Power Points and know the following powers: <em>armor, bolt, boost/lower trait, burrow, deflection, detect/ conceal arcana, dispel, fear, invisibility, obscure, quickness, and speak language</em>. They retain this ability in human form."
+			},
+			{
+				name: "Quick",
+				description: "A naga is frighteningly quick for its size, and redraws cards of 5 or less."
+			},
+			{
+				name: "Shape Change",
+				description: "As an action, a naga can change into female human form with a Smarts roll at –2. Changing back into naga form requires a Smarts roll."
+			},
+			{
+				name: "Size+3",
+				description: "A naga is 15’ long and about a foot in diameter."
+			},
+			{
+				name: "Strong Willed",
+				description: "A naga cannot be swayed by threats or taunts. She receives a +2 bonus to defend against Tests of Will."
+			}
+		),
+		book: currentBook,
+
+		page: "p138"
+	},
+	{
+		name: "Naga - Human Form",
+		tags: "",
+		wildcard: 0,
+		image: "",
+		blurb: Array(
+			"Naga are giant snakes with the head of women. In Buddhist mythology, the naga tried to follow Buddha’s teaching and become a monk, transforming into human form to nfiltrate the monks. Buddha discovered the ploy and told the naga it was a beast, not a human, and therefore could not be ordained. Still loyal to the Buddhist faith, the naga became a temple guardian. In a fantasy campaign, nagas serve as guardians of temples to the gods of good."
+		),
+		attributes: {
+			agility: "d8",
+			smarts: "d10",
+			spirit: "d10",
+			strength: "d8",
+			vigor: "d8"
+		},
+		skills: {
+			'Fighting' : "d8",
+			'Intimidation' : "d8",
+			'Notice' : "d6",
+			'Persuasion' : "d10",
+			'Stealth' : "d6",
+			'Taunt' : "d8"
+		},
+		charisma: "+4",
+		pace: "7",
+		parry: "6",
+		toughness: "10",
+		treasure: "",
+		armor: "0",
+
+		abilities: Array(
+			{
+				name: "Hypnotic Gaze",
+				description: "The naga can use the puppet power using her Smarts instead of an arcane skill. She can use and maintain the power indefinitely, but may only affect one target at a time."
+			},
+			{
+				name: "Quick",
+				description: "A naga is frighteningly quick for its size, and redraws cards of 5 or less."
+			},
+			{
+				name: "Strong Willed",
+				description: "A naga cannot be swayed by threats or taunts. She receives a +2 bonus to defend against Tests of Will."
+			},
+			{
+				name: "Very Attractive",
+				description: "The human form of the naga is that of a beautiful, dusky-skinned woman."
+			}
+		),
+		book: currentBook,
+
+		page: "p138"
+	},
+	{
+		name: "Naiad",
+		tags: "",
+		wildcard: 0,
+		image: "",
+		blurb: Array(
+			"Naiads are fresh water spirits in the way dryads are tree spirits. Nereids are the salt water equivalent to naiads and use the same stats."
+		),
+		attributes: {
+			agility: "d8",
+			smarts: "d10",
+			spirit: "d10",
+			strength: "d6",
+			vigor: "d6"
+		},
+		skills: {
+			'Fighting' : "d4",
+			'Notice' : "d10",
+			'Persuasion' : "d8",
+			'Spellcasting' : "d10",
+			'Stealth' : "d10",
+			'Swimming' : "d10"
+		},
+		charisma: "+2",
+		pace: "6",
+		parry: "4",
+		toughness: "5",
+		treasure: "None",
+		armor: "0",
+
+		abilities: Array(
+			{
+				name: "Aquatic",
+				description: "Naiads have a Pace of 10 underwater."
+			},
+			{
+				name: "Attractive",
+				description: "Naiads resemble beautiful human females."
+			},
+			{
+				name: "Magic",
+				description: "Naiads have 30 Power Points and know the following powers: barrier (wall of water), beast friend (aquatic only), entangle (bound by water ), healing, invisibility (assumes a watery, translucent form), shape change (aquatic only), and stun."
+			},
+			{
+				name: "Pool Bond",
+				description: "Naiads share their soul with a particular pool or similar small body of water. They must remain within 36” of the water or their magic does not work. If the pool is polluted, the naiad must make a Vigor roll each day or suffer a Fatigue level until the taint is cleared."
+			}
+		),
+		book: currentBook,
+
+		page: "p138"
+	},
+	{
+		name: "Nightmare",
+		tags: "",
+		wildcard: 0,
+		image: "",
+		blurb: Array(
+			"Nightmares are demonic steeds. They are black as night, with fiery hooves and eyes. They only accept evil riders, throwing off and stomping those of good heart."
+		),
+		attributes: {
+			agility: "d6",
+			smarts: "d6 (A)",
+			spirit: "d6",
+			strength: "d12+4",
+			vigor: "d10"
+		},
+		skills: {
+			'Fighting' : "d8",
+			'Notice' : "d8"
+		},
+		charisma: "",
+		pace: "10",
+		parry: "6",
+		toughness: "10 or 13 (3)",
+		treasure: "None",
+		armor: "",
+		gear: "Some necromancers give their nightmares barding (+3)",
+
+		abilities: Array(
+			{
+				name: "Brave",
+				description: "Nightmares are not prone to fright and gain +2 to Fear checks."
+			},
+			{
+				name: "Fleet Footed",
+				description: "Nightmares roll a d8 for their running die. Nightmares run just above the surface of the ground and do not suffer movement penalties for Difficult Terrain."
+			},
+			{
+				name: "Kick",
+				description: "Str+d6"
+			},
+			{
+				name: "Size+3",
+				description: "Nightmares weigh between 800 and 1000 pounds."
+			}
+		),
+		book: currentBook,
+
+		page: "p139"
+	},
+	{
+		name: "Courtier",
+		tags: "noble",
+		wildcard: 0,
+		image: "",
+		blurb: Array(
+			"This entry covers both true nobles and their courtier lackeys, such as seneschals and chancellors. The generic noble is suitable for every noble Rank from baron to emperor.",
+			"Courtiers are more than just servants— they are advisors and often hold positions of importance within the court. Unless the characters know a noble personally, most dealings are conducted through a trusted courtier, typically a seneschal."
+		),
+		attributes: {
+			agility: "d6",
+			smarts: "d6",
+			spirit: "d6",
+			strength: "d6",
+			vigor: "d6"
+		},
+		skills: {
+			'Fighting' : "d4",
+			'Notice' : "d8",
+			'Persuasion' : "d8",
+			'Riding' : "d6",
+			'Streetwise' : "d8"
+		},
+		charisma: "+2",
+		pace: "6",
+		parry: "5",
+		toughness: "5",
+		treasure: "Meager",
+		armor: "",
+		gear: "",
+		edges: "Charismatic",
+
+		abilities: Array(
+
+		),
+		book: currentBook,
+
+		page: "p139"
+	},
+	{
+		name: "Court Jester",
+		tags: "noble",
+		wildcard: 0,
+		image: "",
+		blurb: Array(
+			"This entry covers both true nobles and their courtier lackeys, such as seneschals and chancellors. The generic noble is suitable for every noble Rank from baron to emperor.",
+			"Despite often being dwarves or hunchbacks (or both), jesters are more than just comical entertainment for the nobility. They have their lord’s ear, are privy to his most secret affairs, can get away with insulting powerful guests, and conceal great wisdom in their seemingly nonsensical riddles and japes."
+		),
+		attributes: {
+			agility: "d10",
+			smarts: "d8",
+			spirit: "d8",
+			strength: "d6",
+			vigor: "d6"
+		},
+		skills: {
+			'Climbing' : "d6",
+			'Fighting' : "d4",
+			'Notice' : "d8",
+			'Persuasion' : "d6",
+			'Streetwise' : "d8",
+			'Taunt': "d12"
+		},
+		charisma: "",
+		pace: "6",
+		parry: "4",
+		toughness: "5",
+		treasure: "Meager",
+		armor: "",
+		gear: "Stick (Str+d4)",
+		edges: "Acrobat, Ambidextrous, Strong Willed",
+		hindrances: "Various, but often some sort of physical affliction",
+
+		abilities: Array(
+			{
+				name: "Knowledgeable",
+				description: "Jesters are expected to be well versed in many topics. They get +2 to all Common Knowledge rolls."
+			}
+		),
+		book: currentBook,
+
+		page: "p140"
+	},
+	{
+		name: "Noble",
+		tags: "noble",
+		wildcard: 0,
+		image: "",
+		blurb: Array(
+			"This entry covers both true nobles and their courtier lackeys, such as seneschals and chancellors. The generic noble is suitable for every noble Rank from baron to emperor.",
+			"Some nobles are decadent dandies content with living a life of luxury. Others are rich landowners, skilled in business matters. Other noble types include military commanders, advisors to a higher authority, poverty stricken ones, extremely wealthy ones, and those who dabble in forbidden arts.",
+			"This version presents a typical middle-of- the-road noble. A few specific Hindrances and Edges can quickly turn this into any sort of noble you need."
+		),
+		attributes: {
+			agility: "d8",
+			smarts: "d6",
+			spirit: "d8",
+			strength: "d8",
+			vigor: "d6"
+		},
+		skills: {
+			'Fighting' : "d6",
+			'Intimidation' : "d8",
+			'Notice' : "d6",
+			'Persuasion' : "d6",
+			'Riding' : "d8"
+		},
+		charisma: "+2",
+		pace: "6",
+		parry: "6",
+		toughness: "5",
+		treasure: "Worthwhile, Rich in castle",
+		armor: "",
+		gear: "Rapier (Str+d4, +1 Parry) in court; war gear varies with type of noble",
+		edges: "Command, Connection, Noble",
+		hindrances: "Various",
+
+		abilities: Array(
+
+		),
+		book: currentBook,
+
+		page: "p140"
+	},
+
+	{
+		name: "Octopus, Giant",
+		tags: "",
+		wildcard: 0,
+		image: "",
+		blurb: Array(
+			"These terrors of the deep are aggressive and always hungry. Alone, they are quite cowardly and attack only what they consider easy prey. Wounded beasts typically emit an ink cloud and attempt to escape.",
+			"Characters often try to sever tentacles. A tentacle is severed if it takes the creature’s Toughness in damage in one shot from an edged weapon. Attacking a tentacle that has entangled a friend is somewhat risky—a roll of 1 on the attack die means the ally is hit instead."
+		),
+		attributes: {
+			agility: "d8",
+			smarts: "d4(A)",
+			spirit: "d6",
+			strength: "d12+4",
+			vigor: "d8"
+		},
+		skills: {
+			'Fighting' : "d8",
+			'Notice' : "d6",
+			'Stealth' : "d6",
+			'Swimming' : "d6"
+		},
+		charisma: "",
+		pace: "0",
+		parry: "6",
+		toughness: "12",
+		treasure: "None",
+		armor: "",
+		gear: "",
+		edges: "",
+		hindrances: "",
+
+		abilities: Array(
+			{
+				name: "Aquatic",
+				description: "Pace 6"
+			},
+			{
+				name: "Huge",
+				description: "Characters add +4 when attacking a giant octopus due to their great size."
+			},
+			{
+				name: "Ink Cloud",
+				description: "A giant octopus can spurt a cloud of black ink once per day. The cloud fills a sphere equal to a Large Burst Template. No sight or smell functions within this putrid stuff, even for the octopus."
+			},
+			{
+				name: "Size+6",
+				description: "The body of a giant octopus is as big as a sloop, while each tentacle is over 20’ long."
+			},{
+				name: "Tentacles",
+				description: "A giant octopus may make up to four attacks each round. On a raise, the creature has grappled the victim. An entangled victim may only attempt an opposed Strength roll each round to escape. Once grappled, the octopus does its Strength damage automatically by crushing with its arms and rending with its beak. A victim killed by an octopus’ tentacles is usually ripped in half."
+			}
+		),
+		book: currentBook,
+
+		page: "p140"
+	},
+
+	{
+		name: "Ogre",
+		tags: "ogres",
+		wildcard: 0,
+		image: "",
+		blurb: Array(
+			"Ogres are kin to orcs and lesser giants. They are often taken in by orc clans, who respect the dumb brutes for their savagery and strength. Orcs often pit their “pet” ogres in savage combats against their rivals’ ogres."
+		),
+		attributes: {
+			agility: "d6",
+			smarts: "d4",
+			spirit: "d6",
+			strength: "d12+3",
+			vigor: "d12"
+		},
+		skills: {
+			'Fighting' : "d8",
+			'Intimidation' : "d6",
+			'Notice' : "d4",
+			'Throwing' : "d6"
+		},
+		charisma: "",
+		pace: "0",
+		parry: "7",
+		toughness: "11",
+		treasure: "Meager",
+		armor: "1",
+		gear: "Thick hides (+1), massive club (Str+d8)",
+		edges: "",
+		hindrances: "",
+
+		abilities: Array(
+			{
+				name: "Size+3",
+				description: "Most ogres are over 8’ tall with pot-bellies and massive arms and legs."
+			},
+			{
+				name: "Sweep",
+				description: "May attack all adjacent foes at –2."
+			}
+		),
+		book: currentBook,
+
+		page: "p141"
+	},
+	{
+		name: "Orc",
+		wildcard: 0,
+		image: "https://www.frontlinegaming.org/wp-content/uploads/2013/01/4e_DnD_Orcs_by_RalphHorsley1.jpeg",
+		blurb: "Orcs are savage, green-skinned humanoids with pig-like features, including snouts and sometimes even tusks. They have foul temperaments, and rarely take prisoners.",
+		attributes: {
+			agility: "d6",
+			smarts: "d4",
+			spirit: "d6",
+			strength: "d8",
+			vigor: "d8"
+		},
+		skills: {
+			'Fighting' : "d6",
+			'Intimidation' : "d8",
+			'Notice' : "d6",
+			'Shooting' : "d6",
+			'Stealth' : "d6",
+			'Throwing' : "d6"
+		},
+		charisma: "",
+		pace: "6",
+		parry: "5",
+		toughness: "8",
+		armor: "1",
+		treasure: "Meager, per 3 orcs",
+		gear: "Leather armor (+1), scimitar (Str+d8).",
+		abilities: Array(
+			{
+				name: "Infravision",
+				description: "Halves penalties for poor light vs. warm targets."
+			},
+			{
+				name: "Size +1",
+				description: "Orcs are slightly larger than humans."
+			}
+		),
+		book: currentBook,
+
+		page: "p141"
+	},
+	{
+		name: "Orc Chieftan",
+		wildcard: 1,
+		image: "http://fc09.deviantart.net/fs71/f/2013/098/0/0/orc_chieftain_final_by_director_16-d60veug.jpg",
+		blurb: Array(
+			"Orcs are savage, green-skinned humanoids with pig-like features, including snouts and sometimes even tusks. They have foul temperaments, and rarely take prisoners.",
+			"The leader of small orc clans is always the most deadly brute in the bunch. Orc chieftains generally have a magical item or two in settings where such things are relatively common (most “swords and sorcery” worlds)."
+		),
+		attributes: {
+			agility: "d8",
+			smarts: "d6",
+			spirit: "d6",
+			strength: "d10",
+			vigor: "d10"
+		},
+		skills: {
+			'Fighting' : "d12",
+			'Intimidation' : "d10",
+			'Notice' : "d6",
+			'Shooting' : "d8",
+			'Stealth' : "d6",
+			'Throwing' : "d8"
+		},
+		charisma: "",
+		pace: "6",
+		parry: "8",
+		toughness: "11",
+		armor: "3",
+		treasure: "Meager",
+		gear: "Plate chest plate (+3), chain arms and legs (+2), battle axe (Str+d10).",
+		abilities: Array(
+			{
+				name: "Infravision",
+				description: "Halves penalties for poor light vs. warm targets."
+			},
+			{
+				name: "Size +1",
+				description: "Orcs are slightly larger than humans."
+			},
+			{
+				name: "Sweep",
+				description: "May attack all adjacent characters at –2 penalty."
+			}
+		),
+		book: currentBook,
+
+		page: "p141"
+	},
+	{
+		name: "Orc Shaman",
+		wildcard: 0,
+		image: "http://fc09.deviantart.net/fs71/f/2013/098/0/0/orc_chieftain_final_by_director_16-d60veug.jpg",
+		blurb: Array(
+			"Orcs are savage, green-skinned humanoids with pig-like features, including snouts and sometimes even tusks. They have foul temperaments, and rarely take prisoners.",
+			"Orcs worship gods of destruction and slaughter. Their shamans personify this image, and while they are usually the smallest members of a clan, they are often the most savage.",
+			"Orc shamans drape themselves in crude fetishes, bones, and other occult trappings to appear more menacing to their foes. Their power is simple hedge magic, however, and is not divinely inspired despite several millennia believing otherwise."
+		),
+		attributes: {
+			agility: "d6",
+			smarts: "d8",
+			spirit: "d6",
+			strength: "d6",
+			vigor: "d6"
+		},
+		skills: {
+			'Fighting' : "d6",
+			'Intimidation' : "d8",
+			'Notice' : "d6",
+			'Shooting' : "d6",
+			'Spellcasting' : "d8",
+			'Stealth' : "d8"
+		},
+		charisma: "",
+		pace: "6",
+		parry: "6",
+		toughness: "6",
+		armor: "1",
+		treasure: "Meager",
+		gear: "Leather armor (+1), spear (Str+d6, Parry +1, Reach 1)",
+		abilities: Array(
+			{
+				name: "Infravision",
+				description: "Halves penalties for poor light vs. warm targets."
+			},
+			{
+				name: "Spells",
+				description: "Shamans have 15 power points and typically know <em>armor, bolt, fear, and smite.</em>"
+			}
+		),
+		book: currentBook,
+
+		page: "p142"
+	},
+	{
+		name: "Pegasus",
+		tags: "pegasi",
+		wildcard: 0,
+		image: "",
+		blurb: Array(
+			"Pegasi (singular: pegasus) are horses with great, feathery wings. In Greek myth the animal was unique, but in many fantasy settings they are standard creatures."
+		),
+		attributes: {
+			agility: "d8",
+			smarts: "d4 (A)",
+			spirit: "d6",
+			strength: "d12",
+			vigor: "d8"
+		},
+		skills: {
+			'Fighting' : "d6",
+			'Notice' : "d6"
+		},
+		charisma: "",
+		pace: "8",
+		parry: "5",
+		toughness: "8",
+		treasure: "None",
+		armor: "",
+		gear: "",
+
+		abilities: Array(
+			{
+				name: "Flying",
+				description: "Pegasi have a Flying Pace of 12” and a Climb of 6”."
+			},
+			{
+				name: "Kick",
+				description: "Str"
+			},
+			{
+				name: "Size+2",
+				description: "Pegasi weigh around 800 pounds."
+			}
+		),
+		book: currentBook,
+
+		page: "p142"
+	},
+	{
+		name: "Phoenix",
+		tags: "",
+		wildcard: 0,
+		image: "",
+		blurb: Array(
+			"Clad in fiery feathers of yellow, orange, and red, the immortal phoenix is seen as a representation of the sun god. Many cultures consider the bird sacred, but its feathers contain magical power and thus the bird is often hunted.",
+			"The greatest gift a phoenix can bestow is one of its tail feathers. Although the magic in them is temporary, the phoenix forever weakens its life-force with the gift."
+		),
+		attributes: {
+			agility: "d10",
+			smarts: "d10 (A)",
+			spirit: "d8",
+			strength: "d6",
+			vigor: "d10"
+		},
+		skills: {
+			'Fighting' : "d6",
+			'Notice' : "d10",
+			"Spellcasting" : "d12"
+		},
+		charisma: "",
+		pace: "2",
+		parry: "5",
+		toughness: "6",
+		treasure: "None",
+		armor: "",
+		gear: "",
+
+		abilities: Array(
+			{
+				name: "Flight",
+				description: "Phoenix have a Flying Pace of 12” and a Climb of 6”."
+			},
+			{
+				name: "Powers",
+				description: "A phoenix has 35 Power Points and knows the following powers: <em>barrier, blast, bolt, burst, and light</em>. All powers have a fire trapping."
+			},
+			{
+				name: "Rebirth",
+				description: "If a phoenix is killed, it explodes into flame filling a Medium Burst Template. Creatures within the Template suffer 2d10 damage and have a chance of catching fire. During the explosion, the body of the phoenix transforms into an egg. A new phoenix hatches 2d6 days later."
+			},
+			{
+				name: "Size-1",
+				description: "A phoenix is the same size as a large eagle."
+			},
+			{
+				name: "Tail Feathers",
+				description: "Every phoenix has 35 magical tail feathers, each acting as a one-shot spell. Each of the thirteen yellow feathers contain bolt (one bolt, 3d6 damage), the twelve orange feathers have burst, and the ten red feathers hold blast (3d6 damage in Medium Burst Template). The powers are cast using the phoenix’s Spellcasting—all the user need do to activate the power is throw the feather at the target (as an action). Removed tail feathers do not grow back. Furthermore, each lost feather permanently reduces the bird’s Power Points by one. When the last feather is removed, the bird explodes (as above) but is not reborn."
+			}
+		),
+		book: currentBook,
+
+		page: "p142"
+	},
+	{
+		name: "Priest of Death",
+		tags: "",
+		wildcard: 0,
+		image: "",
+		blurb: Array(
+			"Priests are the servants of the gods. Each deity has a network of priests, whose duty it is to spread the faith and ensure the tenets of the god are upheld by the faithful. Every priest has equipment and powers appropriate to his faith. A sample of commonly-encountered priests is presented below."
+		),
+		attributes: {
+			agility: "d6",
+			smarts: "d6",
+			spirit: "d10",
+			strength: "d6",
+			vigor: "d6"
+		},
+		skills: {
+			'Fighting' : "d6",
+			'Faith' : "d10",
+			'Intimidation' : "d8",
+			'Notice' : "d6"
+		},
+		charisma: "",
+		pace: "6",
+		parry: "5",
+		toughness: "6",
+		treasure: "Meager",
+		armor: "1",
+		gear: "Leather armor (+1), short sword (Str+d6), holy symbol",
+		hindrances: "Various",
+		edges: "Arcane Background (Miracles), New Power, Points",
+
+		abilities: Array(
+			{
+				name: "Spells",
+				description: "Death priests typically have 15 Power Points and know armor (bone trapping), fear, and zombie."
+			}
+		),
+		book: currentBook,
+
+		page: "p142-p143"
+	},
+	{
+		name: "Priest of Healing",
+		tags: "",
+		wildcard: 0,
+		image: "",
+		blurb: Array(
+			"Priests are the servants of the gods. Each deity has a network of priests, whose duty it is to spread the faith and ensure the tenets of the god are upheld by the faithful. Every priest has equipment and powers appropriate to his faith. A sample of commonly-encountered priests is presented below."
+		),
+		attributes: {
+			agility: "d6",
+			smarts: "d6",
+			spirit: "d10",
+			strength: "d6",
+			vigor: "d6"
+		},
+		skills: {
+			'Faith' : "d10",
+			'Healing' : "d10",
+			'Notice' : "d6",
+			'Persuasion' : "d8",
+			'Taunt' : "d6"
+		},
+		charisma: "",
+		pace: "6",
+		parry: "3",
+		toughness: "5",
+		treasure: "Meager",
+		armor: "1",
+		gear: "Staff (Str+d4, Parry +1, Reach 1), holy symbol",
+		hindrances: "Pacifist (Minor), Vow (care for the sick)",
+		edges: "Arcane Background (Miracles), Healer, New Power, Power Points",
+
+		abilities: Array(
+			{
+				name: "Spells",
+				description: "Healing priests typically have 15 Power Points and know deflection, healing, and light."
+			}
+		),
+		book: currentBook,
+
+		page: "p143"
+	},
+	{
+		name: "Priest of War",
+		tags: "",
+		wildcard: 0,
+		image: "",
+		blurb: Array(
+			"Priests are the servants of the gods. Each deity has a network of priests, whose duty it is to spread the faith and ensure the tenets of the god are upheld by the faithful. Every priest has equipment and powers appropriate to his faith. A sample of commonly-encountered priests is presented below."
+		),
+		attributes: {
+			agility: "d8",
+			smarts: "d6",
+			spirit: "d8",
+			strength: "d8",
+			vigor: "d8"
+		},
+		skills: {
+			'Fighting' : "d10",
+			'Faith' : "d8",
+			'Intimidation' : "d8",
+			'Knowledge (Battle)' : "d6",
+			'Notice' : "d6"
+		},
+		charisma: "",
+		pace: "6",
+		parry: "8",
+		toughness: "8",
+		treasure: "Meager",
+		armor: "2",
+		gear: "Chain mail (+2), battle axe (Str+d8), medium shield (+1 Parry), holy symbol",
+		hindrances: "Various",
+		edges: "Arcane Background (Miracles), New Power, Power Points",
+
+		abilities: Array(
+			{
+				name: "Spells",
+				description: "War priests typically have 15 Power Points and know armor, boost/lower trait, and smite."
+			}
+		),
+		book: currentBook,
+
+		page: "p143"
+	},
+	{
+		name: "Typical Ranger",
+		tags: "",
+		wildcard: 0,
+		image: "",
+		blurb: Array(
+			"Rangers inhabit wilderness areas, preferring to avoid crowded towns and cities. Some belong to organizations often dedicated to hunting down evil creatures and protecting the wilds. Others are solitary, hiring out their services as guides and trackers."
+		),
+		attributes: {
+			agility: "d8",
+			smarts: "d6",
+			spirit: "d8",
+			strength: "d6",
+			vigor: "d8"
+		},
+		skills: {
+			'Climbing' : "d8",
+			'Fighting' : "d8",
+			'Healing' : "d6",
+			'Intimidation' : "d6",
+			'Notice' : "d8",
+			'Riding' : "d6",
+			'Shooting' : "d8",
+			'Stealth' : "d8",
+			'Survival' : "d8",
+			'Tracking' : "d8"
+		},
+		charisma: "",
+		pace: "6",
+		parry: "6",
+		toughness: "7",
+		treasure: "Meager",
+		armor: "1",
+		gear: "Leather armor (+1), long sword (Str+d8), dagger (Str+d4), long bow (Range: 15/30/60, Damage: 2d6)",
+		hindrances: "Various",
+		edges: "Beast Master, Woodsman",
+
+		abilities: Array(
+		),
+		book: currentBook,
+
+		page: "p143"
+	},
+	{
+		name: "Veteran Ranger",
+		tags: "",
+		wildcard: 0,
+		image: "",
+		blurb: Array(
+			"Rangers inhabit wilderness areas, preferring to avoid crowded towns and cities. Some belong to organizations often dedicated to hunting down evil creatures and protecting the wilds. Others are solitary, hiring out their services as guides and trackers."
+		),
+		attributes: {
+			agility: "d8",
+			smarts: "d6",
+			spirit: "d8",
+			strength: "d8",
+			vigor: "d10"
+		},
+		skills: {
+			'Climbing' : "d8",
+			'Fighting' : "d10",
+			'Healing' : "d6",
+			'Intimidation' : "d6",
+			'Notice' : "d10",
+			'Riding' : "d6",
+			'Shooting' : "d10",
+			'Stealth' : "d8",
+			'Survival' : "d10",
+			'Tracking' : "d10"
+		},
+		charisma: "",
+		pace: "6",
+		parry: "7",
+		toughness: "8",
+		treasure: "Meager",
+		armor: "1",
+		gear: "Leather armor (+1), long sword (Str+d8), dagger (Str+d4), long bow (Range: 15/30/60, Damage: 2d6)",
+		hindrances: "Various",
+		edges: "Beast Master, Combat Reflexes, Steady Hands, Woodsman",
+
+		abilities: Array(
+		),
+		book: currentBook,
+
+		page: "p144"
+	},
+	{
+		name: "Rat Men",
+		tags: "",
+		wildcard: 0,
+		image: "",
+		blurb: Array(
+			"Rat men are, as the name implies, a cross between rats and humans. They are bipedal, but otherwise resemble rats. They are not lycanthropes, for they cannot change into a purely human form. Most rat men colonies are found in or beneath cities, where they scavenge for food and dropped coins."
+		),
+		attributes: {
+			agility: "d10",
+			smarts: "d6",
+			spirit: "d8",
+			strength: "d6",
+			vigor: "d6"
+		},
+		skills: {
+			'Climbing' : "d8",
+			'Fighting' : "d6",
+			'Notice' : "d8",
+			'Stealth' : "d10",
+			'Survival' : "d8",
+			'Tracking' : "d6"
+		},
+		charisma: "",
+		pace: "6",
+		parry: "5",
+		toughness: "5",
+		treasure: "Meager, per 5 rat men",
+		armor: "0",
+		gear: "Short sword (Str+d6)",
+		hindrances: "",
+		edges: "",
+
+		abilities: Array(
+			{
+				name: "Bite",
+				description: "Str+d4"
+			},
+			{
+				name: "Direction Sense",
+				description: "Rat men usually live in sewers or slums. Maneuvering around these mazes has given them a good sense of direction. Rat men never get lost, even in nonnative locales."
+			},
+			{
+				name: "Immunity",
+				description: "Rat men are immune to poison and disease."
+			},
+			{
+				name: "Infection",
+				description: "Anyone bitten by a rat man must make a Vigor roll or the wound becomes swollen and infected. The victim suffers a level of Fatigue, which is recovered with a successful Healing roll or after 24 hours. Cumulative infections can cause a victim to be Incapacitated, but cannot lead to Death."
+			}
+		),
+		book: currentBook,
+
+		page: "p144"
+	},
+	{
+		name: "Redcap",
+		tags: "goblins,goblin",
+		wildcard: 0,
+		image: "",
+		blurb: Array(
+			"Redcaps are related to goblins, but are much larger and more ferocious. Their name comes from the woolen hats they wear, which are soaked in the blood of their victims."
+		),
+		attributes: {
+			agility: "d8",
+			smarts: "d6",
+			spirit: "d6",
+			strength: "d12",
+			vigor: "d10"
+		},
+		skills: {
+			'Fighting' : "d10",
+			'Intimidation' : "d10",
+			'Notice' : "d6",
+			'Taunt' : "d8"
+		},
+		charisma: "",
+		pace: "6",
+		parry: "6",
+		toughness: "10",
+		treasure: "Meager",
+		armor: "1",
+		gear: "Leather armor (+1), great axe (Str+d10, –1 Parry, requires 2 hands)",
+		hindrances: "Bloodthirsty",
+		edges: "Berserk, Combat Reflexes, Improved Frenzy, Improved Nerves of Steel, Improved Sweep",
+
+		abilities: Array(
+			{
+				name: "Fear",
+				description: "Characters seeing a redcap must make a Fear check."
+			},
+			{
+				name: "Infravision",
+				description: "Redcaps halve penalties for dark lighting against living targets (round down)."
+			},
+			{
+				name: "Size+2",
+				description: "Redcaps stand over 8’ tall."
+			}
+		),
+		book: currentBook,
+
+		page: "p144"
+	},
+	{
+		name: "Roc",
+		tags: "",
+		wildcard: 0,
+		image: "",
+		blurb: Array(
+			"These massive birds are large enough to pick up small ships and whales. The great Sinbad the Sailor had a near-fatal encounter with one. Most roost in isolated aeries, searching for large prey for their feasts. Sailors and city guard have sometimes managed to fend off these beasts with ballistae, but even these weapons rarely penetrate the roc’s lizard-like skin."
+		),
+		attributes: {
+			agility: "d6",
+			smarts: "d6(A)",
+			spirit: "d6",
+			strength: "d12+8",
+			vigor: "d8"
+		},
+		skills: {
+			'Fighting' : "d8",
+			'Intimidation' : "d10",
+			'Notice' : "d8"
+		},
+		charisma: "",
+		pace: "8",
+		parry: "6",
+		toughness: "14",
+		treasure: "Rich, In Nest",
+		armor: "0",
+		gear: "",
+		hindrances: "",
+		edges: "",
+
+		abilities: Array(
+			{
+				name: "Bash",
+				description: "Rocs have incredible lift, and can pick up small ships (those with a base Toughness of 15 or less) to drop them on the rocks. It takes the roc a full round to properly grasp a ship, which is a Fighting attack against a “Parry” of 2. With a raise, the roc lifts the boat in the air and ascends 6” per round afterward. After five full rounds, it drops its prey, automatically destroying any boat it can lift. Characters suffer damage according to the height."
+			},
+			{
+				name: "Flight",
+				description: "Rocs have a Flying Pace of 16”, with an Acceleration of 4” and a Climb of 6”."
+			},
+			{
+				name: "Huge",
+				description: "Characters add +4 when attacking a roc due to their great size."
+			},
+			{
+				name: "Size+8",
+				description: "Rocs are huge creatures with wingspans over 120’."
+			},
+			{
+				name: "Talons",
+				description: "Str+d6; AP 4. These claws are large enough to damage ships with Heavy Armor and fortifications."
+			}
+		),
+		book: currentBook,
+
+		page: "p144-p145"
+	},
+	{
+		name: "Sabre-Toothed Tiger",
+		tags: "saber,sabertooth",
+		wildcard: 0,
+		image: "",
+		blurb: Array(
+			"Sabre-toothed tigers haunt grasslands using their patterned skin to sneak up on unsuspecting prey. Their twin canine teeth can slice through armor and bone as easily as flesh."
+		),
+		attributes: {
+			agility: "d10",
+			smarts: "d6(A)",
+			spirit: "d8",
+			strength: "d12",
+			vigor: "d10"
+		},
+		skills: {
+			'Climbing' : "d8",
+			'Fighting' : "d8",
+			'Intimidation' : "d8",
+			'Stealth' : "d8",
+			'Tracking' : "d6"
+		},
+		charisma: "",
+		pace: "8",
+		parry: "6",
+		toughness: "10",
+		treasure: "Meager, In Lair",
+		armor: "0",
+		gear: "",
+		hindrances: "",
+		edges: "",
+
+		abilities: Array(
+			{
+				name: "Bite",
+				description: "Str+d10, AP 1."
+			},
+			{
+				name: "Claws",
+				description: "Str+d6."
+			},
+			{
+				name: "Improved Frenzy",
+				description: "A sabre-toothed tiger may make two attacks each round with no penalty."
+			},
+			{
+				name: "Pounce",
+				description: "Sabre-tooths often pounce on their prey to best bring their mass and teeth to bear. It can leap 1d6” to gain +4 to its attack and damage. Its Parry is reduced by –2 until its next action when performing the maneuver, however."
+			},
+			{
+				name: "Size+3",
+				description: "Sabre-tooths weigh over 800 pounds."
+			}
+		),
+		book: currentBook,
+
+		page: "p145"
+	},
+	{
+		name: "Scorpion, Giant",
+		tags: "",
+		wildcard: 0,
+		image: "",
+		blurb: Array(
+			"Giant scorpions are usually found in hot climates. Unlike their normal-size cousins, giant scorpions are fierce predators."
+		),
+		attributes: {
+			agility: "d8",
+			smarts: "d4(A)",
+			spirit: "d8",
+			strength: "d12+1",
+			vigor: "d10"
+		},
+		skills: {
+			'Climbing' : "d6",
+			'Fighting' : "d8",
+			'Intimidation' : "d8",
+			'Notice' : "d6",
+			'Stealth' : "d8"
+		},
+		charisma: "",
+		pace: "8",
+		parry: "6",
+		toughness: "11",
+		treasure: "Meager, In Lair",
+		armor: "3",
+		gear: "",
+		hindrances: "",
+		edges: "",
+
+		abilities: Array(
+			{
+				name: "Armor +3",
+				description: " Chitinous skin."
+			},
+			{
+				name: "Grapple",
+				description: "A scorpion may grapple a foe with one or both pincers. If it uses both, each must make a successful opposed Strength roll. Escaping from a double grapple gives the prey a –4 penalty to his Strength roll to escape. A stinger attack against a grappled foe is made at +2, +4 if the victim is held in both pincers."
+			},
+			{
+				name: "Improved Frenzy",
+				description: "A sabre-toothed tiger may make two attacks each round with no penalty."
+			},
+			{
+				name: "Pincers",
+				description: "Str+d4."
+			},
+			{
+				name: "Poison",
+				description: "Anyone wounded or Shaken by a stinger attack must make a Vigor roll or immediately become Incapacitated. Death follows in 2d6 rounds."
+			},
+			{
+				name: "Stinger",
+				description: "Str+d6."
+			},
+			{
+				name: "Size+1",
+				description: "Giant scorpions measure 7’ in length."
+			}
+		),
+		book: currentBook,
+
+		page: "p145"
 	}
 ));
