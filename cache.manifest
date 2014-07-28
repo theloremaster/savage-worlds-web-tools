@@ -1,7 +1,7 @@
 CACHE MANIFEST
-# rev 2014072701
-# 2014-07-27:v1
-# Fix of Weapon Modifications to non-power armor
+# rev 2014072702
+# 2014-07-27:v2
+# Recompile from merge conflict of minified JS
 
 CACHE:
 http://jdgwf.github.io/savage-worlds-web-tools/extras_view.html
