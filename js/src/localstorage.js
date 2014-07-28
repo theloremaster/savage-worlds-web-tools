@@ -3,13 +3,13 @@ if(!localStorage.vehicles)
 
 function localstorage_parse_data() {
 	try {
-		currentVehicles = JSON.parse(localStorage.vehicles);
+		current_vehicles = JSON.parse(localStorage.vehicles);
 	}
 	catch(e) {
-		currentVehicles = Array();
+		current_vehicles = Array();
 	}
 
-	return currentVehicles;
+	return current_vehicles;
 }
 
 function save_to_localstorage(saveJSON) {
@@ -22,19 +22,19 @@ function save_to_localstorage(saveJSON) {
 		data: saveJSON,
 	};
 
-	currentVehicles = localstorage_parse_data();
+	current_vehicles = localstorage_parse_data();
 
-	currentVehicles = currentVehicles.concat(storageObject);
+	current_vehicles = current_vehicles.concat(storageObject);
 
-	localStorage.vehicles = JSON.stringify(currentVehicles);
+	localStorage.vehicles = JSON.stringify(current_vehicles);
 }
 
 function get_data_from_localstorage(itemIndex) {
-	currentVehicles = localstorage_parse_data();
+	current_vehicles = localstorage_parse_data();
 
-	if( typeof(currentVehicles[itemIndex]) != "undefined" ) {
-		if( typeof(currentVehicles[itemIndex].data) != "undefined" ) {
-			return currentVehicles[itemIndex].data;
+	if( typeof(current_vehicles[itemIndex]) != "undefined" ) {
+		if( typeof(current_vehicles[itemIndex].data) != "undefined" ) {
+			return current_vehicles[itemIndex].data;
 		} else {
 			return false;
 		}
@@ -44,23 +44,23 @@ function get_data_from_localstorage(itemIndex) {
 }
 
 function delete_item_from_localstorage(itemIndex) {
-	currentVehicles = localstorage_parse_data();
+	current_vehicles = localstorage_parse_data();
 
-	if( typeof(currentVehicles[itemIndex]) != "undefined" ) {
-		if( typeof(currentVehicles[itemIndex].data) != "undefined" ) {
-			currentVehicles.splice(itemIndex, 1);
-			localStorage.vehicles = JSON.stringify(currentVehicles);
+	if( typeof(current_vehicles[itemIndex]) != "undefined" ) {
+		if( typeof(current_vehicles[itemIndex].data) != "undefined" ) {
+			current_vehicles.splice(itemIndex, 1);
+			localStorage.vehicles = JSON.stringify(current_vehicles);
 		}
 	}
 }
 
 // Utility/Debug function...
 function get_localstorage_list() {
-	currentVehicles = localstorage_parse_data();
+	current_vehicles = localstorage_parse_data();
 
-	for(lsCounter = 0; lsCounter < currentVehicles.length; lsCounter++) {
+	for(lsCounter = 0; lsCounter < current_vehicles.length; lsCounter++) {
 		console.log(
-			"#" + lsCounter + " - " + currentVehicles[lsCounter].name + " (" + currentVehicles[lsCounter].type + ") - " + currentVehicles[lsCounter].saved
+			"#" + lsCounter + " - " + current_vehicles[lsCounter].name + " (" + current_vehicles[lsCounter].type + ") - " + current_vehicles[lsCounter].saved
 		);
 	}
 }
