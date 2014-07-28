@@ -51,8 +51,13 @@ creator_base.prototype = {
 		this.selected_weapons = Array();
 		this.selected_weapons_list = Array();
 
-		if(this.object_type == "power_armor")
+		if(this.object_type == "power_armor") {
 			this.requires_mount_point = 1;
+			this.has_weapon_mounts = 1;
+		} else {
+			this.requires_mount_point = 0;
+			this.has_weapon_mounts = 0;
+		}
 	},
 
 	reset: function() {
@@ -367,7 +372,9 @@ creator_base.prototype = {
 				this.vehicle_weapon_mod_points = this.vehicle_weapon_mod_points - weaponModCost;
 
 				if(this.requires_mount_point > 0)
-					this.mods_available += weaponModCost; // I assume that weapons on a mount don't cost any more mod points that the mount point itself
+					this.mods_available -= weaponModCost;
+				else
+					this.mods -= weaponModCost;
 
 				if( this.selected_weapons[calcModCount].get_weight )
 					this.weight += this.selected_weapons[calcModCount].get_weight(this);
