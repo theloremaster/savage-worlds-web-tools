@@ -24,15 +24,14 @@ Fully Functional Tools Include:
 			* Savage Free Bestiary - has 7 entries
 			* Sci-Fi Companion - has no entries
 			* Super Powers Companion - has no entries
-* Character Creator (very early alpha, 50-70% complete from another project)
 
 The roadmap for these tools include:
 
+* Character Creator (very early alpha, 50-70% complete from another project)
 * Robot Creator (planned)
 * World Creator (planned)
 
-You should be able to double-click on the HTML file in any web modern web browser to use the tools.
-
+You should be able to double-click on the HTML file in any web modern web browser to use the tools. Or visit the GitHub application page linked above.
 
 
 ###Disclaimer

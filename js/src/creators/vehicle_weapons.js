@@ -564,7 +564,7 @@ var vehicle_weapons = Array(
 		flying_only: 0,
 		shots: 1,
 		is_available: function(selected_object) {
-			if(selected_object.has_torpedo_tube > 0 && ( selected_object.this.aircraft > 0 || selected_object.this.watercraft > 0 ) )
+			if(selected_object.has_torpedo_tube > 0 && ( selected_object.aircraft > 0 || selected_object.watercraft > 0 ) )
 				return true;
 			else
 				return false;
@@ -584,7 +584,7 @@ var vehicle_weapons = Array(
 		rof: 1,
 		flying_only: 0,
 		is_available: function(selected_object) {
-			if(selected_object.has_torpedo_tube > 0 && ( selected_object.this.aircraft > 0 || selected_object.this.watercraft > 0 ) )
+			if(selected_object.has_torpedo_tube > 0 && ( selected_object.aircraft > 0 || selected_object.watercraft > 0 ) )
 				return true;
 			else
 				return false;

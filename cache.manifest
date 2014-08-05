@@ -1,8 +1,7 @@
 CACHE MANIFEST
-# rev 2014080501
-# 2014-08-05:v1
-# Torpedoes only now show for vehicles with torpedo launchers, as do missles/missle launchers.. minor fixes.
-
+# rev 2014080503
+# 2014-08-05:v3
+# Removal of weapons and mods that aren't available if an option is removed
 
 CACHE:
 http://jdgwf.github.io/savage-worlds-web-tools/extras_view.html

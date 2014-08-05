@@ -302,10 +302,9 @@ creator_base.prototype = {
 
 	calculate: function() {
 
-		// Get base stats from size
 
 		if( this.selected_size && this.selected_size.size_label ) {
-
+			// Flush Stats for recalulation
 			this.strength_bonus = 0;
 			this.aircraft = 0;
 			this.watercraft = 0;
@@ -315,7 +314,6 @@ creator_base.prototype = {
 			this.has_torpedo_tube = 0;
 			this.has_missile_launcher = 0;
 
-			//this.object_label = this.selected_size.size_label;
 			this.examples = this.selected_size.examples;
 			this.size = this.selected_size.size;
 			this.acc = this.selected_size.acc;
@@ -337,14 +335,15 @@ creator_base.prototype = {
 			this.weight = this.selected_size.weight;
 			this.pace = this.selected_size.pace;
 
-
 			this.mods_available = this.mods;
 
+			// Starship is always an aircraft for these purposes ;)
 			if(this.object_type == "starship")
 				this.aircraft = 1;
 
+			// Go through Mods for availability, calculation and listings
 			this.selected_modifications.sort( sort_mods );
-			// Modify Power Armor as per mods
+			// Sort mods
 			this.selected_modifications_list = {};
 			for(calcModCount = 0; calcModCount < this.selected_modifications.length; calcModCount++) {
 				//this.selected_modifications_list += "<li>" + this.selected_modifications[modCount].name + "</li>";
@@ -366,7 +365,8 @@ creator_base.prototype = {
 				}
 			}
 
-			// Weaponise Power Armor as per weapons
+			// Go through Weapons for availability, calculation and listings
+			// Sort weapons
 			this.selected_weapons.sort( sort_mods );
 
 			this.selected_weapons_list = {};
@@ -374,7 +374,18 @@ creator_base.prototype = {
 			linkedWeaponModUsage = Array();
 			otherWeaponModUsage = 0;
 			for(calcModCount = 0; calcModCount < this.selected_weapons.length; calcModCount++) {
-				//this.selected_modifications_list += "<li>" + this.selected_weapons[modCount].name + "</li>";
+
+				// attempt to see if weapon is still availble - remove if it's not.
+				if( this.selected_weapons[calcModCount].is_available ) {
+					if(this.selected_weapons[calcModCount].is_available(this) == false) {
+						this.remove_weapon(calcModCount);
+						refresh_creator_page();
+						// stop all processing as the page is recalcuating anyways
+						return;
+					}
+				}
+
+				// Continue on....
 				weaponModCost = this.selected_weapons[calcModCount].mods;
 				if(this.selected_weapons[calcModCount].fixed > 0)
 					weaponModCost = weaponModCost / 2;
