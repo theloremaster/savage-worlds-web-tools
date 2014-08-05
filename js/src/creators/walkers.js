@@ -190,6 +190,9 @@ var walker_modifications = Array(
 		},
 		get_cost: function(selected_walker) {
 			return 50000;
+		},
+		get_mod_effect: function(selected_walker) {
+			selected_walker.has_missile_launcher = 1;
 		}
 	},
 	{

@@ -29,6 +29,9 @@ creator_base.prototype = {
 		this.base_energy_capacity =  0;
 		this.provisions = 0;
 
+		this.has_torpedo_tube = 0;
+		this.has_missile_launcher = 0;
+
 		this.aircraft = 0;
 
 		this.selected_size = 0;
@@ -305,8 +308,12 @@ creator_base.prototype = {
 
 			this.strength_bonus = 0;
 			this.aircraft = 0;
+			this.watercraft = 0;
 			this.has_weapon_mounts = 0;
 			this.vehicle_weapon_mod_points = 0;
+
+			this.has_torpedo_tube = 0;
+			this.has_missile_launcher = 0;
 
 			//this.object_label = this.selected_size.size_label;
 			this.examples = this.selected_size.examples;
@@ -330,7 +337,11 @@ creator_base.prototype = {
 			this.weight = this.selected_size.weight;
 			this.pace = this.selected_size.pace;
 
+
 			this.mods_available = this.mods;
+
+			if(this.object_type == "starship")
+				this.aircraft = 1;
 
 			this.selected_modifications.sort( sort_mods );
 			// Modify Power Armor as per mods

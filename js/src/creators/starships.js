@@ -173,6 +173,9 @@ var starship_modifications = Array(
 		},
 		get_cost: function(selected_starship) {
 			return 50000;
+		},
+		get_mod_effect: function(selected_walker) {
+			selected_walker.has_missile_launcher = 1;
 		}
 	},
 	{
@@ -320,6 +323,9 @@ var starship_modifications = Array(
 		},
 		get_cost: function(selected_starship) {
 			return 500000;
+		},
+		get_mod_effect: function(selected_walker) {
+			selected_walker.has_torpedo_tube = 1;
 		}
 	},
 	{

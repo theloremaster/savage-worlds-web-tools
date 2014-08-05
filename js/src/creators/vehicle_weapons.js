@@ -304,8 +304,8 @@ var vehicle_weapons = Array(
 		mods: 1,
 		cost: 100000,
 		notes: "Hw. Projectiles are 10 pound spheres that cost $100 each.",
-		is_available: function(selected_starship) {
-			if(selected_starship.size / 2 >= 1)
+		is_available: function(selected_object) {
+			if(selected_object.size / 2 >= 1)
 				return true;
 			else
 				return false;
@@ -324,8 +324,8 @@ var vehicle_weapons = Array(
 		mods: 1,
 		cost: 200000,
 		notes: "Hw. Projectiles are 20 pound spheres that cost $200 each.",
-		is_available: function(selected_starship) {
-			if(selected_starship.size / 2 >= 2)
+		is_available: function(selected_object) {
+			if(selected_object.size / 2 >= 2)
 				return true;
 			else
 				return false;
@@ -344,8 +344,8 @@ var vehicle_weapons = Array(
 		mods: 2,
 		cost: 300000,
 		notes: "Hw. Projectiles are 30 pound spheres that cost $300 each.",
-		is_available: function(selected_starship) {
-			if(selected_starship.size / 2 >= 3)
+		is_available: function(selected_object) {
+			if(selected_object.size / 2 >= 3)
 				return true;
 			else
 				return false;
@@ -364,8 +364,8 @@ var vehicle_weapons = Array(
 		mods: 2,
 		cost: 400000,
 		notes: "Hw. Projectiles are 40 pound spheres that cost $400 each.",
-		is_available: function(selected_starship) {
-			if(selected_starship.size / 2 >= 4)
+		is_available: function(selected_object) {
+			if(selected_object.size / 2 >= 4)
 				return true;
 			else
 				return false;
@@ -384,8 +384,8 @@ var vehicle_weapons = Array(
 		mods: 3,
 		cost: 500000,
 		notes: "Hw. Projectiles are 50 pound spheres that cost $500 each.",
-		is_available: function(selected_starship) {
-			if(selected_starship.size / 2 >= 5)
+		is_available: function(selected_object) {
+			if(selected_object.size / 2 >= 5)
 				return true;
 			else
 				return false;
@@ -404,8 +404,8 @@ var vehicle_weapons = Array(
 		mods: 3,
 		cost: 600000,
 		notes: "Hw. Projectiles are 60 pound spheres that cost $600 each.",
-		is_available: function(selected_starship) {
-			if(selected_starship.size / 2 >= 6)
+		is_available: function(selected_object) {
+			if(selected_object.size / 2 >= 6)
 				return true;
 			else
 				return false;
@@ -424,8 +424,8 @@ var vehicle_weapons = Array(
 		mods: 4,
 		cost: 700000,
 		notes: "Hw. Projectiles are 70 pound spheres that cost $700 each.",
-		is_available: function(selected_starship) {
-			if(selected_starship.size / 2 >= 7)
+		is_available: function(selected_object) {
+			if(selected_object.size / 2 >= 7)
 				return true;
 			else
 				return false;
@@ -444,8 +444,8 @@ var vehicle_weapons = Array(
 		mods: 4,
 		cost: 100000,
 		notes: "Hw. Projectiles are 80 pound spheres that cost $800 each.",
-		is_available: function(selected_starship) {
-			if(selected_starship.size / 2 >= 8)
+		is_available: function(selected_object) {
+			if(selected_object.size / 2 >= 8)
 				return true;
 			else
 				return false;
@@ -464,8 +464,8 @@ var vehicle_weapons = Array(
 		mods: 5,
 		cost: 900000,
 		notes: "Hw. Projectiles are 90 pound spheres that cost $90 each.",
-		is_available: function(selected_starship) {
-			if(selected_starship.size / 2 >= 9)
+		is_available: function(selected_object) {
+			if(selected_object.size / 2 >= 9)
 				return true;
 			else
 				return false;
@@ -484,8 +484,8 @@ var vehicle_weapons = Array(
 		mods: 5,
 		cost: 1000000,
 		notes: "Hw. Projectiles are 100 pound spheres that cost $1000 each.",
-		is_available: function(selected_starship) {
-			if(selected_starship.size / 2 >= 11)
+		is_available: function(selected_object) {
+			if(selected_object.size / 2 >= 11)
 				return true;
 			else
 				return false;
@@ -498,6 +498,12 @@ var vehicle_weapons = Array(
 		range: "200/400/800",
 		damage: "5d6",
 		rof: 1,
+		is_available: function(selected_object) {
+			if(selected_object.has_missile_launcher > 0)
+				return true;
+			else
+				return false;
+		},
 		flying_only: 0,
 		shots: 1,
 		missiles_per: 12,
@@ -514,6 +520,12 @@ var vehicle_weapons = Array(
 		damage: "8d6",
 		rof: 1,
 		flying_only: 0,
+		is_available: function(selected_object) {
+			if(selected_object.has_missile_launcher > 0 )
+				return true;
+			else
+				return false;
+		},
 		shots: 1,
 		missiles_per: 8,
 		linkable: 0,
@@ -530,6 +542,12 @@ var vehicle_weapons = Array(
 		rof: 1,
 		flying_only: 0,
 		shots: 1,
+		is_available: function(selected_object) {
+			if(selected_object.has_missile_launcher > 0)
+				return true;
+			else
+				return false;
+		},
 		missiles_per: 12,
 		linkable: 0,
 		mods: 1,
@@ -545,6 +563,12 @@ var vehicle_weapons = Array(
 		rof: 1,
 		flying_only: 0,
 		shots: 1,
+		is_available: function(selected_object) {
+			if(selected_object.has_torpedo_tube > 0 && ( selected_object.this.aircraft > 0 || selected_object.this.watercraft > 0 ) )
+				return true;
+			else
+				return false;
+		},
 		missiles_per: 8,
 		linkable: 0,
 		mods: 1,
@@ -552,13 +576,19 @@ var vehicle_weapons = Array(
 		notes: "AP 50, HW, LBT. Space or watercraft only. Half Range in water."
 	},
 	{
-		name: "Light Torpedo",
+		name: "Heavy Torpedo",
 		classification: "Missiles & Torpedoes",
 		description: "These weapons use the rules for missiles in Savage Worlds and require missile launchers or torpedo tubes to mount. Attackers use Shooting to get a lock if firing directly or Knowledge (Computers) if fired indirectly from a bridge or weapons station. Defenders use Piloting if evading directly or Knowledge (Navigation) from a bridge or nav station. Determine lock by ship—if a ship gets a lock, it may fire all the missiles or torpedoes it’s allowed.",
 		range: "300/600/1200",
 		damage: "8d12",
 		rof: 1,
 		flying_only: 0,
+		is_available: function(selected_object) {
+			if(selected_object.has_torpedo_tube > 0 && ( selected_object.this.aircraft > 0 || selected_object.this.watercraft > 0 ) )
+				return true;
+			else
+				return false;
+		},
 		shots: 1,
 		missiles_per: 4,
 		linkable: 0,

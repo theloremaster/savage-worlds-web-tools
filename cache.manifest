@@ -1,7 +1,8 @@
 CACHE MANIFEST
-# rev 2014072702
-# 2014-07-27:v2
-# Recompile from merge conflict of minified JS
+# rev 2014080501
+# 2014-08-05:v1
+# Torpedoes only now show for vehicles with torpedo launchers, as do missles/missle launchers.. minor fixes.
+
 
 CACHE:
 http://jdgwf.github.io/savage-worlds-web-tools/extras_view.html

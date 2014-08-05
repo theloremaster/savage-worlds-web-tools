@@ -454,6 +454,9 @@ var vehicle_modifications = Array(
 		},
 		get_cost: function(selected_vehicle) {
 			return 50000;
+		},
+		get_mod_effect: function(selected_vehicle) {
+			selected_vehicle.has_missile_launcher = 1;
 		}
 	},
 	{
@@ -565,6 +568,15 @@ var vehicle_modifications = Array(
 		},
 		get_cost: function(selected_vehicle) {
 			return 500000;
+		},
+		get_mod_effect: function(selected_vehicle) {
+			selected_vehicle.has_torpedo_tube = 1;
+		},
+		is_available: function(selected_vehicle) {
+			if( selected_vehicle.aircraft > 0 || selected_vehicle.watercraft > 0)
+				return true;
+			else
+				return false;
 		}
 	},
 	{
@@ -596,6 +608,7 @@ var vehicle_modifications = Array(
 		get_mod_effect: function(selected_vehicle) {
 			selected_vehicle.ts = Math.ceil(selected_vehicle.ts / 2);
 			selected_vehicle.acc = Math.ceil(selected_vehicle.acc / 2);
+			selected_vehicle.watercraft = 1;
 		}
 	}
 );
