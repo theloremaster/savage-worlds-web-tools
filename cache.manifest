@@ -1,7 +1,7 @@
 CACHE MANIFEST
-# rev 2014080501
-# 2014-08-06:v1
-# Minor bugfix where creators were saving twice
+# rev 2014080502
+# 2014-08-06:v2
+# Fixed export/print display bug for non-power armor (toughness/armor)
 
 CACHE:
 http://jdgwf.github.io/savage-worlds-web-tools/extras_view.html
