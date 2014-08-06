@@ -86,8 +86,14 @@ creator_base.prototype = {
 				html_return += "Acc/TS " + this.acc + "/" + this.ts + ", ";
 			if(this.aircraft)
 				html_return += "Climb " + this.climb + ", Flying Pace " + this.flying_pace + ", ";
-			if(this.armor)
-				html_return += "Armor +" + this.armor + ", ";
+			if(this.toughness > 0) {
+				html_return += "Toughness " + this.toughness + " (" + this.armor + "), ";
+			} else {
+				if(this.armor) {
+					html_return += "Armor +" + this.armor + ", ";
+				}
+			}
+
 			if(this.pace)
 				html_return += "Pace " + this.pace + ", ";
 			if(this.crew > 0)
@@ -152,7 +158,13 @@ creator_base.prototype = {
 			html_return += "Size " + this.size + ", ";
 			html_return += "Acc/TS " + this.acc + "/" + this.ts + ", ";
 			html_return += "Climb " + this.climb + ", ";
-			html_return += "Toughness " + this.toughness + " (" + this.armor + "), ";
+			if(this.toughness > 0) {
+				html_return += "Toughness " + this.toughness + " (" + this.armor + "), ";
+			} else {
+				if(this.armor) {
+					html_return += "Armor +" + this.armor + ", ";
+				}
+			}
 			html_return += "Crew " + this.crew + ", ";
 
 			html_return += "Cost $" + simplify_cost(this.cost) + "" + "\n";

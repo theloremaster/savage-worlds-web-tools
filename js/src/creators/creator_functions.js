@@ -265,7 +265,6 @@ $(".js-load-data").click( function() {
 } );
 
 
-
 $(".js-load-data").click( function() {
 	load_selected_item();
 } );
