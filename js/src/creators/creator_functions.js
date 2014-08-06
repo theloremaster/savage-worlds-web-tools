@@ -266,17 +266,6 @@ $(".js-load-data").click( function() {
 
 
 
-$(".js-save-item").click( function() {
-	if( current_selected_object && current_selected_object.size > 0 && current_selected_object.item_name != "" && current_selected_object.item_name != "(nameless)") {
-		save_to_localstorage( current_selected_object.export_json() );
-		propogate_load_list();
-		createAlert( "Your ship has been saved.", "success" );
-	} else {
-		createAlert( "Please name your ship and select a size before saving", "danger"  );
-	}
-} );
-
-
 $(".js-load-data").click( function() {
 	load_selected_item();
 } );
