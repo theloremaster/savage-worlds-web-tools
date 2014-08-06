@@ -1,7 +1,7 @@
 CACHE MANIFEST
-# rev 2014080502
-# 2014-08-06:v2
-# Fixed export/print display bug for non-power armor (toughness/armor)
+# rev 2014080503
+# 2014-08-06:v3
+# Added unofficial Very Light Walker
 
 CACHE:
 http://jdgwf.github.io/savage-worlds-web-tools/extras_view.html
