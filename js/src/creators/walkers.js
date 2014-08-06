@@ -5,6 +5,24 @@ if calc_weight is empty or undefined, it should be assumed 5 */
 
 var walker_sizes = Array(
 	{
+		size_label: "Very Light (unofficial)",
+		examples: "12 feet tall",
+		strength: 2,
+		pace: 30,
+		size: 4,
+		acc: 0,
+		ts: 0,
+		climb: 0,
+		toughness: 15,
+		armor: 4,
+		mods: 15,
+		crew: 1,
+		cost: 500000,
+		energy_capacity: 0,
+		provisions: 0,
+		unofficial: 1
+	},
+	{
 		size_label: "Light",
 		examples: "20 feet tall",
 		strength: 4,
