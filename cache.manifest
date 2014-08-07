@@ -1,7 +1,7 @@
 CACHE MANIFEST
-# rev 2014080703
-# 2014-08-07:v3
-# Fix for bb code sunglasses when posting some vehicles and walkers to a bb forum
+# rev 2014080704
+# 2014-08-07:v4
+# Removal of Rail Gun (as Mass Driver replaces it in current version, Railguns were in dev version of SciFi companion)
 
 CACHE:
 http://jdgwf.github.io/savage-worlds-web-tools/extras_view.html
