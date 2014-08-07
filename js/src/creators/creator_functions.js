@@ -189,7 +189,6 @@ function propogate_weapon_mods() {
 
 
 function propogate_load_list() {
-	console.log(current_selected_object.object_type);
 	current_load_data = localstorage_parse_data();
 	html = "<ul class='list-unstyled'>";
 	for(lsCounter = 0; lsCounter < current_load_data.length; lsCounter++) {
@@ -373,7 +372,6 @@ function refresh_creator_page() {
 		$('.js-fix-weapon').unbind('change');
 		$(".js-fix-weapon").change( function() {
 			weaponIndex = $(this).attr("ref");
-			console.log("Fix weapon: " + weaponIndex + " / " + $(this).val());
 			current_selected_object.fix_weapon( weaponIndex, $(this).val() );
 			refresh_creator_page();
 		});

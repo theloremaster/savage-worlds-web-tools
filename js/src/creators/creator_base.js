@@ -211,11 +211,20 @@ creator_base.prototype = {
 			html_return += "A size must be selected.";
 		}
 
-		for(removeHideCounter = 1; removeHideCounter < 31; removeHideCounter++)
+
+
+		for(removeHideCounter = 1; removeHideCounter < 31; removeHideCounter++) {
 			html_return = html_return.replace("<span class='hide'>" + removeHideCounter + "</span>", "");
+
+			// fix for bb code sunglasses when posting some vehicles and walkers to a bb forum.
+			html_return = html_return.replace("(8)", "( 8 )");
+		}
+
+
 
 		if(jquery_selector)
 			$(jquery_selector).val(html_return);
+
 		return html_return;
 	},
 

@@ -204,7 +204,7 @@ function displayExtra(extra, indexNumber) {
 
 		extraHTML += "</div>";
 		// Book, Page and Copyrights
-		extraHTML += "<fieldset><p><strong>From:</strong> " + extra.book.name;
+		extraHTML += "<fieldset class=\"c-b\"><p><strong>From:</strong> " + extra.book.name;
 
 		if(extra.book.year)
 			extraHTML += " (" + extra.book.year + ") ";
