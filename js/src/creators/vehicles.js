@@ -244,7 +244,7 @@ var vehicle_modifications = Array(
 	},
 	{
 		name: "Armor",
-		description: "Increases a vehicle’s Armor value by +2. Due to the nature of space and the size and shape of vehicles, all Armor is considered Heavy Armor.",
+		description: "Increases a vehicle’s Armor value by +2. An armor value of +4 (2 slots) or more is considered Heavy Armor.",
 		get_max: function(selected_vehicle) { return selected_vehicle.size },
 		get_mod_cost: function(selected_vehicle) {
 			return 1;
@@ -461,7 +461,7 @@ var vehicle_modifications = Array(
 	},
 	{
 		name: "Reinforced Chassis",
-		description: "Increases Toughness of the chassis by +2.",
+		description: "Increases Toughness of the chassis by +1.",
 		get_max: function(selected_vehicle) { return 3 },
 		get_mod_cost: function(selected_vehicle) {
 			return 1;
@@ -470,7 +470,7 @@ var vehicle_modifications = Array(
 			return 1000 * selected_vehicle.size;
 		},
 		get_mod_effect: function(selected_vehicle) {
-			selected_vehicle.toughness = selected_vehicle.toughness + 2;
+			selected_vehicle.toughness = selected_vehicle.toughness + 1;
 		}
 	},
 	{
