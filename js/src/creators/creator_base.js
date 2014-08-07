@@ -173,7 +173,7 @@ creator_base.prototype = {
 			if(this.crew > 0)
 				html_return += "Crew " + this.crew + ", ";
 
-			html_return += "Cost $" + simplify_cost(this.cost) + "<br />";
+			html_return += "Cost $" + simplify_cost(this.cost) + "\n";
 
 			if(this.energy_capacity > 0)
 				html_return += "[b]Energy Capacity[/b]: " + this.energy_capacity + "\n";
@@ -217,7 +217,7 @@ creator_base.prototype = {
 			html_return = html_return.replace("<span class='hide'>" + removeHideCounter + "</span>", "");
 
 			// fix for bb code sunglasses when posting some vehicles and walkers to a bb forum.
-			html_return = html_return.replace("(8)", "( 8 )");
+			html_return = html_return.replace("8)", " 8 )");
 		}
 
 
@@ -261,6 +261,7 @@ creator_base.prototype = {
 			importedObj= JSON.parse(importedObjectString);
 		}
 		catch(e) {
+			// JSON Import error
 			return false;
 		}
 
@@ -299,6 +300,7 @@ creator_base.prototype = {
 			refresh_creator_page();
 			return true;
 		}
+		// Wasn't an object (or was empty)
 		return false;
 	},
 

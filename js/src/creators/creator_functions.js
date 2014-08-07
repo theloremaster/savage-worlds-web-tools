@@ -221,7 +221,7 @@ function propogate_load_list() {
 
 $(".js-import-data").click( function() {
 	if( $(".js-import-code").val() != "" ) {
-		if(current_selected_object.import_json( $(".js-import-code").val() ) ) {
+		if( current_selected_object.import_json( $(".js-import-code").val() ) ) {
 			$(".js-set-name").val(current_selected_object.item_name);
 			$(".js-set-description").val(current_selected_object.object_description);
 			$(".js-import-code").val('');
@@ -255,7 +255,7 @@ function load_selected_item() {
 		selectedItem = get_data_from_localstorage(selectedItemIndex);
 		current_selected_object.import_json( selectedItem );
 		$(".js-set-name").val(current_selected_object.item_name);
-		$(".js-set-description").val(current_selected_object.ship_description);
+		$(".js-set-description").val(current_selected_object.object_description);
 		refresh_creator_page();
 		createAlert( "Your " + current_selected_object.object_label+ " has been loaded.", "success" );
 	}
