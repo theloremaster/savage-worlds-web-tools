@@ -249,7 +249,7 @@ var walker_modifications = Array(
 			return 10000 * selected_walker.size;
 		},
 		get_mod_effect: function(selected_walker) {
-			selected_walker.toughness = selected_walker.toughness + 4;
+			selected_walker.toughness = selected_walker.toughness + 2;
 		}
 	},
 	{
