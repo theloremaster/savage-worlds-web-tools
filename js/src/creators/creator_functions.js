@@ -398,3 +398,8 @@ function stripslashes (str) {
     }
   });
 }
+
+function format_pace_realworld(pace_value) {
+	// never take things at pace value. /groan
+	return pace_value + " (" + Math.floor(pace_value * 2.4)+ " mph, " + Math.floor(pace_value * 3.862416) + " kph)";
+}
