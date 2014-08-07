@@ -222,11 +222,14 @@ function propogate_load_list() {
 
 $(".js-import-data").click( function() {
 	if( $(".js-import-code").val() != "" ) {
-		current_selected_object.import_json( $(".js-import-code").val() );
-		$(".js-set-name").val(current_selected_object.item_name);
-		$(".js-set-description").val(current_selected_object.power_armor_description);
-		$(".js-import-code").val('');
-		createAlert( "Your " + current_selected_object.object_label+ " has been imported.", "success" );
+		if(current_selected_object.import_json( $(".js-import-code").val() ) ) {
+			$(".js-set-name").val(current_selected_object.item_name);
+			$(".js-set-description").val(current_selected_object.object_description);
+			$(".js-import-code").val('');
+			createAlert( "Your " + current_selected_object.object_label+ " has been imported.", "success" );
+		} else {
+			createAlert( "Your " + current_selected_object.object_label+ " could not be imported - please check the formatting of your code.", "warning" );
+		}
 	}
 });
 
@@ -380,4 +383,20 @@ function refresh_creator_page() {
 		$(".js-select-modifications-container").fadeOut();
 	}
 	localStorage["current_" + current_selected_object.object_type] = current_selected_object.export_json();
+}
+
+function stripslashes (str) {
+
+  return (str + '').replace(/\\(.?)/g, function (s, n1) {
+    switch (n1) {
+    case '\\':
+      return '\\';
+    case '0':
+      return '\u0000';
+    case '':
+      return '';
+    default:
+      return n1;
+    }
+  });
 }

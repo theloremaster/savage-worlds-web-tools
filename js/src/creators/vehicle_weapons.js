@@ -61,7 +61,13 @@ var vehicle_weapons = Array(
 		linkable: 0,
 		mods: 1,
 		cost: 500000,
-		notes: "AP 10, HW, LBT. Up to 250 lb. bombs."
+		notes: "AP 10, HW, LBT. Up to 250 lb. bombs.",
+		is_available: function(selected_object) {
+			if( selected_object.aircraft > 0  )
+				return true;
+			else
+				return false;
+		}
 	},
 	{
 		name: "Medium Bomb",
@@ -76,7 +82,13 @@ var vehicle_weapons = Array(
 		linkable: 0,
 		mods: 1,
 		cost: 1000000,
-		notes: "AP 20, HW, 10” radius. 251 to 500 lb. bombs."
+		notes: "AP 20, HW, 10” radius. 251 to 500 lb. bombs.",
+		is_available: function(selected_object) {
+			if( selected_object.aircraft > 0  )
+				return true;
+			else
+				return false;
+		}
 	},
 	{
 		name: "Large Bomb",
@@ -91,7 +103,13 @@ var vehicle_weapons = Array(
 		linkable: 0,
 		mods: 1,
 		cost: 1000000,
-		notes: "AP 30, HW, 20” radius. 501 to 1000 lb. bombs."
+		notes: "AP 30, HW, 20” radius. 501 to 1000 lb. bombs.",
+		is_available: function(selected_object) {
+			if( selected_object.aircraft > 0  )
+				return true;
+			else
+				return false;
+		}
 	},
 	{
 		name: "Block Buster Bomb",
@@ -106,7 +124,13 @@ var vehicle_weapons = Array(
 		linkable: 0,
 		mods: 1,
 		cost: 1000000,
-		notes: "AP 40, HW, 30” radius. 1001 to 4000 lb. bombs."
+		notes: "AP 40, HW, 30” radius. 1001 to 4000 lb. bombs.",
+		is_available: function(selected_object) {
+			if( selected_object.aircraft > 0  )
+				return true;
+			else
+				return false;
+		}
 	},
 	{
 		name: "City Buster Bomb",
@@ -121,7 +145,13 @@ var vehicle_weapons = Array(
 		linkable: 0,
 		mods: 1,
 		cost: 1000000,
-		notes: "AP 40, HW, 50” radius. 4001 to 8000 lb. bombs."
+		notes: "AP 40, HW, 50” radius. 4001 to 8000 lb. bombs.",
+		is_available: function(selected_object) {
+			if( selected_object.aircraft > 0  )
+				return true;
+			else
+				return false;
+		}
 	},
 	{
 		name: "Small Cannon",

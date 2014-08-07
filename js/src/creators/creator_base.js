@@ -156,8 +156,10 @@ creator_base.prototype = {
 		if(this.selected_size && this.selected_size.size_label) {
 			html_return += "[b]" + this.selected_size.size_label + " " + this.object_label + "[/b]: ";
 			html_return += "Size " + this.size + ", ";
-			html_return += "Acc/TS " + this.acc + "/" + this.ts + ", ";
-			html_return += "Climb " + this.climb + ", ";
+			if(this.acc > 0)
+				html_return += "Acc/TS " + this.acc + "/" + this.ts + ", ";
+			if(this.aircraft)
+				html_return += "Climb " + this.climb + ", Flying Pace " + this.flying_pace + ", ";
 			if(this.toughness > 0) {
 				html_return += "Toughness " + this.toughness + " (" + this.armor + "), ";
 			} else {
@@ -165,9 +167,13 @@ creator_base.prototype = {
 					html_return += "Armor +" + this.armor + ", ";
 				}
 			}
-			html_return += "Crew " + this.crew + ", ";
 
-			html_return += "Cost $" + simplify_cost(this.cost) + "" + "\n";
+			if(this.pace)
+				html_return += "Pace " + this.pace + ", ";
+			if(this.crew > 0)
+				html_return += "Crew " + this.crew + ", ";
+
+			html_return += "Cost $" + simplify_cost(this.cost) + "<br />";
 
 			if(this.energy_capacity > 0)
 				html_return += "[b]Energy Capacity[/b]: " + this.energy_capacity + "\n";
@@ -242,10 +248,11 @@ creator_base.prototype = {
 
 	import_json: function(importedObjectString) {
 		try {
+			importedObjectString = stripslashes(importedObjectString);
 			importedObj= JSON.parse(importedObjectString);
 		}
 		catch(e) {
-
+			return false;
 		}
 
 		if(typeof importedObj =='object') {
@@ -281,7 +288,9 @@ creator_base.prototype = {
 			}
 			this.calculate();
 			refresh_creator_page();
+			return true;
 		}
+		return false;
 	},
 
 	sort_selected_modifications_list: function() {
