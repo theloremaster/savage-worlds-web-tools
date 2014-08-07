@@ -98,14 +98,14 @@ function displayExtra(extra, indexNumber) {
 		// Description
 
 		if(extra.image2 || extra.image) {
-			extraHTML += "<div  style=\"float: left; margin: 0 10px 10px 0\">";
+			extraHTML += "<div class=\"extra-img\">";
 			if(extra.image)
 				extraHTML += "<img width=\"200px\" src=\"" + extra.image  + "\" alt=\"" + extra.name + "\" /><br />";
 			if(extra.image2)
 				extraHTML += "<img width=\"200px\" src=\"" + extra.image2  + "\" alt=\"" + extra.name + "\" /><br />";
 			extraHTML += "</div>";
 		}
-
+		extraHTML += "<div class=\"extra-stats\">";
 		if(typeof(extra.blurb) == "string") {
 			if(extra.blurb)
 				extraHTML += "<p>" + extra.blurb + "</p>";
@@ -202,6 +202,7 @@ function displayExtra(extra, indexNumber) {
 			abilitiesHTML = "<li>none.</li>";
 		extraHTML += "<ul>" + abilitiesHTML + "</ul>";
 
+		extraHTML += "</div>";
 		// Book, Page and Copyrights
 		extraHTML += "<fieldset><p><strong>From:</strong> " + extra.book.name;
 
