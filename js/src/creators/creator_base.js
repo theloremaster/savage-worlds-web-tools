@@ -85,7 +85,9 @@ creator_base.prototype = {
 			if(this.acc > 0)
 				html_return += "Acc/TS " + this.acc + "/" + format_pace_realworld(this.ts) + ", ";
 			if(this.aircraft)
-				html_return += "Climb " + this.climb + ", Flying Pace " + format_pace_realworld(this.flying_pace) + ", ";
+				html_return += "Climb " + this.climb + ", ";
+			if(this.flying_pace > 0)
+				html_return += "Flying Pace " + format_pace_realworld(this.flying_pace) + ", ";
 			if(this.toughness > 0) {
 				html_return += "Toughness " + this.toughness + " (" + this.armor + "), ";
 			} else {
@@ -94,7 +96,7 @@ creator_base.prototype = {
 				}
 			}
 
-			if(this.pace)
+			if(this.pace > 0)
 				html_return += "Pace " + format_pace_realworld(this.pace) + ", ";
 			if(this.crew > 0)
 				html_return += "Crew " + this.crew + ", ";
@@ -159,7 +161,9 @@ creator_base.prototype = {
 			if(this.acc > 0)
 				html_return += "Acc/TS " + this.acc + "/" + format_pace_realworld(this.ts) + ", ";
 			if(this.aircraft)
-				html_return += "Climb " + this.climb + ", Flying Pace " + format_pace_realworld(this.flying_pace) + ", ";
+				html_return += "Climb " + this.climb + ", ";
+			if(this.flying_pace > 0)
+				html_return += "Flying Pace " + format_pace_realworld(this.flying_pace) + ", ";
 			if(this.toughness > 0) {
 				html_return += "Toughness " + this.toughness + " (" + this.armor + "), ";
 			} else {
@@ -168,7 +172,7 @@ creator_base.prototype = {
 				}
 			}
 
-			if(this.pace)
+			if(this.pace > 0)
 				html_return += "Pace " + format_pace_realworld(this.pace) + ", ";
 			if(this.crew > 0)
 				html_return += "Crew " + this.crew + ", ";
