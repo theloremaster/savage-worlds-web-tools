@@ -9,8 +9,8 @@ var chargen_edges = Array(
 		book: books_list[0],
 		prereqs: {},
 		incompatible: {},
-		char_effects: function( character_object ) {
-			character_object.edges_available++;
+		char_effects: function( characterObject ) {
+			characterObject.edges_available++;
 		},
 		page: ""
 	},
@@ -20,8 +20,8 @@ var chargen_edges = Array(
 		unlisted: 1,
 		description: "base d6 Agility",
 		book: books_list[0],
-		char_effects: function( character_object ) {
-			character_object.race.attributes.agility = 1;
+		char_effects: function( characterObject ) {
+			characterObject.race.attributes.agility = 1;
 		},
 		prereqs: {},
 		incompatible: {},
@@ -103,8 +103,8 @@ var chargen_edges = Array(
 				vigor: 1
 			}
 		},
-		char_effects: function( character_object ) {
-			character_object.secondary.charisma = character_object.secondary.charisma + 2;
+		char_effects: function( characterObject ) {
+			characterObject.secondary.charisma = characterObject.secondary.charisma + 2;
 		},
 		incompatible: {
 			hindrances: Array(
@@ -121,8 +121,8 @@ var chargen_edges = Array(
 		prereqs: {
 			edges: Array("Attractive")
 		},
-		char_effects: function( character_object ) {
-			character_object.secondary.charisma = character_object.secondary.charisma + 2;
+		char_effects: function( characterObject ) {
+			characterObject.secondary.charisma = characterObject.secondary.charisma + 2;
 		},
 		incompatible: {
 			hindrances: Array(
@@ -138,7 +138,7 @@ var chargen_edges = Array(
 		book: books_list[0],
 		prereqs: {
 		},
-		char_effects: function( character_object ) {
+		char_effects: function( characterObject ) {
 		},
 		incompatible: {},
 		page: "p32"
@@ -153,7 +153,7 @@ var chargen_edges = Array(
 				spirit: 1
 			}
 		},
-		char_effects: function( character_object ) {
+		char_effects: function( characterObject ) {
 
 		},
 		incompatible: {},
@@ -170,7 +170,7 @@ var chargen_edges = Array(
 				strength: 1
 			}
 		},
-		char_effects: function( character_object ) {
+		char_effects: function( characterObject ) {
 
 		},
 		incompatible: {},
@@ -186,7 +186,7 @@ var chargen_edges = Array(
 				vigor: 2
 			}
 		},
-		char_effects: function( character_object ) {
+		char_effects: function( characterObject ) {
 
 		},
 		incompatible: {},
@@ -202,7 +202,7 @@ var chargen_edges = Array(
 				agility: 1
 			}
 		},
-		char_effects: function( character_object ) {
+		char_effects: function( characterObject ) {
 
 		},
 		incompatible: {},
@@ -215,7 +215,7 @@ var chargen_edges = Array(
 		book: books_list[0],
 		prereqs: {
 		},
-		char_effects: function( character_object ) {
+		char_effects: function( characterObject ) {
 			attributes: {
 				smarts: 1
 			}
@@ -230,7 +230,7 @@ var chargen_edges = Array(
 		book: books_list[0],
 		prereqs: {
 		},
-		char_effects: function( character_object ) {
+		char_effects: function( characterObject ) {
 		},
 		incompatible: {
 			hindrances: Array(
@@ -247,7 +247,7 @@ var chargen_edges = Array(
 		prereqs: {
 			edges: Array("Luck")
 		},
-		char_effects: function( character_object ) {
+		char_effects: function( characterObject ) {
 		},
 		incompatible: {
 			hindrances: Array(
@@ -263,7 +263,7 @@ var chargen_edges = Array(
 		book: books_list[0],
 		prereqs: {
 		},
-		char_effects: function( character_object ) {
+		char_effects: function( characterObject ) {
 		},
 		incompatible: {},
 		page: "p33"
@@ -278,7 +278,7 @@ var chargen_edges = Array(
 				agility: 2
 			}
 		},
-		char_effects: function( character_object ) {
+		char_effects: function( characterObject ) {
 		},
 		incompatible: {},
 		page: "p34"
@@ -290,7 +290,7 @@ var chargen_edges = Array(
 		book: books_list[0],
 		prereqs: {
 		},
-		char_effects: function( character_object ) {
+		char_effects: function( characterObject ) {
 		},
 		incompatible: {},
 		page: "p34"
@@ -303,7 +303,7 @@ var chargen_edges = Array(
 		prereqs: {
 			edges: Array("Rich|Noble")
 		},
-		char_effects: function( character_object ) {
+		char_effects: function( characterObject ) {
 		},
 		incompatible: {},
 		page: "p34"
@@ -319,7 +319,7 @@ var chargen_edges = Array(
 			},
 			rank: "seasoned"
 		},
-		char_effects: function( character_object ) {
+		char_effects: function( characterObject ) {
 		},
 		incompatible: {},
 		page: "p34"
@@ -332,7 +332,7 @@ var chargen_edges = Array(
 		prereqs: {
 			edges: Array("Block")
 		},
-		char_effects: function( character_object ) {
+		char_effects: function( characterObject ) {
 		},
 		incompatible: {},
 		page: "p34"
@@ -347,7 +347,7 @@ var chargen_edges = Array(
 				strength: 2
 			}
 		},
-		char_effects: function( character_object ) {
+		char_effects: function( characterObject ) {
 		},
 		incompatible: {},
 		page: "p34"
@@ -361,7 +361,7 @@ var chargen_edges = Array(
 			edges: Array("Brawler"),
 			rank: "seasoned"
 		},
-		char_effects: function( character_object ) {
+		char_effects: function( characterObject ) {
 		},
 		incompatible: {},
 		page: "p34"
@@ -374,7 +374,7 @@ var chargen_edges = Array(
 		prereqs: {
 			rank: "seasoned"
 		},
-		char_effects: function( character_object ) {
+		char_effects: function( characterObject ) {
 		},
 		incompatible: {},
 		page: "p34"
@@ -388,7 +388,7 @@ var chargen_edges = Array(
 			rank: "seasoned",
 			skills: Array( Array("Fighting", 2 ) ),
 		},
-		char_effects: function( character_object ) {
+		char_effects: function( characterObject ) {
 		},
 		incompatible: {},
 		page: "p34"
@@ -402,7 +402,7 @@ var chargen_edges = Array(
 			edges: Array("Counterattack"),
 			rank: "veteran"
 		},
-		char_effects: function( character_object ) {
+		char_effects: function( characterObject ) {
 		},
 		incompatible: {},
 		page: "p34"
@@ -418,7 +418,7 @@ var chargen_edges = Array(
 				agility: 2
 			}
 		},
-		char_effects: function( character_object ) {
+		char_effects: function( characterObject ) {
 		},
 		incompatible: {},
 		page: "p34"
@@ -432,7 +432,7 @@ var chargen_edges = Array(
 			edges: Array("Dodge"),
 			rank: "veteran"
 		},
-		char_effects: function( character_object ) {
+		char_effects: function( characterObject ) {
 		},
 		incompatible: {},
 		page: "p34"

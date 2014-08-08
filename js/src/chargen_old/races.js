@@ -1,17 +1,4 @@
 /* Character Object */
-
-var cargen_genders = Array(
-	{
-		name: "Male"
-	},
-	{
-		name: "Female"
-	},
-	{
-		name: "Other"
-	}
-);
-
 var chargen_races = Array(
 	/* Savage Worlds Deluxe */
 	{
@@ -58,8 +45,8 @@ var chargen_races = Array(
 			{
 				name: "Handy",
 				description: "d6 Skill in Repair, as every noble knows how to service his/her own Solar Collectors",
-				char_effects: function( character_object ) {
-					character_object.race.skills = Array(
+				char_effects: function( characterObject ) {
+					characterObject.race.skills = Array(
 						Array("Repair", 1)
 					);
 				},
@@ -83,8 +70,8 @@ var chargen_races = Array(
 			{
 				name: "Pious",
 				description: "Starts with d6 skill in Knowledge: Zorian Law/Dogma",
-				char_effects: function( character_object ) {
-					character_object.race.skills = Array(
+				char_effects: function( characterObject ) {
+					characterObject.race.skills = Array(
 						Array("Knowledge", 1, "Zorian Law/Dogma")
 					);
 				},
@@ -107,8 +94,8 @@ var chargen_races = Array(
 			{
 				name: "Pious",
 				description: "Starts with d6 skill in Knowledge: Zorian Law/Dogma",
-				char_effects: function( character_object ) {
-					character_object.race.skills = Array(
+				char_effects: function( characterObject ) {
+					characterObject.race.skills = Array(
 						Array("Knowledge", 1, "Zorian Law/Dogma")
 					);
 				},
@@ -144,8 +131,8 @@ var chargen_races = Array(
 			{
 				name: "Well Informed",
 				description: "Starts with d6 skill in Investigation due to the amount of information a Martian must consume to remain competitive in his/her field",
-				char_effects: function( character_object ) {
-					character_object.race.skills = Array(
+				char_effects: function( characterObject ) {
+					characterObject.race.skills = Array(
 						Array("Investigation", 1)
 					);
 				},
@@ -156,8 +143,8 @@ var chargen_races = Array(
 			{
 				name: "Weak",
 				description: "Strength requires two points per step to raise during character generation",
-				char_effects: function( character_object ) {
-					character_object.cost_to_raise.strength = 2;
+				char_effects: function( characterObject ) {
+					characterObject.cost_to_raise.strength = 2;
 				}
 			}
 
@@ -183,12 +170,12 @@ var chargen_races = Array(
 			{
 				name: "Enlightened",
 				description: "Starts with two Knowledge Skills at d6",
-				char_effects: function( character_object ) {
-					character_object.race.skills = Array(
+				char_effects: function( characterObject ) {
+					characterObject.race.skills = Array(
 						Array("Knowledge", 1),
 						Array("Knowledge", 1)
 					);
-					character_object.race.attributes.smarts = 1;
+					characterObject.race.attributes.smarts = 1;
 				},
 			}
 		),
@@ -196,15 +183,15 @@ var chargen_races = Array(
 			{
 				name: "Slower",
 				description: "-1 Pace",
-				char_effects: function( character_object ) {
-					character_object.secondary.pace = character_object.secondary.pace - 1;
+				char_effects: function( characterObject ) {
+					characterObject.secondary.pace = characterObject.secondary.pace - 1;
 				}
 			},
 			{
 				name: "Small",
 				description: "-1 toughness",
-				char_effects: function( character_object ) {
-					character_object.secondary.toughness = character_object.secondary.toughness - 1;
+				char_effects: function( characterObject ) {
+					characterObject.secondary.toughness = characterObject.secondary.toughness - 1;
 				}
 			},
 			{
@@ -214,8 +201,8 @@ var chargen_races = Array(
 			{
 				name: "Small",
 				description: "-1 toughness",
-				char_effects: function( character_object ) {
-					character_object.max_attributes.strength = 2;
+				char_effects: function( characterObject ) {
+					characterObject.max_attributes.strength = 2;
 				}
 			}
 		)

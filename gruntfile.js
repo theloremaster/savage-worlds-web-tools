@@ -21,7 +21,7 @@ module.exports = function(grunt) {
 					sourceMapName: 'js/sourcemap.map'
 				},
 				files: {
-					'js/swwt.min.js' : ['js/src/*.js', 'js/src/chargen/edges.js','js/src/chargen/hindrances.js','js/src/chargen/equipment.js','js/src/chargen/skills.js','js/src/chargen/races.js','js/src/chargen/races.js', 'js/src/chargen/engine.js', 'js/src/chargen/character.js', 'js/src/extras/*.js', 'js/src/creators/*.js'],
+					'js/swwt.min.js' : ['js/src/*.js', 'js/src/chargen/*.js', 'js/src/extras/*.js', 'js/src/creators/*.js'],
 				}
 			}
 		},

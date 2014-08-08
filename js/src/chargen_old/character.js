@@ -36,6 +36,7 @@ var chargen_advancements = Array (
 		once_per_rank: 1
 	}
 );
+
 function chargen_char() {
 	this.name = "";
 	this.race = chargen_races[0];
@@ -106,6 +107,10 @@ function chargen_char() {
 
 	this.powers_selected = Array();
 	this.powers_racial = Array();
+
+	this.rank = "";
+	this.xp = 0;
+	this.advancements = Array();
 
 	this.set_race = set_race;
 	function set_race(raceName) {

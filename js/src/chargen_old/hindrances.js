@@ -3,32 +3,32 @@ var chargen_perks = Array(
 		name: "Raise an Attribute",
 		short_name: "attribute",
 		cost: 2,
-		char_effects: function (character_object) {
-			character_object.attribute_points++;
+		char_effects: function (characterObject) {
+			characterObject.attribute_points++;
 		}
 	},
 	{
 		name: "Choose an Edge",
 		short_name: "edge",
 		cost: 2,
-		char_effects: function (character_object) {
-			character_object.edges_available++;
+		char_effects: function (characterObject) {
+			characterObject.edges_available++;
 		}
 	},
 	{
 		name: "Gain another skill point",
 		short_name: "skill",
 		cost: 1,
-		char_effects: function (character_object) {
-			character_object.skill_points++;
+		char_effects: function (characterObject) {
+			characterObject.skill_points++;
 		}
 	},
 	{
 		name: "Gain additional starting funds (500)",
 		short_name: "cash",
 		cost: 1,
-		char_effects: function (character_object) {
-			character_object.starting_funds = this.starting_funds + 500;
+		char_effects: function (characterObject) {
+			characterObject.starting_funds = this.starting_funds + 500;
 		}
 	}
 );
@@ -272,15 +272,15 @@ var chargen_hindrances = Array(
 			"Your adventurer is getting on in years, but he’s not quite ready for the nursing home. His Pace is reduced by 1, and his Strength and Vigor drop a die type to a minimum of d4, and cannot be raised thereafter.",
 			"On the plus side, the wisdom of his years grants the hero 5 extra skill points that may be used for any skills linked to Smarts."
 			),
-		char_effects: function(character_object) {
-			character_object.secondary.pace--;
-			character_object.attributes.strength--;
-			character_object.attributes.vigor--;
-			if(character_object.attributes.strength < 0)
-				character_object.attributes.strength = 0;
-			if(character_object.attributes.vigor < 0)
-				character_object.attributes.vigor = 0;
-			character_object.attributes.skill_points = character_object.attributes.skill_points + 5;
+		char_effects: function(characterObject) {
+			characterObject.secondary.pace--;
+			characterObject.attributes.strength--;
+			characterObject.attributes.vigor--;
+			if(characterObject.attributes.strength < 0)
+				characterObject.attributes.strength = 0;
+			if(characterObject.attributes.vigor < 0)
+				characterObject.attributes.vigor = 0;
+			characterObject.attributes.skill_points = characterObject.attributes.skill_points + 5;
 		},
 		book: books_list[0],
 		prereqs: {},
@@ -664,8 +664,8 @@ var chargen_hindrances = Array(
 		description: Array(
 			"Unfortunately, this individual hit more than a few ugly sticks on his way down the tree of life. His Charisma is lowered by 2, and he is generally shunned by members of the opposite sex."
 			),
-		char_effects: function(character_object) {
-			character_object.secondary.charisma = character_object.secondary.charisma - 2;
+		char_effects: function(characterObject) {
+			characterObject.secondary.charisma = characterObject.secondary.charisma - 2;
 		},
 		book: books_list[0],
 		prereqs: {},
@@ -779,10 +779,10 @@ var chargen_hindrances = Array(
 			"Young heroes are generally 8–12 years old (in human years—adjust this for races with different aging paradigms). They have only 3 points to adjust their attributes and 10 skill points. On the plus side, youths like these have a fair amount of luck. They draw one extra Benny at the beginning of each game session in addition to any additional Bennies gained from such things as the Luck or Great Luck Edges.",
 			"If the character should live long enough to mature, the Hindrance doesn’t have to be bought off, he’s already paid the price for the Hindrance by starting at a disadvantage. He stops getting the extra Benny when he reaches 18 years of age however (or the age of adulthood in your particular setting)."
 		),
-		char_effects: function (character_object) {
-			character_object.attribute_points = 3;
-			character_object.skill_points = 10;
-			character_object.bennies_total += 1;
+		char_effects: function (characterObject) {
+			characterObject.attribute_points = 3;
+			characterObject.skill_points = 10;
+			characterObject.bennies_total += 1;
 		},
 		book: books_list[0],
 		prereqs: {},

@@ -383,23 +383,3 @@ function refresh_creator_page() {
 	localStorage["current_" + current_selected_object.object_type] = current_selected_object.export_json();
 }
 
-function stripslashes (str) {
-
-  return (str + '').replace(/\\(.?)/g, function (s, n1) {
-    switch (n1) {
-    case '\\':
-      return '\\';
-    case '0':
-      return '\u0000';
-    case '':
-      return '';
-    default:
-      return n1;
-    }
-  });
-}
-
-function format_pace_realworld(pace_value) {
-	// never take things at pace value. /groan
-	return pace_value + " (" + Math.floor(pace_value * 2.4)+ " mph, " + Math.floor(pace_value * 3.862416) + " kph)";
-}

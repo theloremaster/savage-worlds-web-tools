@@ -396,6 +396,16 @@ creator_base.prototype = {
 				this.mods = this.mods - this.selected_modifications[calcModCount].get_mod_cost(this);
 				this.cost += this.selected_modifications[calcModCount].get_cost(this);
 
+				// attempt to see if mod is still availble - remove if it's not.
+				if( this.selected_modifications[calcModCount].is_available ) {
+					if(this.selected_modifications[calcModCount].is_available(this) == false) {
+						this.remove_mod(this.selected_modifications[calcModCount].name);
+						refresh_creator_page();
+						// stop all processing as the page is recalcuating anyways
+						return;
+					}
+				}
+
 				if( this.selected_modifications[calcModCount].get_weight )
 					this.weight += this.selected_modifications[calcModCount].get_weight(this);
 
@@ -506,21 +516,10 @@ creator_base.prototype = {
 
 	get_strength_label: function( strength_value ) {
 		strength_value = strength_value / 1;
-		if( strength_value < 1) {
-			// no strengh
-		}else if( strength_value == 1 ) {
-			return "d4";
-		}else if( strength_value == 2 ) {
-			return "d6";
-		}else if( strength_value == 3 ) {
-			return "d8";
-		}else if( strength_value == 4 ) {
-			return "d10";
-		}else if( strength_value == 5 ) {
-			return "d12";
-		}else if( strength_value > 5 ) {
-			return "d12+" + (strength_value - 5);
-		}
+		if( attribute_labels[strength_value] )
+			return attribute_labels[strength_value];
+		else
+			return "UNKNOWN VALUE";
 	},
 
 	add_weapon: function(weaponName) {
