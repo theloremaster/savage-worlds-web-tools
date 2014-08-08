@@ -1,7 +1,7 @@
 CACHE MANIFEST
-# rev 2014080801
-# 2014-08-08:v1
-# Added strength calculation and label to walkers
+# rev 2014080802
+# 2014-08-08:v2
+# Broke Power Armor Flight into Base, +1 Climb, and Double Speed as per description
 
 CACHE:
 http://jdgwf.github.io/savage-worlds-web-tools/extras_view.html

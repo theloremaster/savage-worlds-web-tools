@@ -120,7 +120,7 @@ var power_armor_modifications = Array(
 	{
 		name: "Flight",
 		description: "The suit has expandable wings and thrusters for VTOL flight at a Pace of 6” and a Climb of 0. Each time it’s taken doubles previous Pace or increases Climb by 1.",
-		get_max: function(selected_object) { return "u" },
+		get_max: function(selected_object) { return 1 },
 		get_mod_cost: function(selected_object) {
 			return 3;
 		},
@@ -132,10 +132,6 @@ var power_armor_modifications = Array(
 			if(selected_object.aircraft == 0) {
 				selected_object.climb = 0;
 				selected_object.flying_pace = 6;
-			} else {
-				selected_object.climb++;
-				selected_object.flying_pace = selected_object.flying_pace * 2;
-
 			}
 
 			selected_object.aircraft = 1;
@@ -143,6 +139,58 @@ var power_armor_modifications = Array(
 		},
 		get_weight: function(selected_object) {
 			return 0;
+		}
+
+	},
+
+	{
+		name: "Flight - Double Speed",
+		description: "The suit has expandable wings and thrusters for VTOL flight at a Pace of 6” and a Climb of 0. Each time it’s taken doubles previous Pace or increases Climb by 1.",
+		get_max: function(selected_object) { return "u" },
+		get_mod_cost: function(selected_object) {
+			return 3;
+		},
+		get_cost: function(selected_object) {
+			return 5000 * selected_object.size;
+		},
+		get_mod_effect: function(selected_object) {
+
+			selected_object.flying_pace = selected_object.flying_pace * 2;
+		},
+		get_weight: function(selected_object) {
+			return 0;
+		},
+		is_available: function(selected_object) {
+			if( selected_object.aircraft > 0  )
+				return true;
+			else
+				return false;
+		}
+
+	},
+
+	{
+		name: "Flight - +1 Climb",
+		description: "The suit has expandable wings and thrusters for VTOL flight at a Pace of 6” and a Climb of 0. Each time it’s taken doubles previous Pace or increases Climb by 1.",
+		get_max: function(selected_object) { return "u" },
+		get_mod_cost: function(selected_object) {
+			return 3;
+		},
+		get_cost: function(selected_object) {
+			return 5000 * selected_object.size;
+		},
+		get_mod_effect: function(selected_object) {
+
+			selected_object.climb++;
+		},
+		get_weight: function(selected_object) {
+			return 0;
+		},
+		is_available: function(selected_object) {
+			if( selected_object.aircraft > 0  )
+				return true;
+			else
+				return false;
 		}
 
 	},
