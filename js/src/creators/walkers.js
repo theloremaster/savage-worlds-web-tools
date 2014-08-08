@@ -7,7 +7,7 @@ var walker_sizes = Array(
 	{
 		size_label: "Ultraight (unofficial)",
 		examples: "12 feet tall",
-		strength: 2,
+		strength: 7,
 		pace: 30,
 		size: 4,
 		acc: 0,
@@ -25,7 +25,7 @@ var walker_sizes = Array(
 	{
 		size_label: "Light",
 		examples: "20 feet tall",
-		strength: 4,
+		strength: 9,
 		pace: 24,
 		size: 6,
 		acc: 0,
@@ -42,7 +42,7 @@ var walker_sizes = Array(
 	{
 		size_label: "Medium",
 		examples: "30 feet tall",
-		strength: 6,
+		strength: 11,
 		pace: 18,
 		size: 8,
 		acc: 0,
@@ -59,7 +59,7 @@ var walker_sizes = Array(
 	{
 		size_label: "Heavy",
 		examples: "50 feet tall",
-		strength: 8,
+		strength: 13,
 		pace: 12,
 		size: 10,
 		acc: 0,
@@ -76,7 +76,7 @@ var walker_sizes = Array(
 	{
 		size_label: "Super Heavy",
 		examples: "80 feet tall",
-		strength: 10,
+		strength: 15,
 		pace: 8,
 		size: 12,
 		acc: 0,
@@ -93,7 +93,7 @@ var walker_sizes = Array(
 	{
 		size_label: "Titan",
 		examples: "120 feet tall",
-		strength: 12,
+		strength: 17,
 		pace: 8,
 		size: 14,
 		acc: 0,

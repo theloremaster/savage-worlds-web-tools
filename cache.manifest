@@ -1,7 +1,7 @@
 CACHE MANIFEST
-# rev 2014080710
-# 2014-08-07:v10
-# Fixed data entry error on Vehicle Reinforced Chassis
+# rev 2014080801
+# 2014-08-08:v1
+# Added strength calculation and label to walkers
 
 CACHE:
 http://jdgwf.github.io/savage-worlds-web-tools/extras_view.html

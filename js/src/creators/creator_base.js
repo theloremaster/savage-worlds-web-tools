@@ -101,6 +101,9 @@ creator_base.prototype = {
 			if(this.crew > 0)
 				html_return += "Crew " + this.crew + ", ";
 
+			if(this.strength > 0)
+				html_return += "Strength " + this.get_strength_label( this.strength ) + ", ";
+
 			html_return += "Cost $" + simplify_cost(this.cost) + "<br />";
 
 			if(this.energy_capacity > 0)
@@ -176,6 +179,9 @@ creator_base.prototype = {
 				html_return += "Pace " + format_pace_realworld(this.pace) + ", ";
 			if(this.crew > 0)
 				html_return += "Crew " + this.crew + ", ";
+
+			if(this.strength > 0)
+				html_return += "Strength " + this.get_strength_label( this.strength ) + ", ";
 
 			html_return += "Cost $" + simplify_cost(this.cost) + "\n";
 
@@ -341,6 +347,8 @@ creator_base.prototype = {
 
 		if( this.selected_size && this.selected_size.size_label ) {
 			// Flush Stats for recalulation
+			this.strength = 0;
+
 			this.strength_bonus = 0;
 			this.aircraft = 0;
 			this.watercraft = 0;
@@ -357,6 +365,8 @@ creator_base.prototype = {
 			this.aircraft = 0;
 			this.strength_bonus = 0;
 			this.climb = this.selected_size.climb;
+			if(this.selected_size.strength)
+				this.strength = this.selected_size.strength;
 			this.toughness = this.selected_size.toughness;
 			this.base_toughness = this.selected_size.toughness;
 			this.armor = this.selected_size.armor;
@@ -492,6 +502,25 @@ creator_base.prototype = {
 		}
 
 		return return_value;
+	},
+
+	get_strength_label: function( strength_value ) {
+		strength_value = strength_value / 1;
+		if( strength_value < 1) {
+			// no strengh
+		}else if( strength_value == 1 ) {
+			return "d4";
+		}else if( strength_value == 2 ) {
+			return "d6";
+		}else if( strength_value == 3 ) {
+			return "d8";
+		}else if( strength_value == 4 ) {
+			return "d10";
+		}else if( strength_value == 5 ) {
+			return "d12";
+		}else if( strength_value > 5 ) {
+			return "d12+" + (strength_value - 5);
+		}
 	},
 
 	add_weapon: function(weaponName) {
