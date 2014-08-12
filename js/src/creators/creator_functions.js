@@ -196,7 +196,7 @@ function propogate_load_list() {
 			html += "<li style='display:block;overflow:hidden; padding: 2px; margin: 2px; border-bottom: 1px solid #dedede;'>";
 			html += "<label style='display: inline; font-weight: normal'>";
 			html += "<input type='radio' name='selected_load' value='" + lsCounter + "' /> ";
-			html += current_load_data[lsCounter].name + " (Size " + current_load_data[lsCounter].size + ")"; //  - " + currentPowerArmors[lsCounter].saved;
+			html += current_load_data[lsCounter].name + " (Size " + current_load_data[lsCounter].size + ")"; //  - " + current_load_data[lsCounter].saved;
 			html += "</label>";
 			html += "<button ref='" + lsCounter + "' class='js-delete-data btn btn-danger pull-right btn-xs' type='button'>Delete</button>";
 			html += "</li>";
@@ -260,12 +260,6 @@ function load_selected_item() {
 		createAlert( "Your " + current_selected_object.object_label+ " has been loaded.", "success" );
 	}
 }
-
-$(".js-load-data").click( function() {
-	load_selected_item();
-	propogate_load_list();
-} );
-
 
 $(".js-load-data").click( function() {
 	load_selected_item();

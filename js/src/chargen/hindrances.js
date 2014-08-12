@@ -24,11 +24,11 @@ var chargen_perks = Array(
 		}
 	},
 	{
-		name: "Gain additional starting funds (500)",
+		name: "Gain additional starting funds",
 		short_name: "cash",
 		cost: 1,
 		char_effects: function (character_object) {
-			character_object.starting_funds = this.starting_funds + 500;
+			character_object.starting_funds = character_object.starting_funds + character_object.base_starting_funds;
 		}
 	}
 );
@@ -302,6 +302,7 @@ var chargen_hindrances = Array(
 		prereqs: {},
 		incompatible: {},
 		major: 0,
+		specify_field: 1,
 		minor: 1,
 		page: "p29"
 	},
@@ -316,6 +317,7 @@ var chargen_hindrances = Array(
 		prereqs: {},
 		incompatible: {},
 		major: 1,
+		specify_field: 1,
 		minor: 0,
 		page: "p29"
 	},

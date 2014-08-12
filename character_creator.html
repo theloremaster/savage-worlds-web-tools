@@ -17,7 +17,8 @@
 <div class="header-bar">
 	<div class="container">
 		<div class="row">
-			<div class="col-md-12">
+			<div class="col-sm-12">
+				<div class="bug-tweet pull-right text-right">Found a bug?<br /><a href="https://twitter.com/intent/tweet?screen_name=Gauthic&text=%23SWWebTools%20Bug%20CharGen%3A%20" class="twitter-mention-button" data-related="Gauthic">Tweet to @Gauthic</a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script></a></div>
 				<h1><a class="ios_app_click" href="./index.html" title="Savage Worlds Web Tools">Savage Worlds Web Tools</a> - Character Creator</h1>
 				<p class="js-smarty-comment">This web app is a rudimentary Character Creator for the Savage Worlds pen and paper role playing game.</p>
 			</div>
@@ -25,41 +26,226 @@
 	</div>
 </div>
 
+
+
+<div class="action-bar">
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-12">
+				<button type="button" class="btn btn-default js-new-character">New</button>
+				<button type="button" class="btn btn-default" data-toggle="modal" data-target=".js-load-character-dialog">Load</button>
+				<button type="button" class="btn btn-default js-save-character">Save</button>
+				<button type="button" class="btn btn-default" data-toggle="modal" data-target=".js-export-character-dialog">Export</button>
+				<button type="button" class="btn btn-default" data-toggle="modal" data-target=".js-import-character-dialog">Import</button>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="js-export-character-dialog modal fade">
+	<div class="modal-character-dialog">
+    	<div class="modal-content">
+      		<div class="modal-header">
+				<h4 class="modal-title">Export Character</h4>
+			</div>
+			<div class="modal-body">
+				<h5>BB Code</h5>
+				<textarea class="js-bb-code" style="height:150px" readonly="readonly"></textarea>
+			</div>
+			<div class="modal-body">
+				<h5>JSON</h5>
+				<textarea class="js-json-code" style="height:150px" readonly="readonly"></textarea>
+			</div>
+      		<div class="modal-footer">
+        		<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+      		</div>
+		</div>
+	</div>
+</div>
+
+<div class="js-load-character-dialog modal fade">
+	<div class="modal-character-dialog">
+    	<div class="modal-content">
+      		<div class="modal-header">
+				<h4 class="modal-title">Load Character</h4>
+			</div>
+			<div class="modal-body js-load-list">
+
+			</div>
+      		<div class="modal-footer">
+        		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        		<button type="button" class="btn btn-primary js-load-char-data" data-dismiss="modal">Load</button>
+      		</div>
+		</div>
+	</div>
+</div>
+
+<div class="js-import-character-dialog modal fade">
+	<div class="modal-character-dialog">
+    	<div class="modal-content">
+      		<div class="modal-header">
+				<h4 class="modal-title">Import Character</h4>
+			</div>
+			<div class="modal-body">
+				<h5>Paste exported JSON code below</h5>
+				<textarea class="js-import-code" style="height:150px"></textarea>
+			</div>
+      		<div class="modal-footer">
+        		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        		<button type="button" class="btn btn-primary js-import-data" data-dismiss="modal">Import</button>
+      		</div>
+		</div>
+	</div>
+</div>
+
+
 <div class="container">
 
+	<div class="js-alert-container"></div>
+
 	<div class="row page-main">
-		<div class="col-md-12">
+		<div class="col-sm-12">
 			<h2>Under Reconstruction</h2>
-			<p>As of August 9th, 2014 this whole section is undergoing a bottom to top rewrite. I'm able to salvage a few things, such as data entry for hindrances and edges, but I'm working on more maintainable code as I've learned a few more tricks in Objest Oriented JavaScript (finally a way to handle inheritance, coming from C++ coding this is a godsend!) since the original creation of this section more than a year ago.</p>
+			<p>As of August 9th, 2014 this whole section is undergoing a bottom to top rewrite. I'm able to salvage a few things, such as data entry for hindrances and edges, but I'm working on more maintainable code as I've learned a few more tricks in Object Oriented JavaScript (finally a way to handle inheritance, coming from C++ coding this is a godsend!) since the original creation of this section more than a year ago.</p>
 			<p>Thanks for your patience</p>
 		</div>
 	</div>
 
 	<div class="row">
-		<div class="col-md-4">
-			<fieldset><legend>Fluff Information</legend>
-				<label>Name: <input type="text" class="js-chargen-name" /></label>
-				<label>Race: <select class="js-chargen-race"></select></label>
-				<label>Gender: <select class="js-chargen-gender"></select></label>
-				<label>Description: <textarea class="js-chargen-description"></textarea></label>
+		<div class="col-sm-12">
+			<fieldset>
+				<legend>Character Information</legend>
+				<div class="row">
+					<div class="col-sm-12">
+						<label>Name: <input type="text" class="js-chargen-name" /></label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-3">
+						<label>Race: <select class="js-chargen-race"></select></label>
+						<label>Gender: <select class="js-chargen-gender"></select></label>
+					</div>
+					<div class="col-sm-9">
+						<label>Description: <textarea class="js-chargen-description"></textarea></label>
+					</div>
+				</div>
 			</fieldset>
-		</div>
 
-		<div class="col-md-4">
-			<fieldset><legend>Stats</legend>
-				<label>Agility: <select class="js-chargen-attributes-agility"></select></label>
-				<label>Smarts: <select class="js-chargen-attributes-smarts"></select></label>
-				<label>Spirit: <select class="js-chargen-attributes-spirit"></select></label>
-				<label>Strength: <select class="js-chargen-attributes-strength"></select></label>
-				<label>Vigor: <select class="js-chargen-attributes-vigor"></select></label>
-				<div class="js-charget-attributes-points-label"></div>
+			<fieldset style="display: none" class="js-validity-container">
+				<legend>Validity Errors</legend>
+				<div class="row">
+					<div class="col-sm-12 js-validity-detail">
+					</div>
+				</div>
 			</fieldset>
 		</div>
 
 	</div>
 
 	<div class="row">
-		<div class="col-md-12 footer">
+		<div class="col-sm-12">
+			<fieldset>
+				<legend>Stats and Skills</legend>
+
+				<div class="row">
+					<div class="col-sm-15">
+						<label><h4 class="thinned text-center">Agility</h4><select class="attribute-select js-chargen-attributes-agility"></select></label>
+					</div>
+					<div class="col-sm-15">
+						<label><h4 class="thinned text-center">Smarts</h4><select class="attribute-select js-chargen-attributes-smarts"></select></label>
+					</div>
+					<div class="col-sm-15">
+						<label><h4 class="thinned text-center">Spirit</h4><select class="attribute-select js-chargen-attributes-spirit"></select></label>
+					</div>
+					<div class="col-sm-15">
+						<label><h4 class="thinned text-center">Strength</h4><select class="attribute-select js-chargen-attributes-strength"></select></label>
+					</div>
+					<div class="col-sm-15">
+						<label><h4 class="thinned text-center">Vigor</h4><select class="attribute-select js-chargen-attributes-vigor"></select></label>
+					</div>
+				</div>
+				<div class="js-chargen-attributes-points-label"></div>
+				<div class="row">
+					<div class="col-sm-15">
+						TODO agility skills
+					</div>
+					<div class="col-sm-15">
+						TODO smarts skills
+					</div>
+					<div class="col-sm-15">
+						TODO spirit skills
+					</div>
+					<div class="col-sm-15">
+						TODO strength skills
+					</div>
+					<div class="col-sm-15">
+						TODO vigor skills
+					</div>
+				</div>
+			</fieldset>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-sm-4">
+			<fieldset>
+				<legend>Hindrances</legend>
+				<div class="js-list-hindrances"></div>
+				<div class="js-add-hindrance"></div>
+			</fieldset>
+		</div>
+
+		<div class="col-sm-4">
+			<fieldset>
+				<legend>Perks</legend>
+				<div class="js-chargen-perks-points-label"></div>
+				<div class="js-list-perks"></div>
+				<div class="js-add-perk"></div>
+
+			</fieldset>
+		</div>
+
+		<div class="col-sm-4 bg-warning">
+			<fieldset>
+				<legend>Edges</legend>
+				<h4>TODO</h4>
+				<div class="js-chargen-edges-points-label"></div>
+				<div class="js-list-edges"></div>
+				<div class="js-add-edge"></div>
+
+			</fieldset>
+		</div>
+
+	</div>
+
+	<div class="row">
+
+		<div class="col-sm-4">
+			<fieldset>
+				<legend>Equipment</legend>
+				<h4>TODO</h4>
+				<p>Equipment purchases (along with "buy for free" checkbox) and starting cash dropdown for various settings (i.e SFC has standard base cash as $750).</p>
+			</fieldset>
+		</div>
+
+		<div class="col-sm-4">
+			<fieldset>
+				<legend>Powers</legend>
+				<h4>TODO</h4>
+				<p>Adding of powers and trappings is currently low on the TODO list (probably tied with advancement).</p>
+			</fieldset>
+		</div>
+
+		<div class="col-sm-4">
+			<fieldset>
+				<legend>Advancement</legend>
+				<h4>TODO</h4>
+				<p>Adding of experience points, character_class.calculate() will handle novice/seasoned/etc. Once advancements are available list of what to choose will appear as a select field per advancement below.</p>
+			</fieldset>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-sm-12 footer">
 			<a href="https://www.peginc.com/licensing/" title="Click here for more info on Pinnacle Entertainment Groups's licensing policies"><img src="./img/sw_fan_78x50.png" alt="Savage Worlds Fan Logo" /></a>
 			<p>This tool references the Savage Worlds game system, available from Pinnacle Entertainment Group at <a href="http:/www.peginc.com" title="Pinnacle Entertainment Group">www.peginc.com</a>. Savage Worlds and all associated logos and trademarks are copyrights of Pinnacle Entertainment Group. Used with permission. Pinnacle makes no representation or warranty as to the quality, viability, or suitability for purpose of this product.</p>
 
@@ -93,6 +279,8 @@ $(window).load(
 		current_character.init();
 		if( typeof(localStorage["current_character"]) != "undefined" && localStorage["current_character"]) {
 			current_character.import_json( localStorage["current_character"] );
+			$(".js-chargen-name").val(current_character.name);
+			$(".js-chargen-description").val(current_character.description);
 		}
 		refresh_chargen_page();
 	}

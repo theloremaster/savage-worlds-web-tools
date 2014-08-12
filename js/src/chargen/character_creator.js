@@ -1,4 +1,4 @@
-function propogate_attribute_options(current_value, current_attribute) {
+function propagate_attribute_options(current_value, current_attribute) {
 	if(!current_value)
 		current_value = 0;
 
@@ -15,16 +15,29 @@ function propogate_attribute_options(current_value, current_attribute) {
 
 	html = "";
 	for(attribute_counter = min_count; attribute_counter < max_count; attribute_counter++) {
-		if(attribute_labels[attribute_counter])
+		if(attribute_labels[attribute_counter]) {
+			current_class = ""
+			if(attribute_counter == 1)
+				current_class = "d4";
+			if(attribute_counter == 2)
+				current_class = "d6";
+			if(attribute_counter == 3)
+				current_class = "d8";
+			if(attribute_counter == 4)
+				current_class = "d10";
+			if(attribute_counter >= 5)
+				current_class = "d12";
+
 			if(current_value == attribute_counter)
-				html += "<option selected=\"selected\" value=\"" + attribute_counter + "\">" + attribute_labels[attribute_counter] + "</option>";
+				html += "<option class=\"die-select " + current_class + "\" selected=\"selected\" value=\"" + attribute_counter + "\">" + attribute_labels[attribute_counter] + "</option>";
 			else
-				html += "<option value=\"" + attribute_counter + "\">" + attribute_labels[attribute_counter] + "</option>";
+				html += "<option class=\"die-select " + current_class + "\" value=\"" + attribute_counter + "\">" + attribute_labels[attribute_counter] + "</option>";
+		}
 	}
 	$(select_selector).html(html);
 }
 
-function propogate_race_options(select_selector) {
+function propagate_race_options(select_selector) {
 
 	html = "";
 	for(race_counter = 0; race_counter < chargen_races.length; race_counter++) {
@@ -37,17 +50,28 @@ function propogate_race_options(select_selector) {
 }
 
 function display_remaining_attribute_points(selector_name) {
+	$(selector_name).removeClass("text-danger");
+	$(selector_name).removeClass("text-primary");
+
 	if(current_character.attribute_points == 0) {
 		$(selector_name).text(  "No points remaining" );
 	} else if( current_character.attribute_points > 0 ) {
-		$(selector_name).text(  current_character.attribute_points + " points remaining" );
+		$(selector_name).addClass("text-primary");
+		if(current_character.attribute_points == 1)
+			$(selector_name).text(  current_character.attribute_points + " point remaining" );
+		else
+			$(selector_name).text(  current_character.attribute_points + " points remaining" );
 	} else {
-		$(selector_name).text(  current_character.attribute_points * -1 + " points overspent" );
+		$(selector_name).addClass("text-danger");
+		if(current_character.attribute_points == -1)
+			$(selector_name).text(  current_character.attribute_points * -1 + " point overspent" );
+		else
+			$(selector_name).text(  current_character.attribute_points * -1 + " points overspent" );
 	}
 
 }
 
-function propogate_gender_options(select_selector) {
+function propagate_gender_options(select_selector) {
 
 	html = "";
 	for(gender_counter = 0; gender_counter < cargen_genders.length; gender_counter++) {
@@ -59,16 +83,10 @@ function propogate_gender_options(select_selector) {
 	$(select_selector).html(html);
 }
 
-function event_attribute_changed(attribute_name, new_value) {
-	current_character.set_attribute(attribute_name, new_value);
-	refresh_chargen_page();
-}
 
-function refresh_chargen_page() {
-	current_character.calculate();
-	localStorage["current_character"] = current_character.export_json();
-	// Fill in Fluff Section
-	$(".js-chargen-name").val(current_character.name);
+function propagate_character_section() {
+// Fill in Fluff Section
+//	$(".js-chargen-name").val(current_character.name);
 	$(".js-chargen-name").unbind("keyup");
 	$(".js-chargen-name").keyup( function(event) {
 		current_character.set_name($(this).val() );
@@ -76,7 +94,7 @@ function refresh_chargen_page() {
 		return;
 	});
 
-	propogate_race_options(".js-chargen-race")
+	propagate_race_options(".js-chargen-race")
 	$(".js-chargen-race").unbind("change");
 	$(".js-chargen-race").change( function(event) {
 		current_character.set_race($(this).val() );
@@ -84,7 +102,7 @@ function refresh_chargen_page() {
 		return;
 	});
 
-	propogate_gender_options(".js-chargen-gender")
+	propagate_gender_options(".js-chargen-gender")
 	$(".js-chargen-gender").unbind("change");
 	$(".js-chargen-gender").change( function(event) {
 		current_character.set_gender($(this).val() );
@@ -92,21 +110,188 @@ function refresh_chargen_page() {
 		return;
 	});
 
-	$(".js-chargen-description").val(current_character.description);
+	// $(".js-chargen-description").val(current_character.description);
 	$(".js-chargen-description").unbind("keyup");
 	$(".js-chargen-description").keyup( function(event) {
 		current_character.set_description($(this).val() );
 		refresh_chargen_page();
 		return;
 	});
+}
 
+function propagate_skills_section() {
+
+}
+
+function is_incompatible_with( edge_or_hindrance ){
+	if( edge_or_hindrance.incompatible) {
+		if( edge_or_hindrance.incompatible.edges ) {
+			for(is_incompatible_with_counter = 0; is_incompatible_with_counter < edge_or_hindrance.incompatible.edges.length; is_incompatible_with_counter++) {
+				if( current_character.has_edge( edge_or_hindrance.incompatible.edges[is_incompatible_with_counter].name )) {
+					return true;
+				}
+			}
+			return false;
+		}
+		if( edge_or_hindrance.incompatible.hindrances ) {
+			for(is_incompatible_with_counter = 0; is_incompatible_with_counter < edge_or_hindrance.incompatible.hindrances.length; is_incompatible_with_counter++) {
+				if( current_character.has_hindrance( edge_or_hindrance.incompatible.hindrances[is_incompatible_with_counter].name )) {
+					return true;
+				}
+			}
+			return false;
+		}
+	}
+	return false;
+}
+
+function edge_or_hindrance_requirement_met( edge_or_hindrance ){
+	if( edge_or_hindrance.prereqs) {
+		if( edge_or_hindrance.prereqs.edges ) {
+			for(edge_or_hindrance_requirement_met_counter = 0; edge_or_hindrance_requirement_met_counter < edge_or_hindrance.prereqs.edges.length; edge_or_hindrance_requirement_met_counter++) {
+				if( current_character.has_edge( edge_or_hindrance.prereqs.edges[edge_or_hindrance_requirement_met_counter].name )) {
+					return true;
+				}
+			}
+			return false;
+		}
+	}
+	return true;
+}
+
+function propagate_hindrances_section() {
+	list_hindrance_html = "";
+	add_hindrance_html = "";
+
+	current_hindrances = current_character.get_all_hindrances();
+	if(current_hindrances.length > 0) {
+
+		for(hind_counter = 0; hind_counter < current_hindrances.length; hind_counter++) {
+			list_hindrance_html += "<div class=\"a-h-line\">";
+			if( current_hindrances[hind_counter].toLowerCase().indexOf("(racial)") == -1 )
+				list_hindrance_html += "<button type=\"button\" class=\"btn btn-xs btn-danger js-delete-hindrance-button\" relname=\"" + current_hindrances[hind_counter] + "\">Delete</button> ";
+			list_hindrance_html += current_hindrances[hind_counter] + "</div>";
+		}
+
+	} else {
+		list_hindrance_html += "<p>No Hindrances Selected</p>";
+	}
+
+	add_hindrance_html += "<div class=\"row\"><div class=\"col-xs-12\"><h4>Add Hindrance</h4><select class=\"width-auto js-add-hind-select\">";
+	for(hind_counter = 0; hind_counter < chargen_hindrances.length; hind_counter++) {
+		disabled = "";
+		if(
+			current_character.has_hindrance( chargen_hindrances[hind_counter].name )
+				||
+			is_incompatible_with( chargen_hindrances[hind_counter].name )
+		) {
+			disabled = " disabled=\"disabled\"";
+		}
+		minor_major = "";
+		if(chargen_hindrances[hind_counter].major > 0)
+			minor_major = " (major)";
+		if(chargen_hindrances[hind_counter].minor > 0)
+			minor_major = " (minor)";
+
+		specify_field = "";
+		if(chargen_hindrances[hind_counter].specify_field > 0)
+			specify_field = " specified=\"1\"";
+
+		add_hindrance_html += "<option" + disabled + specify_field + ">" + chargen_hindrances[hind_counter].name + minor_major + "</option>";
+	}
+	add_hindrance_html += "</select></div></div><div class=\"row\">";
+	add_hindrance_html += "<div class=\"col-xs-12\"><input type=\"text\" placeholder=\"Specify your hindrance\" style=\"display: none\" class=\"js-add-hindrance-specify\" />";
+	add_hindrance_html += "<button type\"button\" class=\"btn-sm pull-right btn btn-primary js-add-hindrance-button\">Add</button>";
+	add_hindrance_html += "</div>";
+	add_hindrance_html += "</div>";
+
+	$(".js-add-hindrance").html(add_hindrance_html);
+
+	is_specify_field = $('option:selected', this).attr('specified');
+	if( is_specify_field > 0 ) {
+		$(".js-add-hindrance-specify").slideDown();
+		$(".js-add-hindrance-specify").val('');
+	} else {
+		$(".js-add-hindrance-specify").slideUp();
+		$(".js-add-hindrance-specify").val('');
+	}
+
+	$(".js-add-hind-select").unbind("change");
+	$(".js-add-hind-select").change( function() {
+		is_specify_field = $('option:selected', this).attr('specified');
+		if( is_specify_field > 0 ) {
+			$(".js-add-hindrance-specify").slideDown();
+			$(".js-add-hindrance-specify").val('');
+		} else {
+			$(".js-add-hindrance-specify").slideUp();
+			$(".js-add-hindrance-specify").val('');
+		}
+	});
+
+	$(".js-add-hindrance-button").unbind("click");
+	$(".js-add-hindrance-button").click( function() {
+		current_character.add_hindrance(
+			$(".js-add-hind-select").val(),
+			$(".js-add-hindrance-specify").val()
+		);
+		refresh_chargen_page();
+	});
+
+	$(".js-list-hindrances").html(list_hindrance_html);
+	$(".js-delete-hindrance-button").unbind("click");
+	$(".js-delete-hindrance-button").click( function() {
+		if(
+			confirm( "Are you sure you want to remove the hindrance " + $(this).attr("relname") )
+		) {
+			current_character.remove_hindrance(
+				$(this).attr("relname")
+			);
+			refresh_chargen_page();
+		}
+	});
+
+
+}
+
+function propagate_edges_section() {
+	list_edges_html = "";
+	add_edge_html = "";
+
+	current_edges = current_character.get_all_edges();
+	if(current_edges.length > 0) {
+		list_edges_html += "<ul>";
+		for(hind_counter = 0; hind_counter < current_edges.length; hind_counter++) {
+			list_edges_html += "<li>" + current_edges[hind_counter] + "</li>";
+		}
+		list_edges_html += "</ul>";
+	} else {
+		list_edges_html += "<p>No Hindrances Selected</p>";
+	}
+
+	$(".js-add-edge-button").unbind("click");
+	$(".js-add-edge-button").click( function() {
+		alert("ding!");
+	});
+	$(".js-add-edge").html(add_edge_html);
+	$(".js-list-edges").html(list_edges_html);
+}
+
+function propagate_equipment_section() {
+
+}
+
+function propagate_powers_section() {
+
+}
+
+function propagate_attributes_section() {
 	// Fill in Attributes Section
-	display_remaining_attribute_points(".js-charget-attributes-points-label");
-	propogate_attribute_options(current_character.attributes.agility, "agility");
-	propogate_attribute_options(current_character.attributes.smarts, "smarts");
-	propogate_attribute_options(current_character.attributes.spirit, "spirit");
-	propogate_attribute_options(current_character.attributes.strength, "strength");
-	propogate_attribute_options(current_character.attributes.vigor, "vigor");
+	display_remaining_attribute_points(".js-chargen-attributes-points-label");
+	propagate_attribute_options(current_character.attributes.agility, "agility");
+	propagate_attribute_options(current_character.attributes.smarts, "smarts");
+	propagate_attribute_options(current_character.attributes.spirit, "spirit");
+	propagate_attribute_options(current_character.attributes.strength, "strength");
+	propagate_attribute_options(current_character.attributes.vigor, "vigor");
 	$(".js-chargen-attributes-agility").unbind("change");
 	$(".js-chargen-attributes-agility").change( function(event) {
 		event_attribute_changed("agility", $(this).val() );
@@ -132,7 +317,275 @@ function refresh_chargen_page() {
 		event_attribute_changed("vigor", $(this).val() );
 		return;
 	});
+}
+function event_attribute_changed(attribute_name, new_value) {
+	current_character.set_attribute(attribute_name, new_value);
+	refresh_chargen_page();
+}
 
+function init_main_buttons() {
+	$(".js-new-character").unbind("click");
+	$(".js-new-character").click( function() {
+		if(confirm("Are you sure you want to clear out your current character?") ) {
+			current_character.reset();
+			refresh_chargen_page();
+		}
+
+	});
+
+	$(".js-new-character").unbind("click");
+	$(".js-new-character").click( function() {
+		if(confirm("Are you sure you want to clear out your current character?") ) {
+			current_character.reset();
+			$(".js-chargen-name").val(current_character.name);
+			$(".js-chargen-description").val(current_character.description);
+			refresh_chargen_page();
+		}
+
+	});
+
+	$(".js-save-character").unbind("click");
+	$(".js-save-character").click( function() {
+
+		if(current_character.name != "" && current_character.name != "(nameless)") {
+			saveJSON = current_character.export_json();
+			itemObj = JSON.parse(saveJSON);
+			storageObject = {
+				name: itemObj.name,
+				type: "character",
+				saved: new Date(),
+				data: saveJSON,
+			};
+
+			try {
+				current_characters = JSON.parse(localStorage.characters);
+			}
+			catch(e) {
+				current_characters = Array();
+			}
+
+			current_characters = current_characters.concat(storageObject);
+
+			localStorage.characters = JSON.stringify(current_characters);
+
+			propagate_character_load_list();
+
+			createAlert( "Your character has been saved.", "success" );
+		} else {
+			createAlert( "Please name your character before saving", "danger"  );
+		}
+
+	} );
+}
+
+function load_selected_character() {
+	selectedItemIndex = $("input[name=selected_char_load]:checked").val();
+
+	if(selectedItemIndex != "") {
+		$(".js-chargen-name").unbind("keyup");
+		$(".js-chargen-description").unbind("keyup");
+		selectedItemIndex = selectedItemIndex / 1;
+		try {
+			current_characters = JSON.parse(localStorage.characters);
+		}
+		catch(e) {
+			current_characters = Array();
+		}
+
+		console.log( selectedItemIndex );
+		console.log( current_characters );
+
+		if(current_characters[selectedItemIndex]) {
+			if(current_characters[selectedItemIndex].data) {
+				current_character.import_json( current_characters[selectedItemIndex].data );
+
+				$(".js-chargen-name").val(current_character.name);
+				$(".js-chargen-description").val(current_character.description);
+
+				refresh_chargen_page();
+				createAlert( "Your character has been loaded.", "success" );
+			} else {
+				createAlert( "Your character could not be loaded.", "danger" );
+			}
+		} else {
+			createAlert( "Your character could not be loaded.", "danger" );
+		}
+	}
+}
+
+
+
+function propagate_character_load_list() {
+	try {
+		current_load_data = JSON.parse(localStorage.characters);
+	}
+	catch(e) {
+		current_load_data = Array();
+	}
+
+	if(current_load_data.length == 0) {
+		html = "<p>You have no saved characters on this device</p>";
+	} else {
+		html = "<ul class='list-unstyled'>";
+		for(lsCounter = 0; lsCounter < current_load_data.length; lsCounter++) {
+			if(current_load_data[lsCounter].type == "character") {
+				html += "<li style='display:block;overflow:hidden; padding: 2px; margin: 2px; border-bottom: 1px solid #dedede;'>";
+				html += "<label style='display: inline; font-weight: normal'>";
+				html += "<input type='radio' name='selected_char_load' value='" + lsCounter + "' /> ";
+				html += current_load_data[lsCounter].name + ""; //  - " + current_load_data[lsCounter].saved;
+				html += "</label>";
+				html += "<button ref='" + lsCounter + "' class='js-delete-char-data btn btn-danger pull-right btn-xs' type='button'>Delete</button>";
+				html += "</li>";
+			}
+		}
+		html += "</ul>";
+	}
+
+
+
+	$(".js-load-list").html( html );
+
+	$(".js-load-char-data").unbind("click");
+	$(".js-load-char-data").click( function() {
+		load_selected_character();
+	} );
+
+
+	$(".js-delete-char-data").unbind("click");
+	$(".js-delete-char-data").click( function() {
+		if( confirm("Are you sure you want to delete this character?") ) {
+			selectedItemIndex = $(this).attr("ref");
+
+			try {
+				current_characters = JSON.parse(localStorage.characters);
+			}
+			catch(e) {
+				current_characters = Array();
+			}
+
+			if( typeof(current_characters[selectedItemIndex]) != "undefined" ) {
+				if( typeof(current_characters[selectedItemIndex].data) != "undefined" ) {
+					current_characters.splice(selectedItemIndex, 1);
+					localStorage.characters = JSON.stringify(current_characters);
+				}
+			}
+
+			propagate_character_load_list();
+		}
+
+	} );
+}
+
+function propagate_perks_section() {
+	$(".js-chargen-perks-points-label").removeClass("text-primary");
+	$(".js-chargen-perks-points-label").removeClass("text-danger");
+	if( current_character.perks_available > 0 ) {
+		$(".js-chargen-perks-points-label").addClass("text-primary");
+		if( current_character.perks_available == 1) {
+			$(".js-chargen-perks-points-label").text("You have 1 perk point available");
+		} else {
+			$(".js-chargen-perks-points-label").text("You have " + current_character.perks_available  + " perk points available");
+		}
+	} else {
+		if( current_character.perks_available < 0 ) {
+			$(".js-chargen-perks-points-label").addClass("text-danger");
+			$(".js-chargen-perks-points-label").text("You overspent on perk points (" + (current_character.perks_available * -1 ) +")");
+		} else {
+			$(".js-chargen-perks-points-label").text("You have no perk points available");
+		}
+
+	}
+
+	// TODO make list of selected perks
+	//
+	current_perks = current_character.list_perks();
+	list_perks_html = "";
+	if(current_perks.length > 0) {
+
+		for(perk_counter = 0; perk_counter < current_perks.length; perk_counter++) {
+			list_perks_html += "<div class=\"a-h-line\">";
+			if( current_perks[perk_counter].toLowerCase().indexOf("(racial)") == -1 )
+				list_perks_html += "<button type=\"button\" class=\"btn btn-xs btn-danger js-delete-perk-button\" relindex=\"" + perk_counter + "\">Delete</button> ";
+			list_perks_html += current_perks[perk_counter] + "</div>";
+		}
+
+	} else {
+		list_perks_html += "<p>No Perks Selected</p>";
+	}
+	$(".js-list-perks").html( list_perks_html );
+
+	$(".js-delete-perk-button").unbind("click");
+	$(".js-delete-perk-button").click( function() {
+		if( confirm("Are you sure you want to remove this perk?")) {
+			current_character.remove_perk( $(this).attr("relindex") );
+			refresh_chargen_page();
+		}
+	});
+
+	add_perk_html = "";
+	if(current_character.perks_available > 0 ) {
+
+		add_perk_html += "<div class=\"row\"><div class=\"col-xs-12\"><h4>Add Perk</h4><select class=\"width-auto js-add-perk-select\">";
+		for(perk_counter = 0; perk_counter < chargen_perks.length; perk_counter++) {
+			show_perk = true;
+			if(
+				current_character.perks_available < chargen_perks[perk_counter].cost
+			) {
+				show_perk = false
+			}
+
+			if(show_perk)
+				add_perk_html += "<option value=\"" + chargen_perks[perk_counter].short_name + "\">" + chargen_perks[perk_counter].name + " (" + chargen_perks[perk_counter].cost + " points)</option>";
+		}
+		add_perk_html += "</select></div></div><div class=\"row\">";
+		add_perk_html += "<div class=\"col-xs-12\">";
+		add_perk_html += "<button type\"button\" class=\"btn-sm pull-right btn btn-primary js-add-perk-button\">Add</button>";
+		add_perk_html += "</div>";
+		add_perk_html += "</div>";
+	}
+
+	$(".js-add-perk").html(add_perk_html);
+	$(".js-add-perk-button").unbind("click");
+	$(".js-add-perk-button").click( function() {
+		selected_shortname = $(".js-add-perk-select").val();
+		current_character.add_perk(selected_shortname);
+		refresh_chargen_page();
+	});
+
+}
+
+function test_validity() {
+	if( current_character.is_valid ) {
+		$(".js-validity-container").slideUp();
+	} else {
+		validity_html = "<p class=\"thinned\">It appears there may be some validity errors. Although this won't keep you from saving, exporting and printing, there are some GMs that may have issues with this.</p>";
+		validity_html += "<ul>";
+		for(vcounter = 0; vcounter < current_character.validity_messages.length; vcounter++) {
+			validity_html += "<li>" + current_character.validity_messages[vcounter] + "</li>";
+		}
+		validity_html += "</ul>";
+		$(".js-validity-detail").html( validity_html );
+		$(".js-validity-container").slideDown();
+	}
+}
+
+function refresh_chargen_page() {
+	current_character.calculate();
+	localStorage["current_character"] = current_character.export_json();
+
+	propagate_character_load_list();
+
+	propagate_character_section();
+	propagate_attributes_section();
+	propagate_edges_section();
+	propagate_perks_section();
+	propagate_skills_section();
+	propagate_hindrances_section();
+	propagate_equipment_section();
+	propagate_powers_section();
+	init_main_buttons();
+
+	test_validity();
 
 }
 

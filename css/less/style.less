@@ -144,8 +144,28 @@ legend {
 .extra-stats {
 	overflow: hidden;
 }
+
+.clear-both,
 .c-b {
 	clear: both;
+}
+.width-auto {
+	width: auto;
+}
+
+.a-h-line {
+	margin-bottom: 5px;
+	background: #dedede;
+	border-radius: 5px;
+	padding-left: 57px;
+	button {
+		margin-right: 10px;
+		margin-left: -57px;
+	}
+}
+.thinned {
+	margin: 0;
+	padding: 0;
 }
 
 /* Smartphones (portrait and landscape) ----------- */
@@ -157,4 +177,85 @@ and (max-width : 480px) {
 		float: none;
 		margin: 0 auto 10px auto;
 	}
+}
+
+.js-chargen-attributes-points-label {
+	text-align: center;
+}
+
+/*
+	5 column wide bootstrap addition
+	Thanks go to to http://www.wearesicc.com/quick-tips-5-column-layout-with-twitter-bootstrap/
+*/
+.col-xs-15,
+.col-sm-15,
+.col-md-15,
+.col-lg-15 {
+    position: relative;
+    min-height: 1px;
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
+.bug-tweet {
+	margin-top: 20px;
+}
+
+.col-xs-15 {
+    width: 20%;
+    float: left;
+}
+
+.js-validity-container {
+	border-color: #f33;
+	legend {
+		color: #f33;
+	}
+}
+.attribute-select {
+	text-align: center;
+	-webkit-appearance:none !important;
+	width: auto;
+	font-size: 20px;
+	// padding: 10px 5px 10px 25px !important;
+	margin: 0 auto;
+	.die-select {
+		text-align: center;
+		// -webkit-appearance:none !important;
+		// padding: 10px 5px 10px 25px !important;
+		// .d4 {
+		// 	background: #922 !important;
+		// }
+		// .d6 {
+		// 	background: #977 !important;
+		// }
+		// .d8 {
+		// 	background: #797 !important;
+		// }
+		// .d10 {
+		// 	background: #222 !important;
+		// }
+		// .d12 {
+		// 	background: #779 !important;
+		// }
+	}
+}
+
+@media (min-width: 768px) {
+.col-sm-15 {
+        width: 20%;
+        float: left;
+    }
+}
+@media (min-width: 992px) {
+    .col-md-15 {
+        width: 20%;
+        float: left;
+    }
+}
+@media (min-width: 1200px) {
+    .col-lg-15 {
+        width: 20%;
+        float: left;
+    }
 }
