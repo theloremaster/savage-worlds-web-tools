@@ -1,11 +1,20 @@
-function propogate_attribute_options(current_value, select_selector) {
+function propogate_attribute_options(current_value, current_attribute) {
 	if(!current_value)
 		current_value = 0;
 
 	current_value = current_value / 1;
+	select_selector = ".js-chargen-attributes-" + current_attribute;
+
+	min_count = 1;
+	max_count = 6;
+
+	if(current_character.race.attributes[current_attribute]) {
+		min_count += current_character.race.attributes[current_attribute];
+		max_count += current_character.race.attributes[current_attribute];
+	}
 
 	html = "";
-	for(attribute_counter = 1; attribute_counter < 7; attribute_counter++) {
+	for(attribute_counter = min_count; attribute_counter < max_count; attribute_counter++) {
 		if(attribute_labels[attribute_counter])
 			if(current_value == attribute_counter)
 				html += "<option selected=\"selected\" value=\"" + attribute_counter + "\">" + attribute_labels[attribute_counter] + "</option>";
@@ -25,6 +34,17 @@ function propogate_race_options(select_selector) {
 			html += "<option value=\"" + chargen_races[race_counter].name + "\">" + chargen_races[race_counter].name + "</option>";
 	}
 	$(select_selector).html(html);
+}
+
+function display_remaining_attribute_points(selector_name) {
+	if(current_character.attribute_points == 0) {
+		$(selector_name).text(  "No points remaining" );
+	} else if( current_character.attribute_points > 0 ) {
+		$(selector_name).text(  current_character.attribute_points + " points remaining" );
+	} else {
+		$(selector_name).text(  current_character.attribute_points * -1 + " points overspent" );
+	}
+
 }
 
 function propogate_gender_options(select_selector) {
@@ -81,11 +101,12 @@ function refresh_chargen_page() {
 	});
 
 	// Fill in Attributes Section
-	propogate_attribute_options(current_character.attributes.agility, ".js-chargen-attributes-agility");
-	propogate_attribute_options(current_character.attributes.smarts, ".js-chargen-attributes-smarts");
-	propogate_attribute_options(current_character.attributes.spirit, ".js-chargen-attributes-spirit");
-	propogate_attribute_options(current_character.attributes.strength, ".js-chargen-attributes-strength");
-	propogate_attribute_options(current_character.attributes.vigor, ".js-chargen-attributes-vigor");
+	display_remaining_attribute_points(".js-charget-attributes-points-label");
+	propogate_attribute_options(current_character.attributes.agility, "agility");
+	propogate_attribute_options(current_character.attributes.smarts, "smarts");
+	propogate_attribute_options(current_character.attributes.spirit, "spirit");
+	propogate_attribute_options(current_character.attributes.strength, "strength");
+	propogate_attribute_options(current_character.attributes.vigor, "vigor");
 	$(".js-chargen-attributes-agility").unbind("change");
 	$(".js-chargen-attributes-agility").change( function(event) {
 		event_attribute_changed("agility", $(this).val() );

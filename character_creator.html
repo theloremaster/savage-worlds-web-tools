@@ -47,12 +47,12 @@
 
 		<div class="col-md-4">
 			<fieldset><legend>Stats</legend>
-				<div class="js-charget-attributes-points-label"></div>
 				<label>Agility: <select class="js-chargen-attributes-agility"></select></label>
 				<label>Smarts: <select class="js-chargen-attributes-smarts"></select></label>
 				<label>Spirit: <select class="js-chargen-attributes-spirit"></select></label>
 				<label>Strength: <select class="js-chargen-attributes-strength"></select></label>
 				<label>Vigor: <select class="js-chargen-attributes-vigor"></select></label>
+				<div class="js-charget-attributes-points-label"></div>
 			</fieldset>
 		</div>
 
@@ -92,12 +92,7 @@ $(window).load(
 		current_character = new character_class();
 		current_character.init();
 		if( typeof(localStorage["current_character"]) != "undefined" && localStorage["current_character"]) {
-			console.log("Loading JSON");
-			console.log( localStorage["current_character"] );
 			current_character.import_json( localStorage["current_character"] );
-			console.log(current_character);
-//			$(".js-set-name").val(current_character.item_name);
-//			$(".js-set-description").val(current_character.object_description);
 		}
 		refresh_chargen_page();
 	}
