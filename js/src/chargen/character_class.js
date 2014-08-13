@@ -202,6 +202,7 @@ character_class.prototype = {
 		for(selected_edges_counter = 0; selected_edges_counter < this.selected_edges.length; selected_edges_counter++) {
 			current_edge = this.selected_edges[selected_edges_counter];
 			if( current_edge ) {
+				this.edges_available--;
 				if( current_edge.char_effects )
 					current_edge.char_effects( this );
 			}
@@ -292,6 +293,25 @@ character_class.prototype = {
 					return chargen_edges[edge_counter];
 			}
 		}
+		return 0;
+	},
+
+	remove_edge: function( edge_name ) {
+
+		if(edge_name) {
+			found_index = -1;
+			for( edge_counter = 0; edge_counter < this.selected_edges.length; edge_counter++ ) {
+				if(this.selected_edges[edge_counter] && this.selected_edges[edge_counter].name) {
+					if(edge_name.toLowerCase() == this.selected_edges[edge_counter].name.toLowerCase()) {
+						found_index = edge_counter;
+					}
+				}
+			}
+			if( found_index > -1 ) {
+				this.selected_edges.splice(found_index, 1);
+			}
+		}
+
 		return 0;
 	},
 

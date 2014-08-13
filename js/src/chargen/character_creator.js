@@ -123,40 +123,77 @@ function propagate_skills_section() {
 
 }
 
-function is_incompatible_with( edge_or_hindrance ){
-	if( edge_or_hindrance.incompatible) {
-		if( edge_or_hindrance.incompatible.edges ) {
-			for(is_incompatible_with_counter = 0; is_incompatible_with_counter < edge_or_hindrance.incompatible.edges.length; is_incompatible_with_counter++) {
-				if( current_character.has_edge( edge_or_hindrance.incompatible.edges[is_incompatible_with_counter].name )) {
+function is_incompatible_with( edge_object ){
+	if( edge_object.incompatible) {
+
+		if( edge_object.incompatible.edges ) {
+//			console.log(edge_object.incompatible.edges);
+			for(is_incompatible_with_counter = 0; is_incompatible_with_counter < edge_object.incompatible.edges.length; is_incompatible_with_counter++) {
+				if( current_character.has_edge( edge_object.incompatible.edges[is_incompatible_with_counter] )) {
 					return true;
 				}
 			}
-			return false;
+//			return false;
 		}
-		if( edge_or_hindrance.incompatible.hindrances ) {
-			for(is_incompatible_with_counter = 0; is_incompatible_with_counter < edge_or_hindrance.incompatible.hindrances.length; is_incompatible_with_counter++) {
-				if( current_character.has_hindrance( edge_or_hindrance.incompatible.hindrances[is_incompatible_with_counter].name )) {
+		if( edge_object.incompatible.hindrances ) {
+			for(is_incompatible_with_counter = 0; is_incompatible_with_counter < edge_object.incompatible.hindrances.length; is_incompatible_with_counter++) {
+				if( current_character.has_hindrance( edge_object.incompatible.hindrances[is_incompatible_with_counter] )) {
 					return true;
+
 				}
 			}
-			return false;
+//			return false;
 		}
 	}
 	return false;
 }
 
-function edge_or_hindrance_requirement_met( edge_or_hindrance ){
-	if( edge_or_hindrance.prereqs) {
-		if( edge_or_hindrance.prereqs.edges ) {
-			for(edge_or_hindrance_requirement_met_counter = 0; edge_or_hindrance_requirement_met_counter < edge_or_hindrance.prereqs.edges.length; edge_or_hindrance_requirement_met_counter++) {
-				if( current_character.has_edge( edge_or_hindrance.prereqs.edges[edge_or_hindrance_requirement_met_counter].name )) {
-					return true;
+function edge_requirement_met( edge_object ){
+	return_value = true;
+ 	if( edge_object.prereqs) {
+		if( edge_object.prereqs.edges ) {
+			return_value = false;
+			for(edge_requirement_met_counter = 0; edge_requirement_met_counter < edge_object.prereqs.edges.length; edge_requirement_met_counter++) {
+				if( current_character.has_edge( edge_object.prereqs.edges[edge_requirement_met_counter] )) {
+					return_value = true;
 				}
 			}
+
+		}
+
+		if(return_value == false)
 			return false;
+
+		if( edge_object.prereqs.attributes ) {
+			return_value = false;
+			if( edge_object.prereqs.attributes.agility ) {
+				if( current_character.attributes.agility >= edge_object.prereqs.attributes.agility)
+					return_value = true;
+			}
+
+			if( edge_object.prereqs.attributes.smarts ) {
+				if( current_character.attributes.smarts >= edge_object.prereqs.attributes.smarts)
+					return_value = true;
+			}
+
+			if( edge_object.prereqs.attributes.spirit ) {
+				if( current_character.attributes.spirit >= edge_object.prereqs.attributes.spirit)
+					return_value = true;
+			}
+
+			if( edge_object.prereqs.attributes.strength ) {
+				if( current_character.attributes.strength >= edge_object.prereqs.attributes.strength)
+					return_value = true;
+			}
+
+			if( edge_object.prereqs.attributes.vigor ) {
+				if( current_character.attributes.vigor >= edge_object.prereqs.attributes.vigor)
+					return_value = true;
+			}
 		}
 	}
-	return true;
+
+	return return_value;
 }
 
 function propagate_hindrances_section() {
@@ -181,9 +218,10 @@ function propagate_hindrances_section() {
 	for(hind_counter = 0; hind_counter < chargen_hindrances.length; hind_counter++) {
 		disabled = "";
 		if(
-			current_character.has_hindrance( chargen_hindrances[hind_counter].name )
+			current_character.has_edge( chargen_hindrances[hind_counter].name ) == true
 				||
-			is_incompatible_with( chargen_hindrances[hind_counter].name )
+			is_incompatible_with( chargen_hindrances[hind_counter] ) == true
+
 		) {
 			disabled = " disabled=\"disabled\"";
 		}
@@ -259,24 +297,67 @@ function propagate_edges_section() {
 
 	current_edges = current_character.get_all_edges();
 	if(current_edges.length > 0) {
-		list_edges_html += "<ul>";
+
 		for(edge_counter = 0; edge_counter < current_edges.length; edge_counter++) {
 			list_edges_html += "<div class=\"a-h-line\">";
 			if( current_edges[edge_counter].toLowerCase().indexOf("(racial)") == -1 )
 				list_edges_html += "<button type=\"button\" class=\"btn btn-xs btn-danger js-delete-edge-button\" relname=\"" + current_edges[edge_counter] + "\">Delete</button> ";
 			list_edges_html += current_edges[edge_counter] + "</div>";
+//			list_edges_html += "</div>";
 		}
-		list_edges_html += "</ul>";
+
 	} else {
 		list_edges_html += "<p>No Edges Selected</p>";
 	}
 
+	add_edge_html = "";
+	if(current_character.edges_available > 0 ) {
+		add_edge_html += "<div class=\"row\"><div class=\"col-xs-12\"><h4>Add Edge</h4><select class=\"width-auto js-add-edge-select\">";
+		for(edge_counter = 0; edge_counter < chargen_edges.length; edge_counter++) {
+			disabled = "";
+			if(
+				current_character.has_edge( chargen_edges[edge_counter].name ) == true
+					||
+				is_incompatible_with( chargen_edges[edge_counter] ) == true
+					||
+				edge_requirement_met( chargen_edges[edge_counter] ) == false
+
+			) {
+				disabled = " disabled=\"disabled\"";
+			}
+
+			if(!chargen_edges[edge_counter].unlisted || chargen_edges[edge_counter].unlisted < 1)
+				add_edge_html += "<option" + disabled + ">" + chargen_edges[edge_counter].name + "</option>";
+		}
+		add_edge_html += "</select></div></div><div class=\"row\">";
+		add_edge_html += "<div class=\"col-xs-12\">";
+		add_edge_html += "<button type\"button\" class=\"btn-sm pull-right btn btn-primary js-add-edge-button\">Add</button>";
+		add_edge_html += "</div>";
+		add_edge_html += "</div>";
+	}
+
+	$(".js-list-edges").html(list_edges_html);
+	$(".js-delete-edge-button").unbind("click");
+	$(".js-delete-edge-button").click( function() {
+		selected_edge = $(this).attr("relname");
+		if(
+			confirm( "Are you sure you want to remove the edge " + selected_edge )
+		) {
+			current_character.remove_edge(
+				selected_edge
+			);
+			refresh_chargen_page();
+		}
+	});
+
+	$(".js-add-edge").html(add_edge_html);
 	$(".js-add-edge-button").unbind("click");
 	$(".js-add-edge-button").click( function() {
-		alert("ding!");
+		selected_edge = $(".js-add-edge-select").val();
+		current_character.add_edge(selected_edge);
+		refresh_chargen_page();
 	});
-	$(".js-add-edge").html(add_edge_html);
-	$(".js-list-edges").html(list_edges_html);
+
 }
 
 function propagate_equipment_section() {
