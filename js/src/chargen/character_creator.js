@@ -260,12 +260,15 @@ function propagate_edges_section() {
 	current_edges = current_character.get_all_edges();
 	if(current_edges.length > 0) {
 		list_edges_html += "<ul>";
-		for(hind_counter = 0; hind_counter < current_edges.length; hind_counter++) {
-			list_edges_html += "<li>" + current_edges[hind_counter] + "</li>";
+		for(edge_counter = 0; edge_counter < current_edges.length; edge_counter++) {
+			list_edges_html += "<div class=\"a-h-line\">";
+			if( current_edges[edge_counter].toLowerCase().indexOf("(racial)") == -1 )
+				list_edges_html += "<button type=\"button\" class=\"btn btn-xs btn-danger js-delete-edge-button\" relname=\"" + current_edges[edge_counter] + "\">Delete</button> ";
+			list_edges_html += current_edges[edge_counter] + "</div>";
 		}
 		list_edges_html += "</ul>";
 	} else {
-		list_edges_html += "<p>No Hindrances Selected</p>";
+		list_edges_html += "<p>No Edges Selected</p>";
 	}
 
 	$(".js-add-edge-button").unbind("click");
