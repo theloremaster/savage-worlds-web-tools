@@ -32,7 +32,8 @@ character_class.prototype = {
 		this.secondary = {
 			pace : 0,
 			toughness : 0,
-			parry : 0
+			parry : 0,
+			size: 1
 		};
 
 		this.starting_funds = 500;
@@ -64,7 +65,8 @@ character_class.prototype = {
 		this.secondary = {
 			pace : 0,
 			toughness : 0,
-			parry : 0
+			parry : 0,
+			size: 1
 		};
 
 		this.race.attributes = {
