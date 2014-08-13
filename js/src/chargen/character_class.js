@@ -28,6 +28,13 @@ character_class.prototype = {
 			vigor : 1
 		};
 
+		// Derived Stats..
+		this.secondary = {
+			pace : 0,
+			toughness : 0,
+			parry : 0
+		};
+
 		this.starting_funds = 500;
 		this.base_starting_funds = 500;
 
@@ -53,6 +60,13 @@ character_class.prototype = {
 			vigor : 1
 		};
 
+		// Attributes..
+		this.secondary = {
+			pace : 0,
+			toughness : 0,
+			parry : 0
+		};
+
 		this.race.attributes = {
 			agility : 0,
 			smarts : 0,
@@ -65,8 +79,6 @@ character_class.prototype = {
 
 		this.racial_edges = Array();
 		this.racial_hindrances = Array();
-
-
 
 
 		// Add Racial Edges
@@ -117,6 +129,19 @@ character_class.prototype = {
 		this.attribute_points += this.race.attributes.strength;
 		this.attribute_points += this.race.attributes.vigor;
 
+
+		// TODO: Calculate secondary Attributes
+		this.secondary.pace = 6;
+		if(this.attributes.vigor == 1) // d4
+			this.secondary.toughness += 2;
+		if(this.attributes.vigor == 2) // d6
+			this.secondary.toughness += 3;
+		if(this.attributes.vigor == 3) // d8
+			this.secondary.toughness += 4;
+		if(this.attributes.vigor == 4) // d10
+			this.secondary.toughness += 5;
+		if(this.attributes.vigor == 5) // d12
+			this.secondary.toughness += 6;
 
 		this.racial_edges.sort();
 		this.racial_hindrances.sort();
