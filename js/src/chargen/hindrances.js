@@ -16,7 +16,7 @@ var chargen_perks = Array(
 		}
 	},
 	{
-		name: "Gain another skill point",
+		name: "Add skill point",
 		short_name: "skill",
 		cost: 1,
 		char_effects: function (character_object) {
@@ -24,7 +24,7 @@ var chargen_perks = Array(
 		}
 	},
 	{
-		name: "Gain additional starting funds",
+		name: "Add starting funds",
 		short_name: "cash",
 		cost: 1,
 		char_effects: function (character_object) {
@@ -801,9 +801,9 @@ var chargen_hindrances = Array(
 chargen_hindrances.sort(
 	function(a, b)
 	{
-		var textA = a.name.toUpperCase();
-		var textB = b.name.toUpperCase();
-		return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+		var nameA = a.name.toLowerCase();
+		var nameB = b.name.toLowerCase();
+		return (nameA < nameB) ? -1 : (nameA > nameB) ? 1 : 0;
 	}
 );
 */

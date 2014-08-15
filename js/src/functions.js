@@ -70,3 +70,7 @@ function createAlert(messageText, alertClass) {
 	window.setTimeout(function() { $(".alert").alert('close'); }, 2000);
 }
 
+
+function clone_object(originalObject) {
+	return jQuery.extend({}, originalObject);
+}

@@ -97,6 +97,26 @@
 	</div>
 </div>
 
+<div class="js-add-specify-skill-dialog modal fade">
+	<div class="modal-character-dialog">
+    	<div class="modal-content">
+      		<div class="modal-header">
+				<h4 class="modal-title">Adding new <span class="js-specify-skill-label">XXXX</span> Skill</h4>
+			</div>
+			<div class="modal-body">
+				<label>What is your <span class="js-specify-skill-label">XXXX</span> skill?
+					<input type="hidden" value="" class="js-specify-skill-base" />
+					<input type="text" value="" class="js-specify-skill-value" />
+				</label>
+			</div>
+      		<div class="modal-footer">
+        		<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        		<button type="button" class="btn btn-primary js-add-specify-skill-action" data-dismiss="modal">Add</button>
+      		</div>
+		</div>
+	</div>
+</div>
+
 
 <div class="container">
 
@@ -146,6 +166,7 @@
 			<fieldset>
 				<legend>Stats and Skills</legend>
 
+				<div class="js-chargen-attributes-points-label"></div>
 				<div class="row">
 					<div class="col-sm-15">
 						<label><h4 class="thinned text-center">Agility</h4><select class="attribute-select js-chargen-attributes-agility"></select></label>
@@ -163,22 +184,22 @@
 						<label><h4 class="thinned text-center">Vigor</h4><select class="attribute-select js-chargen-attributes-vigor"></select></label>
 					</div>
 				</div>
-				<div class="js-chargen-attributes-points-label"></div>
+				<div class="js-chargen-skill-points-label"></div>
 				<div class="row">
 					<div class="col-sm-15">
-						TODO agility skills
+						<div class="js-skill-list-agility"></div>
 					</div>
 					<div class="col-sm-15">
-						TODO smarts skills
+						<div class="js-skill-list-smarts"></div>
 					</div>
 					<div class="col-sm-15">
-						TODO spirit skills
+						<div class="js-skill-list-spirit"></div>
 					</div>
 					<div class="col-sm-15">
-						TODO strength skills
+						<div class="js-skill-list-strength"></div>
 					</div>
 					<div class="col-sm-15">
-						TODO vigor skills
+						<div class="js-skill-list-vigor"></div>
 					</div>
 				</div>
 			</fieldset>
@@ -207,7 +228,7 @@
 		<div class="col-sm-4 bg-warning">
 			<fieldset>
 				<legend>Edges</legend>
-				<h4>TODO-Current Target</h4>
+				<h4>TODO-Needs Data Entry</h4>
 				<div class="js-chargen-edges-points-label"></div>
 				<div class="js-list-edges"></div>
 				<div class="js-add-edge"></div>

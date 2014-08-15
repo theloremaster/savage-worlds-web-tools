@@ -15,6 +15,7 @@ character_class.prototype = {
 		this.selected_edges = Array();
 		this.selected_hindrances = Array();
 		this.selected_perks = Array();
+		this.selected_skills = Array();
 
 		this.edges_available = 0;
 		this.perks_available = 0;
@@ -155,18 +156,18 @@ character_class.prototype = {
 		this.selected_edges.sort(
 			function(a, b)
 			{
-				var textA = a.name.toLowerCase();
-				var textB = b.name.toLowerCase();
-				return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+				var nameA = a.name.toLowerCase();
+				var nameB = b.name.toLowerCase();
+				return (nameA < nameB) ? -1 : (nameA > nameB) ? 1 : 0;
 			}
 		);
 
 		this.selected_hindrances.sort(
 			function(a, b)
 			{
-				var textA = a.name.toLowerCase();
-				var textB = b.name.toLowerCase();
-				return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+				var nameA = a.name.toLowerCase();
+				var nameB = b.name.toLowerCase();
+				return (nameA < nameB) ? -1 : (nameA > nameB) ? 1 : 0;
 			}
 		);
 
@@ -231,6 +232,125 @@ character_class.prototype = {
 			this.validity_messages.push("Overspent skill points");
 		}
 
+	},
+
+	set_skill: function(skill_name, new_value) {
+		if(skill_name.indexOf(":") > -1) {
+			skill_base_name = skill_name.substring(0, skill_name.indexOf(":") ).trim();
+			skill_specify_name = skill_name.substring(skill_name.indexOf(":") +1).trim();
+		} else {
+			skill_base_name = skill_name.trim();
+			skill_specify_name = "";
+		}
+
+		console.log(skill_base_name);
+		console.log(skill_specify_name);
+
+		console.log("bp1");
+		// if value = 0 remove it entirely
+		if(new_value == 0) {
+			this.remove_skill(skill_name);
+		} else {
+			// if skill is not listed in the selected_skills list, add it
+			console.log("bp2");
+			if( !this.has_skill(skill_base_name, skill_specify_name) ) {
+				var new_skill = this.get_raw_skill(skill_base_name);
+				if( new_skill.name ) {
+					console.log("bp3");
+					if(skill_specify_name != "")
+						new_skill.specify_text = skill_specify_name;
+					new_skill.value = new_value;
+					this.selected_skills.push( new_skill );
+					return true;
+				} else {
+					console.log("bp3");
+					return false;
+				}
+			} else {
+				console.log("bp5");
+				// set the value to requested value
+				for(set_skill_counter = 0; set_skill_counter < this.selected_skills.length; set_skill_counter++) {
+					if(skill_specify_name == "") {
+						console.log("bp6");
+						if( this.selected_skills[set_skill_counter].name.toLowerCase().trim() == skill_base_name.toLowerCase().trim()) {
+							this.selected_skills[set_skill_counter].value = new_value;
+							return true;
+						}
+					} else {
+						console.log("bp7");
+						if( this.selected_skills[set_skill_counter].name.toLowerCase().trim() == skill_base_name.toLowerCase().trim()) {
+							if( this.selected_skills[set_skill_counter].specify_text.toLowerCase().trim() == skill_specify_name.toLowerCase().trim()) {
+								this.selected_skills[set_skill_counter].value = new_value;
+								return true;
+							}
+						}
+					}
+				}
+			}
+		}
+		return false;
+	},
+
+	get_raw_skill: function(skill_name) {
+		for(get_raw_skill_counter = 0; get_raw_skill_counter < chargen_skills.length; get_raw_skill_counter++) {
+			if( chargen_skills[get_raw_skill_counter].name.toLowerCase().trim() == skill_name.toLowerCase().trim())
+				return clone_object( chargen_skills[get_raw_skill_counter] );
+		}
+		return false;
+	},
+
+	get_skill: function(skill_name) {
+		for(get_skill_counter = 0; get_skill_counter < this.selected_skills.length; get_skill_counter++) {
+			if( this.selected_skills[get_skill_counter].name.toLowerCase().trim() == skill_name.toLowerCase().trim())
+				return this.selected_skills[get_skill_counter];
+		}
+	},
+
+	get_skills_of: function(skill_name) {
+		return_value = Array();
+		for(get_skill_counter = 0; get_skill_counter < this.selected_skills.length; get_skill_counter++) {
+			if( this.selected_skills[get_skill_counter].name.toLowerCase().trim() == skill_name.toLowerCase().trim())
+				return_value.push(  this.selected_skills[get_skill_counter] );
+		}
+
+		return_value.sort(
+			function(a, b)
+			{
+				var nameA = a.name.toLowerCase();
+				var nameB = b.name.toLowerCase();
+				return (nameA < nameB) ? -1 : (nameA > nameB) ? 1 : 0;
+			}
+		);
+
+		return return_value;
+	},
+
+	has_skill: function(skill_name, skill_specify_name) {
+		for(has_skill_counter = 0; has_skill_counter < this.selected_skills.length; has_skill_counter++) {
+			if(skill_specify_name) {
+				if( this.selected_skills[has_skill_counter].name.toLowerCase().trim() == skill_name.toLowerCase().trim()) {
+					if( this.selected_skills[has_skill_counter].specify_text.toLowerCase().trim() == skill_specify_name.toLowerCase().trim()) {
+						return true;
+					}
+				}
+			} else {
+				if( this.selected_skills[has_skill_counter].name.toLowerCase().trim() == skill_name.toLowerCase().trim()) {
+					return true;
+				}
+			}
+
+		}
+
+		return false;
+	},
+
+	remove_skill: function(skill_name ) {
+		for(remove_skill_counter = 0; remove_skill_counter < this.selected_skills.length; remove_skill_counter++) {
+			if( this.selected_skills[remove_skill_counter].name.toLowerCase().trim() == skill_name.toLowerCase().trim()) {
+				this.selected_skills.splice(remove_skill_counter, 1);
+				return;
+			}
+		}
 	},
 
 	set_attribute: function(attribute_name, new_value) {
@@ -303,16 +423,14 @@ character_class.prototype = {
 			for( edge_counter = 0; edge_counter < this.selected_edges.length; edge_counter++ ) {
 				if(this.selected_edges[edge_counter] && this.selected_edges[edge_counter].name) {
 					if(edge_name.toLowerCase() == this.selected_edges[edge_counter].name.toLowerCase()) {
-						found_index = edge_counter;
+						this.selected_edges.splice(found_index, 1);
+						return true;
 					}
 				}
 			}
-			if( found_index > -1 ) {
-				this.selected_edges.splice(found_index, 1);
-			}
 		}
 
-		return 0;
+		return false;
 	},
 
 	remove_hindrance: function(hindrance_name) {
@@ -354,6 +472,7 @@ character_class.prototype = {
 					}
 				}
 			}
+
 			if( found_index > -1 ) {
 				this.selected_hindrances.splice(found_index, 1);
 			}

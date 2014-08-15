@@ -439,12 +439,13 @@ var chargen_edges = Array(
 	}
 );
 
-/* chargen_edges.sort(
+/*
+ chargen_edges.sort(
 	function(a, b)
 	{
-		var textA = a.name.toUpperCase();
-		var textB = b.name.toUpperCase();
-		return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+		var nameA = a.name.toLowerCase();
+		var nameB = b.name.toLowerCase();
+		return (nameA < nameB) ? -1 : (nameA > nameB) ? 1 : 0;
 	}
 );
 */

@@ -54,19 +54,41 @@ function display_remaining_attribute_points(selector_name) {
 	$(selector_name).removeClass("text-primary");
 
 	if(current_character.attribute_points == 0) {
-		$(selector_name).text(  "No points remaining" );
+		$(selector_name).text(  "No attribute points remaining" );
 	} else if( current_character.attribute_points > 0 ) {
 		$(selector_name).addClass("text-primary");
 		if(current_character.attribute_points == 1)
-			$(selector_name).text(  current_character.attribute_points + " point remaining" );
+			$(selector_name).text(  current_character.attribute_points + " attribute point remaining" );
 		else
-			$(selector_name).text(  current_character.attribute_points + " points remaining" );
+			$(selector_name).text(  current_character.attribute_points + " attribute points remaining" );
 	} else {
 		$(selector_name).addClass("text-danger");
 		if(current_character.attribute_points == -1)
-			$(selector_name).text(  current_character.attribute_points * -1 + " point overspent" );
+			$(selector_name).text(  current_character.attribute_points * -1 + " attribute point overspent" );
 		else
-			$(selector_name).text(  current_character.attribute_points * -1 + " points overspent" );
+			$(selector_name).text(  current_character.attribute_points * -1 + " attribute points overspent" );
+	}
+
+}
+
+function display_remaining_skill_points(selector_name) {
+	$(selector_name).removeClass("text-danger");
+	$(selector_name).removeClass("text-primary");
+
+	if(current_character.skill_points == 0) {
+		$(selector_name).text(  "No skill points remaining" );
+	} else if( current_character.skill_points > 0 ) {
+		$(selector_name).addClass("text-primary");
+		if(current_character.skill_points == 1)
+			$(selector_name).text(  current_character.skill_points + " skill point remaining" );
+		else
+			$(selector_name).text(  current_character.skill_points + " skill points remaining" );
+	} else {
+		$(selector_name).addClass("text-danger");
+		if(current_character.skill_points == -1)
+			$(selector_name).text(  current_character.skill_points * -1 + " skill point overspent" );
+		else
+			$(selector_name).text(  current_character.skill_points * -1 + " skill points overspent" );
 	}
 
 }
@@ -119,8 +141,113 @@ function propagate_character_section() {
 	});
 }
 
-function propagate_skills_section() {
+function propagate_skills_sections() {
 
+	display_remaining_skill_points(".js-chargen-skill-points-label");
+
+	// list Agility Skills....
+	skills_html = Array();
+
+	for(skills_counter =0 ; skills_counter < chargen_skills.length; skills_counter++) {
+		if( !skills_html[chargen_skills[skills_counter].attribute] )
+			skills_html[chargen_skills[skills_counter].attribute] = "";
+
+		// created an html var for legibility
+		html = "";
+		html += "<div class=\"skill-container\">";
+		current_skill = current_character.get_skill(chargen_skills[skills_counter].name);
+		if( current_skill ) {
+			value_label = attribute_labels[current_skill.value];
+			if(current_skill.value == 0)
+				value_label = " - ";
+			html += current_skill.name + ": " + value_label;
+
+			html += "<div class=\"pull-right\">";
+			html += "<button class=\"js-lower-skill-level btn btn-xs btn-primary\" skillname=\"" + current_skill.name + "\" skillval=\"" + current_skill.value + "\">-</button>";
+			html += "<button class=\"js-add-skill-level btn btn-xs btn-primary\" skillname=\"" + current_skill.name + "\" skillval=\"" + current_skill.value + "\">+</button>";
+			html += "</div>";
+		} else {
+			if( !chargen_skills[skills_counter].specify || chargen_skills[skills_counter].specify < 1 ) {
+				value_label = "-";
+				html += chargen_skills[skills_counter].name + ": " + value_label ;
+				html += "<div class=\"pull-right\">";
+				html += "<button class=\"js-add-skill-level btn btn-xs btn-primary\" skillname=\"" + chargen_skills[skills_counter].name + "\" skillval=\"0\">+</button>";
+				html += "</div>";
+			} else {
+				html += chargen_skills[skills_counter].name + " Skills" ;
+				html += "<div class=\"pull-right\">";
+				html += "<button class=\"js-add-specify-skill btn btn-xs btn-primary\" skillname=\"" + chargen_skills[skills_counter].name + "\">Add</button>";
+				html += "</div>";
+			}
+		}
+
+		html += "</div>";
+
+		skills_html[chargen_skills[skills_counter].attribute] += html;
+	}
+
+	if(skills_html["agility"]) {
+		$(".js-skill-list-agility").html(skills_html["agility"]);
+	}
+	if(skills_html["smarts"]) {
+		$(".js-skill-list-smarts").html(skills_html["smarts"]);
+	}
+	if(skills_html["spirit"]) {
+		$(".js-skill-list-spirit").html(skills_html["spirit"]);
+	}
+	if(skills_html["strength"]) {
+		$(".js-skill-list-strength").html(skills_html["strength"]);
+	}
+	if(skills_html["vigor"]) {
+		$(".js-skill-list-vigor").html(skills_html["vigor"]);
+	}
+
+
+	$(".js-add-specify-skill").unbind("click");
+	$(".js-add-specify-skill").click( function() {
+		skill_name = $(this).attr("skillname");
+		$(".js-specify-skill-label").text(skill_name);
+		$(".js-specify-skill-base").val(skill_name);
+		$(".js-specify-skill-value").val('');
+		$(".js-add-specify-skill-dialog").modal("show");
+	});
+
+	$(".js-add-specify-skill-action").unbind("click");
+	$(".js-add-specify-skill-action").click( function() {
+		new_skill_name = $(".js-specify-skill-base").val() + ": " + $(".js-specify-skill-value").val();
+		current_character.set_skill(new_skill_name, 1);
+	});
+
+
+	$(".js-add-skill-level").unbind("click");
+	$(".js-add-skill-level").click( function() {
+		skill_name = $(this).attr("skillname");
+		skill_value = $(this).attr("skillval") / 1;
+		new_value = skill_value + 1;
+		current_character.set_skill( skill_name, new_value );
+		refresh_chargen_page();
+	});
+
+	$(".js-lower-skill-level").unbind("click");
+	$(".js-lower-skill-level").click( function() {
+		skill_name = $(this).attr("skillname");
+		skill_value = $(this).attr("skillval") / 1;
+		new_value = skill_value - 1;
+		if( new_value < 0)
+			new_value = 0;
+		current_character.set_skill( skill_name, new_value );
+		refresh_chargen_page();
+	});
+
+	$(".js-set-skill-level").unbind("change");
+	$(".js-set-skill-level").change( function() {
+		skill_name = $(this).attr("skillname");
+		skill_value = $(this).attr("skillval") / 1;
+		new_value = $(this).val() / 1;
+
+		current_character.set_skill( skill_name, new_value );
+		refresh_chargen_page();
+	});
 }
 
 function is_incompatible_with( edge_object ){
@@ -663,7 +790,7 @@ function refresh_chargen_page() {
 	propagate_attributes_section();
 	propagate_edges_section();
 	propagate_perks_section();
-	propagate_skills_section();
+	propagate_skills_sections();
 	propagate_hindrances_section();
 	propagate_equipment_section();
 	propagate_powers_section();
