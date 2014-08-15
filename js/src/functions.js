@@ -60,7 +60,7 @@ function simplify_cost(input_price) {
 	}
 }
 
-function createAlert(messageText, alertClass) {
+function bootstrap_alert(messageText, alertClass) {
 	if( !alertClass )
 		alertClass = "info";
 	dismissButton = '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>';

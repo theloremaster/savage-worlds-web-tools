@@ -34,23 +34,17 @@
 ###General
 * Export to BB Code and HTML (Printing?)
 
-###Edges
-* Data Entry
-
-###Skills
-* Clean up interface
-
 ###Equipment
 * Backend Code
 * Frontend Code
 * Data Entry
 
 ###Powers
-* Backend Code
+* Backend Code, some hooks are in place
 * Frontend Code
 * Data Entry
 
 ###Advancements
-* Backend Code
+* Backend Code, some hooks are in place
 * Frontend Code
 * Data Entry

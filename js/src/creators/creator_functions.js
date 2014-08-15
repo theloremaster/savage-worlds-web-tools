@@ -193,10 +193,12 @@ function propogate_load_list() {
 	html = "<ul class='list-unstyled'>";
 	for(lsCounter = 0; lsCounter < current_load_data.length; lsCounter++) {
 		if(current_load_data[lsCounter].type == current_selected_object.object_type) {
+			saved_date = new Date(current_load_data[lsCounter].saved);
+			saved_date_formatted = (saved_date.getMonth() + 1).padLeft() + '/' + saved_date.getDate().padLeft() + '/' +  saved_date.getFullYear().padLeft() + " at " + saved_date.getHours().padLeft() + ":" + saved_date.getMinutes().padLeft();
 			html += "<li style='display:block;overflow:hidden; padding: 2px; margin: 2px; border-bottom: 1px solid #dedede;'>";
 			html += "<label style='display: inline; font-weight: normal'>";
 			html += "<input type='radio' name='selected_load' value='" + lsCounter + "' /> ";
-			html += current_load_data[lsCounter].name + " (Size " + current_load_data[lsCounter].size + ")"; //  - " + current_load_data[lsCounter].saved;
+			html += current_load_data[lsCounter].name + " (Size " + current_load_data[lsCounter].size + ") - saved on " + saved_date_formatted;
 			html += "</label>";
 			html += "<button ref='" + lsCounter + "' class='js-delete-data btn btn-danger pull-right btn-xs' type='button'>Delete</button>";
 			html += "</li>";
@@ -225,9 +227,9 @@ $(".js-import-data").click( function() {
 			$(".js-set-name").val(current_selected_object.item_name);
 			$(".js-set-description").val(current_selected_object.object_description);
 			$(".js-import-code").val('');
-			createAlert( "Your " + current_selected_object.object_label+ " has been imported.", "success" );
+			bootstrap_alert( "Your " + current_selected_object.object_label+ " has been imported.", "success" );
 		} else {
-			createAlert( "Your " + current_selected_object.object_label+ " could not be imported - please check the formatting of your code.", "warning" );
+			bootstrap_alert( "Your " + current_selected_object.object_label+ " could not be imported - please check the formatting of your code.", "warning" );
 		}
 	}
 });
@@ -238,12 +240,12 @@ $(".js-save-item").click( function() {
 		if(current_selected_object.item_name != "" && current_selected_object.item_name != "(nameless)") {
 			save_to_localstorage( current_selected_object.export_json() );
 			propogate_load_list();
-			createAlert( "Your " + current_selected_object.object_label+ " has been saved.", "success" );
+			bootstrap_alert( "Your " + current_selected_object.object_label+ " has been saved.", "success" );
 		} else {
-			createAlert( "Please name your " + current_selected_object.object_label+ " before saving", "danger"  );
+			bootstrap_alert( "Please name your " + current_selected_object.object_label+ " before saving", "danger"  );
 		}
 	} else {
-		createAlert( "Please select a size for your " + current_selected_object.object_label+ " before saving", "danger"  );
+		bootstrap_alert( "Please select a size for your " + current_selected_object.object_label+ " before saving", "danger"  );
 	}
 } );
 
@@ -257,7 +259,7 @@ function load_selected_item() {
 		$(".js-set-name").val(current_selected_object.item_name);
 		$(".js-set-description").val(current_selected_object.object_description);
 		refresh_creator_page();
-		createAlert( "Your " + current_selected_object.object_label+ " has been loaded.", "success" );
+		bootstrap_alert( "Your " + current_selected_object.object_label+ " has been loaded.", "success" );
 	}
 }
 

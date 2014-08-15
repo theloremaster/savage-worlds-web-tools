@@ -316,53 +316,6 @@ function is_incompatible_with( edge_object ){
 	return false;
 }
 
-function edge_requirement_met( edge_object ){
-	return_value = true;
- 	if( edge_object.prereqs) {
-		if( edge_object.prereqs.edges ) {
-			return_value = false;
-			for(edge_requirement_met_counter = 0; edge_requirement_met_counter < edge_object.prereqs.edges.length; edge_requirement_met_counter++) {
-				if( current_character.has_edge( edge_object.prereqs.edges[edge_requirement_met_counter] )) {
-					return_value = true;
-				}
-			}
-
-		}
-
-		if(return_value == false)
-			return false;
-
-		if( edge_object.prereqs.attributes ) {
-			return_value = false;
-			if( edge_object.prereqs.attributes.agility ) {
-				if( current_character.attributes.agility >= edge_object.prereqs.attributes.agility)
-					return_value = true;
-			}
-
-			if( edge_object.prereqs.attributes.smarts ) {
-				if( current_character.attributes.smarts >= edge_object.prereqs.attributes.smarts)
-					return_value = true;
-			}
-
-			if( edge_object.prereqs.attributes.spirit ) {
-				if( current_character.attributes.spirit >= edge_object.prereqs.attributes.spirit)
-					return_value = true;
-			}
-
-			if( edge_object.prereqs.attributes.strength ) {
-				if( current_character.attributes.strength >= edge_object.prereqs.attributes.strength)
-					return_value = true;
-			}
-
-			if( edge_object.prereqs.attributes.vigor ) {
-				if( current_character.attributes.vigor >= edge_object.prereqs.attributes.vigor)
-					return_value = true;
-			}
-		}
-	}
-
-	return return_value;
-}
 
 function propagate_hindrances_section() {
 	list_hindrance_html = "";
@@ -481,21 +434,31 @@ function propagate_edges_section() {
 	add_edge_html = "";
 	if(current_character.edges_available > 0 ) {
 		add_edge_html += "<div class=\"row\"><div class=\"col-xs-12\"><h4>Add Edge</h4><select class=\"width-auto js-add-edge-select\">";
+		optgroup = "";
 		for(edge_counter = 0; edge_counter < chargen_edges.length; edge_counter++) {
 			disabled = "";
+
 			if(
 				current_character.has_edge( chargen_edges[edge_counter].name ) == true
 					||
 				is_incompatible_with( chargen_edges[edge_counter] ) == true
 					||
-				edge_requirement_met( chargen_edges[edge_counter] ) == false
+				current_character.edge_available( chargen_edges[edge_counter] ) == false
 
 			) {
 				disabled = " disabled=\"disabled\"";
 			}
 
-			if(!chargen_edges[edge_counter].unlisted || chargen_edges[edge_counter].unlisted < 1)
+			if(!chargen_edges[edge_counter].unlisted || chargen_edges[edge_counter].unlisted < 1) {
+				if(optgroup != chargen_edges[edge_counter].category ) {
+					if( optgroup != "")
+						add_edge_html += "</optgroup>";
+					add_edge_html += "<optgroup label='" + chargen_edges[edge_counter].category + "'>";
+					optgroup = chargen_edges[edge_counter].category;
+				}
+
 				add_edge_html += "<option" + disabled + ">" + chargen_edges[edge_counter].name + "</option>";
+			}
 		}
 		add_edge_html += "</select></div></div><div class=\"row\">";
 		add_edge_html += "<div class=\"col-xs-12\">";
@@ -571,6 +534,7 @@ function propagate_attributes_section() {
 	});
 }
 function event_attribute_changed(attribute_name, new_value) {
+	//console.log("event_attribute_changed: " + attribute_name + " to " + new_value);
 	current_character.set_attribute(attribute_name, new_value);
 	refresh_chargen_page();
 }
@@ -622,9 +586,9 @@ function init_main_buttons() {
 
 			propagate_character_load_list();
 
-			createAlert( "Your character has been saved.", "success" );
+			bootstrap_alert( "Your character has been saved.", "success" );
 		} else {
-			createAlert( "Please name your character before saving", "danger"  );
+			bootstrap_alert( "Please name your character before saving", "danger"  );
 		}
 
 	} );
@@ -653,12 +617,12 @@ function load_selected_character() {
 				$(".js-chargen-description").val(current_character.description);
 
 				refresh_chargen_page();
-				createAlert( "Your character has been loaded.", "success" );
+				bootstrap_alert( "Your character has been loaded.", "success" );
 			} else {
-				createAlert( "Your character could not be loaded.", "danger" );
+				bootstrap_alert( "Your character could not be loaded.", "danger" );
 			}
 		} else {
-			createAlert( "Your character could not be loaded.", "danger" );
+			bootstrap_alert( "Your character could not be loaded.", "danger" );
 		}
 	}
 }
@@ -821,6 +785,17 @@ function test_validity() {
 	}
 }
 
+function propagate_derived_stats_section() {
+	html = "";
+
+	html += "<label>Charisma: " + current_character.derived.charisma + "<label>";
+	html += "<label>Pace: " + current_character.derived.pace + "<label>";
+	html += "<label>Parry: " + current_character.derived.parry + "<label>";
+	html += "<label>Toughness: " + current_character.derived.toughness + "<label>";
+
+	$(".derived-stats-data").html( html );
+}
+
 function refresh_chargen_page() {
 	current_character.calculate();
 	localStorage["current_character"] = current_character.export_json(".js-chargen-json-code");
@@ -829,6 +804,7 @@ function refresh_chargen_page() {
 
 	propagate_character_section();
 	propagate_attributes_section();
+	propagate_derived_stats_section();
 	propagate_edges_section();
 	propagate_perks_section();
 	propagate_skills_sections();
@@ -848,9 +824,9 @@ $(".js-chargen-import-data").click( function() {
 			$(".js-chargen-name").val(current_character.name);
 			$(".js-chargen-description").val(current_character.description);
 			$(".js-import-code").val('');
-			createAlert( "Your Character has been imported.", "success" );
+			bootstrap_alert( "Your Character has been imported.", "success" );
 		} else {
-			createAlert( "Your Character could not be imported - please check the formatting of your code.", "warning" );
+			bootstrap_alert( "Your Character could not be imported - please check the formatting of your code.", "warning" );
 		}
 	}
 });

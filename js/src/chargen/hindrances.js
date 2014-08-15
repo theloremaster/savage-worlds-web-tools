@@ -273,14 +273,16 @@ var chargen_hindrances = Array(
 			"On the plus side, the wisdom of his years grants the hero 5 extra skill points that may be used for any skills linked to Smarts."
 			),
 		char_effects: function(character_object) {
-			character_object.secondary.pace--;
+			character_object.derived.pace--;
 			character_object.attributes.strength--;
 			character_object.attributes.vigor--;
-			if(character_object.attributes.strength < 0)
-				character_object.attributes.strength = 0;
-			if(character_object.attributes.vigor < 0)
-				character_object.attributes.vigor = 0;
-			character_object.attributes.skill_points = character_object.attributes.skill_points + 5;
+
+			if(character_object.attributes.strength < 1)
+				character_object.attributes.strength = 1;
+			if(character_object.attributes.vigor < 1)
+				character_object.attributes.vigor = 1;
+
+			character_object.skill_points = character_object.skill_points + 5;
 		},
 		book: books_list[0],
 		prereqs: {},
@@ -667,7 +669,7 @@ var chargen_hindrances = Array(
 			"Unfortunately, this individual hit more than a few ugly sticks on his way down the tree of life. His Charisma is lowered by 2, and he is generally shunned by members of the opposite sex."
 			),
 		char_effects: function(character_object) {
-			character_object.secondary.charisma = character_object.secondary.charisma - 2;
+			character_object.derived.charisma = character_object.derived.charisma - 2;
 		},
 		book: books_list[0],
 		prereqs: {},

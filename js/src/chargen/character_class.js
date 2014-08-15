@@ -12,6 +12,12 @@ character_class.prototype = {
 		this.attribute_points = 5;
 		this.skill_points = 15;
 
+		this.arcane_background = 0;
+		this.arcane_background_name = "";
+		this.powers_available = 0;
+		this.power_points_available = 0;
+		this.selected_powers = Array();
+
 		this.selected_edges = Array();
 		this.selected_hindrances = Array();
 		this.selected_perks = Array();
@@ -19,6 +25,10 @@ character_class.prototype = {
 
 		this.edges_available = 0;
 		this.perks_available = 0;
+
+		this.rank = 0; // novice ;)
+		this.wild_card = 1; // currently always a wild card
+		this.xp = 0;
 
 		// Attributes..
 		this.attributes = {
@@ -30,10 +40,11 @@ character_class.prototype = {
 		};
 
 		// Derived Stats..
-		this.secondary = {
+		this.derived = {
+			charisma : 0,
 			pace : 0,
 			toughness : 0,
-			parry : 0,
+			parry : 2,
 			size: 1
 		};
 
@@ -54,6 +65,11 @@ character_class.prototype = {
 
 		this.is_valid = true;
 
+		this.arcane_background = 0;
+		this.arcane_background_name = "";
+		this.powers_available = 0;
+		this.power_points_available = 0;
+
 		this.cost_to_raise = {
 			agility : 1,
 			smarts : 1,
@@ -63,10 +79,11 @@ character_class.prototype = {
 		};
 
 		// Attributes..
-		this.secondary = {
+		this.derived = {
+			charisma : 0,
 			pace : 0,
 			toughness : 0,
-			parry : 0,
+			parry : 2,
 			size: 1
 		};
 
@@ -77,6 +94,7 @@ character_class.prototype = {
 			strength : 0,
 			vigor : 0
 		};
+
 
 		this.edges_available = 0;
 
@@ -144,19 +162,21 @@ character_class.prototype = {
 		this.attribute_points += this.race.attributes.strength;
 		this.attribute_points += this.race.attributes.vigor;
 
-
 		// TODO: Calculate secondary Attributes
-		this.secondary.pace = 6;
+		this.derived.pace = 6;
+		this.derived.toughness = 3;
 		if(this.attributes.vigor == 1) // d4
-			this.secondary.toughness += 2;
+			this.derived.toughness = 3;
 		if(this.attributes.vigor == 2) // d6
-			this.secondary.toughness += 3;
+			this.derived.toughness = 5;
 		if(this.attributes.vigor == 3) // d8
-			this.secondary.toughness += 4;
+			this.derived.toughness = 6;
 		if(this.attributes.vigor == 4) // d10
-			this.secondary.toughness += 5;
+			this.derived.toughness = 7;
 		if(this.attributes.vigor == 5) // d12
-			this.secondary.toughness += 6;
+			this.derived.toughness = 8;
+		if(this.attributes.vigor > 5) // d12
+			this.derived.toughness = 8 + this.attributes.vigor - 5;
 
 		this.racial_edges.sort();
 		this.racial_hindrances.sort();
@@ -219,6 +239,23 @@ character_class.prototype = {
 				if( current_edge.char_effects )
 					current_edge.char_effects( this );
 			}
+		}
+
+		// calculate parry
+		this.derived.parry = 2;
+		if(this.has_skill("Fighting")) {
+			fighting_skill = this.get_skill("Fighting");
+			if(fighting_skill.value == 1) // d4
+				this.derived.parry = 3;
+			if(fighting_skill.value == 2) // d6
+				this.derived.parry = 5;
+			if(fighting_skill.value == 3) // d8
+				this.derived.parry = 6;
+			if(fighting_skill.value == 4) // d10
+				this.derived.parry = 7;
+			if(fighting_skill.value == 5) // d12
+				this.derived.parry = 8;
+
 		}
 
 		this.validity_messages = Array();
@@ -369,8 +406,15 @@ character_class.prototype = {
 	},
 
 	set_attribute: function(attribute_name, new_value) {
-		if(this.attributes[attribute_name]) {
-			this.attributes[attribute_name] = new_value / 1;
+		attribute_name = attribute_name.toLowerCase().trim();
+		if(new_value == "")
+			new_value = 0;
+		new_value = new_value / 1;
+		if( new_value == 0)
+			new_value = 1;
+
+		if(typeof(this.attributes[attribute_name]) != "undefined") {
+			this.attributes[attribute_name] = new_value;
 		}
 	},
 
@@ -518,6 +562,124 @@ character_class.prototype = {
 			}
 		}
 		return 0;
+	},
+
+	edge_available: function ( edge_object ){
+		return_value = true;
+	 	if( edge_object.prereqs ) {
+
+			if( edge_object.prereqs.rank ) {
+
+				if( edge_object.prereqs.rank > 0 ) {
+					if( edge_object.prereqs.rank > this.rank )
+						return false;
+				}
+			}
+
+			if( edge_object.prereqs.wild_card ) {
+				if( edge_object.prereqs.wild_card > 0 ) {
+					if( this.wild_card == 0 )
+						return false;
+				}
+			}
+
+			if( edge_object.prereqs.arcane_background ) {
+				if( edge_object.prereqs.arcane_background > 0 ) {
+					if(  this.arcane_background == 0 )
+						return false;
+
+					if( edge_object.prereqs.arcane_background_name ) {
+						if( edge_object.prereqs.arcane_background_name != "" ) {
+							if( edge_object.prereqs.arcane_background_name.toLowerCase().trim() != this.arcane_background_name.toLowerCase().trim() )
+								return false;
+						}
+					}
+				}
+			}
+
+			if( edge_object.prereqs.edges ) {
+				return_value = false;
+				for(edge_available_counter = 0; edge_available_counter < edge_object.prereqs.edges.length; edge_available_counter++) {
+					if( this.has_edge( edge_object.prereqs.edges[edge_available_counter] )) {
+						return_value = true;
+					}
+				}
+
+				if(return_value == false)
+					return false;
+
+			}
+
+
+			if( edge_object.prereqs.attributes ) {
+				return_value = false;
+				if( edge_object.prereqs.attributes.agility ) {
+					if( this.attributes.agility >= edge_object.prereqs.attributes.agility)
+						return_value = true;
+				}
+
+				if( edge_object.prereqs.attributes.smarts ) {
+					if( this.attributes.smarts >= edge_object.prereqs.attributes.smarts)
+						return_value = true;
+				}
+
+				if( edge_object.prereqs.attributes.spirit ) {
+					if( this.attributes.spirit >= edge_object.prereqs.attributes.spirit)
+						return_value = true;
+				}
+
+				if( edge_object.prereqs.attributes.strength ) {
+					if( this.attributes.strength >= edge_object.prereqs.attributes.strength)
+						return_value = true;
+				}
+
+				if( edge_object.prereqs.attributes.vigor ) {
+					if( this.attributes.vigor >= edge_object.prereqs.attributes.vigor)
+						return_value = true;
+				}
+
+
+				if(return_value == false)
+					return false;
+			}
+
+			if( edge_object.prereqs.skills ) {
+				if(edge_object.prereqs.skills.length > 0 ) {
+					return_value = false;
+					for(edge_available_skill_counter = 0;edge_available_skill_counter < edge_object.prereqs.skills.length ; edge_available_skill_counter++ ) {
+						if( edge_object.prereqs.skills[edge_available_skill_counter].name ) {
+
+							// Check for an "Or" skill, like Trademark Weapon ;)
+							if( edge_object.prereqs.skills[edge_available_skill_counter].name.indexOf("||") > 0) {
+								items = edge_object.prereqs.skills[edge_available_skill_counter].name.split("||");
+								for(itemcount = 0; itemcount < items.length; itemcount++ ) {
+									verify_skill = this.get_skill( items[itemcount] );
+									if( verify_skill && verify_skill.value >= edge_object.prereqs.skills[edge_available_skill_counter].required) {
+										return_value = true;
+									}
+								}
+							} else {
+								// see if the character's skills are up to snuff
+								verify_skill = this.get_skill( edge_object.prereqs.skills[edge_available_skill_counter].name );
+								if( verify_skill && verify_skill.value >= edge_object.prereqs.skills[edge_available_skill_counter].required) {
+									return_value = true;
+								}
+
+							}
+
+
+						}
+					}
+
+					if(return_value == false)
+						return false;
+				}
+			}
+
+
+		}
+
+		return return_value;
 	},
 
 	get_all_edges: function() {
@@ -721,6 +883,9 @@ character_class.prototype = {
 			}
 		}
 
+		export_object.wild_card = this.wild_card;
+		export_object.xp = this.xp;
+
 		if(this.selected_skills.length > 0) {
 
 			for(get_skills_count = 0; get_skills_count < this.selected_skills.length; get_skills_count++ ) {
@@ -744,6 +909,14 @@ character_class.prototype = {
 			$(selector_name).val(export_string);
 
 		return export_string;
+	},
+
+	set_wild_card: function( new_value ) {
+		this.wild_card = new_value / 1;
+	},
+
+	set_xp: function( new_value ) {
+		this.xp = new_value / 1;
 	},
 
 	export_bbcode: function(selector_name) {
@@ -773,6 +946,15 @@ character_class.prototype = {
 			this.set_name( imported_object.name );
 			this.set_gender( imported_object.gender );
 			this.set_description( imported_object.description );
+			if( imported_object.wild_card )
+				this.set_wild_card( imported_object.wild_card );
+			else
+				this.set_wild_card( 1 );
+
+			if( imported_object.wild_card )
+				this.set_xp( imported_object.xp );
+			else
+				this.set_xp( 0 );
 
 			this.set_race(imported_object.race);
 			this.set_attribute("agility",imported_object.attributes.agility);

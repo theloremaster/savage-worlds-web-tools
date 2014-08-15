@@ -86,7 +86,7 @@ var chargen_races = Array(
 				name: "Tough",
 				description: "The pressure of their deep homes make Atlanteans tougher than most. Increase Toughness by 1",
 				char_effects: function( character_object ) {
-					character_object.secondary.toughness += 1;
+					character_object.derived.toughness += 1;
 				}
 			}
 		),
@@ -116,7 +116,7 @@ var chargen_races = Array(
 				name: "Hollow-Boned",
 				description: "Avions have –1 Toughness",
 				char_effects: function( character_object ) {
-					character_object.secondary.toughness -= 1;
+					character_object.derived.toughness -= 1;
 				}
 			}
 		)
@@ -145,7 +145,7 @@ var chargen_races = Array(
 				name: "Slow",
 				description: "Dwarves have a Pace of 5”",
 				char_effects: function( character_object ) {
-					character_object.secondary.pace = 5;
+					character_object.derived.pace = 5;
 				}
 			}
 		)
@@ -215,8 +215,8 @@ var chargen_races = Array(
 				name: "Short",
 				description: "Half-folk average only about 4’ tall. This gives them a Size of –1 and subtracts 1 from their Toughness",
 				char_effects: function( character_object ) {
-					character_object.secondary.toughness -= 1;
-					character_object.secondary.size -= 1;
+					character_object.derived.toughness -= 1;
+					character_object.derived.size -= 1;
 				}
 			}
 		)
