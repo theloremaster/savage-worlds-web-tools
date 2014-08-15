@@ -679,10 +679,12 @@ function propagate_character_load_list() {
 		html = "<ul class='list-unstyled'>";
 		for(lsCounter = 0; lsCounter < current_load_data.length; lsCounter++) {
 			if(current_load_data[lsCounter].type == "character") {
+				saved_date = new Date(current_load_data[lsCounter].saved);
+				saved_date_formatted = (saved_date.getMonth() + 1).padLeft() + '/' + saved_date.getDate().padLeft() + '/' +  saved_date.getFullYear().padLeft() + " at " + saved_date.getHours().padLeft() + ":" + saved_date.getMinutes().padLeft();
 				html += "<li style='display:block;overflow:hidden; padding: 2px; margin: 2px; border-bottom: 1px solid #dedede;'>";
 				html += "<label style='display: inline; font-weight: normal'>";
 				html += "<input type='radio' name='selected_char_load' value='" + lsCounter + "' /> ";
-				html += current_load_data[lsCounter].name + ""; //  - " + current_load_data[lsCounter].saved;
+				html += current_load_data[lsCounter].name + " - saved on " + saved_date_formatted;
 				html += "</label>";
 				html += "<button ref='" + lsCounter + "' class='js-delete-char-data btn btn-danger pull-right btn-xs' type='button'>Delete</button>";
 				html += "</li>";
