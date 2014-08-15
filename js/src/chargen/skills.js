@@ -3,6 +3,7 @@ var chargen_skills = Array(
 		name: "Boating",
 		attribute: "agility",
 		book: books_list[0],
+		specify: 0,
 		prereqs: Array(
 		),
 		page: "p123"
@@ -11,6 +12,7 @@ var chargen_skills = Array(
 		name: "Climbing",
 		attribute: "strength",
 		book: books_list[0],
+		specify: 0,
 		prereqs: Array(
 		),
 		page: "p123"
@@ -19,6 +21,7 @@ var chargen_skills = Array(
 		name: "Driving",
 		attribute: "agility",
 		book: books_list[0],
+		specify: 0,
 		prereqs: Array(
 		),
 		page: "p123"
@@ -27,6 +30,7 @@ var chargen_skills = Array(
 		name: "Fighting",
 		attribute: "agility",
 		book: books_list[0],
+		specify: 0,
 		prereqs: Array(
 		),
 		page: "p123"
@@ -35,6 +39,7 @@ var chargen_skills = Array(
 		name: "Gambling",
 		attribute: "smarts",
 		book: books_list[0],
+		specify: 0,
 		prereqs: Array(
 		),
 		page: "p123"
@@ -43,6 +48,7 @@ var chargen_skills = Array(
 		name: "Healing",
 		attribute: "smarts",
 		book: books_list[0],
+		specify: 0,
 		prereqs: Array(
 		),
 		page: "p123"
@@ -51,6 +57,7 @@ var chargen_skills = Array(
 		name: "Intimidation",
 		attribute: "spirit",
 		book: books_list[0],
+		specify: 0,
 		prereqs: Array(
 		),
 		page: "p123"
@@ -59,6 +66,7 @@ var chargen_skills = Array(
 		name: "Investigation",
 		attribute: "smarts",
 		book: books_list[0],
+		specify: 0,
 		prereqs: Array(
 		),
 		page: "p123"

@@ -119,6 +119,18 @@ character_class.prototype = {
 			}
 		}
 
+		for(skill_counter = 0; skill_counter < this.selected_skills.length; skill_counter++){
+			double_cost = 0;
+			single_cost = 0;
+			if( this.selected_skills[skill_counter].value > this.attributes[this.selected_skills[skill_counter].attribute]) {
+				double_cost = this.selected_skills[skill_counter].value - this.attributes[this.selected_skills[skill_counter].attribute];
+				single_cost = this.selected_skills[skill_counter].value - double_cost;
+			}  else {
+				single_cost = this.selected_skills[skill_counter].value;
+			}
+			this.skill_points -= (single_cost + double_cost * 2);
+		}
+
 		this.attribute_points = this.attribute_points - (this.attributes.agility - 1) * this.cost_to_raise.agility;
 		this.attribute_points = this.attribute_points - (this.attributes.smarts - 1) * this.cost_to_raise.smarts;
 		this.attribute_points = this.attribute_points - (this.attributes.spirit - 1) * this.cost_to_raise.spirit;
@@ -235,6 +247,7 @@ character_class.prototype = {
 	},
 
 	set_skill: function(skill_name, new_value) {
+
 		if(skill_name.indexOf(":") > -1) {
 			skill_base_name = skill_name.substring(0, skill_name.indexOf(":") ).trim();
 			skill_specify_name = skill_name.substring(skill_name.indexOf(":") +1).trim();
@@ -243,41 +256,33 @@ character_class.prototype = {
 			skill_specify_name = "";
 		}
 
-		console.log(skill_base_name);
-		console.log(skill_specify_name);
-
-		console.log("bp1");
 		// if value = 0 remove it entirely
 		if(new_value == 0) {
-			this.remove_skill(skill_name);
+			this.remove_skill(skill_base_name, skill_specify_name);
 		} else {
 			// if skill is not listed in the selected_skills list, add it
-			console.log("bp2");
 			if( !this.has_skill(skill_base_name, skill_specify_name) ) {
 				var new_skill = this.get_raw_skill(skill_base_name);
 				if( new_skill.name ) {
-					console.log("bp3");
 					if(skill_specify_name != "")
 						new_skill.specify_text = skill_specify_name;
 					new_skill.value = new_value;
 					this.selected_skills.push( new_skill );
 					return true;
 				} else {
-					console.log("bp3");
 					return false;
 				}
 			} else {
-				console.log("bp5");
 				// set the value to requested value
 				for(set_skill_counter = 0; set_skill_counter < this.selected_skills.length; set_skill_counter++) {
 					if(skill_specify_name == "") {
-						console.log("bp6");
+
 						if( this.selected_skills[set_skill_counter].name.toLowerCase().trim() == skill_base_name.toLowerCase().trim()) {
 							this.selected_skills[set_skill_counter].value = new_value;
 							return true;
 						}
 					} else {
-						console.log("bp7");
+
 						if( this.selected_skills[set_skill_counter].name.toLowerCase().trim() == skill_base_name.toLowerCase().trim()) {
 							if( this.selected_skills[set_skill_counter].specify_text.toLowerCase().trim() == skill_specify_name.toLowerCase().trim()) {
 								this.selected_skills[set_skill_counter].value = new_value;
@@ -307,6 +312,7 @@ character_class.prototype = {
 	},
 
 	get_skills_of: function(skill_name) {
+
 		return_value = Array();
 		for(get_skill_counter = 0; get_skill_counter < this.selected_skills.length; get_skill_counter++) {
 			if( this.selected_skills[get_skill_counter].name.toLowerCase().trim() == skill_name.toLowerCase().trim())
@@ -344,13 +350,22 @@ character_class.prototype = {
 		return false;
 	},
 
-	remove_skill: function(skill_name ) {
+	remove_skill: function(skill_name, skill_specify_name ) {
 		for(remove_skill_counter = 0; remove_skill_counter < this.selected_skills.length; remove_skill_counter++) {
-			if( this.selected_skills[remove_skill_counter].name.toLowerCase().trim() == skill_name.toLowerCase().trim()) {
-				this.selected_skills.splice(remove_skill_counter, 1);
-				return;
+			if(skill_specify_name) {
+				if( this.selected_skills[remove_skill_counter].name.toLowerCase().trim() == skill_name.toLowerCase().trim()) {
+					if( this.selected_skills[remove_skill_counter].specify_text.toLowerCase().trim() == skill_specify_name.toLowerCase().trim()) {
+						this.selected_skills.splice(remove_skill_counter, 1);
+					}
+				}
+			} else {
+				if( this.selected_skills[remove_skill_counter].name.toLowerCase().trim() == skill_name.toLowerCase().trim()) {
+					this.selected_skills.splice(remove_skill_counter, 1);
+				}
 			}
+
 		}
+
 	},
 
 	set_attribute: function(attribute_name, new_value) {
@@ -706,6 +721,25 @@ character_class.prototype = {
 			}
 		}
 
+		if(this.selected_skills.length > 0) {
+
+			for(get_skills_count = 0; get_skills_count < this.selected_skills.length; get_skills_count++ ) {
+				if( this.selected_skills[get_skills_count].specify_text && this.selected_skills[get_skills_count].specify_text != "" ) {
+					export_skill = {
+						name: this.selected_skills[get_skills_count].name + ": " + this.selected_skills[get_skills_count].specify_text,
+						value: this.selected_skills[get_skills_count].value
+					}
+				} else {
+					export_skill = {
+						name: this.selected_skills[get_skills_count].name,
+						value: this.selected_skills[get_skills_count].value
+					}
+				}
+
+				export_object.skills.push( export_skill );
+			}
+		}
+
 		return JSON.stringify(export_object);
 	},
 
@@ -750,6 +784,12 @@ character_class.prototype = {
 					if( !imported_object.hindrances[import_hindrance_counter].specify )
 						imported_object.hindrances[import_hindrance_counter].specify = "";
 					this.add_hindrance( imported_object.hindrances[import_hindrance_counter].name, imported_object.hindrances[import_hindrance_counter].specify );
+				}
+			}
+
+			if( imported_object.skills ) {
+				for( import_skill_counter = 0; import_skill_counter < imported_object.skills.length; import_skill_counter++) {
+					this.set_skill( imported_object.skills[import_skill_counter].name, imported_object.skills[import_skill_counter].value );
 				}
 			}
 

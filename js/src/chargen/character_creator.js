@@ -149,14 +149,18 @@ function propagate_skills_sections() {
 	skills_html = Array();
 
 	for(skills_counter =0 ; skills_counter < chargen_skills.length; skills_counter++) {
+		if( !chargen_skills[skills_counter].specify )
+			chargen_skills[skills_counter].specify = 0;
+
 		if( !skills_html[chargen_skills[skills_counter].attribute] )
 			skills_html[chargen_skills[skills_counter].attribute] = "";
 
 		// created an html var for legibility
 		html = "";
 		html += "<div class=\"skill-container\">";
-		current_skill = current_character.get_skill(chargen_skills[skills_counter].name);
-		if( current_skill ) {
+		current_skill = current_character.get_skill( chargen_skills[skills_counter].name );
+		skills_of = Array();
+		if( current_skill && !current_skill.specify_text ) {
 			value_label = attribute_labels[current_skill.value];
 			if(current_skill.value == 0)
 				value_label = " - ";
@@ -166,8 +170,10 @@ function propagate_skills_sections() {
 			html += "<button class=\"js-lower-skill-level btn btn-xs btn-primary\" skillname=\"" + current_skill.name + "\" skillval=\"" + current_skill.value + "\">-</button>";
 			html += "<button class=\"js-add-skill-level btn btn-xs btn-primary\" skillname=\"" + current_skill.name + "\" skillval=\"" + current_skill.value + "\">+</button>";
 			html += "</div>";
+
 		} else {
-			if( !chargen_skills[skills_counter].specify || chargen_skills[skills_counter].specify < 1 ) {
+
+			if( chargen_skills[skills_counter].specify < 1 ) {
 				value_label = "-";
 				html += chargen_skills[skills_counter].name + ": " + value_label ;
 				html += "<div class=\"pull-right\">";
@@ -178,10 +184,29 @@ function propagate_skills_sections() {
 				html += "<div class=\"pull-right\">";
 				html += "<button class=\"js-add-specify-skill btn btn-xs btn-primary\" skillname=\"" + chargen_skills[skills_counter].name + "\">Add</button>";
 				html += "</div>";
+				skills_of = current_character.get_skills_of(chargen_skills[skills_counter].name);
 			}
 		}
 
 		html += "</div>";
+
+
+		for(specify_skills_counter = 0 ; specify_skills_counter < skills_of.length; specify_skills_counter++) {
+
+			current_sub_skill = skills_of[specify_skills_counter];
+			value_label = attribute_labels[current_sub_skill.value];
+			if(current_sub_skill.value == 0)
+				value_label = " - ";
+			current_sub_name = current_sub_skill.name + ": " + current_sub_skill.specify_text;
+
+			html += "<div class=\"skill-container\">";
+			html += current_sub_name + ": " + value_label;
+			html += "<div class=\"pull-right\">";
+			html += "<button class=\"js-lower-skill-level btn btn-xs btn-primary\" skillname=\"" + current_sub_name + "\" skillval=\"" + current_sub_skill.value + "\">-</button>";
+			html += "<button class=\"js-add-skill-level btn btn-xs btn-primary\" skillname=\"" + current_sub_name + "\" skillval=\"" + current_sub_skill.value + "\">+</button>";
+			html += "</div>";
+			html += "</div>";
+		}
 
 		skills_html[chargen_skills[skills_counter].attribute] += html;
 	}
@@ -216,6 +241,7 @@ function propagate_skills_sections() {
 	$(".js-add-specify-skill-action").click( function() {
 		new_skill_name = $(".js-specify-skill-base").val() + ": " + $(".js-specify-skill-value").val();
 		current_character.set_skill(new_skill_name, 1);
+		refresh_chargen_page();
 	});
 
 
@@ -254,7 +280,7 @@ function is_incompatible_with( edge_object ){
 	if( edge_object.incompatible) {
 
 		if( edge_object.incompatible.edges ) {
-//			console.log(edge_object.incompatible.edges);
+
 			for(is_incompatible_with_counter = 0; is_incompatible_with_counter < edge_object.incompatible.edges.length; is_incompatible_with_counter++) {
 				if( current_character.has_edge( edge_object.incompatible.edges[is_incompatible_with_counter] )) {
 					return true;
@@ -365,7 +391,7 @@ function propagate_hindrances_section() {
 		add_hindrance_html += "<option" + disabled + specify_field + ">" + chargen_hindrances[hind_counter].name + minor_major + "</option>";
 	}
 	add_hindrance_html += "</select></div></div><div class=\"row\">";
-	add_hindrance_html += "<div class=\"col-xs-12\"><input type=\"text\" placeholder=\"Specify your hindrance\" style=\"display: none\" class=\"js-add-hindrance-specify\" />";
+	add_hindrance_html += "<div class=\"col-xs-12\"><input type=\"text\" placeholder=\"specify your hindrance\" style=\"display: none\" class=\"js-add-hindrance-specify\" />";
 	add_hindrance_html += "<button type\"button\" class=\"btn-sm pull-right btn btn-primary js-add-hindrance-button\">Add</button>";
 	add_hindrance_html += "</div>";
 	add_hindrance_html += "</div>";
@@ -603,8 +629,6 @@ function load_selected_character() {
 			current_characters = Array();
 		}
 
-		console.log( selectedItemIndex );
-		console.log( current_characters );
 
 		if(current_characters[selectedItemIndex]) {
 			if(current_characters[selectedItemIndex].data) {

@@ -21,25 +21,23 @@
 
 ### Edges
 * Some data has been entered for testing
+* Frontend Code
 
 ###Skills
 * Placeholder files
+* Data Entry
 
 ##What Needs To Be Done
 ###General
 * Export and Import of JSON
 * Export to BB Code and HTML (Printing?)
 
-###Skills
-* Data Entry
 
 ###Skills
-* Backend Code
+* Backend Code (calculation of available skill points)
 * Frontend Code
-* Data Entry
 
 ###Edges
-* Frontend Code
 * Data Entry
 
 ###Equipment
