@@ -49,6 +49,8 @@ function propagate_race_options(select_selector) {
 	$(select_selector).html(html);
 }
 
+
+
 function display_remaining_attribute_points(selector_name) {
 	$(selector_name).removeClass("text-danger");
 	$(selector_name).removeClass("text-primary");
@@ -806,7 +808,8 @@ function test_validity() {
 
 function refresh_chargen_page() {
 	current_character.calculate();
-	localStorage["current_character"] = current_character.export_json();
+	localStorage["current_character"] = current_character.export_json(".js-chargen-json-code");
+
 
 	propagate_character_load_list();
 
@@ -820,7 +823,22 @@ function refresh_chargen_page() {
 	propagate_powers_section();
 	init_main_buttons();
 
+
+
 	test_validity();
+	current_character.export_bbcode(".js-chargen-bb-code");
 
 }
 
+$(".js-chargen-import-data").click( function() {
+	if( $(".js-chargen-import-code").val() != "" ) {
+		if( current_character.import_json( $(".js-chargen-import-code").val() ) ) {
+			$(".js-chargen-name").val(current_character.name);
+			$(".js-chargen-description").val(current_character.description);
+			$(".js-import-code").val('');
+			createAlert( "Your Character has been imported.", "success" );
+		} else {
+			createAlert( "Your Character could not be imported - please check the formatting of your code.", "warning" );
+		}
+	}
+});

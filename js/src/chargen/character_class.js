@@ -668,7 +668,7 @@ character_class.prototype = {
 		this.name = new_name;
 	},
 
-	export_json: function() {
+	export_json: function(selector_name) {
 		export_object = {
 			name: this.name,
 			description: this.description,
@@ -739,11 +739,23 @@ character_class.prototype = {
 				export_object.skills.push( export_skill );
 			}
 		}
+		export_string = JSON.stringify(export_object)
+		if(selector_name)
+			$(selector_name).val(export_string);
 
-		return JSON.stringify(export_object);
+		return export_string;
 	},
 
+	export_bbcode: function(selector_name) {
+		html_return = "TODO export_bbcode";
 
+		html_return = html_return.replace("8)", " 8 )");
+
+		if(selector_name)
+			$(selector_name).val(html_return);
+
+		return html_return;
+	},
 
 	import_json: function( import_string ) {
 		try {
