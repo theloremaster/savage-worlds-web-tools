@@ -49,11 +49,11 @@
 			</div>
 			<div class="modal-body">
 				<h5>BB Code</h5>
-				<textarea class="js-chargen-bb-code" style="height:150px" readonly="readonly"></textarea>
+				<textarea class="js-bb-code" style="height:150px" readonly="readonly"></textarea>
 			</div>
 			<div class="modal-body">
 				<h5>JSON</h5>
-				<textarea class="js-chargen-json-code" style="height:150px" readonly="readonly"></textarea>
+				<textarea class="js-json-code" style="height:150px" readonly="readonly"></textarea>
 			</div>
       		<div class="modal-footer">
         		<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
@@ -87,11 +87,11 @@
 			</div>
 			<div class="modal-body">
 				<h5>Paste exported JSON code below</h5>
-				<textarea class="js-chargen-import-code" style="height:150px"></textarea>
+				<textarea class="js-import-code" style="height:150px"></textarea>
 			</div>
       		<div class="modal-footer">
         		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        		<button type="button" class="btn btn-primary js-chargen-import-data" data-dismiss="modal">Import</button>
+        		<button type="button" class="btn btn-primary js-import-data" data-dismiss="modal">Import</button>
       		</div>
 		</div>
 	</div>
@@ -108,7 +108,6 @@
 					<input type="hidden" value="" class="js-specify-skill-base" />
 					<input type="text" value="" class="js-specify-skill-value" />
 				</label>
-				<label><input type="checkbox" class="js-specify-skill-fix-case" value="1" checked="checked" /> Go ahead and fix my case<br /><br />This will lowercase everything and captialize the first letter of every word.<br />Uncheck this if you have certain words that may need non-uppercase first words like deMorte, etc.</label>
 			</div>
       		<div class="modal-footer">
         		<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
@@ -187,38 +186,20 @@
 				</div>
 				<div class="js-chargen-skill-points-label"></div>
 				<div class="row">
-					<div class="col-sm-3">
-						<h5>Agility Skills</h5>
+					<div class="col-sm-15">
 						<div class="js-skill-list-agility"></div>
 					</div>
-					<div class="col-sm-3">
-						<h5>Smarts Skills</h5>
+					<div class="col-sm-15">
 						<div class="js-skill-list-smarts"></div>
 					</div>
-					<div class="col-sm-3">
-						<h5>Spirit Skills</h5>
+					<div class="col-sm-15">
 						<div class="js-skill-list-spirit"></div>
 					</div>
-					<div class="col-sm-3">
-						<h5>Strength Skills</h5>
+					<div class="col-sm-15">
 						<div class="js-skill-list-strength"></div>
 					</div>
-				</div>
-				<div class="row">
-					<div class="col-sm-15 text-center">
-						<img width="20px" src='img/dice/d4.png' title='d4' /> d4
-					</div>
-					<div class="col-sm-15 text-center">
-						<img width="20px" src='img/dice/d6.png' title='d6' /> d6
-					</div>
-					<div class="col-sm-15 text-center">
-						<img width="20px" src='img/dice/d8.png' title='d8' /> d8
-					</div>
-					<div class="col-sm-15 text-center">
-						<img width="20px" src='img/dice/d10.png' title='d10' /> d10
-					</div>
-					<div class="col-sm-15 text-center">
-						<img width="20px" src='img/dice/d12.png' title='d12' /> d12
+					<div class="col-sm-15">
+						<div class="js-skill-list-vigor"></div>
 					</div>
 				</div>
 			</fieldset>
@@ -289,9 +270,8 @@
 			<a href="https://www.peginc.com/licensing/" title="Click here for more info on Pinnacle Entertainment Groups's licensing policies"><img src="./img/sw_fan_78x50.png" alt="Savage Worlds Fan Logo" /></a>
 			<p>This tool references the Savage Worlds game system, available from Pinnacle Entertainment Group at <a href="http:/www.peginc.com" title="Pinnacle Entertainment Group">www.peginc.com</a>. Savage Worlds and all associated logos and trademarks are copyrights of Pinnacle Entertainment Group. Used with permission. Pinnacle makes no representation or warranty as to the quality, viability, or suitability for purpose of this product.</p>
 
-			<p>Many thanks to <a href="http://glyphicons.com/" title="Glyphicons">Glyphicons</a> for providing their Halflings for users of <a href="http://getbootstrap.com/" title="Bootstrap">Bootstrap 3</a> for free!</p>
 
-			<p>Thanks to <a href="http://iconcubic.deviantart.com/">iconcubic</a> and his <a href="http://www.iconeasy.com/iconset/dnd-dice-icons/">DnD Icons Set</a> for the dice icons in the skills section. Used for free as per the <a href="http://www.iconeasy.com/icon/license/Object/DnD%20Dice/license.txt">license</a></p>
+			<p>Many thanks to <a href="http://glyphicons.com/" title="Glyphicons">Glyphicons</a> for providing their Halflings for users of <a href="http://getbootstrap.com/" title="Bootstrap">Bootstrap 3</a> for free!</p>
 
 			<p>You can contribute to this project at <a href="https://github.com/jdgwf/savage-worlds-web-tools">https://github.com/jdgwf/savage-worlds-web-tools</a></p>
 		</div>

@@ -27,6 +27,22 @@ var attribute_labels = Array(
 	"d12+20"
 );
 
+var attribute_images = Array(
+	"<img src='img/dice/blank.png' title='no value' />",
+	"<img src='img/dice/d4.png' title='d4' />",
+	"<img src='img/dice/d6.png' title='d6' />",
+	"<img src='img/dice/d8.png' title='d8' />",
+	"<img src='img/dice/d10.png' title='d10' />",
+	"<img src='img/dice/d12.png' title='d12' />",
+	"<img src='img/dice/d12.png' title='d12' />",
+	"<img src='img/dice/d12.png' title='d12' />",
+	"<img src='img/dice/d12.png' title='d12' />",
+	"<img src='img/dice/d12.png' title='d12' />",
+	"<img src='img/dice/d12.png' title='d12' />",
+	"<img src='img/dice/d12.png' title='d12' />",
+	"<img src='img/dice/d12.png' title='d12' />"
+);
+
 function format_pace_realworld(pace_value) {
 	// never take things at pace value. /groan
 	return pace_value + " (" + Math.floor(pace_value * 2.4)+ " mph, " + Math.floor(pace_value * 3.862416) + " kph)";

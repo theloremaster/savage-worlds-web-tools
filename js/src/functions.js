@@ -74,3 +74,8 @@ function createAlert(messageText, alertClass) {
 function clone_object(originalObject) {
 	return jQuery.extend({}, originalObject);
 }
+
+function uc_words(str)
+{
+    return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+}

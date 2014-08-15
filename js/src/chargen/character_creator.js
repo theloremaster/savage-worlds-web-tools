@@ -158,12 +158,13 @@ function propagate_skills_sections() {
 			skills_html[chargen_skills[skills_counter].attribute] = "";
 
 		// created an html var for legibility
+		no_closing_div = false;
 		html = "";
 		html += "<div class=\"skill-container\">";
 		current_skill = current_character.get_skill( chargen_skills[skills_counter].name );
 		skills_of = Array();
 		if( current_skill && !current_skill.specify_text ) {
-			value_label = attribute_labels[current_skill.value];
+			value_label = attribute_images[current_skill.value];
 			if(current_skill.value == 0)
 				value_label = " - ";
 			html += current_skill.name + ": " + value_label;
@@ -176,7 +177,7 @@ function propagate_skills_sections() {
 		} else {
 
 			if( chargen_skills[skills_counter].specify < 1 ) {
-				value_label = "-";
+				value_label = attribute_images[0];
 				html += chargen_skills[skills_counter].name + ": " + value_label ;
 				html += "<div class=\"pull-right\">";
 				html += "<button class=\"js-add-skill-level btn btn-xs btn-primary\" skillname=\"" + chargen_skills[skills_counter].name + "\" skillval=\"0\">+</button>";
@@ -187,27 +188,35 @@ function propagate_skills_sections() {
 				html += "<button class=\"js-add-specify-skill btn btn-xs btn-primary\" skillname=\"" + chargen_skills[skills_counter].name + "\">Add</button>";
 				html += "</div>";
 				skills_of = current_character.get_skills_of(chargen_skills[skills_counter].name);
+				if(skills_of.length > 0)
+					no_closing_div = true;
 			}
 		}
 
-		html += "</div>";
-
-
-		for(specify_skills_counter = 0 ; specify_skills_counter < skills_of.length; specify_skills_counter++) {
-
-			current_sub_skill = skills_of[specify_skills_counter];
-			value_label = attribute_labels[current_sub_skill.value];
-			if(current_sub_skill.value == 0)
-				value_label = " - ";
-			current_sub_name = current_sub_skill.name + ": " + current_sub_skill.specify_text;
-
-			html += "<div class=\"skill-container\">";
-			html += current_sub_name + ": " + value_label;
-			html += "<div class=\"pull-right\">";
-			html += "<button class=\"js-lower-skill-level btn btn-xs btn-primary\" skillname=\"" + current_sub_name + "\" skillval=\"" + current_sub_skill.value + "\">-</button>";
-			html += "<button class=\"js-add-skill-level btn btn-xs btn-primary\" skillname=\"" + current_sub_name + "\" skillval=\"" + current_sub_skill.value + "\">+</button>";
+		if(!no_closing_div)
 			html += "</div>";
+
+		if(skills_of.length > 0) {
+			html += "<div class=\"subskills\">";
+			for(specify_skills_counter = 0 ; specify_skills_counter < skills_of.length; specify_skills_counter++) {
+
+				current_sub_skill = skills_of[specify_skills_counter];
+				value_label = attribute_images[current_sub_skill.value];
+				if(current_sub_skill.value == 0)
+					value_label = " - ";
+				current_sub_name = current_sub_skill.name + ": " + current_sub_skill.specify_text;
+
+				html += "<div class=\"skill-container\">";
+				html += current_sub_skill.specify_text + ": " + value_label;
+				html += "<div class=\"pull-right\">";
+				html += "<button class=\"js-lower-skill-level btn btn-xs btn-primary\" skillname=\"" + current_sub_name + "\" skillval=\"" + current_sub_skill.value + "\">-</button>";
+				html += "<button class=\"js-add-skill-level btn btn-xs btn-primary\" skillname=\"" + current_sub_name + "\" skillval=\"" + current_sub_skill.value + "\">+</button>";
+				html += "</div>";
+				html += "</div>";
+			}
 			html += "</div>";
+
+			html += "</div>";	// closing div for parent container....
 		}
 
 		skills_html[chargen_skills[skills_counter].attribute] += html;
@@ -241,7 +250,11 @@ function propagate_skills_sections() {
 
 	$(".js-add-specify-skill-action").unbind("click");
 	$(".js-add-specify-skill-action").click( function() {
-		new_skill_name = $(".js-specify-skill-base").val() + ": " + $(".js-specify-skill-value").val();
+		if( $(".js-specify-skill-fix-case").is(":checked") )
+			new_skill_name = $(".js-specify-skill-base").val() + ": " + uc_words( $(".js-specify-skill-value").val() );
+		else
+			new_skill_name = $(".js-specify-skill-base").val() + ": " + $(".js-specify-skill-value").val();
+
 		current_character.set_skill(new_skill_name, 1);
 		refresh_chargen_page();
 	});
@@ -810,7 +823,6 @@ function refresh_chargen_page() {
 	current_character.calculate();
 	localStorage["current_character"] = current_character.export_json(".js-chargen-json-code");
 
-
 	propagate_character_load_list();
 
 	propagate_character_section();
@@ -822,8 +834,6 @@ function refresh_chargen_page() {
 	propagate_equipment_section();
 	propagate_powers_section();
 	init_main_buttons();
-
-
 
 	test_validity();
 	current_character.export_bbcode(".js-chargen-bb-code");
