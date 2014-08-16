@@ -9,11 +9,13 @@ character_class.prototype = {
 		this.gender = "";
 		this.description = "";
 
+		this.bennies = 0;
+
 		this.attribute_points = 5;
 		this.skill_points = 15;
 
 		this.arcane_background = 0;
-		this.arcane_background_name = "";
+		this.arcane_background_selected = "";
 		this.powers_available = 0;
 		this.power_points_available = 0;
 		this.selected_powers = Array();
@@ -65,8 +67,13 @@ character_class.prototype = {
 
 		this.is_valid = true;
 
+		if( this.wild_card > 0)
+			this.bennies = 3;
+		else
+			this.bennies = 0;
+
 		this.arcane_background = 0;
-		this.arcane_background_name = "";
+		this.arcane_background_selected = "";
 		this.powers_available = 0;
 		this.power_points_available = 0;
 
@@ -95,12 +102,10 @@ character_class.prototype = {
 			vigor : 0
 		};
 
-
 		this.edges_available = 0;
 
 		this.racial_edges = Array();
 		this.racial_hindrances = Array();
-
 
 		// Add Racial Edges
 		if(this.race.edges_included) {
@@ -269,12 +274,10 @@ character_class.prototype = {
 			this.validity_messages.push("Overspent attribute points");
 		}
 
-
 		if( this.edges_available < 0) {
 			this.is_valid = false;
 			this.validity_messages.push("Too many edges selected");
 		}
-
 
 		if( this.skill_points < 0) {
 			this.is_valid = false;
@@ -513,7 +516,6 @@ character_class.prototype = {
 			hindrance_name = hindrance_name.trim();
 		}
 
-
 		found_index = -1;
 		if(hindrance_name) {
 
@@ -588,9 +590,9 @@ character_class.prototype = {
 					if(  this.arcane_background == 0 )
 						return false;
 
-					if( edge_object.prereqs.arcane_background_name ) {
-						if( edge_object.prereqs.arcane_background_name != "" ) {
-							if( edge_object.prereqs.arcane_background_name.toLowerCase().trim() != this.arcane_background_name.toLowerCase().trim() )
+					if( edge_object.prereqs.arcane_background_selected ) {
+						if( edge_object.prereqs.arcane_background_selected != "" ) {
+							if( edge_object.prereqs.arcane_background_selected.toLowerCase().trim() != this.arcane_background_selected.toLowerCase().trim() )
 								return false;
 						}
 					}
@@ -609,7 +611,6 @@ character_class.prototype = {
 					return false;
 
 			}
-
 
 			if( edge_object.prereqs.attributes ) {
 				return_value = false;
@@ -637,7 +638,6 @@ character_class.prototype = {
 					if( this.attributes.vigor >= edge_object.prereqs.attributes.vigor)
 						return_value = true;
 				}
-
 
 				if(return_value == false)
 					return false;
@@ -667,7 +667,6 @@ character_class.prototype = {
 
 							}
 
-
 						}
 					}
 
@@ -675,7 +674,6 @@ character_class.prototype = {
 						return false;
 				}
 			}
-
 
 		}
 
@@ -766,7 +764,6 @@ character_class.prototype = {
 		look_for_minor = false;
 		if(!specify_field_text)
 			specify_field_text = "";
-
 
 		if( hindrance_name.toLowerCase().endsWith("(major)")) {
 			look_for_major = true;

@@ -1,6 +1,6 @@
 /* Character Object */
 
-var cargen_genders = Array(
+var chargen_genders = Array(
 	{
 		name: "Male"
 	},

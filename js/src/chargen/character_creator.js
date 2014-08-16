@@ -49,6 +49,33 @@ function propagate_race_options(select_selector) {
 	$(select_selector).html(html);
 }
 
+function propagate_arcane_background_options() {
+
+	html = "";
+	if( current_character.arcane_background > 0) {
+		html += "<select class=\"js-select-arcane-bg\">";
+			if(current_character.arcane_background_selected == "")
+				html += "<option selected=\"selected\" value=\"\">- Select a Background -</option>";
+			else
+				html += "<option value=\"\">- Select a Background -</option>";
+
+		for(arcane_background_counter = 0; arcane_background_counter < chargen_arcane_backgrounds.length; arcane_background_counter++) {
+			if(current_character.arcane_background_selected == chargen_arcane_backgrounds[arcane_background_counter])
+				html += "<option selected=\"selected\" value=\"" + chargen_arcane_backgrounds[arcane_background_counter].short_name + "\">" + chargen_arcane_backgrounds[race_counter].name + "</option>";
+			else
+				html += "<option value=\"" + chargen_arcane_backgrounds[arcane_background_counter].short_name + "\">" + chargen_arcane_backgrounds[arcane_background_counter].name + "</option>";
+		}
+		html += "</select>";
+	} else {
+		html += "You must select the Arcane Backrgound edge to have powers."
+	}
+	$(".js-powers-area").html(html);
+	$(".js-select-arcane-bg").unbind("change");
+	$(".js-select-arcane-bg").change( function() {
+		current_character.set_arcane_bg( $(this).val() );
+	} );
+
+}
 
 
 function display_remaining_attribute_points(selector_name) {
@@ -98,15 +125,14 @@ function display_remaining_skill_points(selector_name) {
 function propagate_gender_options(select_selector) {
 
 	html = "";
-	for(gender_counter = 0; gender_counter < cargen_genders.length; gender_counter++) {
-		if(current_character.gender == cargen_genders[gender_counter].name)
-			html += "<option selected=\"selected\" value=\"" + cargen_genders[gender_counter].name + "\">" + cargen_genders[gender_counter].name + "</option>";
+	for(gender_counter = 0; gender_counter < chargen_genders.length; gender_counter++) {
+		if(current_character.gender == chargen_genders[gender_counter].name)
+			html += "<option selected=\"selected\" value=\"" + chargen_genders[gender_counter].name + "\">" + chargen_genders[gender_counter].name + "</option>";
 		else
-			html += "<option value=\"" + cargen_genders[gender_counter].name + "\">" + cargen_genders[gender_counter].name + "</option>";
+			html += "<option value=\"" + chargen_genders[gender_counter].name + "\">" + chargen_genders[gender_counter].name + "</option>";
 	}
 	$(select_selector).html(html);
 }
-
 
 function propagate_character_section() {
 // Fill in Fluff Section
@@ -238,7 +264,6 @@ function propagate_skills_sections() {
 		$(".js-skill-list-vigor").html(skills_html["vigor"]);
 	}
 
-
 	$(".js-add-specify-skill").unbind("click");
 	$(".js-add-specify-skill").click( function() {
 		skill_name = $(this).attr("skillname");
@@ -258,7 +283,6 @@ function propagate_skills_sections() {
 		current_character.set_skill(new_skill_name, 1);
 		refresh_chargen_page();
 	});
-
 
 	$(".js-add-skill-level").unbind("click");
 	$(".js-add-skill-level").click( function() {
@@ -315,7 +339,6 @@ function is_incompatible_with( edge_object ){
 	}
 	return false;
 }
-
 
 function propagate_hindrances_section() {
 	list_hindrance_html = "";
@@ -408,7 +431,6 @@ function propagate_hindrances_section() {
 			refresh_chargen_page();
 		}
 	});
-
 
 }
 
@@ -608,7 +630,6 @@ function load_selected_character() {
 			current_characters = Array();
 		}
 
-
 		if(current_characters[selectedItemIndex]) {
 			if(current_characters[selectedItemIndex].data) {
 				current_character.import_json( current_characters[selectedItemIndex].data );
@@ -626,7 +647,6 @@ function load_selected_character() {
 		}
 	}
 }
-
 
 
 function propagate_character_load_list() {
@@ -658,14 +678,12 @@ function propagate_character_load_list() {
 	}
 
 
-
 	$(".js-load-list").html( html );
 
 	$(".js-load-char-data").unbind("click");
 	$(".js-load-char-data").click( function() {
 		load_selected_character();
 	} );
-
 
 	$(".js-delete-char-data").unbind("click");
 	$(".js-delete-char-data").click( function() {
@@ -811,6 +829,8 @@ function refresh_chargen_page() {
 	propagate_hindrances_section();
 	propagate_equipment_section();
 	propagate_powers_section();
+	propagate_arcane_background_options();
+
 	init_main_buttons();
 
 	test_validity();

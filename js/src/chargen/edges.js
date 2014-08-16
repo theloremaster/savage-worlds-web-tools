@@ -1240,7 +1240,7 @@ var chargen_edges = Array(
 
 		prereqs: {
 			arcane_background: 1,
-			arcane_background_name: "Miracles",
+			arcane_background_selected: "miracles",
 			edges: Array("Martial Arist"),
 			skills: Array(
 				{
@@ -1303,7 +1303,7 @@ var chargen_edges = Array(
 
 		prereqs: {
 			arcane_background: 1,
-			arcane_background_name: "Miracles",
+			arcane_background_selected: "miracles",
 			skills: Array(
 				{
 					name: "Faith",
@@ -1335,7 +1335,7 @@ var chargen_edges = Array(
 
 		prereqs: {
 			arcane_background: 1,
-			arcane_background_name: "Weird Science",
+			arcane_background_selected: "weird-science",
 			skills: Array(
 				{
 					name: "Repair",
@@ -1368,7 +1368,7 @@ var chargen_edges = Array(
 
 		prereqs: {
 			arcane_background: 1,
-			arcane_background_name: "Miracles",
+			arcane_background_selected: "miracles",
 			skills: Array(
 				{
 					name: "Faith",
@@ -1468,7 +1468,7 @@ var chargen_edges = Array(
 
 		prereqs: {
 			arcane_background: 1,
-			arcane_background_name: "Psionics",
+			arcane_background_selected: "psionics",
 			skills: Array(
 				{
 					name: "Psionics",
@@ -1493,7 +1493,7 @@ var chargen_edges = Array(
 
 		prereqs: {
 			arcane_background: 1,
-			arcane_background_name: "Weird Science",
+			arcane_background_selected: "weird-science",
 			skills: Array(
 				{
 					name: "Repair",
@@ -1573,7 +1573,7 @@ var chargen_edges = Array(
 
 		prereqs: {
 			arcane_background: 1,
-			arcane_background_name: "Magic",
+			arcane_background_selected: "magic",
 			skills: Array(
 				{
 					name: "Spellcasting",
@@ -1602,7 +1602,7 @@ var chargen_edges = Array(
 
 		prereqs: {
 			arcane_background: 1,
-			arcane_background_name: "Magic",
+			arcane_background_selected: "magic",
 			skills: Array(
 				{
 					name: "Tracking",

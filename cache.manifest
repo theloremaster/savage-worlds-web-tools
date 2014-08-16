@@ -1,7 +1,7 @@
 CACHE MANIFEST
 # rev 2014081501
 # 2014-08-15:01
-# Chargen: Cleaning up of interface, entered in all edges from SWD
+# Chargen: First bit of work on Powers section
 
 CACHE:
 http://jdgwf.github.io/savage-worlds-web-tools/extras_view.html
@@ -16,7 +16,6 @@ http://jdgwf.github.io/savage-worlds-web-tools/raise_calculator.html
 http://jdgwf.github.io/savage-worlds-web-tools/world_maker.html
 http://jdgwf.github.io/savage-worlds-web-tools/robot_creator.html
 http://jdgwf.github.io/savage-worlds-web-tools/index.html
-
 
 http://jdgwf.github.io/savage-worlds-web-tools/js/jquery-1.10.2.min.js
 http://jdgwf.github.io/savage-worlds-web-tools/js/background.js
