@@ -244,14 +244,22 @@ character_class.prototype = {
 					current_edge.char_effects( this );
 			}
 		}
-		if(this.arcane_background_selected) {
-			if(this.arcane_background_selected.power_points)
-				this.power_points_available += this.arcane_background_selected.power_points;
-			if(this.arcane_background_selected.starting_powers)
-				this.powers_available += this.arcane_background_selected.starting_powers;
 
-			this.powers_available -= this.selected_powers.length;
+		if( this.arcane_background > 0 ) {
+			if(this.arcane_background_selected) {
+				if(this.arcane_background_selected.power_points)
+					this.power_points_available += this.arcane_background_selected.power_points;
+				if(this.arcane_background_selected.starting_powers)
+					this.powers_available += this.arcane_background_selected.starting_powers;
+
+				this.powers_available -= this.selected_powers.length;
+			}
+		} else {
+			// remove any arcane items
+			this.arcane_background_selected = "";
+			this.selected_powers = Array();
 		}
+
 
 		// calculate parry
 		this.derived.parry = 2;
@@ -621,6 +629,20 @@ character_class.prototype = {
 			}
 		}
 		return 0;
+	},
+
+	power_available: function ( power_object ) {
+
+		if( power_object.rank ) {
+
+			if( power_object.rank > 0 ) {
+				if( power_object.rank > this.rank )
+					return false;
+			}
+		}
+
+		return true;
+
 	},
 
 	edge_available: function ( edge_object ){

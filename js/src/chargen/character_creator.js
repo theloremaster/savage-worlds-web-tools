@@ -82,7 +82,6 @@ function propagate_arcane_background_options() {
 		if( current_character.selected_powers.length > 0 ) {
 			html += "<h4>Current Powers</h4>";
 			for(p_counter = 0; p_counter < current_character.selected_powers.length; p_counter++) {
-				html += current_character.selected_powers[p_counter].name + "<br />";
 				html += "<div class=\"a-h-line\">";
 				html += "<button";
 					html += " type=\"button\"";
@@ -92,9 +91,17 @@ function propagate_arcane_background_options() {
 				html += ">";
 				html += "Delete</button> ";
 				if( current_character.selected_powers[p_counter].description != "") {
-					html += current_character.selected_powers[p_counter].description + " (" + current_character.selected_powers[p_counter].name + ", " + current_character.selected_powers[p_counter].trapping  + ")";
+					html += current_character.selected_powers[p_counter].description; + " (" + current_character.selected_powers[p_counter].name;
+						if( current_character.selected_powers[p_counter].trapping != "" )
+							html += ", " + current_character.selected_powers[p_counter].trapping  + ")";
+						else
+							html += ")";
+
 				} else {
-					html += current_character.selected_powers[p_counter].name + " (" + current_character.selected_powers[p_counter].trapping  + ")";
+					if( current_character.selected_powers[p_counter].trapping != "" )
+						html += current_character.selected_powers[p_counter].name + " (" + current_character.selected_powers[p_counter].trapping  + ")";
+					else
+						html += current_character.selected_powers[p_counter].name;
 				}
 				html += "</div>";
 			}
@@ -170,7 +177,11 @@ function propagate_power_options() {
 	ps_html = "<option value=\"\">- Select a Power -</option>";
 
 	for(ps_counter = 0; ps_counter < chargen_powers.length; ps_counter++){
-		ps_html += "<option value=\"" + chargen_powers[ps_counter].short_name + "\">" + chargen_powers[ps_counter].name + "</option>";
+		if( current_character.power_available(chargen_powers[ps_counter]) ) {
+			ps_html += "<option value=\"" + chargen_powers[ps_counter].short_name + "\">" + chargen_powers[ps_counter].name + "</option>";
+		} else {
+			ps_html += "<option  disabled=\"disabled\" value=\"" + chargen_powers[ps_counter].short_name + "\">" + chargen_powers[ps_counter].name + "</option>";
+		}
 	}
 
 	$(".js-select-power").html(ps_html);
