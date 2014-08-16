@@ -53,28 +53,127 @@ function propagate_arcane_background_options() {
 
 	html = "";
 	if( current_character.arcane_background > 0) {
-		html += "<select class=\"js-select-arcane-bg\">";
+		html += "<label>Arcane Background Type<br /><select class=\"js-select-arcane-bg\">";
 			if(current_character.arcane_background_selected == "")
 				html += "<option selected=\"selected\" value=\"\">- Select a Background -</option>";
 			else
 				html += "<option value=\"\">- Select a Background -</option>";
 
 		for(arcane_background_counter = 0; arcane_background_counter < chargen_arcane_backgrounds.length; arcane_background_counter++) {
-			if(current_character.arcane_background_selected == chargen_arcane_backgrounds[arcane_background_counter])
-				html += "<option selected=\"selected\" value=\"" + chargen_arcane_backgrounds[arcane_background_counter].short_name + "\">" + chargen_arcane_backgrounds[race_counter].name + "</option>";
+			if(current_character.arcane_background_selected.short_name == chargen_arcane_backgrounds[arcane_background_counter].short_name)
+				html += "<option selected=\"selected\" value=\"" + chargen_arcane_backgrounds[arcane_background_counter].short_name + "\">" + chargen_arcane_backgrounds[arcane_background_counter].name + "</option>";
 			else
 				html += "<option value=\"" + chargen_arcane_backgrounds[arcane_background_counter].short_name + "\">" + chargen_arcane_backgrounds[arcane_background_counter].name + "</option>";
 		}
-		html += "</select>";
+		html += "</select></label>";
+
+
+		if( current_character.power_points_available > 0) {
+			html += "<br />Your character has " + current_character.power_points_available + " power points";
+		} else {
+			html += "<br />Your character has no power points";
+		}
+
+		if( current_character.powers_available > 0) {
+			html += "<br />You have " + current_character.powers_available + " powers available.";
+			html += "<br /><button class='btn btn-primary btn-sm js-open-power-modal'>Select a New Power</button>";
+		}
+
+		if( current_character.selected_powers.length > 0 ) {
+			html += "<h4>Current Powers</h4>";
+			for(p_counter = 0; p_counter < current_character.selected_powers.length; p_counter++) {
+				html += current_character.selected_powers[p_counter].name + "<br />";
+				html += "<div class=\"a-h-line\">";
+				html += "<button";
+					html += " type=\"button\"";
+					html += " class=\"btn btn-xs btn-danger js-delete-power-button\"";
+					html += " shortname=\"" + current_character.selected_powers[p_counter].short_name + "\"";
+					html += " trap=\"" + current_character.selected_powers[p_counter].trapping + "\"";
+				html += ">";
+				html += "Delete</button> ";
+				if( current_character.selected_powers[p_counter].description != "") {
+					html += current_character.selected_powers[p_counter].description + " (" + current_character.selected_powers[p_counter].name + ", " + current_character.selected_powers[p_counter].trapping  + ")";
+				} else {
+					html += current_character.selected_powers[p_counter].name + " (" + current_character.selected_powers[p_counter].trapping  + ")";
+				}
+				html += "</div>";
+			}
+		}else {
+			html += "<p>You have no selected powers</p>";
+		}
+
+
+		propagate_trapping_base_options();
+		propagate_power_options();
 	} else {
 		html += "You must select the Arcane Backrgound edge to have powers."
 	}
+
+
 	$(".js-powers-area").html(html);
+
+	$(".js-delete-power-button").unbind("click");
+	$(".js-delete-power-button").click( function() {
+		if( confirm("Are you sure you want to delete this power?") ) {
+			shortname = $(this).attr("shortname");
+			trapping = $(this).attr("trap");
+			current_character.remove_power( shortname, trapping);
+			refresh_chargen_page();
+		}
+
+	});
+
+	$(".js-open-power-modal").unbind("click");
+	$(".js-open-power-modal").click( function() {
+		$(".js-trapping-description-case").prop("checked", "checked");
+		$(".js-add-specify-power-dialog").modal();
+	});
+	/* Select Arcane Background Bindings */
 	$(".js-select-arcane-bg").unbind("change");
 	$(".js-select-arcane-bg").change( function() {
 		current_character.set_arcane_bg( $(this).val() );
+		refresh_chargen_page();
 	} );
 
+	$(".js-add-power-action").unbind("click");
+	$(".js-add-power-action").click( function() {
+		if( $(".js-select-power").val() != "" ) {
+			if( $(".js-trapping-description-case").is(":checked") )
+				new_description = uc_words( $(".js-trapping-description").val() );
+			else
+				new_description = $(".js-trapping-description").val();
+
+			current_character.add_power(
+				$(".js-select-power").val(), // power shortname
+				$(".js-select-trapping").val(), // trapping
+				new_description // description
+			);
+			refresh_chargen_page();
+		} else {
+			bootstrap_alert("No power was selected", "warning");
+		}
+
+	} );
+}
+
+function propagate_trapping_base_options() {
+	ts_html = "<option value=\"\">- Select a Trapping -</option>";
+
+	for(ts_counter = 0; ts_counter < chargen_trappings.length; ts_counter++){
+		ts_html += "<option>" + chargen_trappings[ts_counter] + "</option>";
+	}
+
+	$(".js-select-trapping").html(ts_html);
+}
+
+function propagate_power_options() {
+	ps_html = "<option value=\"\">- Select a Power -</option>";
+
+	for(ps_counter = 0; ps_counter < chargen_powers.length; ps_counter++){
+		ps_html += "<option value=\"" + chargen_powers[ps_counter].short_name + "\">" + chargen_powers[ps_counter].name + "</option>";
+	}
+
+	$(".js-select-power").html(ps_html);
 }
 
 
@@ -270,6 +369,7 @@ function propagate_skills_sections() {
 		$(".js-specify-skill-label").text(skill_name);
 		$(".js-specify-skill-base").val(skill_name);
 		$(".js-specify-skill-value").val('');
+		$(".js-specify-skill-fix-case").prop("checked", "checked");
 		$(".js-add-specify-skill-dialog").modal("show");
 	});
 
@@ -556,7 +656,6 @@ function propagate_attributes_section() {
 	});
 }
 function event_attribute_changed(attribute_name, new_value) {
-	//console.log("event_attribute_changed: " + attribute_name + " to " + new_value);
 	current_character.set_attribute(attribute_name, new_value);
 	refresh_chargen_page();
 }
@@ -830,6 +929,7 @@ function refresh_chargen_page() {
 	propagate_equipment_section();
 	propagate_powers_section();
 	propagate_arcane_background_options();
+
 
 	init_main_buttons();
 

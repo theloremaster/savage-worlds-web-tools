@@ -1,6 +1,6 @@
 #Character Generator Worksheet
 
-##What Works
+##What (Allegedly) Works
 ###General
 * New Button
 * Load Button (and delete button from dialog)
@@ -23,6 +23,7 @@
 ### Edges
 * Some data has been entered for testing
 * Frontend Code
+* NOTE: There a few edges where I've noted I'm not sure how to enforce availabilty in js/src/edges.js more than likely these will have to be custom exceptions
 
 ###Skills
 * Placeholder files
@@ -30,21 +31,20 @@
 * Backend Code (calculation of available skill points)
 * Frontend Code
 
+###Powers Selection
+* Feature Complete, but needs data entry for powers
+
+
 ##What Needs To Be Done
 ###General
 * Export to BB Code and HTML (Printing?)
 
-###Equipment
-* Backend Code
-* Frontend Code
-* Data Entry
+###Arcane Background Selection
+* Power Data Entry
 
-###Powers
-* Backend Code, some hooks are in place
-* Frontend Code
-* Data Entry
 
-###Advancements
-* Backend Code, some hooks are in place
-* Frontend Code
-* Data Entry
+###Equipment. 
+* I'll probably only handle the PERSONAL equipment at first, leaving the big stuff like Tank Cannons and Cars out of it.
+ 
+###Advancement
+* There's lots here to think about.... possibly adding XP and then "slots" show up of how to advance your character.

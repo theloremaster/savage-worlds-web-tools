@@ -73,7 +73,6 @@ character_class.prototype = {
 			this.bennies = 0;
 
 		this.arcane_background = 0;
-		this.arcane_background_selected = "";
 		this.powers_available = 0;
 		this.power_points_available = 0;
 
@@ -167,7 +166,7 @@ character_class.prototype = {
 		this.attribute_points += this.race.attributes.strength;
 		this.attribute_points += this.race.attributes.vigor;
 
-		// TODO: Calculate secondary Attributes
+		// Calculate secondary Attributes
 		this.derived.pace = 6;
 		this.derived.toughness = 3;
 		if(this.attributes.vigor == 1) // d4
@@ -244,6 +243,14 @@ character_class.prototype = {
 				if( current_edge.char_effects )
 					current_edge.char_effects( this );
 			}
+		}
+		if(this.arcane_background_selected) {
+			if(this.arcane_background_selected.power_points)
+				this.power_points_available += this.arcane_background_selected.power_points;
+			if(this.arcane_background_selected.starting_powers)
+				this.powers_available += this.arcane_background_selected.starting_powers;
+
+			this.powers_available -= this.selected_powers.length;
 		}
 
 		// calculate parry
@@ -424,9 +431,10 @@ character_class.prototype = {
 	has_edge: function( edge_name ) {
 		if( edge_name ) {
 			if(this.race.edges_included) {
-				for(get_all_edges_count = 0; get_all_edges_count < this.racial_edges.length; get_all_edges_count++ )
-					if( this.racial_edges[get_all_edges_count].name.toLowerCase() == edge_name.toLowerCase() )
-						return true;
+				if( this.racial_edges)
+					for(get_all_edges_count = 0; get_all_edges_count < this.racial_edges.length; get_all_edges_count++ )
+						if( this.racial_edges[get_all_edges_count].name.toLowerCase() == edge_name.toLowerCase() )
+							return true;
 			}
 
 			if(this.selected_edges.length > 0) {
@@ -476,6 +484,55 @@ character_class.prototype = {
 			}
 		}
 		return 0;
+	},
+
+	set_arcane_bg: function( background_shortname ) {
+		for(set_arcane_count = 0; set_arcane_count < chargen_arcane_backgrounds.length; set_arcane_count++) {
+			if( chargen_arcane_backgrounds[set_arcane_count].short_name == background_shortname ) {
+				this.arcane_background_selected = chargen_arcane_backgrounds[set_arcane_count];
+				return true;
+			}
+		}
+		return false;
+	},
+
+	add_power: function( power_shortname, trapping, description ) {
+
+		for( add_power_counter = 0; add_power_counter < chargen_powers.length; add_power_counter++ ) {
+			if( power_shortname.toLowerCase().trim() == chargen_powers[add_power_counter].short_name.toLowerCase().trim() ) {
+				new_power = clone_object( chargen_powers[add_power_counter] );
+				new_power.description = description;
+				new_power.trapping = trapping;
+				this.selected_powers.push(new_power);
+				return true;
+			}
+		}
+		return false;
+	},
+
+	remove_power: function( power_shortname, trapping ) {
+		if(!trapping)
+			trapping= "";
+		if(power_shortname) {
+			found_index = -1;
+			for( remove_power_counter = 0; remove_power_counter < this.selected_powers.length; remove_power_counter++ ) {
+				if(this.selected_powers[remove_power_counter] && this.selected_powers[remove_power_counter].short_name) {
+					if(power_shortname.toLowerCase() == this.selected_powers[remove_power_counter].short_name.toLowerCase()) {
+						// double check trapping match just in case there are multiple powers of same type
+						if( trapping != "" && this.selected_powers[remove_power_counter].trapping ){
+							if(trapping.toLowerCase() == this.selected_powers[remove_power_counter].trapping.toLowerCase()) {
+								this.selected_powers.splice(found_index, 1);
+								return true;
+							}
+						} else {
+							this.selected_powers.splice(found_index, 1);
+							return true;
+						}
+					}
+				}
+			}
+		}
+		return false;
 	},
 
 	remove_edge: function( edge_name ) {
@@ -591,8 +648,8 @@ character_class.prototype = {
 						return false;
 
 					if( edge_object.prereqs.arcane_background_selected ) {
-						if( edge_object.prereqs.arcane_background_selected != "" ) {
-							if( edge_object.prereqs.arcane_background_selected.toLowerCase().trim() != this.arcane_background_selected.toLowerCase().trim() )
+						if( edge_object.prereqs.arcane_background_selected.short_name != "" ) {
+							if( edge_object.prereqs.arcane_background_selected.short_name.toLowerCase().trim() != this.arcane_background_selected.short_name.toLowerCase().trim() )
 								return false;
 						}
 					}
@@ -843,7 +900,11 @@ character_class.prototype = {
 			edges: Array(),
 			hindrances: Array(),
 			perks: Array(),
-			skills: Array()
+			skills: Array(),
+			arcane: {
+				type : this.arcane_background_selected.short_name,
+				powers: Array()
+			}
 		}
 
 		if(this.selected_edges.length > 0) {
@@ -859,6 +920,20 @@ character_class.prototype = {
 				current_perk = this.selected_perks[get_all_perks_count];
 				if(current_perk)
 					export_object.perks.push( current_perk.short_name );
+			}
+		}
+
+		if(this.selected_powers.length > 0) {
+			for(get_all_powers_count = 0; get_all_powers_count < this.selected_powers.length; get_all_powers_count++ ) {
+				current_power = this.selected_powers[get_all_powers_count];
+				if(current_power) {
+					export_power = {
+						short: current_power.short_name,
+						trap: current_power.trapping,
+						desc: current_power.description,
+					}
+					export_object.arcane.powers.push( export_power );
+				}
 			}
 		}
 
@@ -981,6 +1056,22 @@ character_class.prototype = {
 			if( imported_object.skills ) {
 				for( import_skill_counter = 0; import_skill_counter < imported_object.skills.length; import_skill_counter++) {
 					this.set_skill( imported_object.skills[import_skill_counter].name, imported_object.skills[import_skill_counter].value );
+				}
+			}
+
+			if( imported_object.arcane ) {
+
+				if( imported_object.arcane.type && this.has_edge("Arcane Background")) {
+					this.set_arcane_bg( imported_object.arcane.type );
+					if( imported_object.arcane.powers.length > 0 ) {
+						console.log(imported_object.arcane.powers.length);
+						for( import_power_counter = 0; import_power_counter < imported_object.arcane.powers.length; import_power_counter++)
+							this.add_power(
+								imported_object.arcane.powers[import_power_counter].short,
+								imported_object.arcane.powers[import_power_counter].trap,
+								imported_object.arcane.powers[import_power_counter].desc
+							);
+					}
 				}
 			}
 

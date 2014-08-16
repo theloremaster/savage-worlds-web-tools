@@ -4,17 +4,23 @@
 [http://jdgwf.github.io/savage-worlds-web-tools/](http://jdgwf.github.io/savage-worlds-web-tools/)
 
 ###Overview
-This is a collection of javascript web applications for the Savage Worlds pen and paper role playing system owned by Pinnacle Entertainment Group.
+This is a collection of javascript web applications for the Savage Worlds pen and paper role playing system owned by Pinnacle Entertainment Group. 
+
+A few may question why I chose HTML/JS for this app instead of traditional compile and distrubute. The primary reason was accessiblity. I can use the same code on an iPad, a Mac Pro, a Windows XP machine, Linux and even my daughter's Kindle. I'm not afraid of closing my source up so the the accessabiliy of javascript (although the distributed code is minified) was a bonus to me not a burden. 
+
+Since this really doesn't do any processor intensive calculations, JavaScript does well for pushing around variables and objects for such low-intensive purposes. *IF* I were to recreate this, I'd probably write it in C++ using the Qt framework, but that'd require multiple accounts and distribution and complitaion methods ("ain't nobody got time for that!").
+
+I expect bugs, please feel free to point them out to me by tweeting me at the top of the hosted github application and I'll get on it as soon as I can.
 
 Fully Functional Tools Include:
 
 * Dice Roller
 * Raise Calculator
 * Mass Battle Calculator
-* Starship Creator (in early beta, needing testing)
-* Vehicle Creator (in early beta, needing testing)
-* Walker Creator (in early beta, needing testing)
-* Power Armor Creator (in early beta, needing testing)
+* Starship Creator
+* Vehicle Creator
+* Walker Creator
+* Power Armor Creator
 * Monster Search
 	* TODO:
 		* Data Entry still needed
@@ -27,7 +33,13 @@ Fully Functional Tools Include:
 
 The roadmap for these tools include:
 
-* Character Creator (very early alpha, 50-70% complete from another project)
+* Character Creator (rewrite in progress since Aug 9th, already leaps ahead of the previous version )
+	* TODO
+		* Arcane Background Selection (needs JSON import/export)
+		* Powers Selection
+		* Equipment. I'll probably only handle the PERSONAL equipment at first, leaving the big stuff like Tank Cannons and Cars out of it.
+		* Advancement
+
 * Robot Creator (planned)
 * World Creator (planned)
 
