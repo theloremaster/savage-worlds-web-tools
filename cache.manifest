@@ -1,7 +1,7 @@
 CACHE MANIFEST
 # rev 2014081501
 # 2014-08-15:01
-# Chargen: First bit of work on Powers section
+# Chargen: Changed column sizes for smaller android screen sizes
 
 CACHE:
 http://jdgwf.github.io/savage-worlds-web-tools/extras_view.html

@@ -17,7 +17,7 @@
 <div class="header-bar">
 	<div class="container">
 		<div class="row">
-			<div class="col-sm-12">
+			<div class="col-xs-12">
 				<div class="bug-tweet pull-right text-right">Found a bug?<br /><a href="https://twitter.com/intent/tweet?screen_name=Gauthic&text=%23SWWebTools%20Bug%20CharGen%3A%20" class="twitter-mention-button" data-related="Gauthic">Tweet to @Gauthic</a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script></a></div>
 				<h1><a class="ios_app_click" href="./index.html" title="Savage Worlds Web Tools">Savage Worlds Web Tools</a> - Character Creator</h1>
 				<p class="js-smarty-comment">This web app is a rudimentary Character Creator for the Savage Worlds pen and paper role playing game.</p>
@@ -30,7 +30,7 @@
 <div class="action-bar">
 	<div class="container">
 		<div class="row">
-			<div class="col-sm-12">
+			<div class="col-xs-12">
 				<button type="button" class="btn btn-default js-new-character">New</button>
 				<button type="button" class="btn btn-default" data-toggle="modal" data-target=".js-load-character-dialog">Load</button>
 				<button type="button" class="btn btn-default js-save-character">Save</button>
@@ -122,7 +122,7 @@
 	<div class="js-alert-container"></div>
 
 	<div class="row page-main">
-		<div class="col-sm-12">
+		<div class="col-xs-12">
 			<h2>Under Reconstruction</h2>
 			<p>As of August 9th, 2014 this whole section is undergoing a bottom to top rewrite. I'm able to salvage a few things, such as data entry for hindrances and edges, but I'm working on more maintainable code as I've learned a few more tricks in Object Oriented JavaScript (finally a way to handle inheritance, coming from C++ coding this is a godsend!) since the original creation of this section more than a year ago.</p>
 			<p>Thanks for your patience</p>
@@ -130,20 +130,20 @@
 	</div>
 
 	<div class="row">
-		<div class="col-sm-12">
+		<div class="col-xs-12">
 			<fieldset>
 				<legend>Character Information</legend>
 				<div class="row">
-					<div class="col-sm-12">
+					<div class="col-xs-12">
 						<label>Name: <input type="text" class="js-chargen-name" /></label>
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-sm-3">
+					<div class="col-xs-3">
 						<label>Race: <select class="js-chargen-race"></select></label>
 						<label>Gender: <select class="js-chargen-gender"></select></label>
 					</div>
-					<div class="col-sm-9">
+					<div class="col-xs-9">
 						<label>Description: <textarea class="js-chargen-description"></textarea></label>
 					</div>
 				</div>
@@ -152,7 +152,7 @@
 			<fieldset style="display: none" class="js-validity-container">
 				<legend>Validity Errors</legend>
 				<div class="row">
-					<div class="col-sm-12 js-validity-detail">
+					<div class="col-xs-12 js-validity-detail">
 					</div>
 				</div>
 			</fieldset>
@@ -161,61 +161,61 @@
 	</div>
 
 	<div class="row">
-		<div class="col-sm-12">
+		<div class="col-xs-12">
 			<fieldset>
 				<legend>Stats and Skills</legend>
 
 				<div class="js-chargen-attributes-points-label"></div>
 				<div class="row">
-					<div class="col-sm-15">
+					<div class="col-xs-15">
 						<label><h4 class="thinned text-center">Agility</h4><select class="attribute-select js-chargen-attributes-agility"></select></label>
 					</div>
-					<div class="col-sm-15">
+					<div class="col-xs-15">
 						<label><h4 class="thinned text-center">Smarts</h4><select class="attribute-select js-chargen-attributes-smarts"></select></label>
 					</div>
-					<div class="col-sm-15">
+					<div class="col-xs-15">
 						<label><h4 class="thinned text-center">Spirit</h4><select class="attribute-select js-chargen-attributes-spirit"></select></label>
 					</div>
-					<div class="col-sm-15">
+					<div class="col-xs-15">
 						<label><h4 class="thinned text-center">Strength</h4><select class="attribute-select js-chargen-attributes-strength"></select></label>
 					</div>
-					<div class="col-sm-15">
+					<div class="col-xs-15">
 						<label><h4 class="thinned text-center">Vigor</h4><select class="attribute-select js-chargen-attributes-vigor"></select></label>
 					</div>
 				</div>
 				<div class="js-chargen-skill-points-label"></div>
 				<div class="row">
-					<div class="col-sm-3">
+					<div class="col-xs-3">
 						<h5>Agility Skills</h5>
 						<div class="js-skill-list-agility"></div>
 					</div>
-					<div class="col-sm-3">
+					<div class="col-xs-3">
 						<h5>Smarts Skills</h5>
 						<div class="js-skill-list-smarts"></div>
 					</div>
-					<div class="col-sm-3">
+					<div class="col-xs-3">
 						<h5>Spirit Skills</h5>
 						<div class="js-skill-list-spirit"></div>
 					</div>
-					<div class="col-sm-3">
+					<div class="col-xs-3">
 						<h5>Strength Skills</h5>
 						<div class="js-skill-list-strength"></div>
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-sm-15 text-center">
+					<div class="col-xs-15 text-center">
 						<img width="20px" src='img/dice/d4.png' title='d4' /> d4
 					</div>
-					<div class="col-sm-15 text-center">
+					<div class="col-xs-15 text-center">
 						<img width="20px" src='img/dice/d6.png' title='d6' /> d6
 					</div>
-					<div class="col-sm-15 text-center">
+					<div class="col-xs-15 text-center">
 						<img width="20px" src='img/dice/d8.png' title='d8' /> d8
 					</div>
-					<div class="col-sm-15 text-center">
+					<div class="col-xs-15 text-center">
 						<img width="20px" src='img/dice/d10.png' title='d10' /> d10
 					</div>
-					<div class="col-sm-15 text-center">
+					<div class="col-xs-15 text-center">
 						<img width="20px" src='img/dice/d12.png' title='d12' /> d12
 					</div>
 				</div>
@@ -231,7 +231,7 @@
 	</div>
 
 	<div class="row">
-		<div class="col-sm-4">
+		<div class="col-xs-4">
 			<fieldset>
 				<legend>Hindrances</legend>
 				<div class="js-list-hindrances"></div>
@@ -239,7 +239,7 @@
 			</fieldset>
 		</div>
 
-		<div class="col-sm-4">
+		<div class="col-xs-4">
 			<fieldset>
 				<legend>Perks</legend>
 				<div class="js-chargen-perks-points-label"></div>
@@ -249,7 +249,7 @@
 			</fieldset>
 		</div>
 
-		<div class="col-sm-4 bg-warning">
+		<div class="col-xs-4 bg-warning">
 			<fieldset>
 				<legend>Edges</legend>
 				<div class="js-chargen-edges-points-label"></div>
@@ -263,7 +263,7 @@
 
 	<div class="row">
 
-		<div class="col-sm-4">
+		<div class="col-xs-4">
 			<fieldset>
 				<legend>Equipment</legend>
 				<h4>TODO</h4>
@@ -271,7 +271,7 @@
 			</fieldset>
 		</div>
 
-		<div class="col-sm-4">
+		<div class="col-xs-4">
 			<fieldset>
 				<legend>Powers</legend>
 				<h4>TODO - Current Target</h4>
@@ -281,7 +281,7 @@
 			</fieldset>
 		</div>
 
-		<div class="col-sm-4">
+		<div class="col-xs-4">
 			<fieldset>
 				<legend>Advancement</legend>
 				<h4>TODO</h4>
@@ -291,7 +291,7 @@
 	</div>
 
 	<div class="row">
-		<div class="col-sm-12 footer">
+		<div class="col-xs-12 footer">
 			<a href="https://www.peginc.com/licensing/" title="Click here for more info on Pinnacle Entertainment Groups's licensing policies"><img src="./img/sw_fan_78x50.png" alt="Savage Worlds Fan Logo" /></a>
 			<p>This tool references the Savage Worlds game system, available from Pinnacle Entertainment Group at <a href="http:/www.peginc.com" title="Pinnacle Entertainment Group">www.peginc.com</a>. Savage Worlds and all associated logos and trademarks are copyrights of Pinnacle Entertainment Group. Used with permission. Pinnacle makes no representation or warranty as to the quality, viability, or suitability for purpose of this product.</p>
 
