@@ -91,7 +91,7 @@ function propagate_arcane_background_options() {
 				html += ">";
 				html += "Delete</button> ";
 				if( current_character.selected_powers[p_counter].description != "") {
-					html += current_character.selected_powers[p_counter].description; + " (" + current_character.selected_powers[p_counter].name;
+					html += current_character.selected_powers[p_counter].description + " (" + current_character.selected_powers[p_counter].name;
 						if( current_character.selected_powers[p_counter].trapping != "" )
 							html += ", " + current_character.selected_powers[p_counter].trapping  + ")";
 						else
