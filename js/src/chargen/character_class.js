@@ -1122,6 +1122,115 @@ character_class.prototype = {
 		return html_return;
 	},
 
+
+	export_html: function(selector_name) {
+
+		html_return = "<strong><h3>" +  this.name + "</h3></strong>\n";
+		html_return += "<em>" +  this.description + "</em><br />\n";
+		html_return += "<strong>Attributes</strong>: ";
+		html_return += "Agility " + attribute_labels[this.attributes.agility];
+		html_return += ", Smarts " + attribute_labels[this.attributes.smarts];
+		html_return += ", Spirit " + attribute_labels[this.attributes.spirit];
+		html_return += ", Strength " + attribute_labels[this.attributes.strength];
+		html_return += ", Vigor " + attribute_labels[this.attributes.vigor];
+		html_return += "<br />\n";
+
+		html_return += "<strong>Pace</strong>: " + this.derived.pace;
+		html_return += ", <strong>Parry</strong>: " + this.derived.parry;
+
+		if(this.armor && this.armor > 0) {
+			html_return += ", <strong>Toughness</strong>: " + this.derived.toughness + this.armor;
+			html_return += "(" + this.armor + ")";
+		} else {
+			html_return += ", <strong>Toughness</strong>: " + this.derived.toughness;
+		}
+
+		if(this.derived.charisma > 0)
+			html_return += "<strong>Charisma</strong>: " + this.derived.charisma;
+
+		html_return += "<br />\n";
+
+		if(this.selected_skills.length > 0 ) {
+			html_return += "<strong>Skills</strong>: ";
+			for(sk_c = 0; sk_c < this.selected_skills.length; sk_c++) {
+				if(sk_c > 0)
+					html_return += ", ";
+				if(this.selected_skills[sk_c].specify_text && this.selected_skills[sk_c].specify_text != "")
+					html_return += this.selected_skills[sk_c].name + " (" + this.selected_skills[sk_c].specify_text + ")";
+				else
+					html_return += this.selected_skills[sk_c].name;
+				html_return += " " + attribute_labels[this.selected_skills[sk_c].value]
+			}
+		}
+
+		html_return += "<br />\n";
+		if(this.selected_edges.length > 0 ) {
+			html_return += "<strong>Edges</strong>: ";
+			for(sk_c = 0; sk_c < this.selected_edges.length; sk_c++) {
+				if(sk_c > 0)
+					html_return += ", ";
+				html_return += this.selected_edges[sk_c].name;
+
+			}
+		}
+
+		html_return += "<br />\n";
+
+		current_hindrances = this.get_all_hindrances();
+		if(current_hindrances.length > 0) {
+			html_return += "<strong>Hindrances</strong>: ";
+			for(sk_c = 0; sk_c < current_hindrances.length; sk_c++) {
+				if(sk_c > 0)
+					html_return += ", ";
+				html_return += current_hindrances[sk_c]
+			}
+		}
+
+		html_return += "<br />\n";
+
+		if( this.arcane_background > 0 ) {
+			html_return += "<strong>Arcane Background</strong>: " + this.arcane_background_selected.name + "<br />\n";
+			html_return += "<strong>Power Points</strong>: " + this.power_points_available + "<br />\n";
+			html_return += "<strong>Powers</strong>: ";
+			for(sk_c = 0; sk_c < this.selected_powers.length; sk_c++) {
+				if(sk_c > 0)
+					html_return += ", ";
+				if( this.selected_powers[sk_c].description != "") {
+					html_return += this.selected_powers[sk_c].description + " (" + this.selected_powers[sk_c].name;
+						if( this.selected_powers[sk_c].trapping != "" )
+							html_return += ", " + this.selected_powers[sk_c].trapping  + ")";
+						else
+							html_return += ")";
+
+				} else {
+					if( this.selected_powers[sk_c].trapping != "" )
+						html_return += this.selected_powers[sk_c].name + " (" + this.selected_powers[sk_c].trapping  + ")";
+					else
+						html_return += this.selected_powers[sk_c].name;
+				}
+			}
+		}
+
+		html_return += "<br />\n";
+		if(this.selected_equipment.length > 0 ) {
+			html_return += "<strong>Gear</strong>: ";
+			for(sk_c = 0; sk_c < this.selected_equipment.length; sk_c++) {
+				if(sk_c > 0)
+					html_return += ", ";
+				html_return += this.selected_equipment[sk_c].name;
+
+			}
+		}
+
+		html_return = html_return.replace("8)", " 8 )");
+
+		if(selector_name)
+			$(selector_name).val(html_return);
+
+		return html_return;
+	},
+
+
 	import_json: function( import_string ) {
 		try {
 			import_string = stripslashes(import_string);

@@ -35,8 +35,6 @@ The roadmap for these tools include:
 
 * Character Creator (rewrite in progress since Aug 9th, already leaps ahead of the previous version )
 	* TODO
-		* Arcane Background Selection (needs JSON import/export)
-		* Powers Selection
 		* Equipment. I'll probably only handle the PERSONAL equipment at first, leaving the big stuff like Tank Cannons and Cars out of it.
 		* Advancement
 

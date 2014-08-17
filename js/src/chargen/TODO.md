@@ -16,28 +16,30 @@
 * Should be complete
 
 ###Hindrances
+* Should be complete
 * Frontend Code
 * Data Entered
 * Perks Assigments
 
 ### Edges
-* Some data has been entered for testing
+* Should be complete
 * Frontend Code
 * NOTE: There a few edges where I've noted I'm not sure how to enforce availabilty in js/src/edges.js more than likely these will have to be custom exceptions
 
 ###Skills
-* Placeholder files
+* Should be complete
 * Data Entry
 * Backend Code (calculation of available skill points)
 * Frontend Code
 
 ###Powers Selection
-* Feature Complete, but needs data entry for powers
+* Feature Complete
+* Data Entry
 
 
 ##What Needs To Be Done
 ###General
-* Export to BB Code and HTML (Printing?)
+* Export HTML for Copy/Paste (Printing?)
 
 ###Equipment. 
 * I'll probably only handle the PERSONAL equipment at first, leaving the big stuff like Tank Cannons and Cars out of it.

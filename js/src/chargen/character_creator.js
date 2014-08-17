@@ -670,13 +670,10 @@ function event_attribute_changed(attribute_name, new_value) {
 }
 
 function init_main_buttons() {
-	$(".js-new-character").unbind("click");
-	$(".js-new-character").click( function() {
-		if(confirm("Are you sure you want to clear out your current character?") ) {
-			current_character.reset();
-			refresh_chargen_page();
-		}
 
+	$(".js-print-character").unbind("click");
+	$(".js-print-character").click( function() {
+		create_print_popup();
 	});
 
 	$(".js-new-character").unbind("click");
@@ -943,6 +940,28 @@ function refresh_chargen_page() {
 
 	test_validity();
 	current_character.export_bbcode(".js-chargen-bb-code");
+
+}
+
+function create_print_popup() {
+	var mywindow = window.open('', 'Viewing/Printing Character', 'height=400,width=600');
+	data = current_character.export_html();
+	mywindow.document.write('<html><head><title>my div</title>');
+	mywindow.document.write('<style>');
+	mywindow.document.write('h3 {margin: 0; padding:0}');
+	mywindow.document.write('</style>');
+	mywindow.document.write('</head><body>');
+	mywindow.document.write("<div style='text-align: right'>");
+	mywindow.document.write('<button onclick="window.print()" type="button">Print</button>');
+	mywindow.document.write('<button onclick="window.close()" type="button">Close</button>');
+	mywindow.document.write('</div>');
+	mywindow.document.write(data);
+	mywindow.document.write('</body></html>');
+
+//	mywindow.print();
+//	mywindow.close();
+
+	return true;
 
 }
 
