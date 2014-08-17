@@ -39,10 +39,6 @@
 ###General
 * Export to BB Code and HTML (Printing?)
 
-###Arcane Background Selection
-* Power Data Entry
-
-
 ###Equipment. 
 * I'll probably only handle the PERSONAL equipment at first, leaving the big stuff like Tank Cannons and Cars out of it.
  
