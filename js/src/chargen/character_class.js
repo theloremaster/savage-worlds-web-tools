@@ -559,13 +559,13 @@ character_class.prototype = {
 	},
 
 	remove_edge: function( edge_name ) {
-
+		console.log( edge_name );
 		if(edge_name) {
-			found_index = -1;
 			for( edge_counter = 0; edge_counter < this.selected_edges.length; edge_counter++ ) {
 				if(this.selected_edges[edge_counter] && this.selected_edges[edge_counter].name) {
 					if(edge_name.toLowerCase() == this.selected_edges[edge_counter].name.toLowerCase()) {
-						this.selected_edges.splice(found_index, 1);
+						console.log(this.selected_edges[edge_counter].name.toLowerCase());
+						this.selected_edges.splice(edge_counter, 1);
 						return true;
 					}
 				}
@@ -685,8 +685,8 @@ character_class.prototype = {
 						return false;
 
 					if( edge_object.prereqs.arcane_background_selected ) {
-						if( edge_object.prereqs.arcane_background_selected.short_name != "" ) {
-							if( edge_object.prereqs.arcane_background_selected.short_name.toLowerCase().trim() != this.arcane_background_selected.short_name.toLowerCase().trim() )
+						if( edge_object.prereqs.arcane_background_selected != ""  && this.arcane_background_selected.short_name ) {
+							if( edge_object.prereqs.arcane_background_selected.toLowerCase().trim() != this.arcane_background_selected.short_name.toLowerCase().trim() )
 								return false;
 						}
 					}
