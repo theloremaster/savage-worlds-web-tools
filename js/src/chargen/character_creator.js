@@ -133,6 +133,7 @@ function propagate_arcane_background_options() {
 	$(".js-open-power-modal").unbind("click");
 	$(".js-open-power-modal").click( function() {
 		$(".js-trapping-description-case").prop("checked", "checked");
+		$(".js-trapping-description").val('');
 		$(".js-add-specify-power-dialog").modal();
 	});
 	/* Select Arcane Background Bindings */
@@ -628,9 +629,6 @@ function propagate_equipment_section() {
 
 }
 
-function propagate_powers_section() {
-
-}
 
 function propagate_attributes_section() {
 	// Fill in Attributes Section
@@ -938,7 +936,6 @@ function refresh_chargen_page() {
 	propagate_skills_sections();
 	propagate_hindrances_section();
 	propagate_equipment_section();
-	propagate_powers_section();
 	propagate_arcane_background_options();
 
 

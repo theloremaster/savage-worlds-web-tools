@@ -25,6 +25,8 @@ character_class.prototype = {
 		this.selected_perks = Array();
 		this.selected_skills = Array();
 
+		this.selected_equipment = Array();
+
 		this.edges_available = 0;
 		this.perks_available = 0;
 
@@ -1014,7 +1016,103 @@ character_class.prototype = {
 	},
 
 	export_bbcode: function(selector_name) {
-		html_return = "TODO export_bbcode";
+
+		html_return = "[b][size=18]" +  this.name + "[/size][/b]\n";
+		html_return += "[i]" +  this.description + "[/i]\n";
+		html_return += "[b]Attributes[/b]: ";
+		html_return += "Agility " + attribute_labels[this.attributes.agility];
+		html_return += ", Smarts " + attribute_labels[this.attributes.smarts];
+		html_return += ", Spirit " + attribute_labels[this.attributes.spirit];
+		html_return += ", Strength " + attribute_labels[this.attributes.strength];
+		html_return += ", Vigor " + attribute_labels[this.attributes.vigor];
+		html_return += "\n";
+
+		html_return += "[b]Pace[/b]: " + this.derived.pace;
+		html_return += ", [b]Parry[/b]: " + this.derived.parry;
+
+		if(this.armor && this.armor > 0) {
+			html_return += ", [b]Toughness[/b]: " + this.derived.toughness + this.armor;
+			html_return += "(" + this.armor + ")";
+		} else {
+			html_return += ", [b]Toughness[/b]: " + this.derived.toughness;
+		}
+
+		if(this.derived.charisma > 0)
+			html_return += "[b]Charisma[/b]: " + this.derived.charisma;
+
+		html_return += "\n";
+
+		if(this.selected_skills.length > 0 ) {
+			html_return += "[b]Skills[/b]: ";
+			for(sk_c = 0; sk_c < this.selected_skills.length; sk_c++) {
+				if(sk_c > 0)
+					html_return += ", ";
+				if(this.selected_skills[sk_c].specify_text && this.selected_skills[sk_c].specify_text != "")
+					html_return += this.selected_skills[sk_c].name + " (" + this.selected_skills[sk_c].specify_text + ")";
+				else
+					html_return += this.selected_skills[sk_c].name;
+				html_return += " " + attribute_labels[this.selected_skills[sk_c].value]
+			}
+		}
+
+		html_return += "\n";
+		if(this.selected_edges.length > 0 ) {
+			html_return += "[b]Edges[/b]: ";
+			for(sk_c = 0; sk_c < this.selected_edges.length; sk_c++) {
+				if(sk_c > 0)
+					html_return += ", ";
+				html_return += this.selected_edges[sk_c].name;
+
+			}
+		}
+
+		html_return += "\n";
+
+		current_hindrances = this.get_all_hindrances();
+		if(current_hindrances.length > 0) {
+			html_return += "[b]Hindrances[/b]: ";
+			for(sk_c = 0; sk_c < current_hindrances.length; sk_c++) {
+				if(sk_c > 0)
+					html_return += ", ";
+				html_return += current_hindrances[sk_c]
+			}
+		}
+
+		html_return += "\n";
+
+		if( this.arcane_background > 0 ) {
+			html_return += "[b]Arcane Background[/b]: " + this.arcane_background_selected.name + "\n";
+			html_return += "[b]Power Points[/b]: " + this.power_points_available + "\n";
+			html_return += "[b]Powers[/b]: ";
+			for(sk_c = 0; sk_c < this.selected_powers.length; sk_c++) {
+				if(sk_c > 0)
+					html_return += ", ";
+				if( this.selected_powers[sk_c].description != "") {
+					html_return += this.selected_powers[sk_c].description + " (" + this.selected_powers[sk_c].name;
+						if( this.selected_powers[sk_c].trapping != "" )
+							html_return += ", " + this.selected_powers[sk_c].trapping  + ")";
+						else
+							html_return += ")";
+
+				} else {
+					if( this.selected_powers[sk_c].trapping != "" )
+						html_return += this.selected_powers[sk_c].name + " (" + this.selected_powers[sk_c].trapping  + ")";
+					else
+						html_return += this.selected_powers[sk_c].name;
+				}
+			}
+		}
+
+		html_return += "\n";
+		if(this.selected_equipment.length > 0 ) {
+			html_return += "[b]Gear[/b]: ";
+			for(sk_c = 0; sk_c < this.selected_equipment.length; sk_c++) {
+				if(sk_c > 0)
+					html_return += ", ";
+				html_return += this.selected_equipment[sk_c].name;
+
+			}
+		}
 
 		html_return = html_return.replace("8)", " 8 )");
 
