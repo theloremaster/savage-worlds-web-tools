@@ -304,6 +304,7 @@ function propagate_skills_sections() {
 			value_label = attribute_images[current_skill.value];
 			if(current_skill.value == 0)
 				value_label = " - ";
+
 			html += current_skill.name + ": " + value_label;
 
 			html += "<div class=\"pull-right\">";
@@ -357,6 +358,35 @@ function propagate_skills_sections() {
 		}
 
 		skills_html[chargen_skills[skills_counter].attribute] += html;
+	}
+
+	if( current_character.arcane_background_selected ) {
+
+		html = "<div class=\"skill-container\">";
+		current_skill = current_character.get_skill( current_character.arcane_background_selected.skill.name );
+		skills_of = Array();
+		if( current_skill ) {
+			value_label = attribute_images[current_skill.value];
+			if(current_skill.value == 0)
+				value_label = " - ";
+
+			html += current_skill.name + ": " + value_label;
+
+			html += "<div class=\"pull-right\">";
+			html += "<button class=\"js-lower-skill-level btn btn-xs btn-primary\" skillname=\"" + current_skill.name + "\" skillval=\"" + current_skill.value + "\">-</button>";
+			html += "<button class=\"js-add-skill-level btn btn-xs btn-primary\" skillname=\"" + current_skill.name + "\" skillval=\"" + current_skill.value + "\">+</button>";
+			html += "</div>";
+		} else {
+			value_label = attribute_images[0];
+			html += current_character.arcane_background_selected.skill.name + ": " + value_label ;
+			html += "<div class=\"pull-right\">";
+			html += "<button class=\"js-add-skill-level btn btn-xs btn-primary\" skillname=\"" + current_character.arcane_background_selected.skill.name + "\" skillval=\"0\">+</button>";
+			html += "</div>";
+		}
+
+		html += "</div>";
+
+		skills_html[current_character.arcane_background_selected.skill.attribute] += html;
 	}
 
 	if(skills_html["agility"]) {

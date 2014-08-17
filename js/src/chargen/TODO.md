@@ -7,6 +7,7 @@
 * Save Button
 * Saving of session of browser closed or refreshed
 * Export and Import of JSON
+* View/Print HTML
 
 ###Races
 * Should be feature complete
@@ -38,8 +39,6 @@
 
 
 ##What Needs To Be Done
-###General
-* Export HTML for Copy/Paste (Printing?)
 
 ###Equipment. 
 * I'll probably only handle the PERSONAL equipment at first, leaving the big stuff like Tank Cannons and Cars out of it.

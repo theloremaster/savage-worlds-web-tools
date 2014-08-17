@@ -350,6 +350,7 @@ character_class.prototype = {
 				}
 			}
 		}
+
 		return false;
 	},
 
@@ -357,6 +358,10 @@ character_class.prototype = {
 		for(get_raw_skill_counter = 0; get_raw_skill_counter < chargen_skills.length; get_raw_skill_counter++) {
 			if( chargen_skills[get_raw_skill_counter].name.toLowerCase().trim() == skill_name.toLowerCase().trim())
 				return clone_object( chargen_skills[get_raw_skill_counter] );
+		}
+
+		if( this.arcane_background_selected ) {
+			return clone_object( this.arcane_background_selected.skill );
 		}
 		return false;
 	},
@@ -497,13 +502,21 @@ character_class.prototype = {
 	},
 
 	set_arcane_bg: function( background_shortname ) {
+		return_value = false
 		for(set_arcane_count = 0; set_arcane_count < chargen_arcane_backgrounds.length; set_arcane_count++) {
 			if( chargen_arcane_backgrounds[set_arcane_count].short_name == background_shortname ) {
+
 				this.arcane_background_selected = chargen_arcane_backgrounds[set_arcane_count];
-				return true;
+				return_value = true;
+			}
+
+			if( background_shortname != chargen_arcane_backgrounds[set_arcane_count].short_name ) {
+				//remove any other arcane skills to restore skill points
+				if(chargen_arcane_backgrounds[set_arcane_count].skill)
+					this.remove_skill( chargen_arcane_backgrounds[set_arcane_count].skill.name );
 			}
 		}
-		return false;
+		return return_value;
 	},
 
 	add_power: function( power_shortname, trapping, description ) {
@@ -1282,12 +1295,6 @@ character_class.prototype = {
 				}
 			}
 
-			if( imported_object.skills ) {
-				for( import_skill_counter = 0; import_skill_counter < imported_object.skills.length; import_skill_counter++) {
-					this.set_skill( imported_object.skills[import_skill_counter].name, imported_object.skills[import_skill_counter].value );
-				}
-			}
-
 			if( imported_object.arcane ) {
 
 				if( imported_object.arcane.type && this.has_edge("Arcane Background")) {
@@ -1303,6 +1310,14 @@ character_class.prototype = {
 					}
 				}
 			}
+
+			if( imported_object.skills ) {
+				for( import_skill_counter = 0; import_skill_counter < imported_object.skills.length; import_skill_counter++) {
+					this.set_skill( imported_object.skills[import_skill_counter].name, imported_object.skills[import_skill_counter].value );
+				}
+			}
+
+
 
 			return true;
 		}

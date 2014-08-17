@@ -1,7 +1,7 @@
 CACHE MANIFEST
-# rev 2014081605
-# 2014-08-16-05
-# CharGen: Added html export for copy/paste and printing
+# rev 2014081701
+# 2014-08-17-01
+# CharGen: Bugfix/Added Arcane skill to list when selected
 
 CACHE:
 http://jdgwf.github.io/savage-worlds-web-tools/extras_view.html
