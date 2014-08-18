@@ -29,10 +29,13 @@ character_class.prototype = {
 
 		this.edges_available = 0;
 		this.perks_available = 0;
+		this.creation_completed = false;
 
 		this.rank = 0; // novice ;)
 		this.wild_card = 1; // currently always a wild card
 		this.xp = 0;
+		this.selected_advancements;
+		this.available_advancements;
 
 		// Attributes..
 		this.attributes = {
@@ -107,6 +110,7 @@ character_class.prototype = {
 
 		this.racial_edges = Array();
 		this.racial_hindrances = Array();
+
 
 		// Add Racial Edges
 		if(this.race.edges_included) {
@@ -301,6 +305,48 @@ character_class.prototype = {
 			this.validity_messages.push("Overspent skill points");
 		}
 
+
+		/* Advancements */
+		if( this.is_complete() ) {
+
+			if(this.xp < 20 ) {
+				this.rank = 0; // novice
+			} else {
+				if (this.xp <= 20 && this.xp < 40 ) {
+					this.rank = 1; // seasoned
+				} else
+				{
+					if (this.xp <= 40 && this.xp < 60) {
+						this.rank = 2; // veteran
+					} else
+					{
+						if ( this.xp <= 60 && this.xp < 80  ) {
+							this.rank = 3; // heroic
+						} else
+						{
+							this.rank = 4; // legen---waitforit--dary
+						}
+					}
+				}
+			}
+
+			// this.selected_advancements;
+			this.available_advancements = Math.floor(this.xp / 5);
+
+			// TODO - run through advancements, make effects on character
+
+		} else {
+			//reset xp and advancements and rank to 0
+			this.xp = 0;
+			this.rank = 0;
+			this.selected_advancements = Array();
+		}
+
+
+	},
+
+	set_xp: function ( new_value ) {
+		this.xp = new_value / 1;
 	},
 
 	set_skill: function(skill_name, new_value) {
@@ -351,6 +397,32 @@ character_class.prototype = {
 			}
 		}
 
+		return false;
+	},
+
+
+	is_incompatible_with: function ( edge_object ){
+		if( edge_object.incompatible) {
+
+			if( edge_object.incompatible.edges ) {
+
+				for(is_incompatible_with_counter = 0; is_incompatible_with_counter < edge_object.incompatible.edges.length; is_incompatible_with_counter++) {
+					if( this.has_edge( edge_object.incompatible.edges[is_incompatible_with_counter] )) {
+						return true;
+					}
+				}
+	//			return false;
+			}
+			if( edge_object.incompatible.hindrances ) {
+				for(is_incompatible_with_counter = 0; is_incompatible_with_counter < edge_object.incompatible.hindrances.length; is_incompatible_with_counter++) {
+					if( this.has_hindrance( edge_object.incompatible.hindrances[is_incompatible_with_counter] )) {
+						return true;
+
+					}
+				}
+	//			return false;
+			}
+		}
 		return false;
 	},
 
@@ -920,6 +992,9 @@ character_class.prototype = {
 	set_name: function(new_name) {
 		this.name = new_name;
 	},
+	is_complete: function() {
+		return this.creation_completed;
+	},
 
 	export_json: function(selector_name) {
 		export_object = {
@@ -934,6 +1009,7 @@ character_class.prototype = {
 				vigor : this.attributes.vigor
 			},
 			race : this.race.name,
+			complete: 0,
 			edges: Array(),
 			hindrances: Array(),
 			perks: Array(),
@@ -943,6 +1019,9 @@ character_class.prototype = {
 				powers: Array()
 			}
 		}
+
+		if(this.creation_completed == true)
+			export_object.complete = 1;
 
 		if(this.selected_edges.length > 0) {
 			for(get_all_edges_count = 0; get_all_edges_count < this.selected_edges.length; get_all_edges_count++ ) {
@@ -1269,6 +1348,11 @@ character_class.prototype = {
 				this.set_xp( imported_object.xp );
 			else
 				this.set_xp( 0 );
+
+			this.creation_completed = false;
+			if( imported_object.complete )
+				if( imported_object.complete > 0)
+					this.creation_completed = true;
 
 			this.set_race(imported_object.race);
 			this.set_attribute("agility",imported_object.attributes.agility);

@@ -37,6 +37,15 @@ function propagate_attribute_options(current_value, current_attribute) {
 	$(select_selector).html(html);
 }
 
+function display_attribute(current_value, current_attribute) {
+	select_selector = ".js-chargen-attributes-" + current_attribute;
+	div_selector = ".js-chargen-complete-attribute-" + current_attribute;
+
+	$(select_selector).hide();
+	$(div_selector).text(attribute_labels[current_value]);
+	$(div_selector).show();
+}
+
 function propagate_race_options(select_selector) {
 
 	html = "";
@@ -53,20 +62,25 @@ function propagate_arcane_background_options() {
 
 	html = "";
 	if( current_character.arcane_background > 0) {
-		html += "<label>Arcane Background Type<br /><select class=\"js-select-arcane-bg\">";
-			if(current_character.arcane_background_selected == "")
-				html += "<option selected=\"selected\" value=\"\">- Select a Background -</option>";
-			else
-				html += "<option value=\"\">- Select a Background -</option>";
 
-		for(arcane_background_counter = 0; arcane_background_counter < chargen_arcane_backgrounds.length; arcane_background_counter++) {
-			if(current_character.arcane_background_selected.short_name == chargen_arcane_backgrounds[arcane_background_counter].short_name)
-				html += "<option selected=\"selected\" value=\"" + chargen_arcane_backgrounds[arcane_background_counter].short_name + "\">" + chargen_arcane_backgrounds[arcane_background_counter].name + "</option>";
-			else
-				html += "<option value=\"" + chargen_arcane_backgrounds[arcane_background_counter].short_name + "\">" + chargen_arcane_backgrounds[arcane_background_counter].name + "</option>";
+		if( !current_character.is_complete() ) {
+			html += "<label>Arcane Background Type<br />";
+			html += "<select class=\"js-select-arcane-bg\">";
+				if(current_character.arcane_background_selected == "")
+					html += "<option selected=\"selected\" value=\"\">- Select a Background -</option>";
+				else
+					html += "<option value=\"\">- Select a Background -</option>";
+
+			for(arcane_background_counter = 0; arcane_background_counter < chargen_arcane_backgrounds.length; arcane_background_counter++) {
+				if(current_character.arcane_background_selected.short_name == chargen_arcane_backgrounds[arcane_background_counter].short_name)
+					html += "<option selected=\"selected\" value=\"" + chargen_arcane_backgrounds[arcane_background_counter].short_name + "\">" + chargen_arcane_backgrounds[arcane_background_counter].name + "</option>";
+				else
+					html += "<option value=\"" + chargen_arcane_backgrounds[arcane_background_counter].short_name + "\">" + chargen_arcane_backgrounds[arcane_background_counter].name + "</option>";
+			}
+			html += "</select></label>";
+		} else {
+			html += "<label>Arcane Background Type<br />" + current_character.arcane_background_selected.name + "</label>";
 		}
-		html += "</select></label>";
-
 
 		if( current_character.power_points_available > 0) {
 			html += "<br />Your character has " + current_character.power_points_available + " power points";
@@ -83,13 +97,15 @@ function propagate_arcane_background_options() {
 			html += "<h4>Current Powers</h4>";
 			for(p_counter = 0; p_counter < current_character.selected_powers.length; p_counter++) {
 				html += "<div class=\"a-h-line\">";
-				html += "<button";
-					html += " type=\"button\"";
-					html += " class=\"btn btn-xs btn-danger js-delete-power-button\"";
-					html += " shortname=\"" + current_character.selected_powers[p_counter].short_name + "\"";
-					html += " trap=\"" + current_character.selected_powers[p_counter].trapping + "\"";
-				html += ">";
-				html += "Delete</button> ";
+				if(!current_character.is_complete() ) {
+					html += "<button";
+						html += " type=\"button\"";
+						html += " class=\"btn btn-xs btn-danger js-delete-power-button\"";
+						html += " shortname=\"" + current_character.selected_powers[p_counter].short_name + "\"";
+						html += " trap=\"" + current_character.selected_powers[p_counter].trapping + "\"";
+					html += ">";
+					html += "Delete</button> ";
+				}
 				if( current_character.selected_powers[p_counter].description != "") {
 					html += current_character.selected_powers[p_counter].description + " (" + current_character.selected_powers[p_counter].name;
 						if( current_character.selected_powers[p_counter].trapping != "" )
@@ -190,45 +206,48 @@ function propagate_power_options() {
 
 
 function display_remaining_attribute_points(selector_name) {
-	$(selector_name).removeClass("text-danger");
-	$(selector_name).removeClass("text-primary");
+	if(!current_character.is_complete() ) {
+		$(selector_name).removeClass("text-danger");
+		$(selector_name).removeClass("text-primary");
 
-	if(current_character.attribute_points == 0) {
-		$(selector_name).text(  "No attribute points remaining" );
-	} else if( current_character.attribute_points > 0 ) {
-		$(selector_name).addClass("text-primary");
-		if(current_character.attribute_points == 1)
-			$(selector_name).text(  current_character.attribute_points + " attribute point remaining" );
-		else
-			$(selector_name).text(  current_character.attribute_points + " attribute points remaining" );
-	} else {
-		$(selector_name).addClass("text-danger");
-		if(current_character.attribute_points == -1)
-			$(selector_name).text(  current_character.attribute_points * -1 + " attribute point overspent" );
-		else
-			$(selector_name).text(  current_character.attribute_points * -1 + " attribute points overspent" );
+		if(current_character.attribute_points == 0) {
+			$(selector_name).text(  "No attribute points remaining" );
+		} else if( current_character.attribute_points > 0 ) {
+			$(selector_name).addClass("text-primary");
+			if(current_character.attribute_points == 1)
+				$(selector_name).text(  current_character.attribute_points + " attribute point remaining" );
+			else
+				$(selector_name).text(  current_character.attribute_points + " attribute points remaining" );
+		} else {
+			$(selector_name).addClass("text-danger");
+			if(current_character.attribute_points == -1)
+				$(selector_name).text(  current_character.attribute_points * -1 + " attribute point overspent" );
+			else
+				$(selector_name).text(  current_character.attribute_points * -1 + " attribute points overspent" );
+		}
 	}
-
 }
 
 function display_remaining_skill_points(selector_name) {
-	$(selector_name).removeClass("text-danger");
-	$(selector_name).removeClass("text-primary");
+	if(!current_character.is_complete() ) {
+		$(selector_name).removeClass("text-danger");
+		$(selector_name).removeClass("text-primary");
 
-	if(current_character.skill_points == 0) {
-		$(selector_name).text(  "No skill points remaining" );
-	} else if( current_character.skill_points > 0 ) {
-		$(selector_name).addClass("text-primary");
-		if(current_character.skill_points == 1)
-			$(selector_name).text(  current_character.skill_points + " skill point remaining" );
-		else
-			$(selector_name).text(  current_character.skill_points + " skill points remaining" );
-	} else {
-		$(selector_name).addClass("text-danger");
-		if(current_character.skill_points == -1)
-			$(selector_name).text(  current_character.skill_points * -1 + " skill point overspent" );
-		else
-			$(selector_name).text(  current_character.skill_points * -1 + " skill points overspent" );
+		if(current_character.skill_points == 0) {
+			$(selector_name).text(  "No skill points remaining" );
+		} else if( current_character.skill_points > 0 ) {
+			$(selector_name).addClass("text-primary");
+			if(current_character.skill_points == 1)
+				$(selector_name).text(  current_character.skill_points + " skill point remaining" );
+			else
+				$(selector_name).text(  current_character.skill_points + " skill points remaining" );
+		} else {
+			$(selector_name).addClass("text-danger");
+			if(current_character.skill_points == -1)
+				$(selector_name).text(  current_character.skill_points * -1 + " skill point overspent" );
+			else
+				$(selector_name).text(  current_character.skill_points * -1 + " skill points overspent" );
+		}
 	}
 
 }
@@ -307,24 +326,30 @@ function propagate_skills_sections() {
 
 			html += current_skill.name + ": " + value_label;
 
-			html += "<div class=\"pull-right\">";
-			html += "<button class=\"js-lower-skill-level btn btn-xs btn-primary\" skillname=\"" + current_skill.name + "\" skillval=\"" + current_skill.value + "\">-</button>";
-			html += "<button class=\"js-add-skill-level btn btn-xs btn-primary\" skillname=\"" + current_skill.name + "\" skillval=\"" + current_skill.value + "\">+</button>";
-			html += "</div>";
+			if( !current_character.is_complete() ) {
+				html += "<div class=\"pull-right\">";
+				html += "<button class=\"js-lower-skill-level btn btn-xs btn-primary\" skillname=\"" + current_skill.name + "\" skillval=\"" + current_skill.value + "\">-</button>";
+				html += "<button class=\"js-add-skill-level btn btn-xs btn-primary\" skillname=\"" + current_skill.name + "\" skillval=\"" + current_skill.value + "\">+</button>";
+				html += "</div>";
+			}
 
 		} else {
 
 			if( chargen_skills[skills_counter].specify < 1 ) {
 				value_label = attribute_images[0];
 				html += chargen_skills[skills_counter].name + ": " + value_label ;
-				html += "<div class=\"pull-right\">";
-				html += "<button class=\"js-add-skill-level btn btn-xs btn-primary\" skillname=\"" + chargen_skills[skills_counter].name + "\" skillval=\"0\">+</button>";
-				html += "</div>";
+				if( !current_character.is_complete() ) {
+					html += "<div class=\"pull-right\">";
+					html += "<button class=\"js-add-skill-level btn btn-xs btn-primary\" skillname=\"" + chargen_skills[skills_counter].name + "\" skillval=\"0\">+</button>";
+					html += "</div>";
+				}
 			} else {
 				html += chargen_skills[skills_counter].name + " Skills" ;
-				html += "<div class=\"pull-right\">";
-				html += "<button class=\"js-add-specify-skill btn btn-xs btn-primary\" skillname=\"" + chargen_skills[skills_counter].name + "\">Add</button>";
-				html += "</div>";
+				if( !current_character.is_complete() ) {
+					html += "<div class=\"pull-right\">";
+					html += "<button class=\"js-add-specify-skill btn btn-xs btn-primary\" skillname=\"" + chargen_skills[skills_counter].name + "\">Add</button>";
+					html += "</div>";
+				}
 				skills_of = current_character.get_skills_of(chargen_skills[skills_counter].name);
 				if(skills_of.length > 0)
 					no_closing_div = true;
@@ -346,10 +371,12 @@ function propagate_skills_sections() {
 
 				html += "<div class=\"skill-container\">";
 				html += current_sub_skill.specify_text + ": " + value_label;
-				html += "<div class=\"pull-right\">";
-				html += "<button class=\"js-lower-skill-level btn btn-xs btn-primary\" skillname=\"" + current_sub_name + "\" skillval=\"" + current_sub_skill.value + "\">-</button>";
-				html += "<button class=\"js-add-skill-level btn btn-xs btn-primary\" skillname=\"" + current_sub_name + "\" skillval=\"" + current_sub_skill.value + "\">+</button>";
-				html += "</div>";
+				if( !current_character.is_complete() ) {
+					html += "<div class=\"pull-right\">";
+					html += "<button class=\"js-lower-skill-level btn btn-xs btn-primary\" skillname=\"" + current_sub_name + "\" skillval=\"" + current_sub_skill.value + "\">-</button>";
+					html += "<button class=\"js-add-skill-level btn btn-xs btn-primary\" skillname=\"" + current_sub_name + "\" skillval=\"" + current_sub_skill.value + "\">+</button>";
+					html += "</div>";
+				}
 				html += "</div>";
 			}
 			html += "</div>";
@@ -372,16 +399,20 @@ function propagate_skills_sections() {
 
 			html += current_skill.name + ": " + value_label;
 
-			html += "<div class=\"pull-right\">";
-			html += "<button class=\"js-lower-skill-level btn btn-xs btn-primary\" skillname=\"" + current_skill.name + "\" skillval=\"" + current_skill.value + "\">-</button>";
-			html += "<button class=\"js-add-skill-level btn btn-xs btn-primary\" skillname=\"" + current_skill.name + "\" skillval=\"" + current_skill.value + "\">+</button>";
-			html += "</div>";
+			if( !current_character.is_complete() ) {
+				html += "<div class=\"pull-right\">";
+				html += "<button class=\"js-lower-skill-level btn btn-xs btn-primary\" skillname=\"" + current_skill.name + "\" skillval=\"" + current_skill.value + "\">-</button>";
+				html += "<button class=\"js-add-skill-level btn btn-xs btn-primary\" skillname=\"" + current_skill.name + "\" skillval=\"" + current_skill.value + "\">+</button>";
+				html += "</div>";
+			}
 		} else {
 			value_label = attribute_images[0];
 			html += current_character.arcane_background_selected.skill.name + ": " + value_label ;
-			html += "<div class=\"pull-right\">";
-			html += "<button class=\"js-add-skill-level btn btn-xs btn-primary\" skillname=\"" + current_character.arcane_background_selected.skill.name + "\" skillval=\"0\">+</button>";
-			html += "</div>";
+			if( !current_character.is_complete() ) {
+				html += "<div class=\"pull-right\">";
+				html += "<button class=\"js-add-skill-level btn btn-xs btn-primary\" skillname=\"" + current_character.arcane_background_selected.skill.name + "\" skillval=\"0\">+</button>";
+				html += "</div>";
+			}
 		}
 
 		html += "</div>";
@@ -457,30 +488,35 @@ function propagate_skills_sections() {
 	});
 }
 
-function is_incompatible_with( edge_object ){
-	if( edge_object.incompatible) {
-
-		if( edge_object.incompatible.edges ) {
-
-			for(is_incompatible_with_counter = 0; is_incompatible_with_counter < edge_object.incompatible.edges.length; is_incompatible_with_counter++) {
-				if( current_character.has_edge( edge_object.incompatible.edges[is_incompatible_with_counter] )) {
-					return true;
-				}
-			}
-//			return false;
-		}
-		if( edge_object.incompatible.hindrances ) {
-			for(is_incompatible_with_counter = 0; is_incompatible_with_counter < edge_object.incompatible.hindrances.length; is_incompatible_with_counter++) {
-				if( current_character.has_hindrance( edge_object.incompatible.hindrances[is_incompatible_with_counter] )) {
-					return true;
-
-				}
-			}
-//			return false;
-		}
+function propagate_advancement_section() {
+	html = "";
+	if( current_character.is_complete() ){
+		html += "Your character is complete - advancement enabled. If this is not what you want, click the button below.";
+		html += "<button type='button' class='js-remove-advancements-character btn btn-danger'>Remove Advancements</button>";
+	} else {
+		html += "Your novice character is still in development. Click on the complete button below to start standard character advancement.";
+		html += "<button type='button' class='js-complete-character btn btn-primary'>Complete</button>";
 	}
-	return false;
+	$(".js-advancement-area").html(html);
+
+	$(".js-complete-character").unbind("click");
+	$(".js-complete-character").click( function() {
+		if( confirm("This will 'finalize' your character creation and change the interface to advancement mode. You will only be able to change attributes, edges, skills via the advancement interface.\n\nWould you like to continue?") ) {
+			current_character.creation_completed = true;
+			refresh_chargen_page();
+		}
+	});
+
+	$(".js-remove-advancements-character").unbind("click");
+	$(".js-remove-advancements-character").click( function() {
+		if( confirm("This will remove ALL advancements from this character, and you'll have to re-add them manually when you are ready to advance again.\n\nWould you like to continue?") ) {
+			current_character.creation_completed = false;
+			refresh_chargen_page();
+		}
+	});
 }
+
+
 
 function propagate_hindrances_section() {
 	list_hindrance_html = "";
@@ -492,7 +528,8 @@ function propagate_hindrances_section() {
 		for(hind_counter = 0; hind_counter < current_hindrances.length; hind_counter++) {
 			list_hindrance_html += "<div class=\"a-h-line\">";
 			if( current_hindrances[hind_counter].toLowerCase().indexOf("(racial)") == -1 )
-				list_hindrance_html += "<button type=\"button\" class=\"btn btn-xs btn-danger js-delete-hindrance-button\" relname=\"" + current_hindrances[hind_counter] + "\">Delete</button> ";
+				if(!current_character.is_complete() )
+					list_hindrance_html += "<button type=\"button\" class=\"btn btn-xs btn-danger js-delete-hindrance-button\" relname=\"" + current_hindrances[hind_counter] + "\">Delete</button> ";
 			list_hindrance_html += current_hindrances[hind_counter] + "</div>";
 		}
 
@@ -500,34 +537,36 @@ function propagate_hindrances_section() {
 		list_hindrance_html += "<p>No Hindrances Selected</p>";
 	}
 
-	add_hindrance_html += "<div class=\"row\"><div class=\"col-xs-12\"><h4>Add Hindrance</h4><select class=\"width-auto js-add-hind-select\">";
-	for(hind_counter = 0; hind_counter < chargen_hindrances.length; hind_counter++) {
-		disabled = "";
-		if(
-			current_character.has_edge( chargen_hindrances[hind_counter].name ) == true
-				||
-			is_incompatible_with( chargen_hindrances[hind_counter] ) == true
+	if( !current_character.is_complete() ) {
+		add_hindrance_html += "<div class=\"row\"><div class=\"col-xs-12\"><h4>Add Hindrance</h4><select class=\"width-auto js-add-hind-select\">";
+		for(hind_counter = 0; hind_counter < chargen_hindrances.length; hind_counter++) {
+			disabled = "";
+			if(
+				current_character.has_edge( chargen_hindrances[hind_counter].name ) == true
+					||
+				current_character.is_incompatible_with( chargen_hindrances[hind_counter] ) == true
 
-		) {
-			disabled = " disabled=\"disabled\"";
+			) {
+				disabled = " disabled=\"disabled\"";
+			}
+			minor_major = "";
+			if(chargen_hindrances[hind_counter].major > 0)
+				minor_major = " (major)";
+			if(chargen_hindrances[hind_counter].minor > 0)
+				minor_major = " (minor)";
+
+			specify_field = "";
+			if(chargen_hindrances[hind_counter].specify_field > 0)
+				specify_field = " specified=\"1\"";
+
+			add_hindrance_html += "<option" + disabled + specify_field + ">" + chargen_hindrances[hind_counter].name + minor_major + "</option>";
 		}
-		minor_major = "";
-		if(chargen_hindrances[hind_counter].major > 0)
-			minor_major = " (major)";
-		if(chargen_hindrances[hind_counter].minor > 0)
-			minor_major = " (minor)";
-
-		specify_field = "";
-		if(chargen_hindrances[hind_counter].specify_field > 0)
-			specify_field = " specified=\"1\"";
-
-		add_hindrance_html += "<option" + disabled + specify_field + ">" + chargen_hindrances[hind_counter].name + minor_major + "</option>";
+		add_hindrance_html += "</select></div></div><div class=\"row\">";
+		add_hindrance_html += "<div class=\"col-xs-12\"><input type=\"text\" placeholder=\"specify your hindrance\" style=\"display: none\" class=\"js-add-hindrance-specify\" />";
+		add_hindrance_html += "<button type\"button\" class=\"btn-sm pull-right btn btn-primary js-add-hindrance-button\">Add</button>";
+		add_hindrance_html += "</div>";
+		add_hindrance_html += "</div>";
 	}
-	add_hindrance_html += "</select></div></div><div class=\"row\">";
-	add_hindrance_html += "<div class=\"col-xs-12\"><input type=\"text\" placeholder=\"specify your hindrance\" style=\"display: none\" class=\"js-add-hindrance-specify\" />";
-	add_hindrance_html += "<button type\"button\" class=\"btn-sm pull-right btn btn-primary js-add-hindrance-button\">Add</button>";
-	add_hindrance_html += "</div>";
-	add_hindrance_html += "</div>";
 
 	$(".js-add-hindrance").html(add_hindrance_html);
 
@@ -586,7 +625,8 @@ function propagate_edges_section() {
 		for(edge_counter = 0; edge_counter < current_edges.length; edge_counter++) {
 			list_edges_html += "<div class=\"a-h-line\">";
 			if( current_edges[edge_counter].toLowerCase().indexOf("(racial)") == -1 )
-				list_edges_html += "<button type=\"button\" class=\"btn btn-xs btn-danger js-delete-edge-button\" relname=\"" + current_edges[edge_counter] + "\">Delete</button> ";
+				if(!current_character.is_complete() )
+					list_edges_html += "<button type=\"button\" class=\"btn btn-xs btn-danger js-delete-edge-button\" relname=\"" + current_edges[edge_counter] + "\">Delete</button> ";
 			list_edges_html += current_edges[edge_counter] + "</div>";
 //			list_edges_html += "</div>";
 		}
@@ -605,7 +645,7 @@ function propagate_edges_section() {
 			if(
 				current_character.has_edge( chargen_edges[edge_counter].name ) == true
 					||
-				is_incompatible_with( chargen_edges[edge_counter] ) == true
+				current_character.is_incompatible_with( chargen_edges[edge_counter] ) == true
 					||
 				current_character.edge_available( chargen_edges[edge_counter] ) == false
 
@@ -662,37 +702,45 @@ function propagate_equipment_section() {
 
 function propagate_attributes_section() {
 	// Fill in Attributes Section
-	display_remaining_attribute_points(".js-chargen-attributes-points-label");
-	propagate_attribute_options(current_character.attributes.agility, "agility");
-	propagate_attribute_options(current_character.attributes.smarts, "smarts");
-	propagate_attribute_options(current_character.attributes.spirit, "spirit");
-	propagate_attribute_options(current_character.attributes.strength, "strength");
-	propagate_attribute_options(current_character.attributes.vigor, "vigor");
-	$(".js-chargen-attributes-agility").unbind("change");
-	$(".js-chargen-attributes-agility").change( function(event) {
-		event_attribute_changed("agility", $(this).val() );
-		return;
-	});
-	$(".js-chargen-attributes-smarts").unbind("change");
-	$(".js-chargen-attributes-smarts").change( function(event) {
-		event_attribute_changed("smarts", $(this).val() );
-		return;
-	});
-	$(".js-chargen-attributes-spirit").unbind("change");
-	$(".js-chargen-attributes-spirit").change( function(event) {
-		event_attribute_changed("spirit", $(this).val() );
-		return;
-	});
-	$(".js-chargen-attributes-strength").unbind("change");
-	$(".js-chargen-attributes-strength").change( function(event) {
-		event_attribute_changed("strength", $(this).val() );
-		return;
-	});
-	$(".js-chargen-attributes-vigor").unbind("change");
-	$(".js-chargen-attributes-vigor").change( function(event) {
-		event_attribute_changed("vigor", $(this).val() );
-		return;
-	});
+	if( !current_character.is_complete() ) {
+		display_remaining_attribute_points(".js-chargen-attributes-points-label");
+		propagate_attribute_options(current_character.attributes.agility, "agility");
+		propagate_attribute_options(current_character.attributes.smarts, "smarts");
+		propagate_attribute_options(current_character.attributes.spirit, "spirit");
+		propagate_attribute_options(current_character.attributes.strength, "strength");
+		propagate_attribute_options(current_character.attributes.vigor, "vigor");
+		$(".js-chargen-attributes-agility").unbind("change");
+		$(".js-chargen-attributes-agility").change( function(event) {
+			event_attribute_changed("agility", $(this).val() );
+			return;
+		});
+		$(".js-chargen-attributes-smarts").unbind("change");
+		$(".js-chargen-attributes-smarts").change( function(event) {
+			event_attribute_changed("smarts", $(this).val() );
+			return;
+		});
+		$(".js-chargen-attributes-spirit").unbind("change");
+		$(".js-chargen-attributes-spirit").change( function(event) {
+			event_attribute_changed("spirit", $(this).val() );
+			return;
+		});
+		$(".js-chargen-attributes-strength").unbind("change");
+		$(".js-chargen-attributes-strength").change( function(event) {
+			event_attribute_changed("strength", $(this).val() );
+			return;
+		});
+		$(".js-chargen-attributes-vigor").unbind("change");
+		$(".js-chargen-attributes-vigor").change( function(event) {
+			event_attribute_changed("vigor", $(this).val() );
+			return;
+		});
+	} else {
+		display_attribute(current_character.attributes.agility, "agility");
+		display_attribute(current_character.attributes.smarts, "smarts");
+		display_attribute(current_character.attributes.spirit, "spirit");
+		display_attribute(current_character.attributes.strength, "strength");
+		display_attribute(current_character.attributes.vigor, "vigor");
+	}
 }
 function event_attribute_changed(attribute_name, new_value) {
 	current_character.set_attribute(attribute_name, new_value);
@@ -874,7 +922,8 @@ function propagate_perks_section() {
 		for(perk_counter = 0; perk_counter < current_perks.length; perk_counter++) {
 			list_perks_html += "<div class=\"a-h-line\">";
 			if( current_perks[perk_counter].toLowerCase().indexOf("(racial)") == -1 )
-				list_perks_html += "<button type=\"button\" class=\"btn btn-xs btn-danger js-delete-perk-button\" relindex=\"" + perk_counter + "\">Delete</button> ";
+				if(!current_character.is_complete() )
+					list_perks_html += "<button type=\"button\" class=\"btn btn-xs btn-danger js-delete-perk-button\" relindex=\"" + perk_counter + "\">Delete</button> ";
 			list_perks_html += current_perks[perk_counter] + "</div>";
 		}
 
@@ -964,7 +1013,7 @@ function refresh_chargen_page() {
 	propagate_hindrances_section();
 	propagate_equipment_section();
 	propagate_arcane_background_options();
-
+	propagate_advancement_section();
 
 	init_main_buttons();
 
