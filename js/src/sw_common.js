@@ -1,3 +1,10 @@
+var starting_funds = Array (
+	250,
+	500,
+	750,
+	1000
+);
+
 var attribute_labels = Array(
 	"no value",
 	"d4",

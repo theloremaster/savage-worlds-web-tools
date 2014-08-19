@@ -1103,12 +1103,13 @@ var chargen_edges = Array(
 			"An arcane character may learn a new power by choosing this Edge (which may be taken multiple times). He may choose from any powers normally available to his particular Arcane Background."
 		),
 		book: books_list[0],
+		retakable: 1,
 		prereqs: {
 			arcane_background: 1,
 			rank: 0
 		},
 		char_effects: function( character_object ) {
-			this.powers_available++;
+			character_object.powers_available++;
 		},
 		incompatible: {},
 		page: "p41"
@@ -1122,12 +1123,14 @@ var chargen_edges = Array(
 			"Power Points may be selected more than once, but only once per Rank."
 		),
 		book: books_list[0],
+		retakable: 1,
+		once_per_rank: 1,
 		prereqs: {
 			arcane_background: 1,
 			rank: 0
 		},
 		char_effects: function( character_object ) {
-			this.powers_available++;
+			character_object.power_points_available += 5;
 		},
 		incompatible: {
 			once_per_rank: 1

@@ -491,10 +491,10 @@ function propagate_skills_sections() {
 function propagate_advancement_section() {
 	html = "";
 	if( current_character.is_complete() ){
-		html += "Your character is complete - advancement enabled. If this is not what you want, click the button below.";
+		html += "<p>Your character is complete - advancement enabled. If this is not what you want, click the button below.</p>";
 		html += "<button type='button' class='js-remove-advancements-character btn btn-danger'>Remove Advancements</button>";
 	} else {
-		html += "Your novice character is still in development. Click on the complete button below to start standard character advancement.";
+		html += "<p>Your novice character is still in development. Click on the complete button below to start standard character advancement.</p>";
 		html += "<button type='button' class='js-complete-character btn btn-primary'>Complete</button>";
 	}
 	$(".js-advancement-area").html(html);
@@ -641,9 +641,17 @@ function propagate_edges_section() {
 		optgroup = "";
 		for(edge_counter = 0; edge_counter < chargen_edges.length; edge_counter++) {
 			disabled = "";
+			check_this_rank_only = false;
+			if( chargen_edges[edge_counter].once_per_rank && chargen_edges[edge_counter].once_per_rank)
+				check_this_rank_only = true;
+
+			if( !chargen_edges[edge_counter].retakable )
+				retakable = false;
+			else
+				retakable = chargen_edges[edge_counter].retakable;
 
 			if(
-				current_character.has_edge( chargen_edges[edge_counter].name ) == true
+				( current_character.has_edge( chargen_edges[edge_counter].name, retakable, check_this_rank_only ) == true )
 					||
 				current_character.is_incompatible_with( chargen_edges[edge_counter] ) == true
 					||
@@ -696,6 +704,31 @@ function propagate_edges_section() {
 }
 
 function propagate_equipment_section() {
+	html = "";
+
+	if( !current_character.is_complete() ) {
+		html += "<label>Starting Wealth (as per setting):<br /><select class='js-starting-wealth'>";
+		for(lc = 0; lc < starting_funds.length; lc++) {
+			selected = "";
+			if( starting_funds[lc] == current_character.starting_funds)
+				selected = " selected='selected'";
+			default_string = "";
+			if(current_character.base_starting_funds == starting_funds[lc])
+				default_string = " (default)";
+			html += "<option value='" + starting_funds[lc] + "'" + selected + ">$" + starting_funds[lc] + default_string + "</option>";
+		}
+
+		html += "</select></label>";
+	} else {
+		html += "<label>Starting Wealth (as per setting):<br />$" + current_character.starting_funds + "</label>";
+	}
+
+	$(".js-equipment-area").html( html );
+
+	$(".js-starting-wealth").unbind( "change" );
+	$(".js-starting-wealth").change( function() {
+		current_character.set_starting_funds( $(this).val() );
+	});
 
 }
 

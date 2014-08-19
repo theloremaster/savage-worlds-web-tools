@@ -34,8 +34,8 @@ character_class.prototype = {
 		this.rank = 0; // novice ;)
 		this.wild_card = 1; // currently always a wild card
 		this.xp = 0;
-		this.selected_advancements;
-		this.available_advancements;
+		this.selected_advancements = Array();
+		this.available_advancements = 0;
 
 		// Attributes..
 		this.attributes = {
@@ -57,6 +57,7 @@ character_class.prototype = {
 
 		this.starting_funds = 500;
 		this.base_starting_funds = 500;
+		this.current_funds = 0;
 
 		this.is_valid = true;
 		this.validity_messages = Array();
@@ -80,6 +81,9 @@ character_class.prototype = {
 		this.arcane_background = 0;
 		this.powers_available = 0;
 		this.power_points_available = 0;
+
+		if(this.gender == "")
+			this.gender = "Male";
 
 		this.cost_to_raise = {
 			agility : 1,
@@ -342,7 +346,20 @@ character_class.prototype = {
 			this.selected_advancements = Array();
 		}
 
+		/* TODO Equipment */
+		this.current_funds = this.starting_funds;
+		for( eq_count = 0; eq_count < this.selected_equipment.length; eq_count++) {
 
+		}
+
+	},
+
+
+	set_starting_funds: function (new_value) {
+		new_value = new_value / 1;
+		if( new_value == 0 )
+			new_value = 500;
+		this.starting_funds = new_value;
 	},
 
 	set_xp: function ( new_value ) {
@@ -515,7 +532,13 @@ character_class.prototype = {
 		}
 	},
 
-	has_edge: function( edge_name ) {
+	has_edge: function( edge_name, retakable, this_rank_only ) {
+
+		if( !retakable )
+			retakable = false;
+		if( !this_rank_only )
+			this_rank_only = false;
+
 		if( edge_name ) {
 			if(this.race.edges_included) {
 				if( this.racial_edges)
@@ -528,12 +551,26 @@ character_class.prototype = {
 				for(get_all_edges_count = 0; get_all_edges_count < this.selected_edges.length; get_all_edges_count++ ) {
 					current_edge = this.selected_edges[get_all_edges_count];
 					if(current_edge) {
-						if( current_edge.name.toLowerCase() == edge_name.toLowerCase() )
-							return true;
+						if(retakable && this_rank_only) {
+
+							if( current_edge.name.toLowerCase() == edge_name.toLowerCase() ){
+								if( current_edge.selected_rank == this.rank ) {
+									return true;
+								}
+							}
+
+						} else {
+							if( current_edge.name.toLowerCase() == edge_name.toLowerCase() ) {
+								if(!retakable)
+									return true;
+							}
+						}
 					}
 				}
 			}
+
 		}
+
 		return false;
 	},
 
@@ -603,6 +640,23 @@ character_class.prototype = {
 			}
 		}
 		return false;
+	},
+
+
+	add_advancement: function( short_name, option1, option2) {
+		if( !option1 )
+			option1 = "";
+		if( !option2 )
+			option2 = "";
+
+		for(add_advancement_count = 0; add_advancement_count < chagen_advancements.length; add_advancement_count++) {
+			if(chagen_advancements[add_advancement_count].short_name.toLowerCase().trim == short_name.toLowerCase().trim() ) {
+				new_advancement = clone_object( chagen_advancements[add_advancement_count] );
+				new_advancement.option1 = option1;
+				new_advancement.option1 = option2;
+				this.selected_advancements.push( new_advancement );
+			}
+		}
 	},
 
 	remove_power: function( power_shortname, trapping ) {
@@ -706,12 +760,16 @@ character_class.prototype = {
 		return 0;
 	},
 
-	add_edge: function(edge_name) {
+	add_edge: function(edge_name, during_rank) {
+		if(!during_rank)
+			during_rank = 0;
 		if(edge_name) {
 			for( edge_counter = 0; edge_counter < chargen_edges.length; edge_counter++ ) {
-				if(edge_name.toLowerCase() == chargen_edges[edge_counter].name.toLowerCase()){
-					this.selected_edges.push( chargen_edges[edge_counter] );
-					return chargen_edges[edge_counter];
+				if(edge_name.toLowerCase() == chargen_edges[edge_counter].name.toLowerCase()) {
+					found_edge = clone_object( chargen_edges[edge_counter] );
+					found_edge.selected_rank = during_rank;
+					this.selected_edges.push( found_edge );
+					return found_edge;
 				}
 			}
 		}
@@ -1010,8 +1068,10 @@ character_class.prototype = {
 			},
 			race : this.race.name,
 			complete: 0,
+			starting_funds: this.starting_funds,
 			edges: Array(),
 			hindrances: Array(),
+			advancements: Array(),
 			perks: Array(),
 			skills: Array(),
 			arcane: {
@@ -1092,6 +1152,19 @@ character_class.prototype = {
 				export_object.skills.push( export_skill );
 			}
 		}
+
+		if(this.selected_advancements.length > 0) {
+			for(get_advancements_count = 0; get_advancements_count < this.selected_advancements.length; get_advancements_count++ ) {
+				export_advancement = {
+					name: this.selected_advancements[get_advancements_count].short_name,
+					opt1: this.selected_advancements[get_advancements_count].option1,
+					opt2: this.selected_advancements[get_advancements_count].option2
+				}
+
+				export_object.advancements.push( export_skill );
+			}
+		}
+
 		export_string = JSON.stringify(export_object)
 		if(selector_name)
 			$(selector_name).val(export_string);
@@ -1110,7 +1183,8 @@ character_class.prototype = {
 	export_bbcode: function(selector_name) {
 
 		html_return = "[b][size=18]" +  this.name + "[/size][/b]\n";
-		html_return += "[i]" +  this.description + "[/i]\n";
+		html_return += this.race.name + " " + this.gender + " - [i]" +  chargen_ranks[this.rank] + " ( " + this.xp + " xp)[/i]\n";
+		html_return += "" +  this.description + "\n";
 		html_return += "[b]Attributes[/b]: ";
 		html_return += "Agility " + attribute_labels[this.attributes.agility];
 		html_return += ", Smarts " + attribute_labels[this.attributes.smarts];
@@ -1218,7 +1292,9 @@ character_class.prototype = {
 	export_html: function(selector_name) {
 
 		html_return = "<strong><h3>" +  this.name + "</h3></strong>\n";
-		html_return += "<em>" +  this.description + "</em><br />\n";
+		html_return += this.race.name + " " + this.gender + " - <em>" +  chargen_ranks[this.rank] + " ( " + this.xp + " xp)</em><br />\n";
+		html_return += "" +  this.description + "<br />\n";
+
 		html_return += "<strong>Attributes</strong>: ";
 		html_return += "Agility " + attribute_labels[this.attributes.agility];
 		html_return += ", Smarts " + attribute_labels[this.attributes.smarts];
@@ -1339,6 +1415,9 @@ character_class.prototype = {
 			this.set_name( imported_object.name );
 			this.set_gender( imported_object.gender );
 			this.set_description( imported_object.description );
+
+			if( imported_object.starting_funds )
+				this.set_starting_funds( imported_object.starting_funds );
 			if( imported_object.wild_card )
 				this.set_wild_card( imported_object.wild_card );
 			else
@@ -1379,12 +1458,21 @@ character_class.prototype = {
 				}
 			}
 
+			if( imported_object.advancements ) {
+				for( import_advancement_counter = 0; import_hindrance_counter < imported_object.advancements.length; import_advancement_counter++) {
+					this.add_advancement (
+						imported_object.advancements[import_advancement_counter].name,
+						imported_object.advancements[import_hindrance_counter].opt1,
+						imported_object.advancements[import_hindrance_counter].opt1
+					);
+				}
+			}
+
 			if( imported_object.arcane ) {
 
 				if( imported_object.arcane.type && this.has_edge("Arcane Background")) {
 					this.set_arcane_bg( imported_object.arcane.type );
 					if( imported_object.arcane.powers.length > 0 ) {
-						console.log(imported_object.arcane.powers.length);
 						for( import_power_counter = 0; import_power_counter < imported_object.arcane.powers.length; import_power_counter++)
 							this.add_power(
 								imported_object.arcane.powers[import_power_counter].short,
