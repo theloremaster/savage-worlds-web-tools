@@ -1,7 +1,7 @@
 CACHE MANIFEST
-# rev 20140818-01
-# 2014-08-18-01
-# Chargen: Removed "danger" from index.html for chagren, work on advancement backend, starting of work for Equipment.
+# rev 20140810-01
+# 2014-08-19-01
+# Chargen: Added some starting equipment for development of equipment section
 
 CACHE:
 http://jdgwf.github.io/savage-worlds-web-tools/extras_view.html

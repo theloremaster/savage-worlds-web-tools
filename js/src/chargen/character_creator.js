@@ -225,6 +225,8 @@ function display_remaining_attribute_points(selector_name) {
 			else
 				$(selector_name).text(  current_character.attribute_points * -1 + " attribute points overspent" );
 		}
+	} else {
+		$(selector_name).hide();
 	}
 }
 
@@ -248,6 +250,8 @@ function display_remaining_skill_points(selector_name) {
 			else
 				$(selector_name).text(  current_character.skill_points * -1 + " skill points overspent" );
 		}
+	} else {
+		$(selector_name).hide();
 	}
 
 }
@@ -491,10 +495,10 @@ function propagate_skills_sections() {
 function propagate_advancement_section() {
 	html = "";
 	if( current_character.is_complete() ){
-		html += "<p>Your character is complete - advancement enabled. If this is not what you want, click the button below.</p>";
+		html += "<p>Your character creation is complete - advancement enabled. If this is not what you want, click the button below.</p>";
 		html += "<button type='button' class='js-remove-advancements-character btn btn-danger'>Remove Advancements</button>";
 	} else {
-		html += "<p>Your novice character is still in development. Click on the complete button below to start standard character advancement.</p>";
+		html += "<p>Your novice character is still in creation mode. Click on the complete button below to start standard character advancement.</p>";
 		html += "<button type='button' class='js-complete-character btn btn-primary'>Complete</button>";
 	}
 	$(".js-advancement-area").html(html);
