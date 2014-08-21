@@ -1,7 +1,7 @@
 CACHE MANIFEST
-# Version 2014-08-21-01
-# August 21, 2014 revision 1
-# Chargen: Some very signficant interface changes, round one. Manifest cache bugfixes. Other minor interface tweaks as I'm still brainstorming how equipment selection should be handled.
+# Version 2014-08-21-02
+# August 21, 2014 revision 2
+# Chargen: Misnamed button label on index
 
 CACHE:
 http://jdgwf.github.io/savage-worlds-web-tools/extras_view.html
