@@ -32,7 +32,7 @@ function propogate_add_mods(selected_modification_list) {
 			modifications_html += "</td>";
 
 			if(  object_mod_count > 0 )
-				modifications_html += "<td style='color: green'>" + selected_modification_list[mod_count].name + "</td>";
+				modifications_html += "<td class='creator-selected'>" + selected_modification_list[mod_count].name + "</td>";
 			else
 				modifications_html += "<td>" + selected_modification_list[mod_count].name + "</td>";
 			modifications_html += "<td>" + object_mod_count + "/" + selected_modification_list[mod_count].get_max(current_selected_object)  + "</td>";
@@ -155,7 +155,7 @@ function propogate_weapon_mods() {
 		if( current_selected_object && object_mods_available >= mod_cost && is_available) {
 			current_weapon_class_html += "<tr title='" + vehicle_weapons[mod_count].description + "'>";
 			if(  object_mod_count > 0 )
-				current_weapon_class_html += "<td style='color: green'>";
+				current_weapon_class_html += "<td>";
 			else
 				current_weapon_class_html += "<td>";
 

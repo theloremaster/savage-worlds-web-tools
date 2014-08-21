@@ -48,14 +48,35 @@ function display_attribute(current_value, current_attribute) {
 
 function propagate_race_options(select_selector) {
 
+	if(current_character.is_complete() ) {
+		$(".race-locked").show();
+		$(".race-open").hide();
+		$(select_selector + "-readonly").text( current_character.race.name );
+	} else {
+
+		html = "";
+		for(race_counter = 0; race_counter < chargen_races.length; race_counter++) {
+			if(current_character.race == chargen_races[race_counter])
+				html += "<option selected=\"selected\" value=\"" + chargen_races[race_counter].name + "\">" + chargen_races[race_counter].name + "</option>";
+			else
+				html += "<option value=\"" + chargen_races[race_counter].name + "\">" + chargen_races[race_counter].name + "</option>";
+		}
+		$(select_selector).html(html);
+	}
+}
+
+
+function propagate_gender_options(select_selector) {
+
 	html = "";
-	for(race_counter = 0; race_counter < chargen_races.length; race_counter++) {
-		if(current_character.race == chargen_races[race_counter])
-			html += "<option selected=\"selected\" value=\"" + chargen_races[race_counter].name + "\">" + chargen_races[race_counter].name + "</option>";
+	for(gender_counter = 0; gender_counter < chargen_genders.length; gender_counter++) {
+		if(current_character.gender == chargen_genders[gender_counter].name)
+			html += "<option selected=\"selected\" value=\"" + chargen_genders[gender_counter].name + "\">" + chargen_genders[gender_counter].name + "</option>";
 		else
-			html += "<option value=\"" + chargen_races[race_counter].name + "\">" + chargen_races[race_counter].name + "</option>";
+			html += "<option value=\"" + chargen_genders[gender_counter].name + "\">" + chargen_genders[gender_counter].name + "</option>";
 	}
 	$(select_selector).html(html);
+
 }
 
 function propagate_arcane_background_options() {
@@ -256,17 +277,6 @@ function display_remaining_skill_points(selector_name) {
 
 }
 
-function propagate_gender_options(select_selector) {
-
-	html = "";
-	for(gender_counter = 0; gender_counter < chargen_genders.length; gender_counter++) {
-		if(current_character.gender == chargen_genders[gender_counter].name)
-			html += "<option selected=\"selected\" value=\"" + chargen_genders[gender_counter].name + "\">" + chargen_genders[gender_counter].name + "</option>";
-		else
-			html += "<option value=\"" + chargen_genders[gender_counter].name + "\">" + chargen_genders[gender_counter].name + "</option>";
-	}
-	$(select_selector).html(html);
-}
 
 function propagate_character_section() {
 // Fill in Fluff Section

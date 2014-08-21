@@ -14,9 +14,14 @@ function do_success_calc() {
 
 	damage_html = damageSuccessMargin(roll, target_number, armor, armorpiercing);
 	attribute_html = traitSuccessMargin(roll, target_number);
-	$(".js-results").html( attribute_html );
-	$(".js-damage-results").html( damage_html );
+	$(".js-results").html( "<br />" + attribute_html );
+	$(".js-damage-results").html( "<br />" + damage_html );
 }
+
+$(".raise-calc-input").change( function() {
+	do_success_calc();
+});
+
 $(".raise-calc-input").keyup( function() {
 	do_success_calc();
 });

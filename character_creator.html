@@ -148,14 +148,6 @@
 
 	<div class="js-alert-container"></div>
 
-	<div class="row page-main">
-		<div class="col-xs-12">
-			<h2>Under Reconstruction</h2>
-			<p>As of August 9th, 2014 this whole section is undergoing a bottom to top rewrite. I'm able to salvage a few things, such as data entry for hindrances and edges, but I'm working on more maintainable code as I've learned a few more tricks in Object Oriented JavaScript (finally a way to handle inheritance, coming from C++ coding this is a godsend!) since the original creation of this section more than a year ago.</p>
-			<p>Thanks for your patience</p>
-		</div>
-	</div>
-
 	<div class="row">
 		<div class="col-xs-12">
 			<fieldset>
@@ -167,8 +159,15 @@
 				</div>
 				<div class="row">
 					<div class="col-xs-3">
-						<label>Race: <select class="js-chargen-race"></select></label>
 						<label>Gender: <select class="js-chargen-gender"></select></label>
+
+						<div class="race-open">
+							<label>Race: <select class="js-chargen-race"></select></label>
+						</div>
+						<div class="race-locked" style="display: none">
+							<label class="bigger-text">Race: <span class="js-chargen-race-readonly"></span></label>
+						</div>
+
 					</div>
 					<div class="col-xs-9">
 						<label>Description: <textarea class="js-chargen-description"></textarea></label>
@@ -177,7 +176,7 @@
 			</fieldset>
 
 			<fieldset style="display: none" class="js-validity-container">
-				<legend>Validity Errors</legend>
+				<h3>Validity Errors</h3>
 				<div class="row">
 					<div class="col-xs-12 js-validity-detail">
 					</div>
@@ -321,21 +320,28 @@
 			</fieldset>
 		</div>
 	</div>
+</div>
 
-	<div class="row">
-		<div class="col-xs-12 footer">
-			<a href="https://www.peginc.com/licensing/" title="Click here for more info on Pinnacle Entertainment Groups's licensing policies"><img src="./img/sw_fan_78x50.png" alt="Savage Worlds Fan Logo" /></a>
-			<p>This tool references the Savage Worlds game system, available from Pinnacle Entertainment Group at <a href="http:/www.peginc.com" title="Pinnacle Entertainment Group">www.peginc.com</a>. Savage Worlds and all associated logos and trademarks are copyrights of Pinnacle Entertainment Group. Used with permission. Pinnacle makes no representation or warranty as to the quality, viability, or suitability for purpose of this product.</p>
+<div class="footer">
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-12">
+				<a href="https://www.peginc.com/licensing/" title="Click here for more info on Pinnacle Entertainment Groups's licensing policies"><img src="./img/sw_fan_78x50.png" alt="Savage Worlds Fan Logo" /></a>
+				<p>This tool references the Savage Worlds game system, available from Pinnacle Entertainment Group at <a href="http:/www.peginc.com" title="Pinnacle Entertainment Group">www.peginc.com</a>. Savage Worlds and all associated logos and trademarks are copyrights of Pinnacle Entertainment Group. Used with permission. Pinnacle makes no representation or warranty as to the quality, viability, or suitability for purpose of this product.</p>
 
-			<p>Many thanks to <a href="http://glyphicons.com/" title="Glyphicons">Glyphicons</a> for providing their Halflings for users of <a href="http://getbootstrap.com/" title="Bootstrap">Bootstrap 3</a> for free!</p>
+				<p>Many thanks to <a href="http://glyphicons.com/" title="Glyphicons">Glyphicons</a> for providing their Halflings for users of <a href="http://getbootstrap.com/" title="Bootstrap">Bootstrap 3</a> for free!</p>
 
-			<p>Thanks to <a href="http://iconcubic.deviantart.com/">iconcubic</a> and his <a href="http://www.iconeasy.com/iconset/dnd-dice-icons/">DnD Icons Set</a> for the dice icons in the skills section. Used for free as per the <a href="http://www.iconeasy.com/icon/license/Object/DnD%20Dice/license.txt">license</a></p>
+				<p>Thanks to <a href="http://iconcubic.deviantart.com/">iconcubic</a> and his <a href="http://www.iconeasy.com/iconset/dnd-dice-icons/">DnD Icons Set</a> for the dice icons. Used for free as per the <a href="http://www.iconeasy.com/icon/license/Object/DnD%20Dice/license.txt">license</a></p>
 
-			<p>You can contribute to this project at <a href="https://github.com/jdgwf/savage-worlds-web-tools">https://github.com/jdgwf/savage-worlds-web-tools</a></p>
+				<p>You can contribute to this project at <a href="https://github.com/jdgwf/savage-worlds-web-tools">https://github.com/jdgwf/savage-worlds-web-tools</a></p>
+
+				<p class="text-right">Updated/Version: 2014-08-21-01</p>
+			</div>
 		</div>
 	</div>
-
 </div>
+
+
 </body>
 
 <script src="./js/jquery-1.10.2.min.js"></script>

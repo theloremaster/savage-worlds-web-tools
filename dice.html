@@ -28,81 +28,89 @@
 </div>
 
 <div class="container">
-<div class="row">
-	<div class="col-sm-6">
-		<fieldset>
-		<legend>Dice</legend>
-		<label>Dice: <input type="text" name="roll" value="d8* x 2" /></label>
-		Designate your Trait roll with an * for wild die rolling, just about anything (logical) can be put here<br />
-		Examples
-		<ul class="no-bullet">
-			<li>d8 add 2: <a onclick="$('input[name=roll]').val('d8* + 2');$('#trait-check').attr('checked', 'checked')">d8* + 2</a> (trait test)</li>
-			<li>d8 with wild die + d6: <a onclick="$('input[name=roll]').val('d8 + d6');$('#damage-check').attr('checked', 'checked')">d8 + d6</a> (damage test)</li>
-			<li>d12 with wild die subtract 4: <a onclick="$('input[name=roll]').val('d12* - 4');$('#trait-check').attr('checked', 'checked')">d12* - 4</a> (trait test)</li>
-			<li>d12 but substract d6 then add 6: <a onclick="$('input[name=roll]').val('d12 - d6 + 6');$('#damage-check').attr('checked', 'checked')">d12 - d6 + 6</a> (damage test)</li>
-			<li>You can now use multiplication (x) and division (/) as well as adding and subtracting. <strong>NOTE</strong>: This system doesn't use Algebraic Order of Operations (yet, this is planned as are parenthesis and exponents)</li>
-		</ul>
+	<div class="row">
+		<div class="col-sm-6">
+			<fieldset>
+			<legend>Dice</legend>
+			<label>Dice: <input type="text" name="roll" value="d8* x 2" /></label>
+			Designate your Trait roll with an * for wild die rolling, just about anything (logical) can be put here<br />
+			Examples
+			<ul class="no-bullet">
+				<li>d8 add 2: <a onclick="$('input[name=roll]').val('d8* + 2');$('#trait-check').attr('checked', 'checked')">d8* + 2</a> (trait test)</li>
+				<li>d8 with wild die + d6: <a onclick="$('input[name=roll]').val('d8 + d6');$('#damage-check').attr('checked', 'checked')">d8 + d6</a> (damage test)</li>
+				<li>d12 with wild die subtract 4: <a onclick="$('input[name=roll]').val('d12* - 4');$('#trait-check').attr('checked', 'checked')">d12* - 4</a> (trait test)</li>
+				<li>d12 but substract d6 then add 6: <a onclick="$('input[name=roll]').val('d12 - d6 + 6');$('#damage-check').attr('checked', 'checked')">d12 - d6 + 6</a> (damage test)</li>
+				<li>You can now use multiplication (x) and division (/) as well as adding and subtracting. <strong>NOTE</strong>: This system doesn't use Algebraic Order of Operations (yet, this is planned as are parenthesis and exponents)</li>
+			</ul>
 
-	</div>
+		</div>
 
-	<div class="col-sm-6">
+		<div class="col-sm-6">
 
-		<fieldset>
-			<legend>Roll Type</legend>
+			<fieldset>
+				<legend>Roll Type</legend>
 
-				<div class="row">
-					<div class="col-xs-6">
-							<fieldset><label><input type="radio" id="trait-check" checked="checked" name="roll-type" value="trait" /> Trait Roll</label>
-								<label>Target Number: <input type="text" name="target-number" value="4" /></label>
+					<div class="row">
+						<div class="col-xs-6">
+								<fieldset><label><input type="radio" id="trait-check" checked="checked" name="roll-type" value="trait" /> Trait Roll</label>
+									<label>Target Number: <input type="text" name="target-number" value="4" /></label>
+								</fieldset>
+
+						</div>
+
+						<div class="col-xs-6">
+							<fieldset><label><input type="radio" id="damage-check" name="roll-type" value="damage" /> Damage Roll</label>
+								<label>Base Toughness: <input type="text" name="toughness" value="5" /></label>
+								<label>Armor: <input type="text" name="armor" value="1" /></label>
+								<label>Weapon AP: <input type="text" name="weapon-ap" value="0" /></label>
+
+
 							</fieldset>
 
-					</div>
-
-					<div class="col-xs-6">
-						<fieldset><label><input type="radio" id="damage-check" name="roll-type" value="damage" /> Damage Roll</label>
-							<label>Base Toughness: <input type="text" name="toughness" value="5" /></label>
-							<label>Armor: <input type="text" name="armor" value="1" /></label>
-							<label>Weapon AP: <input type="text" name="weapon-ap" value="0" /></label>
-
-
-						</fieldset>
+						</div>
 
 					</div>
 
-				</div>
-
-		</fieldset>
-		<br /> <input type="button" class="btn btn-success" id="roll-dice" value="Generate Rolls With Above Settings" />
+			</fieldset>
+			<br /> <input type="button" class="btn btn-success" id="roll-dice" value="Generate Rolls With Above Settings" />
+		</div>
 	</div>
-</div>
-
-<div class="row">
-	<div class="col-sm-12">
-		<fieldset>
-			<legend>Results</legend>
-
-
-			<div id="results">( Press the Generate Rolls button above )</div>
-			<div id="success-results"></div>
-			<div id="rolls"></div>
-		</fieldset>
-
-	</div>
-</div>
 
 	<div class="row">
-		<div class="col-sm-12 footer">
-			<a href="https://www.peginc.com/licensing/" title="Click here for more info on Pinnacle Entertainment Groups's licensing policies"><img src="./img/sw_fan_78x50.png" alt="Savage Worlds Fan Logo" /></a>
-			<p>This tool references the Savage Worlds game system, available from Pinnacle Entertainment Group at <a href="http:/www.peginc.com" title="Pinnacle Entertainment Group">www.peginc.com</a>. Savage Worlds and all associated logos and trademarks are copyrights of Pinnacle Entertainment Group. Used with permission. Pinnacle makes no representation or warranty as to the quality, viability, or suitability for purpose of this product.</p>
+		<div class="col-sm-12">
+			<fieldset>
+				<legend>Results</legend>
 
 
-			<p>Many thanks to <a href="http://glyphicons.com/" title="Glyphicons">Glyphicons</a> for providing their Halflings for users of <a href="http://getbootstrap.com/" title="Bootstrap">Bootstrap 3</a> for free!</p>
+				<div id="results">( Press the Generate Rolls button above )</div>
+				<div id="success-results"></div>
+				<div id="rolls"></div>
+			</fieldset>
 
-			<p>You can contribute to this project at <a href="https://github.com/jdgwf/savage-worlds-web-tools">https://github.com/jdgwf/savage-worlds-web-tools </a></p>
 		</div>
 	</div>
 
 </div>
+
+<div class="footer">
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-12">
+				<a href="https://www.peginc.com/licensing/" title="Click here for more info on Pinnacle Entertainment Groups's licensing policies"><img src="./img/sw_fan_78x50.png" alt="Savage Worlds Fan Logo" /></a>
+				<p>This tool references the Savage Worlds game system, available from Pinnacle Entertainment Group at <a href="http:/www.peginc.com" title="Pinnacle Entertainment Group">www.peginc.com</a>. Savage Worlds and all associated logos and trademarks are copyrights of Pinnacle Entertainment Group. Used with permission. Pinnacle makes no representation or warranty as to the quality, viability, or suitability for purpose of this product.</p>
+
+				<p>Many thanks to <a href="http://glyphicons.com/" title="Glyphicons">Glyphicons</a> for providing their Halflings for users of <a href="http://getbootstrap.com/" title="Bootstrap">Bootstrap 3</a> for free!</p>
+
+				<p>Thanks to <a href="http://iconcubic.deviantart.com/">iconcubic</a> and his <a href="http://www.iconeasy.com/iconset/dnd-dice-icons/">DnD Icons Set</a> for the dice icons. Used for free as per the <a href="http://www.iconeasy.com/icon/license/Object/DnD%20Dice/license.txt">license</a></p>
+
+				<p>You can contribute to this project at <a href="https://github.com/jdgwf/savage-worlds-web-tools">https://github.com/jdgwf/savage-worlds-web-tools</a></p>
+
+				<p class="text-right">Updated/Version: 2014-08-21-01</p>
+			</div>
+		</div>
+	</div>
+</div>
+
 </body>
 
 <script src="./js/jquery-1.10.2.min.js"></script>

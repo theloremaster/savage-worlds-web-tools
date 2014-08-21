@@ -262,19 +262,19 @@ function traitSuccessMargin(roll, targetNumber) {
 	debugConsole("traitSuccessMargin((): value = " + value);
 	html = "";
 	if(criticalFailure > 0) {
-		html += "<span style=\"color: red;font-weight: strong; text-transform: uppercase;\">Critical Failure</span>";
+		html += "<span  class=\"color-red bolded uppercase\">Critical Failure</span>";
 	} else {
 		if(value < 0) {
-			html += "<span style=\"color: red\">Failure</span>";
+			html += "<span  class=\"color-red\">Failure</span>";
 		} else {
 			raises = Math.floor(value/4);
 			if(raises == 0) {
 				html += "Success";
 			} else {
 				if( raises == 1) {
-					html += "Success with a raise";
+					html += "<span  class=\"color-green bolded\">Success with a raise</span>";
 				} else {
-					html += "Success with " + raises + " raises";
+					html += "<span  class=\"color-green bolded uppercase\">Success with " + raises + " raises</span>";
 				}
 			}
 		}
@@ -291,16 +291,16 @@ function damageSuccessMargin(roll, toughness, armor, armorpiercing) {
 	value = roll/1 - targetNumber/1;
 	html = "";
 	if(value < 0) {
-		html += "<span style=\"color: red\">No Effect</span>";
+		html += "<span>No Effect</span>";
 	} else {
 		raises = Math.floor(value/4);
 		if(raises == 0) {
-			html += "Shaken";
+			html += "<span class=\"color-orange\">Shaken</span>";
 		} else {
 			if( raises == 1) {
-				html += "Shaken and a wound";
+				html += "<span class=\"color-red\">Shaken and a wound</span>";
 			} else {
-				html += "Shaken and " + raises + " wounds";
+				html += "<span class=\"color-red bolded uppercase\">Shaken and " + raises + " wounds</span>";
 			}
 		}
 	}

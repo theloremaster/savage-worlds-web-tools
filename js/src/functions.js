@@ -28,6 +28,10 @@ $(".ios_app_click").click( function(event) {
     return false;
 });
 
+$("input.numeric-only").keypress(function(event) {
+	return /\d/.test(String.fromCharCode(event.keyCode));
+});
+
 function sort_mods(a,b) {
 	if( typeof(a.calc_weight) == "undefined")
 		a.calc_weight = 5;
