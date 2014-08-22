@@ -552,7 +552,7 @@ function propagate_hindrances_section() {
 	}
 
 	if( !current_character.is_complete() ) {
-		add_hindrance_html += "<div class=\"row\"><div class=\"col-xs-12\"><h4>Add Hindrance</h4><select class=\"width-auto js-add-hind-select\">";
+		add_hindrance_html += "<div class=\"row\"><div class=\"col-xs-12\"><h4>Add Hindrance</h4><select class=\"js-add-hind-select\">";
 		for(hind_counter = 0; hind_counter < chargen_hindrances.length; hind_counter++) {
 			disabled = "";
 			if(
@@ -651,7 +651,7 @@ function propagate_edges_section() {
 
 	add_edge_html = "";
 	if(current_character.edges_available > 0 ) {
-		add_edge_html += "<div class=\"row\"><div class=\"col-xs-12\"><h4>Add Edge</h4><select class=\"width-auto js-add-edge-select\">";
+		add_edge_html += "<div class=\"row\"><div class=\"col-xs-12\"><h4>Add Edge</h4><select class=\"js-add-edge-select\">";
 		optgroup = "";
 		for(edge_counter = 0; edge_counter < chargen_edges.length; edge_counter++) {
 			disabled = "";
@@ -990,7 +990,7 @@ function propagate_perks_section() {
 	add_perk_html = "";
 	if(current_character.perks_available > 0 ) {
 
-		add_perk_html += "<div class=\"row\"><div class=\"col-xs-12\"><h4>Add Perk</h4><select class=\"width-auto js-add-perk-select\">";
+		add_perk_html += "<div class=\"row\"><div class=\"col-xs-12\"><h4>Add Perk</h4><select class=\"js-add-perk-select\">";
 		for(perk_counter = 0; perk_counter < chargen_perks.length; perk_counter++) {
 			show_perk = true;
 			if(
