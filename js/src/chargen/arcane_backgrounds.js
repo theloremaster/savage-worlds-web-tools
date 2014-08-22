@@ -7,6 +7,7 @@ chargen_arcane_backgrounds = Array(
 		short_name: "magic",
 		power_points: 10,
 		starting_powers: 3,
+		book: books_list[0],
 		description: Array(
 			"Magicians range from powerful wizards to vile cultists. They draw on raw supernatural energy to fuel their eldritch fires. This energy often infuses the worlds in which they live, and is drawn forth with elaborate rituals, words of power, runes, or perhaps even dark sacrifices.",
 			"Wizards are often quite weak early in their careers, but are forces to be reckoned with as they become powerful sorcerers."
@@ -25,6 +26,7 @@ chargen_arcane_backgrounds = Array(
 		short_name: "miracles",
 		power_points: 10,
 		starting_powers: 2,
+		book: books_list[0],
 		description: Array(
 			"Those who draw on miracles are priestly types or holy champions. Their power comes from a divine presence of some sort, including gods, nature, or spirits. Their powers are usually invoked with a few words of prayer or by performing established rituals."
 		),
@@ -43,6 +45,7 @@ chargen_arcane_backgrounds = Array(
 		short_name: "psionics",
 		power_points: 10,
 		starting_powers: 3,
+		book: books_list[0],
 		description: Array(
 			"Psionicists have discovered how to tap into their own psychic powers. They can manipulate matter, create fire, or control their own bodies with but a thought."
 		),
@@ -60,6 +63,7 @@ chargen_arcane_backgrounds = Array(
 		short_name: "super-powers",
 		power_points: 20,
 		starting_powers: 1,
+		book: books_list[0],
 		description: Array(
 			"Characters with super powers gain their abilities through strange circumstances, such as being bitten by irradiated creatures, exposure to strange chemicals, or perhaps by finding alien artifacts. This particular level of power is intended for relatively low-level “pulp” heroes. More powerful super types are dealt with in specific Savage Settings, and you’ll find an alternate and far more detailed system in our Super Powers Companion.",
 			"Super powers work a little differently from most other Arcane Backgrounds—each power is its own skill and has no linked attribute (and thus counts as “lower” than its linked Attribute for purposes of Advancement). A hero with the armor and bolt powers, for example, also has an Armor and a Bolt skill he uses to enable it. It’s more expensive for a character to improve his powers, but he starts with more Power Points than other arcane types so he can use his abilities more often.",
@@ -74,6 +78,7 @@ chargen_arcane_backgrounds = Array(
 		short_name: "weird-science",
 		power_points: 10,
 		starting_powers: 1,
+		book: books_list[0],
 		description: Array(
 			"Weird Science is the creation of strange and powerful devices. It differs from regular science in that some element of the arcane is involved. Maybe it’s just generic “super-science,” or perhaps it’s divinely (or demonically) inspired. Maybe the science itself is relatively sound, but it derives power from an arcane source, such as ghost rock in Deadlands, or some other magical mineral or essence in a steampunk fantasy game.",
 			"Wizards are often quite weak early in their careers, but are forces to be reckoned with as they become powerful sorcerers."

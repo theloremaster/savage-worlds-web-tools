@@ -1,7 +1,7 @@
 CACHE MANIFEST
-# Version 2014-08-21-04
-# August 21, 2014 revision 4
-# Chargen: Select Width Problem at iPad portrait size
+# Version 2014-08-22-01
+# August 22, 2014 revision 1
+# Chargen: Added Book OptGroups for <select> elements, minor bugfix on vow (added specification), added book items for trappings
 
 CACHE:
 http://jdgwf.github.io/savage-worlds-web-tools/extras_view.html

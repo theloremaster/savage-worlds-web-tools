@@ -543,7 +543,7 @@ character_class.prototype = {
 			if(this.race.edges_included) {
 				if( this.racial_edges)
 					for(get_all_edges_count = 0; get_all_edges_count < this.racial_edges.length; get_all_edges_count++ )
-						if( this.racial_edges[get_all_edges_count].name.toLowerCase() == edge_name.toLowerCase() )
+						if( this.racial_edges[get_all_edges_count].name.toLowerCase().trim() == edge_name.toLowerCase().trim() )
 							return true;
 			}
 
@@ -553,14 +553,14 @@ character_class.prototype = {
 					if(current_edge) {
 						if(retakable && this_rank_only) {
 
-							if( current_edge.name.toLowerCase() == edge_name.toLowerCase() ){
+							if( current_edge.name.toLowerCase().trim() == edge_name.toLowerCase().trim() ){
 								if( current_edge.selected_rank == this.rank ) {
 									return true;
 								}
 							}
 
 						} else {
-							if( current_edge.name.toLowerCase() == edge_name.toLowerCase() ) {
+							if( current_edge.name.toLowerCase().trim() == edge_name.toLowerCase().trim() ) {
 								if(!retakable)
 									return true;
 							}
@@ -583,7 +583,7 @@ character_class.prototype = {
 			hindrance_name = hindrance_name.replace("(minor)", "");
 			if(this.race.hindrances_included) {
 				for(get_all_hindrances_count = 0; get_all_hindrances_count < this.racial_hindrances.length; get_all_hindrances_count++ )
-					if( this.racial_hindrances[get_all_hindrances_count].name.toLowerCase() == hindrance_name.toLowerCase() )
+					if( this.racial_hindrances[get_all_hindrances_count].name.toLowerCase().trim() == hindrance_name.toLowerCase().trim() )
 						return true;
 			}
 
@@ -591,7 +591,7 @@ character_class.prototype = {
 				for(get_all_hindrances_count = 0; get_all_hindrances_count < this.selected_hindrances.length; get_all_hindrances_count++ ) {
 					current_hindarance = this.selected_hindrances[get_all_hindrances_count];
 					if(current_hindarance) {
-						if( current_hindarance.name.toLowerCase() == hindrance_name.toLowerCase() )
+						if( current_hindarance.name.toLowerCase().trim() == hindrance_name.toLowerCase().trim() )
 							return true;
 					}
 				}
@@ -603,7 +603,7 @@ character_class.prototype = {
 	get_edge: function(edge_name) {
 		if(edge_name) {
 			for( edge_counter = 0; edge_counter < chargen_edges.length; edge_counter++ ) {
-				if(edge_name.toLowerCase() == chargen_edges[edge_counter].name.toLowerCase())
+				if(edge_name.toLowerCase().trim() == chargen_edges[edge_counter].name.toLowerCase().trim() )
 					return chargen_edges[edge_counter];
 			}
 		}
@@ -666,10 +666,10 @@ character_class.prototype = {
 			found_index = -1;
 			for( remove_power_counter = 0; remove_power_counter < this.selected_powers.length; remove_power_counter++ ) {
 				if(this.selected_powers[remove_power_counter] && this.selected_powers[remove_power_counter].short_name) {
-					if(power_shortname.toLowerCase() == this.selected_powers[remove_power_counter].short_name.toLowerCase()) {
+					if(power_shortname.toLowerCase().trim() == this.selected_powers[remove_power_counter].short_name.toLowerCase().trim() ) {
 						// double check trapping match just in case there are multiple powers of same type
 						if( trapping != "" && this.selected_powers[remove_power_counter].trapping ){
-							if(trapping.toLowerCase() == this.selected_powers[remove_power_counter].trapping.toLowerCase()) {
+							if(trapping.toLowerCase().trim() == this.selected_powers[remove_power_counter].trapping.toLowerCase().trim() ) {
 								this.selected_powers.splice(found_index, 1);
 								return true;
 							}
@@ -689,7 +689,7 @@ character_class.prototype = {
 		if(edge_name) {
 			for( edge_counter = 0; edge_counter < this.selected_edges.length; edge_counter++ ) {
 				if(this.selected_edges[edge_counter] && this.selected_edges[edge_counter].name) {
-					if(edge_name.toLowerCase() == this.selected_edges[edge_counter].name.toLowerCase()) {
+					if(edge_name.toLowerCase().trim() == this.selected_edges[edge_counter].name.toLowerCase().trim() ) {
 						console.log(this.selected_edges[edge_counter].name.toLowerCase());
 						this.selected_edges.splice(edge_counter, 1);
 						return true;
@@ -727,7 +727,7 @@ character_class.prototype = {
 
 			for( hindrance_counter = 0; hindrance_counter < this.selected_hindrances.length; hindrance_counter++ ) {
 				if(this.selected_hindrances[hindrance_counter] && this.selected_hindrances[hindrance_counter].name) {
-					if(hindrance_name.toLowerCase() == this.selected_hindrances[hindrance_counter].name.toLowerCase()) {
+					if(hindrance_name.toLowerCase().trim() == this.selected_hindrances[hindrance_counter].name.toLowerCase().trim() ) {
 						if( specify_text != "") {
 							if(specify_text.toLowerCase().trim() == this.selected_hindrances[hindrance_counter].specify_text.toLowerCase().trim()) {
 								found_index = hindrance_counter;
@@ -752,7 +752,7 @@ character_class.prototype = {
 		if(hindrance_name) {
 			for( hindrance_counter = 0; hindrance_counter < chargen_hindrances.length; hindrance_counter++ ) {
 				if(chargen_hindrances[hindrance_counter] && chargen_hindrances[hindrance_counter].name) {
-					if(hindrance_name.toLowerCase() == chargen_hindrances[hindrance_counter].name.toLowerCase())
+					if(hindrance_name.toLowerCase().trim() == chargen_hindrances[hindrance_counter].name.toLowerCase().trim())
 						return chargen_hindrances[hindrance_counter];
 				}
 			}
@@ -765,7 +765,7 @@ character_class.prototype = {
 			during_rank = 0;
 		if(edge_name) {
 			for( edge_counter = 0; edge_counter < chargen_edges.length; edge_counter++ ) {
-				if(edge_name.toLowerCase() == chargen_edges[edge_counter].name.toLowerCase()) {
+				if(edge_name.toLowerCase().trim() == chargen_edges[edge_counter].name.toLowerCase().trim() ) {
 					found_edge = clone_object( chargen_edges[edge_counter] );
 					found_edge.selected_rank = during_rank;
 					this.selected_edges.push( found_edge );
@@ -964,7 +964,7 @@ character_class.prototype = {
 	add_perk: function(perk_short_name) {
 		if(perk_short_name) {
 			for(add_perk_counter = 0; add_perk_counter < chargen_perks.length; add_perk_counter++) {
-				if( chargen_perks[add_perk_counter].short_name.toLowerCase() == perk_short_name.toLowerCase() ) {
+				if( chargen_perks[add_perk_counter].short_name.toLowerCase().trim() == perk_short_name.toLowerCase().trim() ) {
 					this.selected_perks.push( chargen_perks[add_perk_counter] );
 					return true;
 				}
@@ -1001,7 +1001,7 @@ character_class.prototype = {
 		}
 
 		for( hindrance_counter = 0; hindrance_counter < chargen_hindrances.length; hindrance_counter++ ) {
-			if(hindrance_name.toLowerCase() == chargen_hindrances[hindrance_counter].name.toLowerCase()) {
+			if(hindrance_name.toLowerCase().trim() == chargen_hindrances[hindrance_counter].name.toLowerCase().trim()) {
 				add_hindrance = false;
 				if(look_for_major == true) {
 					if( chargen_hindrances[hindrance_counter].major > 0) {
@@ -1314,7 +1314,8 @@ character_class.prototype = {
 		}
 
 		if(this.derived.charisma > 0)
-			html_return += "<strong>Charisma</strong>: " + this.derived.charisma;
+			html_return += ", <strong>Charisma</strong>: " + this.derived.charisma;
+
 
 		html_return += "<br />\n";
 

@@ -3,15 +3,51 @@ Powers
 */
 
 chargen_trappings = Array(
-	"Acid",
-	"Cold/Ice",
-	"Darkness",
-	"Electricity",
-	"Fire/Heat",
-	"Light",
-	"Necromantic",
-	"Sound",
-	"Other"
+	{
+		name: "Acid",
+		page: "p122",
+		book: books_list[0]
+	},
+	{
+		name: "Cold/Ice",
+		page: "p122",
+		book: books_list[0]
+	},
+	{
+		name: "Darkness",
+		page: "p122",
+		book: books_list[0]
+	},
+	{
+		name: "Electricity",
+		page: "p122",
+		book: books_list[0]
+	},
+	{
+		name: "Fire/Heat",
+		page: "p123",
+		book: books_list[0]
+	},
+	{
+		name: "Light",
+		page: "p123",
+		book: books_list[0]
+	},
+	{
+		name: "Necromantic",
+		page: "p124",
+		book: books_list[0]
+	},
+	{
+		name: "Sound",
+		page: "p124",
+		book: books_list[0]
+	},
+	{
+		name: "Other",
+		page: "",
+		book: books_list[0]
+	}
 );
 
 chargen_powers = Array(

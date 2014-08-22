@@ -87,12 +87,21 @@ function propagate_arcane_background_options() {
 		if( !current_character.is_complete() ) {
 			html += "<label>Arcane Background Type<br />";
 			html += "<select class=\"js-select-arcane-bg\">";
-				if(current_character.arcane_background_selected == "")
-					html += "<option selected=\"selected\" value=\"\">- Select a Background -</option>";
-				else
-					html += "<option value=\"\">- Select a Background -</option>";
 
+			if(current_character.arcane_background_selected == "")
+				html += "<option selected=\"selected\" value=\"\">- Select a Background -</option>";
+			else
+				html += "<option value=\"\">- Select a Background -</option>";
+
+			bookoptgroup = ""
 			for(arcane_background_counter = 0; arcane_background_counter < chargen_arcane_backgrounds.length; arcane_background_counter++) {
+				if(bookoptgroup != chargen_arcane_backgrounds[arcane_background_counter].book.name ) {
+					if( bookoptgroup != "")
+						html += "</optgroup>";
+					html += "<optgroup label='" + chargen_arcane_backgrounds[arcane_background_counter].book.name + "'>";
+					bookoptgroup = chargen_arcane_backgrounds[arcane_background_counter].book.name;
+				}
+
 				if(current_character.arcane_background_selected.short_name == chargen_arcane_backgrounds[arcane_background_counter].short_name)
 					html += "<option selected=\"selected\" value=\"" + chargen_arcane_backgrounds[arcane_background_counter].short_name + "\">" + chargen_arcane_backgrounds[arcane_background_counter].name + "</option>";
 				else
@@ -204,8 +213,16 @@ function propagate_arcane_background_options() {
 function propagate_trapping_base_options() {
 	ts_html = "<option value=\"\">- Select a Trapping -</option>";
 
+	bookoptgroup = "";
 	for(ts_counter = 0; ts_counter < chargen_trappings.length; ts_counter++){
-		ts_html += "<option>" + chargen_trappings[ts_counter] + "</option>";
+
+		if(bookoptgroup != chargen_trappings[ts_counter].book.name ) {
+			if( bookoptgroup != "")
+				ps_html += "</optgroup>";
+			ts_html += "<optgroup label='" + chargen_trappings[ts_counter].book.name + "'>";
+			bookoptgroup = chargen_trappings[ts_counter].book.name;
+		}
+		ts_html += "<option>" + chargen_trappings[ts_counter].name + "</option>";
 	}
 
 	$(".js-select-trapping").html(ts_html);
@@ -214,7 +231,18 @@ function propagate_trapping_base_options() {
 function propagate_power_options() {
 	ps_html = "<option value=\"\">- Select a Power -</option>";
 
+
+	bookoptgroup = "";
 	for(ps_counter = 0; ps_counter < chargen_powers.length; ps_counter++){
+
+		if(bookoptgroup != chargen_powers[ps_counter].book.name ) {
+			if( bookoptgroup != "")
+				ps_html += "</optgroup>";
+			ps_html += "<optgroup label='" + chargen_powers[ps_counter].book.name + "'>";
+			bookoptgroup = chargen_powers[ps_counter].book.name;
+		}
+
+
 		if( current_character.power_available(chargen_powers[ps_counter]) ) {
 			ps_html += "<option value=\"" + chargen_powers[ps_counter].short_name + "\">" + chargen_powers[ps_counter].name + "</option>";
 		} else {
@@ -431,7 +459,7 @@ function propagate_skills_sections() {
 
 		html += "</div>";
 
-		skills_html[current_character.arcane_background_selected.skill.attribute] += html;
+		skills_html[current_character.arcane_background_selected.skill.attribute] = html + skills_html[current_character.arcane_background_selected.skill.attribute];
 	}
 
 	if(skills_html["agility"]) {
@@ -553,7 +581,16 @@ function propagate_hindrances_section() {
 
 	if( !current_character.is_complete() ) {
 		add_hindrance_html += "<div class=\"row\"><div class=\"col-xs-12\"><h4>Add Hindrance</h4><select class=\"js-add-hind-select\">";
+		bookoptgroup = "";
 		for(hind_counter = 0; hind_counter < chargen_hindrances.length; hind_counter++) {
+
+			if(bookoptgroup != chargen_hindrances[hind_counter].book.name ) {
+				if( bookoptgroup != "")
+					add_hindrance_html += "</optgroup>";
+				add_hindrance_html += "<optgroup label='" + chargen_hindrances[hind_counter].book.name + "'>";
+				bookoptgroup = chargen_hindrances[hind_counter].book.name;
+			}
+
 			disabled = "";
 			if(
 				current_character.has_edge( chargen_hindrances[hind_counter].name ) == true
@@ -573,7 +610,7 @@ function propagate_hindrances_section() {
 			if(chargen_hindrances[hind_counter].specify_field > 0)
 				specify_field = " specified=\"1\"";
 
-			add_hindrance_html += "<option" + disabled + specify_field + ">" + chargen_hindrances[hind_counter].name + minor_major + "</option>";
+			add_hindrance_html += "<option" + disabled + specify_field + ">&nbsp;&nbsp;&nbsp;&nbsp;" + chargen_hindrances[hind_counter].name + minor_major + "</option>";
 		}
 		add_hindrance_html += "</select></div></div><div class=\"row\">";
 		add_hindrance_html += "<div class=\"col-xs-12\"><input type=\"text\" placeholder=\"specify your hindrance\" style=\"display: none\" class=\"js-add-hindrance-specify\" />";
@@ -608,8 +645,8 @@ function propagate_hindrances_section() {
 	$(".js-add-hindrance-button").unbind("click");
 	$(".js-add-hindrance-button").click( function() {
 		current_character.add_hindrance(
-			$(".js-add-hind-select").val(),
-			$(".js-add-hindrance-specify").val()
+			$(".js-add-hind-select").val().replace("&nbsp;", ""),
+			$(".js-add-hindrance-specify").val().replace("&nbsp;", "")
 		);
 		refresh_chargen_page();
 	});
@@ -653,6 +690,7 @@ function propagate_edges_section() {
 	if(current_character.edges_available > 0 ) {
 		add_edge_html += "<div class=\"row\"><div class=\"col-xs-12\"><h4>Add Edge</h4><select class=\"js-add-edge-select\">";
 		optgroup = "";
+		bookoptgroup = "";
 		for(edge_counter = 0; edge_counter < chargen_edges.length; edge_counter++) {
 			disabled = "";
 			check_this_rank_only = false;
@@ -676,14 +714,22 @@ function propagate_edges_section() {
 			}
 
 			if(!chargen_edges[edge_counter].unlisted || chargen_edges[edge_counter].unlisted < 1) {
+
+				if(bookoptgroup != chargen_edges[edge_counter].book.name ) {
+					if( bookoptgroup != "")
+						add_edge_html += "</optgroup>";
+					add_edge_html += "<optgroup label='" + chargen_edges[edge_counter].book.name + "'>";
+					bookoptgroup = chargen_edges[edge_counter].book.name;
+				}
+
 				if(optgroup != chargen_edges[edge_counter].category ) {
 					if( optgroup != "")
 						add_edge_html += "</optgroup>";
-					add_edge_html += "<optgroup label='" + chargen_edges[edge_counter].category + "'>";
+					add_edge_html += "<optgroup label='&nbsp;&nbsp;&nbsp;&nbsp;" + chargen_edges[edge_counter].category + "'>";
 					optgroup = chargen_edges[edge_counter].category;
 				}
 
-				add_edge_html += "<option" + disabled + ">" + chargen_edges[edge_counter].name + "</option>";
+				add_edge_html += "<option" + disabled + ">&nbsp;&nbsp;&nbsp;&nbsp;" + chargen_edges[edge_counter].name + "</option>";
 			}
 		}
 		add_edge_html += "</select></div></div><div class=\"row\">";
@@ -710,7 +756,8 @@ function propagate_edges_section() {
 	$(".js-add-edge").html(add_edge_html);
 	$(".js-add-edge-button").unbind("click");
 	$(".js-add-edge-button").click( function() {
-		selected_edge = $(".js-add-edge-select").val();
+		selected_edge = $(".js-add-edge-select").val().replace("&nbsp;", "");
+		console.log('selected_edge: "' + selected_edge + '"') ;
 		current_character.add_edge(selected_edge);
 		refresh_chargen_page();
 	});

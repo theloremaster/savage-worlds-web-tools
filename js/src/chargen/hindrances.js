@@ -720,6 +720,7 @@ var chargen_hindrances = Array(
 		prereqs: {},
 		incompatible: {},
 		major: 1,
+		specify_field: 1,
 		minor: 0,
 		page: "p31"
 	},
@@ -732,6 +733,7 @@ var chargen_hindrances = Array(
 		book: books_list[0],
 		prereqs: {},
 		incompatible: {},
+		specify_field: 1,
 		major: 0,
 		minor: 1,
 		page: "p31"
