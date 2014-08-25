@@ -6,13 +6,13 @@ var starting_funds = Array (
 );
 
 var attribute_labels = Array(
-	"no value",
-	"d4",
-	"d6",
-	"d8",
-	"d10",
-	"d12",
-	"d12+1",
+	"no value", 	// 0
+	"d4",			// 1
+	"d6",			// 2
+	"d8",			// 3
+	"d10",			// 4
+	"d12",			// 5
+	"d12+1",		// 6
 	"d12+2",
 	"d12+3",
 	"d12+4",
