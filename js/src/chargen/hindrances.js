@@ -284,7 +284,7 @@ var chargen_hindrances = Array(
 			if(character_object.attributes.vigor < 1)
 				character_object.attributes.vigor = 1;
 
-			character_object.skill_points = character_object.skill_points + 5;
+			character_object.skill_points += 5;
 		},
 		book: books_list[0],
 		prereqs: {},

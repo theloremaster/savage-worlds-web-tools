@@ -540,7 +540,8 @@ var chargen_races = Array(
 				name: "Bite",
 				description: "Str+d4"
 
-			},{
+			},
+			{
 				name: "Claws",
 				description: "Str+d8"
 

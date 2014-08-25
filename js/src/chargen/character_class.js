@@ -178,23 +178,23 @@ character_class.prototype = {
 		this.attributes.strength = this.attributes_alloc.strength;
 		this.attributes.vigor = this.attributes_alloc.vigor;
 
-		console.log("#1: " + this.attribute_points);
+//		console.log("#1: " + this.attribute_points);
 		this.attribute_points = this.attribute_points - (this.attributes.agility - 1) * this.cost_to_raise.agility;
-		console.log("#2: " + this.attribute_points);
+//		console.log("#2: " + this.attribute_points);
 		this.attribute_points = this.attribute_points - (this.attributes.smarts - 1) * this.cost_to_raise.smarts;
-		console.log("#3: " + this.attribute_points);
+//		console.log("#3: " + this.attribute_points);
 		this.attribute_points = this.attribute_points - (this.attributes.spirit - 1) * this.cost_to_raise.spirit;
-		console.log("#4: " + this.attribute_points);
+//		console.log("#4: " + this.attribute_points);
 		this.attribute_points = this.attribute_points - (this.attributes.strength - 1) * this.cost_to_raise.strength;
-		console.log("#5: " + this.attribute_points);
+//		console.log("#5: " + this.attribute_points);
 		this.attribute_points = this.attribute_points - (this.attributes.vigor - 1) * this.cost_to_raise.vigor;
-		console.log("#6: " + this.attribute_points);
+//		console.log("#6: " + this.attribute_points);
 
-		console.log("this.attributes.agility: " + this.attributes.agility);
-		console.log("this.attributes.smarts: " + this.attributes.smarts);
-		console.log("this.attributes.spirit: " + this.attributes.spirit);
-		console.log("this.attributes.strength: " + this.attributes.strength);
-		console.log("this.attributes.vigor: " + this.attributes.vigor);
+//		console.log("this.attributes.agility: " + this.attributes.agility);
+//		console.log("this.attributes.smarts: " + this.attributes.smarts);
+//		console.log("this.attributes.spirit: " + this.attributes.spirit);
+//		console.log("this.attributes.strength: " + this.attributes.strength);
+//		console.log("this.attributes.vigor: " + this.attributes.vigor);
 
 		// Racial Attribute Price Adjustments
 		this.attributes.agility += this.race.attributes.agility;
@@ -1515,7 +1515,7 @@ character_class.prototype = {
 				}
 			}
 
-
+			this.calculate();
 
 			return true;
 		}
