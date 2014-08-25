@@ -13,7 +13,7 @@ var chargen_genders = Array(
 );
 
 var chargen_races = Array(
-	/* Savage Worlds Deluxe */
+	/* Savage Worlds Deluxe - These are the same Fantasy Companion Races */
 	{
 		name: "Human",
 		blurb: Array(),
@@ -122,7 +122,7 @@ var chargen_races = Array(
 		)
 	},
 	{
-		name: "Dwarves",
+		name: "Dwarf",
 		blurb: Array(
 			"Dwarves are short, stout, hardy people who come from massive caverns in the high mountains. They are a proud, warlike race, usually made so by frequent contact with savage races such as orcs and goblins.",
 			"Dwarves usually live upwards of 200 years. In most fantasy campaigns, they have ruddy skin and all human hair colors."
@@ -164,7 +164,7 @@ var chargen_races = Array(
 		)
 	},
 	{
-		name: "Half-Elves (Elf)",
+		name: "Half-Elf (Elf)",
 		blurb: Array("Half-elves are usually a solid mix of their two parents. They gain the elves’ grace but none of their elegant frailty. Most half-elves are well-adjusted, but some are shunned by one side of the family or the other and grow resentful. Others may even be mistreated. Their lifespans are closer to their human parent than those of their elven kin. Most half-elves live only to about 100 years."),
 		book: books_list[0],
 		page: "p20",
@@ -177,7 +177,7 @@ var chargen_races = Array(
 		)
 	},
 	{
-		name: "Half-Elves (Human)",
+		name: "Half-Elf (Human)",
 		blurb: Array("Half-elves are usually a solid mix of their two parents. They gain the elves’ grace but none of their elegant frailty. Most half-elves are well-adjusted, but some are shunned by one side of the family or the other and grow resentful. Others may even be mistreated. Their lifespans are closer to their human parent than those of their elven kin. Most half-elves live only to about 100 years."),
 		book: books_list[0],
 		page: "p20",
@@ -248,7 +248,7 @@ var chargen_races = Array(
 		)
 	},
 	{
-		name: "Rakashans",
+		name: "Rakashan",
 		blurb: Array(
 			"Rakashans have the form of humans with the features of felines. They come in a wide variety: the bright colors of tigers, the speckled hides of leopards, and the exotic look of Siamese cats are all appropriate. They have sharp claws and teeth and a cruel nature when it comes to dealing with their prey.",
 			"Rakashans can be found in their own remote and exotic cities or as fringe elements of normal society. While they are too beautiful to be shunned, they are too foreign to be easily accepted."
@@ -260,7 +260,7 @@ var chargen_races = Array(
 				name: "Agile",
 				description: "Rakashans have the feline grace of their ancestors. They start with a d6 Agility attribute instead of a d4.",
 				char_effects: function( character_object) {
-					character_object.race.attributes.strength = 1;
+					character_object.race.attributes.agility = 1;
 				}
 			},
 			{
@@ -284,7 +284,7 @@ var chargen_races = Array(
 		)
 	},
 	{
-		name: "Saurians",
+		name: "Saurian",
 		blurb: Array(
 			"Lizard men typically come from steaming jungles or deep deserts where they have unique civilizations unknown to other sentient races.",
 			"Few outsiders have penetrated their society, and persistent rumors that Saurian religion requires sentient sacrifices remain unconfirmed."
@@ -309,6 +309,7 @@ var chargen_races = Array(
 			}
 		)
 	},
+	/* Horror Companion */
 	{
 		name: "Angel",
 		blurb: Array(
