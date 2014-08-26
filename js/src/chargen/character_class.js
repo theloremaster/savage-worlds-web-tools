@@ -45,6 +45,15 @@ character_class.prototype = {
 			vigor : 1
 		};
 
+		// Attributes..
+		this.attributes_alloc = {
+			agility : 0,
+			smarts : 0,
+			spirit : 0,
+			strength : 0,
+			vigor : 0
+		};
+
 		// Derived Stats..
 		this.derived = {
 			charisma : 0,
@@ -163,18 +172,36 @@ character_class.prototype = {
 			this.skill_points -= (single_cost + double_cost * 2);
 		}
 
+		this.attributes.agility = this.attributes_alloc.agility;
+		this.attributes.smarts = this.attributes_alloc.smarts;
+		this.attributes.spirit = this.attributes_alloc.spirit;
+		this.attributes.strength = this.attributes_alloc.strength;
+		this.attributes.vigor = this.attributes_alloc.vigor;
+
+//		console.log("#1: " + this.attribute_points);
 		this.attribute_points = this.attribute_points - (this.attributes.agility - 1) * this.cost_to_raise.agility;
+//		console.log("#2: " + this.attribute_points);
 		this.attribute_points = this.attribute_points - (this.attributes.smarts - 1) * this.cost_to_raise.smarts;
+//		console.log("#3: " + this.attribute_points);
 		this.attribute_points = this.attribute_points - (this.attributes.spirit - 1) * this.cost_to_raise.spirit;
+//		console.log("#4: " + this.attribute_points);
 		this.attribute_points = this.attribute_points - (this.attributes.strength - 1) * this.cost_to_raise.strength;
+//		console.log("#5: " + this.attribute_points);
 		this.attribute_points = this.attribute_points - (this.attributes.vigor - 1) * this.cost_to_raise.vigor;
+//		console.log("#6: " + this.attribute_points);
+
+//		console.log("this.attributes.agility: " + this.attributes.agility);
+//		console.log("this.attributes.smarts: " + this.attributes.smarts);
+//		console.log("this.attributes.spirit: " + this.attributes.spirit);
+//		console.log("this.attributes.strength: " + this.attributes.strength);
+//		console.log("this.attributes.vigor: " + this.attributes.vigor);
 
 		// Racial Attribute Price Adjustments
-		this.attribute_points += this.race.attributes.agility;
-		this.attribute_points += this.race.attributes.smarts;
-		this.attribute_points += this.race.attributes.spirit;
-		this.attribute_points += this.race.attributes.strength;
-		this.attribute_points += this.race.attributes.vigor;
+		this.attributes.agility += this.race.attributes.agility;
+		this.attributes.smarts += this.race.attributes.smarts;
+		this.attributes.spirit += this.race.attributes.spirit;
+		this.attributes.strength += this.race.attributes.strength;
+		this.attributes.vigor += this.race.attributes.vigor;
 
 		// Calculate secondary Attributes
 		this.derived.pace = 6;
@@ -527,8 +554,8 @@ character_class.prototype = {
 		if( new_value == 0)
 			new_value = 1;
 
-		if(typeof(this.attributes[attribute_name]) != "undefined") {
-			this.attributes[attribute_name] = new_value;
+		if(typeof(this.attributes_alloc[attribute_name]) != "undefined") {
+			this.attributes_alloc[attribute_name] = new_value;
 		}
 	},
 
@@ -685,12 +712,10 @@ character_class.prototype = {
 	},
 
 	remove_edge: function( edge_name ) {
-		console.log( edge_name );
 		if(edge_name) {
 			for( edge_counter = 0; edge_counter < this.selected_edges.length; edge_counter++ ) {
 				if(this.selected_edges[edge_counter] && this.selected_edges[edge_counter].name) {
 					if(edge_name.toLowerCase().trim() == this.selected_edges[edge_counter].name.toLowerCase().trim() ) {
-						console.log(this.selected_edges[edge_counter].name.toLowerCase());
 						this.selected_edges.splice(edge_counter, 1);
 						return true;
 					}
@@ -1060,11 +1085,11 @@ character_class.prototype = {
 			description: this.description,
 			gender: this.gender,
 			attributes : {
-				agility : this.attributes.agility,
-				smarts : this.attributes.smarts,
-				spirit : this.attributes.spirit,
-				strength : this.attributes.strength,
-				vigor : this.attributes.vigor
+				agility : this.attributes.agility - this.race.attributes.agility,
+				smarts : this.attributes.smarts - this.race.attributes.smarts,
+				spirit : this.attributes.spirit - this.race.attributes.spirit,
+				strength : this.attributes.strength - this.race.attributes.strength,
+				vigor : this.attributes.vigor - this.race.attributes.vigor
 			},
 			race : this.race.name,
 			complete: 0,
@@ -1568,6 +1593,8 @@ character_class.prototype = {
 					);
 				}
 			}
+
+			this.calculate();
 
 			return true;
 		}

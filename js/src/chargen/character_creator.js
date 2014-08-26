@@ -29,9 +29,9 @@ function propagate_attribute_options(current_value, current_attribute) {
 				current_class = "d12";
 
 			if(current_value == attribute_counter)
-				html += "<option class=\"die-select " + current_class + "\" selected=\"selected\" value=\"" + attribute_counter + "\">" + attribute_labels[attribute_counter] + "</option>";
+				html += "<option class=\"die-select " + current_class + "\" selected=\"selected\" value=\"" + (attribute_counter - current_character.race.attributes[current_attribute])+ "\">" + attribute_labels[attribute_counter] + "</option>";
 			else
-				html += "<option class=\"die-select " + current_class + "\" value=\"" + attribute_counter + "\">" + attribute_labels[attribute_counter] + "</option>";
+				html += "<option class=\"die-select " + current_class + "\" value=\"" + (attribute_counter - current_character.race.attributes[current_attribute]) + "\">" + attribute_labels[attribute_counter] + "</option>";
 		}
 	}
 	$(select_selector).html(html);
@@ -55,7 +55,14 @@ function propagate_race_options(select_selector) {
 	} else {
 
 		html = "";
+		bookoptgroup = "";
 		for(race_counter = 0; race_counter < chargen_races.length; race_counter++) {
+			if(bookoptgroup != chargen_races[race_counter].book.name ) {
+				if( bookoptgroup != "")
+					html += "</optgroup>";
+				html += "<optgroup label='" + chargen_races[race_counter].book.name + "'>";
+				bookoptgroup = chargen_races[race_counter].book.name;
+			}
 			if(current_character.race == chargen_races[race_counter])
 				html += "<option selected=\"selected\" value=\"" + chargen_races[race_counter].name + "\">" + chargen_races[race_counter].name + "</option>";
 			else
@@ -759,7 +766,6 @@ function propagate_edges_section() {
 	$(".js-add-edge-button").unbind("click");
 	$(".js-add-edge-button").click( function() {
 		selected_edge = $(".js-add-edge-select").val().replace("&nbsp;", "");
-		console.log('selected_edge: "' + selected_edge + '"') ;
 		current_character.add_edge(selected_edge);
 		refresh_chargen_page();
 	});
