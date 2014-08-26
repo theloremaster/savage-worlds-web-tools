@@ -1,8 +1,8 @@
 CACHE MANIFEST
 
-# Version 2014-08-25-05
-# August 25, 2014 revision 5
-# Chargen: Sync from pull
+# Version 2014-08-26-01
+# August 26, 2014 revision 1
+# Chargen: Adding filtering to Equipment (still in Alpha!), split some js files into book sections in src, bugfixes.
 
 
 CACHE:
