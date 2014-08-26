@@ -1,7 +1,10 @@
 /*
 Arcane Backgrounds
 */
-chargen_arcane_backgrounds = Array(
+if(!chargen_arcane_backgrounds)
+	var chargen_arcane_backgrounds = Array();
+
+chargen_arcane_backgrounds = chargen_arcane_backgrounds.concat(Array(
 	{
 		name: "Magic",
 		short_name: "magic",
@@ -93,4 +96,4 @@ chargen_arcane_backgrounds = Array(
 		}
 	}
 
-);
+));

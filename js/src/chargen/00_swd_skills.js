@@ -1,4 +1,8 @@
-var chargen_skills = Array(
+if(!chargen_skills)
+	var chargen_skills = Array();
+
+chargen_skills = chargen_skills.concat(Array(
+
 	{
 		name: "Boating",
 		attribute: "agility",
@@ -207,7 +211,7 @@ var chargen_skills = Array(
 		page: "p123"
 	}
 
-);
+));
 
 /*
 chargen_skills.sort(

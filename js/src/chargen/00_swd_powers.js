@@ -1,8 +1,12 @@
 /*
 Powers
 */
+if(!chargen_trappings)
+	var chargen_trappings = Array();
 
-chargen_trappings = Array(
+chargen_trappings = chargen_trappings.concat(Array(
+
+
 	{
 		name: "Acid",
 		page: "p122",
@@ -48,9 +52,13 @@ chargen_trappings = Array(
 		page: "",
 		book: books_list[0]
 	}
-);
+));
 
-chargen_powers = Array(
+if(!chargen_powers)
+	var chargen_powers = Array();
+
+chargen_powers = chargen_powers.concat(Array(
+
 	{
 		name: "Armor",
 		short_name: "armor",
@@ -942,4 +950,4 @@ chargen_powers = Array(
 	}
 
 
-);
+));

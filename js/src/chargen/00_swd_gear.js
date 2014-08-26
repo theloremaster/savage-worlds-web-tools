@@ -1,4 +1,7 @@
-var chargen_gear = Array(
+if(!chargen_gear)
+	var chargen_gear = Array();
+
+chargen_gear = chargen_gear.concat( Array(
 	/* Hand Weapons */
 	{
 		name: "Dagger",
@@ -265,4 +268,6 @@ var chargen_gear = Array(
 		book: books_list[0],
 		page: "p60",
 	}
-);
+
+
+));

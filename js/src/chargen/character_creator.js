@@ -1,3 +1,9 @@
+var current_gear_book = "";
+var current_gear_general = "";
+var current_gear_class = "";
+var current_gear_type = "";
+var current_gear_search = "";
+
 function propagate_attribute_options(current_value, current_attribute) {
 	if(!current_value)
 		current_value = 0;
@@ -779,17 +785,17 @@ function propagate_gear_section() {
 		html += "<label>Starting Wealth (as per setting):<br /><select class='js-starting-wealth'>";
 		for(lc = 0; lc < starting_funds.length; lc++) {
 			selected = "";
-			if( starting_funds[lc] == current_character.starting_funds)
+			if( starting_funds[lc] == current_character.base_starting_funds)
 				selected = " selected='selected'";
 			default_string = "";
-			if(current_character.base_starting_funds == starting_funds[lc])
+			if(500 == starting_funds[lc])
 				default_string = " (default)";
 			html += "<option value='" + starting_funds[lc] + "'" + selected + ">$" + starting_funds[lc] + default_string + "</option>";
 		}
 
 		html += "</select></label>";
 	} else {
-		html += "<label>Starting Wealth (as per setting):<br />$" + current_character.starting_funds + "</label>";
+		html += "<label>Starting Wealth (as per setting): $" + current_character.starting_funds + "</label>";
 	}
 
 	// Show number of items (or items)....
@@ -815,41 +821,145 @@ function propagate_gear_section() {
 
 	$(".js-starting-wealth").unbind( "change" );
 	$(".js-starting-wealth").change( function() {
-		current_character.set_starting_funds( $(this).val() );
+		current_character.set_base_starting_funds( $(this).val() );
+		refresh_chargen_page();
 	});
 
 
 	/* MODAL */
 	// Now Propogate the Available Gear in the Modal
-	html = "<h5>Available Gear</h5>";
-	html += "<table>";
-	html += "<tbody>";
+	gear_book_dd = Array();
+	gear_general_dd = Array();
+	gear_class_dd = Array();
+	gear_type_dd = Array();
+
 	for( gear_count = 0; gear_count < chargen_gear.length; gear_count++) {
-		if( chargen_gear[gear_count].cost <= current_character.current_funds ) {
-			html += "<tr>";
-			html += "<td>" + chargen_gear[gear_count].name + "</td>";
-			html += "<td>\$" + chargen_gear[gear_count].cost + "</td>";
-			html += "<td><button ref=\"" + chargen_gear[gear_count].name + "\" class=\"js-add-gear btn btn-xs btn-primary\">Buy</button></td>";
-			html += "</tr>";
+		if(
+			gear_book_dd.indexOf( chargen_gear[gear_count].book ) == -1
+		) {
+			gear_book_dd.push(chargen_gear[gear_count].book);
+			if( current_gear_book == "")
+				current_gear_book = chargen_gear[gear_count].book.name;
+		}
+
+		if(
+			gear_general_dd.indexOf( chargen_gear[gear_count].general ) == -1
+				&&
+			chargen_gear[gear_count].book.name.toLowerCase().trim() == current_gear_book.toLowerCase().trim()
+		) {
+			gear_general_dd.push(chargen_gear[gear_count].general);
+			if( current_gear_general == "")
+				current_gear_general = chargen_gear[gear_count].general;
+		}
+
+		if(
+			gear_class_dd.indexOf( chargen_gear[gear_count].class ) == -1
+				&&
+			chargen_gear[gear_count].general.toLowerCase().trim() == current_gear_general.toLowerCase().trim()
+		) {
+			gear_class_dd.push(chargen_gear[gear_count].class);
+			if( current_gear_class == "")
+				current_gear_class = chargen_gear[gear_count].class;
+		}
+
+		if(
+			gear_type_dd.indexOf( chargen_gear[gear_count].type ) == -1
+				&&
+			chargen_gear[gear_count].class.toLowerCase().trim() == current_gear_class.toLowerCase().trim()
+		) {
+			gear_type_dd.push(chargen_gear[gear_count].type);
+			if( current_gear_type == "")
+				current_gear_type = chargen_gear[gear_count].type;
 		}
 	}
-	html += "</tbody>";
-	html += "</table>";
 
-	$(".js-gear-available").html( html );
+	html = "<h5>Available Gear</h5>";
+	html += "<label>Book: <select class=\"js-set-gear-filter js-gear-book\">";
+	html += "<option value=\"\"> - Select a Book -</option>";
+	for(bc = 0; bc < gear_book_dd.length; bc++) {
+		if (current_gear_book == "")
+			current_gear_book = gear_book_dd[bc].name;
+		if( gear_book_dd[bc].name == current_gear_book)
+			html += "<option selected=\"selected\" value=\"" + gear_book_dd[bc].name + "\">" + gear_book_dd[bc].name + "</option>";
+		else
+			html += "<option value=\"" + gear_book_dd[bc].name + "\">" + gear_book_dd[bc].name + "</option>";
+	}
 
-	$(".js-add-gear").unbind("click");
-	$(".js-add-gear").click( function() {
-		current_character.add_gear( $(this).attr("ref") );
-		current_character.calculate();
-		localStorage["current_character"] = current_character.export_json(".js-chargen-json-code");
-		propagate_gear_section();
+	if(gear_general_dd.length > 0) {
+		html += "</select></label>";
+		html += "<label>General: <select class=\"js-set-gear-filter js-gear-general\">";
+		html += "<option value=\"\"> - Select a General -</option>";
+		for(bc = 0; bc < gear_general_dd.length; bc++) {
+			if (current_gear_general == "")
+				current_gear_general = gear_general_dd[bc];
+
+			if( gear_general_dd[bc] == current_gear_general )
+				html += "<option selected=\"selected\">" + gear_general_dd[bc] + "</option>";
+			else
+				html += "<option>" + gear_general_dd[bc] + "</option>";
+		}
+
+		html += "</select></label>";
+	}
+
+	if(gear_class_dd.length > 0) {
+		html += "<label>Class: <select class=\"js-set-gear-filter js-gear-class\">";
+		html += "<option value=\"\"> - Select a Class -</option>";
+		for(bc = 0; bc < gear_class_dd.length; bc++) {
+			if (current_gear_class == "")
+				current_gear_class = gear_class_dd[bc];
+
+			if( gear_class_dd[bc] == current_gear_class )
+				html += "<option selected=\"selected\">" + gear_class_dd[bc] + "</option>";
+			else
+				html += "<option>" + gear_class_dd[bc] + "</option>";
+		}
+		html += "</select></label>";
+	}
+
+	if(gear_type_dd.length > 0) {
+		html += "<label>Type: <select class=\"js-set-gear-filter js-gear-type\">";
+		html += "<option value=\"\"> - Select a Type -</option>";
+		for(bc = 0; bc < gear_type_dd.length; bc++) {
+			if (current_gear_type == "")
+				current_gear_type = gear_type_dd[bc];
+
+			if( gear_type_dd[bc] == current_gear_type )
+				html += "<option selected=\"selected\">" + gear_type_dd[bc] + "</option>";
+			else
+				html += "<option>" + gear_type_dd[bc] + "</option>";
+		}
+		html += "</select></label>";
+	}
+
+	html += "<label>Search: <input type=\"text\" class=\"js-gear-search\" value=\"" + current_gear_search + "\" />";
+	html += "</label>";
+
+	$(".js-gear-filter-area").html (html);
+
+	$(".js-set-gear-filter").unbind("change");
+	$(".js-set-gear-filter").change( function() {
+		current_gear_book = $(".js-gear-book").val();
+		current_gear_general =  $(".js-gear-general").val();
+		current_gear_class =  $(".js-gear-class").val();
+		current_gear_type =  $(".js-gear-type").val();
+
+		propagate_gear_section() ;
 	});
 
+
+	$(".js-gear-search").unbind("keyup");
+	$(".js-gear-search").keyup( function() {
+		current_gear_search = $(".js-gear-search").val();
+		make_gear_available_list() ;
+	});
+
+
 	// Now Propogate the Available Gear in the Modal
+	make_gear_available_list();
+
 	html = "<h4 class=\"text-right\">Current Wealth: \$" + current_character.current_funds + "</h4>";
 	html += "<h5>Selected Gear</h5>";
-
 
 	html += "<table>";
 	html += "<tbody>";
@@ -880,6 +990,60 @@ function propagate_gear_section() {
 
 }
 
+
+function make_gear_available_list() {
+
+	html = "<table>";
+	html += "<tbody>";
+	for( gear_count = 0; gear_count < chargen_gear.length; gear_count++) {
+//		if( chargen_gear[gear_count].cost <= current_character.current_funds ) {
+			show_item = false;
+			if(	current_gear_search.length > 2 ) {
+				if( chargen_gear[gear_count].name.toLowerCase().indexOf( current_gear_search.toLowerCase().trim() ) > -1 ) {
+					show_item = true;
+				}
+			} else {
+
+				if(
+					chargen_gear[gear_count].type == current_gear_type
+						&&
+					chargen_gear[gear_count].class == current_gear_class
+						&&
+					chargen_gear[gear_count].book.name == current_gear_book
+						&&
+					chargen_gear[gear_count].general == current_gear_general
+
+				) {
+					show_item = true;
+				}
+			}
+
+			if( show_item ) {
+
+				html += "<tr>";
+				html += "<td>" + chargen_gear[gear_count].name + "</td>";
+				html += "<td>\$" + chargen_gear[gear_count].cost + "</td>";
+				html += "<td><button ref=\"" + chargen_gear[gear_count].name + "\" class=\"js-add-gear btn btn-xs btn-primary\">Buy</button></td>";
+				html += "</tr>";
+			}
+//		}
+	}
+	html += "</tbody>";
+	html += "</table>";
+
+	$(".js-gear-available").html( html );
+
+
+
+
+	$(".js-add-gear").unbind("click");
+	$(".js-add-gear").click( function() {
+		current_character.add_gear( $(this).attr("ref") );
+		current_character.calculate();
+		localStorage["current_character"] = current_character.export_json(".js-chargen-json-code");
+		propagate_gear_section();
+	});
+}
 
 function propagate_attributes_section() {
 	// Fill in Attributes Section
@@ -941,6 +1105,12 @@ function init_main_buttons() {
 			current_character.reset();
 			$(".js-chargen-name").val(current_character.name);
 			$(".js-chargen-description").val(current_character.description);
+
+			current_gear_book = "";
+			current_gear_general = "";
+			current_gear_class = "";
+			current_gear_type = "";
+
 			refresh_chargen_page();
 		}
 

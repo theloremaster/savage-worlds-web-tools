@@ -80,6 +80,8 @@ character_class.prototype = {
 		this.attribute_points = 5;
 		this.skill_points = 15;
 
+		this.starting_funds = this.base_starting_funds;
+
 		this.is_valid = true;
 
 		if( this.wild_card > 0)
@@ -124,6 +126,7 @@ character_class.prototype = {
 		this.racial_edges = Array();
 		this.racial_hindrances = Array();
 
+		this.derived.toughness = 0;
 
 		// Add Racial Edges
 		if(this.race.edges_included) {
@@ -178,23 +181,11 @@ character_class.prototype = {
 		this.attributes.strength = this.attributes_alloc.strength;
 		this.attributes.vigor = this.attributes_alloc.vigor;
 
-//		console.log("#1: " + this.attribute_points);
 		this.attribute_points = this.attribute_points - (this.attributes.agility - 1) * this.cost_to_raise.agility;
-//		console.log("#2: " + this.attribute_points);
 		this.attribute_points = this.attribute_points - (this.attributes.smarts - 1) * this.cost_to_raise.smarts;
-//		console.log("#3: " + this.attribute_points);
 		this.attribute_points = this.attribute_points - (this.attributes.spirit - 1) * this.cost_to_raise.spirit;
-//		console.log("#4: " + this.attribute_points);
 		this.attribute_points = this.attribute_points - (this.attributes.strength - 1) * this.cost_to_raise.strength;
-//		console.log("#5: " + this.attribute_points);
 		this.attribute_points = this.attribute_points - (this.attributes.vigor - 1) * this.cost_to_raise.vigor;
-//		console.log("#6: " + this.attribute_points);
-
-//		console.log("this.attributes.agility: " + this.attributes.agility);
-//		console.log("this.attributes.smarts: " + this.attributes.smarts);
-//		console.log("this.attributes.spirit: " + this.attributes.spirit);
-//		console.log("this.attributes.strength: " + this.attributes.strength);
-//		console.log("this.attributes.vigor: " + this.attributes.vigor);
 
 		// Racial Attribute Price Adjustments
 		this.attributes.agility += this.race.attributes.agility;
@@ -205,19 +196,19 @@ character_class.prototype = {
 
 		// Calculate secondary Attributes
 		this.derived.pace = 6;
-		this.derived.toughness = 3;
+
 		if(this.attributes.vigor == 1) // d4
-			this.derived.toughness = 3;
+			this.derived.toughness += 4;
 		if(this.attributes.vigor == 2) // d6
-			this.derived.toughness = 5;
+			this.derived.toughness += 5;
 		if(this.attributes.vigor == 3) // d8
-			this.derived.toughness = 6;
+			this.derived.toughness += 6;
 		if(this.attributes.vigor == 4) // d10
-			this.derived.toughness = 7;
+			this.derived.toughness += 7;
 		if(this.attributes.vigor == 5) // d12
-			this.derived.toughness = 8;
+			this.derived.toughness += 8;
 		if(this.attributes.vigor > 5) // d12
-			this.derived.toughness = 8 + this.attributes.vigor - 5;
+			this.derived.toughness += 8 + this.attributes.vigor - 5;
 
 		this.racial_edges.sort();
 		this.racial_hindrances.sort();
@@ -382,11 +373,11 @@ character_class.prototype = {
 	},
 
 
-	set_starting_funds: function (new_value) {
+	set_base_starting_funds: function (new_value) {
 		new_value = new_value / 1;
 		if( new_value == 0 )
 			new_value = 500;
-		this.starting_funds = new_value;
+		this.base_starting_funds = new_value;
 	},
 
 	set_xp: function ( new_value ) {
@@ -1093,7 +1084,7 @@ character_class.prototype = {
 			},
 			race : this.race.name,
 			complete: 0,
-			starting_funds: this.starting_funds,
+			starting_funds: this.base_starting_funds,
 			edges: Array(),
 			hindrances: Array(),
 			advancements: Array(),
@@ -1220,108 +1211,32 @@ character_class.prototype = {
 
 	export_bbcode: function(selector_name) {
 
-		html_return = "[b][size=18]" +  this.name + "[/size][/b]\n";
-		html_return += this.race.name + " " + this.gender + " - [i]" +  chargen_ranks[this.rank] + " ( " + this.xp + " xp)[/i]\n";
-		html_return += "" +  this.description + "\n";
-		html_return += "[b]Attributes[/b]: ";
-		html_return += "Agility " + attribute_labels[this.attributes.agility];
-		html_return += ", Smarts " + attribute_labels[this.attributes.smarts];
-		html_return += ", Spirit " + attribute_labels[this.attributes.spirit];
-		html_return += ", Strength " + attribute_labels[this.attributes.strength];
-		html_return += ", Vigor " + attribute_labels[this.attributes.vigor];
-		html_return += "\n";
+		html_return = this.export_html(false);
 
-		html_return += "[b]Pace[/b]: " + this.derived.pace;
-		html_return += ", [b]Parry[/b]: " + this.derived.parry;
+		while(html_return.indexOf("<br />") > -1)
+			html_return = html_return.replace("<br />", "\n");
+		while(html_return.indexOf("<h3>") > -1)
+			html_return = html_return.replace("<h3>", "[size=18]");
+		while(html_return.indexOf("</h3>") > -1)
+			html_return = html_return.replace("</h3>", "[/size]");
 
-		if(this.armor && this.armor > 0) {
-			html_return += ", [b]Toughness[/b]: " + this.derived.toughness + this.armor;
-			html_return += "(" + this.armor + ")";
-		} else {
-			html_return += ", [b]Toughness[/b]: " + this.derived.toughness;
-		}
+		while(html_return.indexOf("<strong>") > -1)
+			html_return = html_return.replace("<strong>", "[b]");
+		while(html_return.indexOf("</strong>") > -1)
+			html_return = html_return.replace("</strong>", "[/b]");
 
-		if(this.derived.charisma > 0)
-			html_return += "[b]Charisma[/b]: " + this.derived.charisma;
+		while(html_return.indexOf("<em>") > -1)
+			html_return = html_return.replace("<em>", "[i]");
+		while(html_return.indexOf("</em>") > -1)
+			html_return = html_return.replace("</em>", "[/i]");
 
-		html_return += "\n";
 
-		if(this.selected_skills.length > 0 ) {
-			html_return += "[b]Skills[/b]: ";
-			for(sk_c = 0; sk_c < this.selected_skills.length; sk_c++) {
-				if(sk_c > 0)
-					html_return += ", ";
-				if(this.selected_skills[sk_c].specify_text && this.selected_skills[sk_c].specify_text != "")
-					html_return += this.selected_skills[sk_c].name + " (" + this.selected_skills[sk_c].specify_text + ")";
-				else
-					html_return += this.selected_skills[sk_c].name;
-				html_return += " " + attribute_labels[this.selected_skills[sk_c].value]
-			}
-		}
 
-		html_return += "\n";
-		if(this.selected_edges.length > 0 ) {
-			html_return += "[b]Edges[/b]: ";
-			for(sk_c = 0; sk_c < this.selected_edges.length; sk_c++) {
-				if(sk_c > 0)
-					html_return += ", ";
-				html_return += this.selected_edges[sk_c].name;
-
-			}
-		}
-
-		html_return += "\n";
-
-		current_hindrances = this.get_all_hindrances();
-		if(current_hindrances.length > 0) {
-			html_return += "[b]Hindrances[/b]: ";
-			for(sk_c = 0; sk_c < current_hindrances.length; sk_c++) {
-				if(sk_c > 0)
-					html_return += ", ";
-				html_return += current_hindrances[sk_c]
-			}
-		}
-
-		html_return += "\n";
-
-		if( this.arcane_background > 0 ) {
-			html_return += "[b]Arcane Background[/b]: " + this.arcane_background_selected.name + "\n";
-			html_return += "[b]Power Points[/b]: " + this.power_points_available + "\n";
-			html_return += "[b]Powers[/b]: ";
-			for(sk_c = 0; sk_c < this.selected_powers.length; sk_c++) {
-				if(sk_c > 0)
-					html_return += ", ";
-				if( this.selected_powers[sk_c].description != "") {
-					html_return += this.selected_powers[sk_c].description + " (" + this.selected_powers[sk_c].name;
-						if( this.selected_powers[sk_c].trapping != "" )
-							html_return += ", " + this.selected_powers[sk_c].trapping  + ")";
-						else
-							html_return += ")";
-
-				} else {
-					if( this.selected_powers[sk_c].trapping != "" )
-						html_return += this.selected_powers[sk_c].name + " (" + this.selected_powers[sk_c].trapping  + ")";
-					else
-						html_return += this.selected_powers[sk_c].name;
-				}
-			}
-		}
-
-		html_return += "\n";
-		if(this.selected_gear.length > 0 ) {
-			html_return += "[b]Gear[/b]: ";
-			for(sk_c = 0; sk_c < this.selected_gear.length; sk_c++) {
-				if(sk_c > 0)
-					html_return += ", ";
-				html_return += this.selected_gear[sk_c].name;
-
-			}
-		}
-
-		html_return = html_return.replace("8)", " 8 )");
+		while(html_return.indexOf("8)") > -1)
+			html_return = html_return.replace("8)", " 8 )");
 
 		if(selector_name)
-			$(selector_name).val(html_return);
+			$(selector_name).val( html_return );
 
 		return html_return;
 	},
@@ -1385,9 +1300,9 @@ character_class.prototype = {
 
 	export_html: function(selector_name) {
 
-		html_return = "<strong><h3>" +  this.name + "</h3></strong>\n";
-		html_return += this.race.name + " " + this.gender + " - <em>" +  chargen_ranks[this.rank] + " ( " + this.xp + " xp)</em><br />\n";
-		html_return += "" +  this.description + "<br />\n";
+		html_return = "<strong><h3>" +  this.name + "</h3></strong><br />";
+		html_return += this.race.name + " " + this.gender + " - <em>" +  chargen_ranks[this.rank] + " ( " + this.xp + " xp)</em><br />";
+		html_return += "" +  this.description + "<br />";
 
 		html_return += "<strong>Attributes</strong>: ";
 		html_return += "Agility " + attribute_labels[this.attributes.agility];
@@ -1395,7 +1310,7 @@ character_class.prototype = {
 		html_return += ", Spirit " + attribute_labels[this.attributes.spirit];
 		html_return += ", Strength " + attribute_labels[this.attributes.strength];
 		html_return += ", Vigor " + attribute_labels[this.attributes.vigor];
-		html_return += "<br />\n";
+		html_return += "<br />";
 
 		html_return += "<strong>Pace</strong>: " + this.derived.pace;
 		html_return += ", <strong>Parry</strong>: " + this.derived.parry;
@@ -1411,7 +1326,7 @@ character_class.prototype = {
 			html_return += ", <strong>Charisma</strong>: " + this.derived.charisma;
 
 
-		html_return += "<br />\n";
+		html_return += "<br />";
 
 		if(this.selected_skills.length > 0 ) {
 			html_return += "<strong>Skills</strong>: ";
@@ -1424,20 +1339,23 @@ character_class.prototype = {
 					html_return += this.selected_skills[sk_c].name;
 				html_return += " " + attribute_labels[this.selected_skills[sk_c].value]
 			}
+			html_return += "<br />";
 		}
 
-		html_return += "<br />\n";
-		if(this.selected_edges.length > 0 ) {
+
+		current_edges = this.get_all_edges();
+		if(current_edges.length > 0 ) {
 			html_return += "<strong>Edges</strong>: ";
-			for(sk_c = 0; sk_c < this.selected_edges.length; sk_c++) {
+			for(sk_c = 0; sk_c < current_edges.length; sk_c++) {
 				if(sk_c > 0)
 					html_return += ", ";
-				html_return += this.selected_edges[sk_c].name;
+				html_return += current_edges[sk_c];
 
 			}
+			html_return += "<br />";
 		}
 
-		html_return += "<br />\n";
+
 
 		current_hindrances = this.get_all_hindrances();
 		if(current_hindrances.length > 0) {
@@ -1445,11 +1363,12 @@ character_class.prototype = {
 			for(sk_c = 0; sk_c < current_hindrances.length; sk_c++) {
 				if(sk_c > 0)
 					html_return += ", ";
-				html_return += current_hindrances[sk_c]
+				html_return += current_hindrances[sk_c];
 			}
+			html_return += "<br />";
 		}
 
-		html_return += "<br />\n";
+
 
 		if( this.arcane_background > 0 ) {
 			html_return += "<strong>Arcane Background</strong>: " + this.arcane_background_selected.name + "<br />\n";
@@ -1472,17 +1391,22 @@ character_class.prototype = {
 						html_return += this.selected_powers[sk_c].name;
 				}
 			}
+			html_return += "<br />";
 		}
 
-		html_return += "<br />\n";
+
 		if(this.selected_gear.length > 0 ) {
 			html_return += "<strong>Gear</strong>: ";
 			for(sk_c = 0; sk_c < this.selected_gear.length; sk_c++) {
 				if(sk_c > 0)
 					html_return += ", ";
-				html_return += this.selected_gear[sk_c].name;
+				if( this.selected_gear[sk_c].count > 1 )
+					html_return += this.selected_gear[sk_c].name + " x" + this.selected_gear[sk_c].count;
+				else
+					html_return += this.selected_gear[sk_c].name;
 
 			}
+			html_return += "<br />";
 		}
 
 		html_return = html_return.replace("8)", " 8 )");
@@ -1512,7 +1436,7 @@ character_class.prototype = {
 			this.set_description( imported_object.description );
 
 			if( imported_object.starting_funds )
-				this.set_starting_funds( imported_object.starting_funds );
+				this.set_base_starting_funds( imported_object.starting_funds );
 			if( imported_object.wild_card )
 				this.set_wild_card( imported_object.wild_card );
 			else

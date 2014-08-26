@@ -1,6 +1,8 @@
 /* Edges List */
+if(!chargen_edges)
+	var chargen_edges = Array();
 
-var chargen_edges = Array(
+chargen_edges = chargen_edges.concat(Array(
 	{
 		name: "Extra Edge",
 		category: "racial",
@@ -2079,7 +2081,7 @@ var chargen_edges = Array(
 		page: "p46"
 	}
 
-);
+));
 
 /*
  chargen_edges.sort(

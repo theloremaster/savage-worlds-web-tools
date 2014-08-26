@@ -33,7 +33,10 @@ var chargen_perks = Array(
 	}
 );
 
-var chargen_hindrances = Array(
+if(!chargen_hindrances)
+	var chargen_hindrances = Array();
+
+chargen_hindrances = chargen_hindrances.concat(Array(
 	{
 		name: "All Thumbs",
 		category: "",
@@ -801,7 +804,7 @@ var chargen_hindrances = Array(
 		minor: 0,
 		page: "p31"
 	}
-);
+));
 
 /*
 chargen_hindrances.sort(
