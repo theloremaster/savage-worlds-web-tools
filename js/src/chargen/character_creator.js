@@ -62,6 +62,8 @@ function propagate_race_options(select_selector) {
 				html += "<option value=\"" + chargen_races[race_counter].name + "\">" + chargen_races[race_counter].name + "</option>";
 		}
 		$(select_selector).html(html);
+		$(".race-locked").hide();
+		$(".race-open").show();
 	}
 }
 
@@ -134,7 +136,7 @@ function propagate_arcane_background_options() {
 						html += " shortname=\"" + current_character.selected_powers[p_counter].short_name + "\"";
 						html += " trap=\"" + current_character.selected_powers[p_counter].trapping + "\"";
 					html += ">";
-					html += "Delete</button> ";
+					html += "Remove</button> ";
 				}
 				if( current_character.selected_powers[p_counter].description != "") {
 					html += current_character.selected_powers[p_counter].description + " (" + current_character.selected_powers[p_counter].name;
@@ -571,7 +573,7 @@ function propagate_hindrances_section() {
 			list_hindrance_html += "<div class=\"a-h-line\">";
 			if( current_hindrances[hind_counter].toLowerCase().indexOf("(racial)") == -1 )
 				if(!current_character.is_complete() )
-					list_hindrance_html += "<button type=\"button\" class=\"btn btn-xs btn-danger js-delete-hindrance-button\" relname=\"" + current_hindrances[hind_counter] + "\">Delete</button> ";
+					list_hindrance_html += "<button type=\"button\" class=\"btn btn-xs btn-danger js-delete-hindrance-button\" relname=\"" + current_hindrances[hind_counter] + "\">Remove</button> ";
 			list_hindrance_html += current_hindrances[hind_counter] + "</div>";
 		}
 
@@ -677,7 +679,7 @@ function propagate_edges_section() {
 			list_edges_html += "<div class=\"a-h-line\">";
 			if( current_edges[edge_counter].toLowerCase().indexOf("(racial)") == -1 )
 				if(!current_character.is_complete() )
-					list_edges_html += "<button type=\"button\" class=\"btn btn-xs btn-danger js-delete-edge-button\" relname=\"" + current_edges[edge_counter] + "\">Delete</button> ";
+					list_edges_html += "<button type=\"button\" class=\"btn btn-xs btn-danger js-delete-edge-button\" relname=\"" + current_edges[edge_counter] + "\">Remove</button> ";
 			list_edges_html += current_edges[edge_counter] + "</div>";
 //			list_edges_html += "</div>";
 		}
@@ -764,7 +766,7 @@ function propagate_edges_section() {
 
 }
 
-function propagate_equipment_section() {
+function propagate_gear_section() {
 	html = "";
 
 	if( !current_character.is_complete() ) {
@@ -784,12 +786,91 @@ function propagate_equipment_section() {
 		html += "<label>Starting Wealth (as per setting):<br />$" + current_character.starting_funds + "</label>";
 	}
 
-	$(".js-equipment-area").html( html );
+	// Show number of items (or items)....
+	for( gear_count = 0; gear_count < current_character.selected_gear.length; gear_count++) {
+		html += "<div class=\"a-h-line\">"
+		html += "<button ref=\"" + gear_count + "\" class=\"js-remove-gear btn btn-xs btn-danger\">Remove</button> ";
+		if( current_character.selected_gear[gear_count].count > 1)
+			html += current_character.selected_gear[gear_count].name + " x " + current_character.selected_gear[gear_count].count;
+		else
+			html += current_character.selected_gear[gear_count].name;
+
+		html += "</div>";
+	}
+
+	// Show Get Equipment Button
+	html += "<button type=\"button\" class=\"btn btn-default\" data-toggle=\"modal\" data-target=\".js-gear-dialog\">Get Gear</button>";
+
+	// Show current wealth....
+	html += "<div class=\"text-right\">Current Wealth: \$" + current_character.current_funds + "</div>";
+
+
+	$(".js-gear-area").html( html );
 
 	$(".js-starting-wealth").unbind( "change" );
 	$(".js-starting-wealth").change( function() {
 		current_character.set_starting_funds( $(this).val() );
 	});
+
+
+	/* MODAL */
+	// Now Propogate the Available Gear in the Modal
+	html = "<h5>Available Gear</h5>";
+	html += "<table>";
+	html += "<tbody>";
+	for( gear_count = 0; gear_count < chargen_gear.length; gear_count++) {
+		if( chargen_gear[gear_count].cost <= current_character.current_funds ) {
+			html += "<tr>";
+			html += "<td>" + chargen_gear[gear_count].name + "</td>";
+			html += "<td>\$" + chargen_gear[gear_count].cost + "</td>";
+			html += "<td><button ref=\"" + chargen_gear[gear_count].name + "\" class=\"js-add-gear btn btn-xs btn-primary\">Buy</button></td>";
+			html += "</tr>";
+		}
+	}
+	html += "</tbody>";
+	html += "</table>";
+
+	$(".js-gear-available").html( html );
+
+	$(".js-add-gear").unbind("click");
+	$(".js-add-gear").click( function() {
+		current_character.add_gear( $(this).attr("ref") );
+		current_character.calculate();
+		localStorage["current_character"] = current_character.export_json(".js-chargen-json-code");
+		propagate_gear_section();
+	});
+
+	// Now Propogate the Available Gear in the Modal
+	html = "<h4 class=\"text-right\">Current Wealth: \$" + current_character.current_funds + "</h4>";
+	html += "<h5>Selected Gear</h5>";
+
+
+	html += "<table>";
+	html += "<tbody>";
+	for( gear_count = 0; gear_count < current_character.selected_gear.length; gear_count++) {
+		html += "<tr>";
+		if( current_character.selected_gear[gear_count].count > 1)
+			html += "<td>" + current_character.selected_gear[gear_count].name + " x " + current_character.selected_gear[gear_count].count + "</td>";
+		else
+			html += "<td>" + current_character.selected_gear[gear_count].name + "</td>";
+
+		html += "<td><button ref=\"" + gear_count + "\" class=\"js-remove-gear btn btn-xs btn-danger\">Remove</button></td>";
+		html += "</tr>";
+	}
+	html += "</tbody>";
+	html += "</table>";
+
+	$(".js-gear-selected").html( html );
+
+	$(".js-remove-gear").unbind("click");
+	$(".js-remove-gear").click( function() {
+		current_character.remove_gear( $(this).attr("ref") / 1 );
+		current_character.calculate();
+		localStorage["current_character"] = current_character.export_json(".js-chargen-json-code");
+		propagate_gear_section();
+	});
+
+
 
 }
 
@@ -947,7 +1028,7 @@ function propagate_character_load_list() {
 				html += "<input type='radio' name='selected_char_load' value='" + lsCounter + "' /> ";
 				html += current_load_data[lsCounter].name + " - saved on " + saved_date_formatted;
 				html += "</label>";
-				html += "<button ref='" + lsCounter + "' class='js-delete-char-data btn btn-danger pull-right btn-xs' type='button'>Delete</button>";
+				html += "<button ref='" + lsCounter + "' class='js-delete-char-data btn btn-danger pull-right btn-xs' type='button'>Remove</button>";
 				html += "</li>";
 			}
 		}
@@ -1017,7 +1098,7 @@ function propagate_perks_section() {
 			list_perks_html += "<div class=\"a-h-line\">";
 			if( current_perks[perk_counter].toLowerCase().indexOf("(racial)") == -1 )
 				if(!current_character.is_complete() )
-					list_perks_html += "<button type=\"button\" class=\"btn btn-xs btn-danger js-delete-perk-button\" relindex=\"" + perk_counter + "\">Delete</button> ";
+					list_perks_html += "<button type=\"button\" class=\"btn btn-xs btn-danger js-delete-perk-button\" relindex=\"" + perk_counter + "\">Remove</button> ";
 			list_perks_html += current_perks[perk_counter] + "</div>";
 		}
 
@@ -1105,7 +1186,7 @@ function refresh_chargen_page() {
 	propagate_perks_section();
 	propagate_skills_sections();
 	propagate_hindrances_section();
-	propagate_equipment_section();
+	propagate_gear_section();
 	propagate_arcane_background_options();
 	propagate_advancement_section();
 

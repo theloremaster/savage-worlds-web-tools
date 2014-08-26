@@ -25,7 +25,6 @@ character_class.prototype = {
 		this.selected_perks = Array();
 		this.selected_skills = Array();
 
-		this.selected_equipment = Array();
 
 		this.edges_available = 0;
 		this.perks_available = 0;
@@ -58,6 +57,7 @@ character_class.prototype = {
 		this.starting_funds = 500;
 		this.base_starting_funds = 500;
 		this.current_funds = 0;
+		this.selected_gear = Array();
 
 		this.is_valid = true;
 		this.validity_messages = Array();
@@ -346,10 +346,10 @@ character_class.prototype = {
 			this.selected_advancements = Array();
 		}
 
-		/* TODO Equipment */
+		/* Equipment */
 		this.current_funds = this.starting_funds;
-		for( eq_count = 0; eq_count < this.selected_equipment.length; eq_count++) {
-
+		for( eq_count = 0; eq_count < this.selected_gear.length; eq_count++) {
+			this.current_funds -= this.selected_gear[eq_count].cost * this.selected_gear[eq_count].count;
 		}
 
 	},
@@ -1074,6 +1074,7 @@ character_class.prototype = {
 			advancements: Array(),
 			perks: Array(),
 			skills: Array(),
+			gear: Array(),
 			arcane: {
 				type : this.arcane_background_selected.short_name,
 				powers: Array()
@@ -1161,7 +1162,19 @@ character_class.prototype = {
 					opt2: this.selected_advancements[get_advancements_count].option2
 				}
 
-				export_object.advancements.push( export_skill );
+				export_object.advancements.push( export_advancement );
+			}
+		}
+
+		if(this.selected_gear.length > 0) {
+			for(gear_count = 0; gear_count < this.selected_gear.length; gear_count++ ) {
+				export_gear = {
+					name: this.selected_gear[gear_count].name,
+					cost: this.selected_gear[gear_count].cost,
+					count: this.selected_gear[gear_count].count
+				}
+
+				export_object.gear.push( export_gear );
 			}
 		}
 
@@ -1270,12 +1283,12 @@ character_class.prototype = {
 		}
 
 		html_return += "\n";
-		if(this.selected_equipment.length > 0 ) {
+		if(this.selected_gear.length > 0 ) {
 			html_return += "[b]Gear[/b]: ";
-			for(sk_c = 0; sk_c < this.selected_equipment.length; sk_c++) {
+			for(sk_c = 0; sk_c < this.selected_gear.length; sk_c++) {
 				if(sk_c > 0)
 					html_return += ", ";
-				html_return += this.selected_equipment[sk_c].name;
+				html_return += this.selected_gear[sk_c].name;
 
 			}
 		}
@@ -1288,6 +1301,62 @@ character_class.prototype = {
 		return html_return;
 	},
 
+	add_gear: function( gear_name, gear_cost, gear_count ) {
+
+		if(!gear_count)
+			gear_count = 1;
+
+		gear_count = gear_count / 1;
+
+
+
+
+		for( gear_counter = 0; gear_counter < this.selected_gear.length; gear_counter++) {
+			if( this.selected_gear[gear_counter].name.trim().toLowerCase() == gear_name.trim().toLowerCase() )  {
+				this.selected_gear[gear_counter].count += gear_count;
+				return this.selected_gear[gear_counter];
+			}
+		}
+
+		gear_cost = gear_cost / 1;
+
+		for( gear_counter = 0; gear_counter < chargen_gear.length; gear_counter++) {
+			if(gear_name.trim().toLowerCase() == chargen_gear[gear_counter].name.trim().toLowerCase() ) {
+				gear_object = clone_object(chargen_gear[gear_counter])
+				gear_object.count = gear_count;
+			}
+		}
+
+		if( !gear_object ) {
+			gear_object = {
+				name: gear_name,
+				cost: gear_cost,
+				count: gear_count
+			};
+		}
+
+
+		this.selected_gear.push( gear_object );
+		return gear_object;
+	},
+
+	remove_gear: function( gear_index ) {
+		// TODO add_gear
+		gear_index = gear_index / 1;
+
+		if( this.selected_gear[gear_index] ) {
+			if( this.selected_gear[gear_index].count > 1 ) {
+				this.selected_gear[gear_index].count--;
+				return true;
+			} else {
+				if( this.selected_gear[gear_index].count < 2 ) {
+					this.selected_gear.splice(gear_index, 1);
+					return true;
+				}
+			}
+		}
+		return false;
+	},
 
 	export_html: function(selector_name) {
 
@@ -1381,12 +1450,12 @@ character_class.prototype = {
 		}
 
 		html_return += "<br />\n";
-		if(this.selected_equipment.length > 0 ) {
+		if(this.selected_gear.length > 0 ) {
 			html_return += "<strong>Gear</strong>: ";
-			for(sk_c = 0; sk_c < this.selected_equipment.length; sk_c++) {
+			for(sk_c = 0; sk_c < this.selected_gear.length; sk_c++) {
 				if(sk_c > 0)
 					html_return += ", ";
-				html_return += this.selected_equipment[sk_c].name;
+				html_return += this.selected_gear[sk_c].name;
 
 			}
 		}
@@ -1490,7 +1559,15 @@ character_class.prototype = {
 				}
 			}
 
-
+			if( imported_object.gear ) {
+				for( import_gear_counter = 0; import_gear_counter < imported_object.gear.length; import_gear_counter++) {
+					this.add_gear(
+						imported_object.gear[import_gear_counter].name,
+						imported_object.gear[import_gear_counter].cost,
+						imported_object.gear[import_gear_counter].count
+					);
+				}
+			}
 
 			return true;
 		}

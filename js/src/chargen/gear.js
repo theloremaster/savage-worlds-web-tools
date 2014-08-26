@@ -1,4 +1,4 @@
-var chargen_equip = Array(
+var chargen_gear = Array(
 	/* Hand Weapons */
 	{
 		name: "Dagger",
