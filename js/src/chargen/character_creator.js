@@ -1399,20 +1399,22 @@ function refresh_chargen_page() {
 }
 
 function create_print_popup() {
-	var mywindow = window.open('', 'Viewing/Printing Character', 'height=400,width=600');
-	data = current_character.export_html();
-	mywindow.document.write('<html><head><title>my div</title>');
-	mywindow.document.write('<style>');
-	mywindow.document.write('h3 {margin: 0; padding:0}');
-	mywindow.document.write('</style>');
-	mywindow.document.write('</head><body>');
-	mywindow.document.write("<div style='text-align: right'>");
-	mywindow.document.write('<button onclick="window.print()" type="button">Print</button>');
-	mywindow.document.write('<button onclick="window.history.back();window.close()" type="button">Close</button>');
-	mywindow.document.write('</div>');
-	mywindow.document.write(data);
-	mywindow.document.write('</body></html>');
+	// var mywindow = window.open('', 'Viewing/Printing Character', 'height=400,width=600');
+	// data = current_character.export_html();
+	// mywindow.document.write('<html><head><title>my div</title>');
+	// mywindow.document.write('<style>');
+	// mywindow.document.write('h3 {margin: 0; padding:0}');
+	// mywindow.document.write('</style>');
+	// mywindow.document.write('</head><body>');
+	// mywindow.document.write("<div style='text-align: right'>");
+	// mywindow.document.write('<button onclick="window.print()" type="button">Print</button>');
+	// mywindow.document.write('<button onclick="window.history.back();window.close()" type="button">Close</button>');
+	// mywindow.document.write('</div>');
+	// mywindow.document.write(data);
+	// mywindow.document.write('</body></html>');
 
+	$(".js-print-character-content").html( "<p>" + current_character.export_html() + "</p>" );
+	$(".js-print-character-dialog").modal();
 //	mywindow.print();
 //	mywindow.close();
 

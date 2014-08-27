@@ -12,6 +12,16 @@
 	<meta name="apple-mobile-web-app-capable" content="yes" />
 	<meta name="apple-mobile-web-app-status-bar-style" content="black">
 	<meta name="format-detection" content="telephone=no">
+	<style type="text/css">
+	@media print
+	{
+		body * { visibility: hidden; word-wrap: whitespace; }
+		.js-print-character-content { }
+		.js-print-character-content * { visibility: visible !important; color: #333;}
+		.js-print-character-content {  visibility: visible !important; position: absolute; top: 20; left: 20px;  width: 100%;}
+
+	}
+	</style>
 </head>
 <body class="">
 <div class="header-bar">
@@ -56,6 +66,24 @@
 				<textarea class="js-chargen-json-code" style="height:150px" readonly="readonly"></textarea>
 			</div>
       		<div class="modal-footer">
+        		<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+      		</div>
+		</div>
+	</div>
+</div>
+
+<div class="js-print-character-dialog modal fade">
+	<div class="modal-character-dialog">
+    	<div class="modal-content">
+      		<div class="modal-header">
+				<h4 class="modal-title">Print/Copy Character</h4>
+			</div>
+			<div class="modal-body js-print-character-content">
+
+			</div>
+
+      		<div class="modal-footer">
+      			<button type="button" class="btn btn-default" onclick="window.print();">Print</button>
         		<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
       		</div>
 		</div>
@@ -361,7 +389,7 @@
 				<p>You can contribute to this project at <a href="https://github.com/jdgwf/savage-worlds-web-tools">https://github.com/jdgwf/savage-worlds-web-tools</a></p>
 
 
-				<p class="text-right">Updated/Version: 2014-08-26-04</p>
+				<p class="text-right">Updated/Version: 2014-08-26-05</p>
 
 			</div>
 		</div>

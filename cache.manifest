@@ -1,8 +1,8 @@
 CACHE MANIFEST
 
-# Version 2014-08-26-04
+# Version 2014-08-26-05
 # August 26, 2014 revision 2
-# Chargen: Possible fix for print character window lockup when in ipad app/homescreen mode.
+# Chargen: Another possible way to get iPad printing to work....
 
 
 CACHE:
