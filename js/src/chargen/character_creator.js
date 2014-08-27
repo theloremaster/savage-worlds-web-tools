@@ -928,22 +928,22 @@ function propagate_gear_section() {
 		current_gear_class = "";
 	}
 
-	if(gear_type_dd.length > 0) {
-		html += "<label>Type: <select class=\"js-set-gear-filter js-gear-type\">";
-		html += "<option value=\"\"> - Select a Type -</option>";
-		for(bc = 0; bc < gear_type_dd.length; bc++) {
-			if (current_gear_type == "")
-				current_gear_type = gear_type_dd[bc];
+	// if(gear_type_dd.length > 0) {
+	// 	html += "<label>Type: <select class=\"js-set-gear-filter js-gear-type\">";
+	// 	html += "<option value=\"\"> - Select a Type -</option>";
+	// 	for(bc = 0; bc < gear_type_dd.length; bc++) {
+	// 		if (current_gear_type == "")
+	// 			current_gear_type = gear_type_dd[bc];
 
-			if( gear_type_dd[bc] == current_gear_type )
-				html += "<option selected=\"selected\">" + gear_type_dd[bc] + "</option>";
-			else
-				html += "<option>" + gear_type_dd[bc] + "</option>";
-		}
-		html += "</select></label>";
-	} else {
-		current_gear_type = "";
-	}
+	// 		if( gear_type_dd[bc] == current_gear_type )
+	// 			html += "<option selected=\"selected\">" + gear_type_dd[bc] + "</option>";
+	// 		else
+	// 			html += "<option>" + gear_type_dd[bc] + "</option>";
+	// 	}
+	// 	html += "</select></label>";
+	// } else {
+	// 	current_gear_type = "";
+	// }
 
 	html += "<label>Search: <input type=\"text\" class=\"js-gear-search\" value=\"" + current_gear_search + "\" />";
 	html += "</label>";
@@ -959,7 +959,7 @@ function propagate_gear_section() {
 		current_gear_book = $(".js-gear-book").val();
 		current_gear_general =  $(".js-gear-general").val();
 		current_gear_class =  $(".js-gear-class").val();
-		current_gear_type =  $(".js-gear-type").val();
+	//	current_gear_type =  $(".js-gear-type").val();
 
 		propagate_gear_section() ;
 	});
@@ -983,9 +983,13 @@ function propagate_gear_section() {
 	for( gear_count = 0; gear_count < current_character.selected_gear.length; gear_count++) {
 		html += "<tr>";
 		if( current_character.selected_gear[gear_count].count > 1)
-			html += "<td>" + current_character.selected_gear[gear_count].name + " x " + current_character.selected_gear[gear_count].count + "</td>";
+			html += "<td>" + current_character.selected_gear[gear_count].name + " x " + current_character.selected_gear[gear_count].count;
 		else
-			html += "<td>" + current_character.selected_gear[gear_count].name + "</td>";
+			html += "<td>" + current_character.selected_gear[gear_count].name;
+
+		if( current_character.selected_gear[gear_count].free > 0 )
+			html += " (free)";
+		html += "</td>";
 
 		html += "<td><button ref=\"" + gear_count + "\" class=\"js-remove-gear btn btn-xs btn-danger\">Remove</button></td>";
 		html += "</tr>";
@@ -1022,9 +1026,9 @@ function make_gear_available_list() {
 			} else {
 
 				if(
-					( chargen_gear[gear_count].type == current_gear_type )
-						&&
-					( chargen_gear[gear_count].class == current_gear_class )
+	//				( chargen_gear[gear_count].type == current_gear_type )
+	//					&&
+					chargen_gear[gear_count].class == current_gear_class
 						&&
 					chargen_gear[gear_count].book.name == current_gear_book
 						&&
@@ -1039,15 +1043,20 @@ function make_gear_available_list() {
 
 				html += "<tr>";
 				html += "<td>" + chargen_gear[gear_count].name + "</td>";
-				if( typeof(chargen_gear[gear_count].cost) != "string" && chargen_gear[gear_count].cost < current_character.current_funds) {
+				if( typeof(chargen_gear[gear_count].cost) != "string" && chargen_gear[gear_count].cost <= current_character.current_funds) {
 					html += "<td>\$" + chargen_gear[gear_count].cost + "</td>";
-					html += "<td><button ref=\"" + chargen_gear[gear_count].name + "\" class=\"js-add-gear btn btn-xs btn-primary\">Buy</button></td>";
+					html += "<td>";
+					html += "<button ref=\"" + chargen_gear[gear_count].name + "\" class=\"js-buy-gear btn btn-xs btn-primary\">Buy</button>";
+					html += "<button ref=\"" + chargen_gear[gear_count].name + "\" title=\"Add this gear for free\" class=\"js-add-gear btn btn-xs btn-warning\">Free</button>";
+					html += "</td>";
 				} else {
 					if(typeof(chargen_gear[gear_count].cost) != "string")
 						html += "<td>\$" + chargen_gear[gear_count].cost + "</td>";
 					else
 						html += "<td>" + chargen_gear[gear_count].cost + "</td>";
-					html += "<td>&nbsp;</td>";
+					html += "<td>";
+					html += "<button ref=\"" + chargen_gear[gear_count].name + "\" title=\"Add this gear for free\" class=\"js-add-gear btn btn-xs btn-warning\">Free</button>";
+					html += "</td>";
 				}
 				html += "</tr>";
 			}
@@ -1060,10 +1069,17 @@ function make_gear_available_list() {
 
 
 
+	$(".js-buy-gear").unbind("click");
+	$(".js-buy-gear").click( function() {
+		current_character.add_gear( $(this).attr("ref") );
+		current_character.calculate();
+		localStorage["current_character"] = current_character.export_json(".js-chargen-json-code");
+		propagate_gear_section();
+	});
 
 	$(".js-add-gear").unbind("click");
 	$(".js-add-gear").click( function() {
-		current_character.add_gear( $(this).attr("ref") );
+		current_character.add_gear( $(this).attr("ref") , null, 1, 1);
 		current_character.calculate();
 		localStorage["current_character"] = current_character.export_json(".js-chargen-json-code");
 		propagate_gear_section();

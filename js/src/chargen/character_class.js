@@ -1191,7 +1191,8 @@ character_class.prototype = {
 				export_gear = {
 					name: this.selected_gear[gear_count].name,
 					cost: this.selected_gear[gear_count].cost,
-					count: this.selected_gear[gear_count].count
+					count: this.selected_gear[gear_count].count,
+					free: this.selected_gear[gear_count].free
 				}
 
 				export_object.gear.push( export_gear );
@@ -1245,20 +1246,25 @@ character_class.prototype = {
 		return html_return;
 	},
 
-	add_gear: function( gear_name, gear_cost, gear_count ) {
+	add_gear: function( gear_name, gear_cost, gear_count, for_free ) {
 
 		if(!gear_count)
 			gear_count = 1;
 
 		gear_count = gear_count / 1;
 
-
+		if(!for_free)
+			for_free = 0;
+		if(for_free > 0)
+			for_free = 1;
 
 
 		for( gear_counter = 0; gear_counter < this.selected_gear.length; gear_counter++) {
 			if( this.selected_gear[gear_counter].name.trim().toLowerCase() == gear_name.trim().toLowerCase() )  {
-				this.selected_gear[gear_counter].count += gear_count;
-				return this.selected_gear[gear_counter];
+				if(this.selected_gear[gear_counter].free == for_free) {
+					this.selected_gear[gear_counter].count += gear_count;
+					return this.selected_gear[gear_counter];
+				}
 			}
 		}
 
@@ -1268,12 +1274,14 @@ character_class.prototype = {
 			if(gear_name.trim().toLowerCase() == chargen_gear[gear_counter].name.trim().toLowerCase() ) {
 				gear_object = clone_object(chargen_gear[gear_counter])
 				gear_object.count = gear_count;
+				gear_object.free = for_free;
 			}
 		}
 
 		if( !gear_object ) {
 			gear_object = {
 				name: gear_name,
+				free: for_free,
 				cost: gear_cost,
 				count: gear_count
 			};
@@ -1285,7 +1293,6 @@ character_class.prototype = {
 	},
 
 	remove_gear: function( gear_index ) {
-		// TODO add_gear
 		gear_index = gear_index / 1;
 
 		if( this.selected_gear[gear_index] ) {
@@ -1414,7 +1421,11 @@ character_class.prototype = {
 						||
 					( this.selected_gear[sk_c].damage && this.selected_gear[sk_c].damage != "" )
 				) {
-					html_return += " (";
+					// Weapon Notes
+					if( this.selected_gear[sk_c].free > 0 )
+						html_return += " (free, ";
+					else
+						html_return += " (";
 					if( this.selected_gear[sk_c].range && this.selected_gear[sk_c].range != "" )
 						html_return += this.selected_gear[sk_c].range + ", ";
 					if( this.selected_gear[sk_c].rof && this.selected_gear[sk_c].rof != "" )
@@ -1424,11 +1435,21 @@ character_class.prototype = {
 					if( this.selected_gear[sk_c].ap && this.selected_gear[sk_c].ap >0 )
 						html_return += ", AP " + this.selected_gear[sk_c].ap;
 					html_return += ")";
+				} else {
+					if( this.selected_gear[sk_c].armor && this.selected_gear[sk_c].armor != ""  ) {
+						// Armor Notes
+						if( this.selected_gear[sk_c].free > 0 )
+							html_return += " (free, ";
+						else
+							html_return += " (";
+						html_return += "Armor " + this.selected_gear[sk_c].armor + ")";
+					} else {
+						if( this.selected_gear[sk_c].free > 0 )
+							html_return += " (free)";
+					}
 				}
 
-				if( this.selected_gear[sk_c].armor && this.selected_gear[sk_c].armor != ""  ) {
-					html_return += " (Armor " + this.selected_gear[sk_c].armor + ")";
-				}
+
 			}
 			html_return += "<br />";
 		}
@@ -1532,10 +1553,15 @@ character_class.prototype = {
 
 			if( imported_object.gear ) {
 				for( import_gear_counter = 0; import_gear_counter < imported_object.gear.length; import_gear_counter++) {
+					if(!imported_object.gear[import_gear_counter].free)
+						imported_object.gear[import_gear_counter].free = 0;
+					if(!imported_object.gear[import_gear_counter].count)
+						imported_object.gear[import_gear_counter].count = 1;
 					this.add_gear(
 						imported_object.gear[import_gear_counter].name,
 						imported_object.gear[import_gear_counter].cost,
-						imported_object.gear[import_gear_counter].count
+						imported_object.gear[import_gear_counter].count,
+						imported_object.gear[import_gear_counter].free
 					);
 				}
 			}

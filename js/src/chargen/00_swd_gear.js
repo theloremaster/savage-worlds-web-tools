@@ -406,7 +406,7 @@ are staples in many space-opera campaigns"
 	},
 	{
 		name: "Leather",
-		class: "Medieval Armor",
+		class: "Medieval",
 		general: "Armor",
 		type: "Personal Armor",
 		weight: 15,
@@ -421,7 +421,7 @@ are staples in many space-opera campaigns"
 	{
 		name: "Chain Hauberk (long coat)",
 
-		class: "Medieval Armor",
+		class: "Medieval",
 		general: "Armor",
 		type: "Personal Armor",
 		weight: 25,
@@ -435,7 +435,7 @@ are staples in many space-opera campaigns"
 	},
 	{
 		name: "Plate Corselet",
-		class: "Medieval Armor",
+		class: "Medieval",
 		general: "Armor",
 		type: "Personal Armor",
 		weight: 25,
@@ -449,7 +449,7 @@ are staples in many space-opera campaigns"
 	},
 	{
 		name: "Plate Arms (vambrace)",
-		class: "Medieval Armor",
+		class: "Medieval",
 		general: "Armor",
 		type: "Personal Armor",
 		weight: 10,
@@ -463,7 +463,7 @@ are staples in many space-opera campaigns"
 	},
 	{
 		name: "Plate Leggings (greaves)",
-		class: "Medieval Armor",
+		class: "Medieval",
 		general: "Armor",
 		type: "Personal Armor",
 		weight: 15,
@@ -477,7 +477,7 @@ are staples in many space-opera campaigns"
 	},
 	{
 		name: "Pot Helm",
-		class: "Medieval Armor",
+		class: "Medieval",
 		general: "Armor",
 		type: "Personal Armor",
 		weight: 4,
@@ -491,7 +491,7 @@ are staples in many space-opera campaigns"
 	},
 	{
 		name: "Steel Helmet (enclosed)",
-		class: "Medieval Armor",
+		class: "Medieval",
 		general: "Armor",
 		type: "Personal Armor",
 		weight: 8,
@@ -505,7 +505,7 @@ are staples in many space-opera campaigns"
 	},
 	{
 		name: "Plate Barding",
-		class: "Medieval Armor",
+		class: "Medieval",
 		general: "Armor",
 		type: "Barding",
 		weight: 30,
@@ -519,7 +519,7 @@ are staples in many space-opera campaigns"
 	},
 	{
 		name: "Small Shield (buckler)",
-		class: "Medieval Armor",
+		class: "Medieval",
 		general: "Armor",
 		type: "Shields",
 		weight: 8,
@@ -534,7 +534,7 @@ are staples in many space-opera campaigns"
 	},
 	{
 		name: "Medium Shield",
-		class: "Medieval Armor",
+		class: "Medieval",
 		general: "Armor",
 		type: "Shields",
 		weight: 12,
@@ -549,7 +549,7 @@ are staples in many space-opera campaigns"
 	},
 	{
 		name: "Large Shield (kite, pavise)",
-		class: "Medieval Armor",
+		class: "Medieval",
 		general: "Armor",
 		type: "Shields",
 		weight: 20,
@@ -564,7 +564,7 @@ are staples in many space-opera campaigns"
 	},
 	{
 		name: "Flak Jacket",
-		class: "Modern Armor",
+		class: "Modern",
 		general: "Armor",
 		type: "Personal Armor",
 		weight: 12,
@@ -578,7 +578,7 @@ are staples in many space-opera campaigns"
 	},
 	{
 		name: "Kevlar Vest",
-		class: "Modern Armor",
+		class: "Modern",
 		general: "Armor",
 		type: "Personal Armor",
 		weight: 8,
@@ -592,7 +592,7 @@ are staples in many space-opera campaigns"
 	},
 	{
 		name: "Kevlar Vest w/inserts",
-		class: "Modern Armor",
+		class: "Modern",
 		general: "Armor",
 		type: "Personal Armor",
 		weight: 12,
@@ -606,7 +606,7 @@ are staples in many space-opera campaigns"
 	},
 	{
 		name: "Motorcycle Helmet",
-		class: "Modern Armor",
+		class: "Modern",
 		general: "Armor",
 		type: "Personal Armor",
 		weight: 5,
@@ -620,7 +620,7 @@ are staples in many space-opera campaigns"
 	},
 	{
 		name: "Steel Pot (helmet)",
-		class: "Modern Armor",
+		class: "Modern",
 		general: "Armor",
 		type: "Personal Armor",
 		weight: 5,
@@ -634,7 +634,7 @@ are staples in many space-opera campaigns"
 	},
 	{
 		name: "Infantry Battle Suit",
-		class: "Future Armor",
+		class: "Future",
 		general: "Armor",
 		type: "Personal Armor",
 		weight: 20,
@@ -648,7 +648,7 @@ are staples in many space-opera campaigns"
 	},
 	{
 		name: "Hard Armor",
-		class: "Future Armor",
+		class: "Future",
 		general: "Armor",
 		type: "Personal Armor",
 		weight: 30,
@@ -662,7 +662,7 @@ are staples in many space-opera campaigns"
 	},
 	{
 		name: "Powered Armor (Scout Suit)",
-		class: "Future Armor",
+		class: "Future",
 		general: "Armor",
 		type: "Personal Armor",
 		weight: 0,
@@ -676,7 +676,7 @@ are staples in many space-opera campaigns"
 	},
 	{
 		name: "Powered Armor (Battle Suit)",
-		class: "Future Armor",
+		class: "Future",
 		general: "Armor",
 		type: "Personal Armor",
 		weight: 0,
@@ -690,7 +690,7 @@ are staples in many space-opera campaigns"
 	},
 	{
 		name: "Powered Armor (Heavy Suit)",
-		class: "Future Armor",
+		class: "Future",
 		general: "Armor",
 		type: "Personal Armor",
 		weight: 0,
@@ -704,7 +704,7 @@ are staples in many space-opera campaigns"
 	},
 	{
 		name: "Reflective Vest",
-		class: "Future Armor",
+		class: "Future",
 		general: "Armor",
 		type: "Personal Armor",
 		weight: 5,
@@ -719,7 +719,7 @@ are staples in many space-opera campaigns"
 	{
 		name: "Axe, Throwing",
 		damage: "Str+d6",
-		class: "Medieval Ranged Weapons",
+		class: "Medieval",
 		general: "Ranged Weapons",
 		type: "",
 		range: "3/6/12",
@@ -734,7 +734,7 @@ are staples in many space-opera campaigns"
 	{
 		name: "Bow",
 		damage: "2d6",
-		class: "Medieval Ranged Weapons",
+		class: "Medieval",
 		general: "Ranged Weapons",
 		type: "",
 		range: "12/24/48",
@@ -751,7 +751,7 @@ are staples in many space-opera campaigns"
 	{
 		name: "Crossbow",
 		damage: "2d6",
-		class: "Medieval Ranged Weapons",
+		class: "Medieval",
 		general: "Ranged Weapons",
 		type: "",
 		range: "15/30/60",
@@ -769,7 +769,7 @@ are staples in many space-opera campaigns"
 	{
 		name: "English Long Bow",
 		damage: "2d6",
-		class: "Medieval Ranged Weapons",
+		class: "Medieval",
 		general: "Ranged Weapons",
 		type: "",
 		range: "15/30/60",
@@ -786,7 +786,7 @@ are staples in many space-opera campaigns"
 	{
 		name: "Knife/Dagger",
 		damage: "Str+d4",
-		class: "Medieval Ranged Weapons",
+		class: "Medieval",
 		general: "Ranged Weapons",
 		type: "",
 		range: "3/6/12",
@@ -801,7 +801,7 @@ are staples in many space-opera campaigns"
 	{
 		name: "Sling",
 		damage: "Str+d4",
-		class: "Medieval Ranged Weapons",
+		class: "Medieval",
 		general: "Ranged Weapons",
 		type: "",
 		range: "4/8/16",
@@ -816,7 +816,7 @@ are staples in many space-opera campaigns"
 	{
 		name: "Spear",
 		damage: "Str+d6",
-		class: "Medieval Ranged Weapons",
+		class: "Medieval",
 		general: "Ranged Weapons",
 		type: "",
 		range: "3/6/12",
