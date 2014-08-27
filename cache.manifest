@@ -1,8 +1,8 @@
 CACHE MANIFEST
 
-# Version 2014-08-26-02
+# Version 2014-08-26-03
 # August 26, 2014 revision 2
-# Chargen: Capped Skill die at d12, added Ranges and Damage to equipment html and bbcode export
+# Chargen: Added a few tables of equipment, minor bugfixes to add screen and export screens as data is entered
 
 
 CACHE:

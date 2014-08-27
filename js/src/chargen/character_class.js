@@ -367,7 +367,11 @@ character_class.prototype = {
 		/* Equipment */
 		this.current_funds = this.starting_funds;
 		for( eq_count = 0; eq_count < this.selected_gear.length; eq_count++) {
-			this.current_funds -= this.selected_gear[eq_count].cost * this.selected_gear[eq_count].count;
+			if(!this.selected_gear[eq_count].free)
+				this.selected_gear[eq_count].free = 0;
+
+			if(typeof(this.selected_gear[eq_count].cost) != "string" && this.selected_gear[eq_count].free == 0 )
+				this.current_funds -= this.selected_gear[eq_count].cost * this.selected_gear[eq_count].count;
 		}
 
 	},
@@ -1412,10 +1416,18 @@ character_class.prototype = {
 				) {
 					html_return += " (";
 					if( this.selected_gear[sk_c].range && this.selected_gear[sk_c].range != "" )
-						html_return += this.selected_gear[sk_c].range + " ";
+						html_return += this.selected_gear[sk_c].range + ", ";
+					if( this.selected_gear[sk_c].rof && this.selected_gear[sk_c].rof != "" )
+						html_return += "ROF " + this.selected_gear[sk_c].rof + ", ";
 					if( this.selected_gear[sk_c].damage && this.selected_gear[sk_c].damage != "" )
 						html_return += this.selected_gear[sk_c].damage;
+					if( this.selected_gear[sk_c].ap && this.selected_gear[sk_c].ap >0 )
+						html_return += ", AP " + this.selected_gear[sk_c].ap;
 					html_return += ")";
+				}
+
+				if( this.selected_gear[sk_c].armor && this.selected_gear[sk_c].armor != ""  ) {
+					html_return += " (Armor " + this.selected_gear[sk_c].armor + ")";
 				}
 			}
 			html_return += "<br />";

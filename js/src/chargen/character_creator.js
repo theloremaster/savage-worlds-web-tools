@@ -859,6 +859,8 @@ function propagate_gear_section() {
 			gear_class_dd.indexOf( chargen_gear[gear_count].class ) == -1
 				&&
 			chargen_gear[gear_count].general.toLowerCase().trim() == current_gear_general.toLowerCase().trim()
+				&&
+			chargen_gear[gear_count].class != ""
 		) {
 			gear_class_dd.push(chargen_gear[gear_count].class);
 			if( current_gear_class == "")
@@ -869,6 +871,8 @@ function propagate_gear_section() {
 			gear_type_dd.indexOf( chargen_gear[gear_count].type ) == -1
 				&&
 			chargen_gear[gear_count].class.toLowerCase().trim() == current_gear_class.toLowerCase().trim()
+				&&
+			chargen_gear[gear_count].type != ""
 		) {
 			gear_type_dd.push(chargen_gear[gear_count].type);
 			if( current_gear_type == "")
@@ -903,6 +907,8 @@ function propagate_gear_section() {
 		}
 
 		html += "</select></label>";
+	}	else {
+		current_gear_general = "";
 	}
 
 	if(gear_class_dd.length > 0) {
@@ -918,6 +924,8 @@ function propagate_gear_section() {
 				html += "<option>" + gear_class_dd[bc] + "</option>";
 		}
 		html += "</select></label>";
+	} else {
+		current_gear_class = "";
 	}
 
 	if(gear_type_dd.length > 0) {
@@ -933,6 +941,8 @@ function propagate_gear_section() {
 				html += "<option>" + gear_type_dd[bc] + "</option>";
 		}
 		html += "</select></label>";
+	} else {
+		current_gear_type = "";
 	}
 
 	html += "<label>Search: <input type=\"text\" class=\"js-gear-search\" value=\"" + current_gear_search + "\" />";
@@ -942,6 +952,10 @@ function propagate_gear_section() {
 
 	$(".js-set-gear-filter").unbind("change");
 	$(".js-set-gear-filter").change( function() {
+		current_gear_book = "";
+		current_gear_general = "";
+		current_gear_class = "";
+		current_gear_type = "";
 		current_gear_book = $(".js-gear-book").val();
 		current_gear_general =  $(".js-gear-general").val();
 		current_gear_class =  $(".js-gear-class").val();
@@ -1008,9 +1022,9 @@ function make_gear_available_list() {
 			} else {
 
 				if(
-					chargen_gear[gear_count].type == current_gear_type
+					( chargen_gear[gear_count].type == current_gear_type )
 						&&
-					chargen_gear[gear_count].class == current_gear_class
+					( chargen_gear[gear_count].class == current_gear_class )
 						&&
 					chargen_gear[gear_count].book.name == current_gear_book
 						&&
@@ -1025,8 +1039,16 @@ function make_gear_available_list() {
 
 				html += "<tr>";
 				html += "<td>" + chargen_gear[gear_count].name + "</td>";
-				html += "<td>\$" + chargen_gear[gear_count].cost + "</td>";
-				html += "<td><button ref=\"" + chargen_gear[gear_count].name + "\" class=\"js-add-gear btn btn-xs btn-primary\">Buy</button></td>";
+				if( typeof(chargen_gear[gear_count].cost) != "string" && chargen_gear[gear_count].cost < current_character.current_funds) {
+					html += "<td>\$" + chargen_gear[gear_count].cost + "</td>";
+					html += "<td><button ref=\"" + chargen_gear[gear_count].name + "\" class=\"js-add-gear btn btn-xs btn-primary\">Buy</button></td>";
+				} else {
+					if(typeof(chargen_gear[gear_count].cost) != "string")
+						html += "<td>\$" + chargen_gear[gear_count].cost + "</td>";
+					else
+						html += "<td>" + chargen_gear[gear_count].cost + "</td>";
+					html += "<td>&nbsp;</td>";
+				}
 				html += "</tr>";
 			}
 //		}
