@@ -386,7 +386,10 @@ function propagate_skills_sections() {
 			if( !current_character.is_complete() ) {
 				html += "<div class=\"pull-right\">";
 				html += "<button class=\"js-lower-skill-level btn btn-xs btn-primary\" skillname=\"" + current_skill.name + "\" skillval=\"" + current_skill.value + "\">-</button>";
-				html += "<button class=\"js-add-skill-level btn btn-xs btn-primary\" skillname=\"" + current_skill.name + "\" skillval=\"" + current_skill.value + "\">+</button>";
+				if(current_skill.value < 5)
+					html += "<button class=\"js-add-skill-level btn btn-xs btn-primary\" skillname=\"" + current_skill.name + "\" skillval=\"" + current_skill.value + "\">+</button>";
+				else
+					html += "<button class=\"js-disable-add-skill-level btn btn-xs btn-warning\" title=\"d12 is the highest skill level\">+</button>";
 				html += "</div>";
 			}
 

@@ -1233,7 +1233,7 @@ character_class.prototype = {
 
 
 		while(html_return.indexOf("8)") > -1)
-			html_return = html_return.replace("8)", " 8 )");
+			html_return = html_return.replace("8)", "8 )");
 
 		if(selector_name)
 			$(selector_name).val( html_return );
@@ -1405,11 +1405,21 @@ character_class.prototype = {
 				else
 					html_return += this.selected_gear[sk_c].name;
 
+				if(
+					( this.selected_gear[sk_c].range && this.selected_gear[sk_c].range != "" )
+						||
+					( this.selected_gear[sk_c].damage && this.selected_gear[sk_c].damage != "" )
+				) {
+					html_return += " (";
+					if( this.selected_gear[sk_c].range && this.selected_gear[sk_c].range != "" )
+						html_return += this.selected_gear[sk_c].range + " ";
+					if( this.selected_gear[sk_c].damage && this.selected_gear[sk_c].damage != "" )
+						html_return += this.selected_gear[sk_c].damage;
+					html_return += ")";
+				}
 			}
 			html_return += "<br />";
 		}
-
-		html_return = html_return.replace("8)", " 8 )");
 
 		if(selector_name)
 			$(selector_name).val(html_return);

@@ -1,8 +1,8 @@
 CACHE MANIFEST
 
-# Version 2014-08-26-01
-# August 26, 2014 revision 1
-# Chargen: Adding filtering to Equipment (still in Alpha!), split some js files into book sections in src, bugfixes.
+# Version 2014-08-26-02
+# August 26, 2014 revision 2
+# Chargen: Capped Skill die at d12, added Ranges and Damage to equipment html and bbcode export
 
 
 CACHE:
