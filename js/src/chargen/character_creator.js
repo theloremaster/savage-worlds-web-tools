@@ -1408,7 +1408,7 @@ function create_print_popup() {
 	mywindow.document.write('</head><body>');
 	mywindow.document.write("<div style='text-align: right'>");
 	mywindow.document.write('<button onclick="window.print()" type="button">Print</button>');
-	mywindow.document.write('<button onclick="window.close()" type="button">Close</button>');
+	mywindow.document.write('<button onclick="window.history.back();window.close()" type="button">Close</button>');
 	mywindow.document.write('</div>');
 	mywindow.document.write(data);
 	mywindow.document.write('</body></html>');
