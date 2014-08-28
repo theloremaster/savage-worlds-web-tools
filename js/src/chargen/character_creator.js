@@ -905,7 +905,7 @@ function propagate_gear_section() {
 	if(gear_general_dd.length > 0) {
 		html += "</select></label>";
 		html += "<label>General: <select class=\"js-set-gear-filter js-gear-general\">";
-		html += "<option value=\"\"> - Select a General -</option>";
+		html += "<option value=\"\"> - Select a Category -</option>";
 		for(bc = 0; bc < gear_general_dd.length; bc++) {
 			if (current_gear_general == "")
 				current_gear_general = gear_general_dd[bc];
@@ -923,7 +923,7 @@ function propagate_gear_section() {
 
 	if(gear_class_dd.length > 0) {
 		html += "<label>Class: <select class=\"js-set-gear-filter js-gear-class\">";
-		html += "<option value=\"\"> - Select a Class -</option>";
+		html += "<option value=\"\"> - Select a Category -</option>";
 		for(bc = 0; bc < gear_class_dd.length; bc++) {
 			if (current_gear_class == "")
 				current_gear_class = gear_class_dd[bc];
@@ -940,7 +940,7 @@ function propagate_gear_section() {
 
 	// if(gear_type_dd.length > 0) {
 	// 	html += "<label>Type: <select class=\"js-set-gear-filter js-gear-type\">";
-	// 	html += "<option value=\"\"> - Select a Type -</option>";
+	// 	html += "<option value=\"\"> - Select a Category -</option>";
 	// 	for(bc = 0; bc < gear_type_dd.length; bc++) {
 	// 		if (current_gear_type == "")
 	// 			current_gear_type = gear_type_dd[bc];

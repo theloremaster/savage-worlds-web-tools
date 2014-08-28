@@ -1,8 +1,8 @@
 CACHE MANIFEST
 
-# Version 2014-08-27-02
+# Version 2014-08-27-03
 # August 27, 2014 revision 2
-# Chargen: Finished Data entry of personal equipment from SW:D and Fantasy Companion
+# Chargen: Quick renaming of select dropdown, and fix of img 404
 
 
 CACHE:
@@ -33,7 +33,7 @@ http://jdgwf.github.io/savage-worlds-web-tools/css/bootstrap.min.css
 http://jdgwf.github.io/savage-worlds-web-tools/img/sw_fan-16.png
 http://jdgwf.github.io/savage-worlds-web-tools/img/sw_fan-128.png
 http://jdgwf.github.io/savage-worlds-web-tools/img/sw_fan-256.png
-http://jdgwf.github.io/savage-worlds-web-tools/img/sw_fan_78x50.png
+http://jdgwf.github.io/savage-worlds-web-tools/img/sw_fan-78x50.png
 
 http://jdgwf.github.io/savage-worlds-web-tools/img/dice/blank.png
 http://jdgwf.github.io/savage-worlds-web-tools/img/dice/d4.png
