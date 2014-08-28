@@ -21,6 +21,18 @@ Fully Functional Tools Include:
 * Vehicle Creator
 * Walker Creator
 * Power Armor Creator
+* Character Creator (Novice is fully functional)
+	* TODO:
+		* Data Entry still needed 
+			* Equipment 
+				* COMPLETE - SWD Personal Equipment
+				* COMPLETE - Fantasy Companion Equipment
+				* Horror Companion Equipment
+				* SciFi Companion Equipment
+			* Powers
+				* COMPLETE - SWD Trappings and Powers
+				* Fantasy Companion Trappings and Powers
+				* Horror Companion Trappings and Powers
 * Monster Search
 	* TODO:
 		* Data Entry still needed
@@ -31,11 +43,12 @@ Fully Functional Tools Include:
 			* Sci-Fi Companion - has no entries
 			* Super Powers Companion - has no entries
 
-The roadmap for these tools include:
+####The roadmap for these tools include:
 
-* Character Creator (rewrite in progress since Aug 9th, already leaps ahead of the previous version )
+* Character Creator ( rewrite in progress since Aug 9th, novice creation complete, adding of advancements is next on list )
 	* TODO
-		* Equipment. I'll probably only handle the PERSONAL equipment at first, leaving the big stuff like Tank Cannons and Cars out of it.
+		* Ability to adorn armor and affect derived stats, optional derived stats (e.g. Sanity from Horror Companion )
+		* Data entry for Horror and SFC Companions
 		* Advancement
 
 * Robot Creator (planned)

@@ -10,6 +10,7 @@ function propagate_attribute_options(current_value, current_attribute) {
 
 	current_value = current_value / 1;
 	select_selector = ".js-chargen-attributes-" + current_attribute;
+	div_selector = ".js-chargen-complete-attribute-" + current_attribute;
 
 	min_count = 1;
 	max_count = 6;
@@ -41,6 +42,8 @@ function propagate_attribute_options(current_value, current_attribute) {
 		}
 	}
 	$(select_selector).html(html);
+	$(div_selector).hide();
+	$(select_selector).show();
 }
 
 function display_attribute(current_value, current_attribute) {
@@ -270,9 +273,12 @@ function propagate_power_options() {
 
 
 function display_remaining_attribute_points(selector_name) {
-	if(!current_character.is_complete() ) {
+	if( !current_character.is_complete() ) {
+
 		$(selector_name).removeClass("text-danger");
 		$(selector_name).removeClass("text-primary");
+
+		$(selector_name).show();
 
 		if(current_character.attribute_points == 0) {
 			$(selector_name).text(  "No attribute points remaining" );
@@ -289,7 +295,10 @@ function display_remaining_attribute_points(selector_name) {
 			else
 				$(selector_name).text(  current_character.attribute_points * -1 + " attribute points overspent" );
 		}
+
 	} else {
+		$(selector_name).removeClass("text-danger");
+		$(selector_name).removeClass("text-primary");
 		$(selector_name).hide();
 	}
 }
@@ -314,6 +323,7 @@ function display_remaining_skill_points(selector_name) {
 			else
 				$(selector_name).text(  current_character.skill_points * -1 + " skill points overspent" );
 		}
+		$(selector_name).show();
 	} else {
 		$(selector_name).hide();
 	}
@@ -1016,6 +1026,7 @@ function make_gear_available_list() {
 
 	html = "<table>";
 	html += "<tbody>";
+	current_gear_type_header = "";
 	for( gear_count = 0; gear_count < chargen_gear.length; gear_count++) {
 //		if( chargen_gear[gear_count].cost <= current_character.current_funds ) {
 			show_item = false;
@@ -1041,13 +1052,20 @@ function make_gear_available_list() {
 
 			if( show_item ) {
 
+				if(chargen_gear[gear_count].type != "" && current_gear_type_header != chargen_gear[gear_count].type) {
+					html += "<tr><th colspan=3>";
+					html += chargen_gear[gear_count].type;
+					html += "</th></tr>";
+					current_gear_type_header = chargen_gear[gear_count].type;
+				}
+
 				html += "<tr>";
 				html += "<td>" + chargen_gear[gear_count].name + "</td>";
 				if( typeof(chargen_gear[gear_count].cost) != "string" && chargen_gear[gear_count].cost <= current_character.current_funds) {
 					html += "<td>\$" + chargen_gear[gear_count].cost + "</td>";
 					html += "<td>";
-					html += "<button ref=\"" + chargen_gear[gear_count].name + "\" class=\"js-buy-gear btn btn-xs btn-primary\">Buy</button>";
-					html += "<button ref=\"" + chargen_gear[gear_count].name + "\" title=\"Add this gear for free\" class=\"js-add-gear btn btn-xs btn-warning\">Free</button>";
+					html += "<button book=\"" + chargen_gear[gear_count].book.id + "\" ref=\"" + chargen_gear[gear_count].name + "\" class=\"js-buy-gear btn btn-xs btn-primary\">Buy</button>";
+					html += "<button book=\"" + chargen_gear[gear_count].book.id + "\" ref=\"" + chargen_gear[gear_count].name + "\" title=\"Add this gear for free\" class=\"js-add-gear btn btn-xs btn-warning\">Free</button>";
 					html += "</td>";
 				} else {
 					if(typeof(chargen_gear[gear_count].cost) != "string")
@@ -1055,7 +1073,7 @@ function make_gear_available_list() {
 					else
 						html += "<td>" + chargen_gear[gear_count].cost + "</td>";
 					html += "<td>";
-					html += "<button ref=\"" + chargen_gear[gear_count].name + "\" title=\"Add this gear for free\" class=\"js-add-gear btn btn-xs btn-warning\">Free</button>";
+					html += "<button book=\"" + chargen_gear[gear_count].book.id + "\" ref=\"" + chargen_gear[gear_count].name + "\" title=\"Add this gear for free\" class=\"js-add-gear btn btn-xs btn-warning\">Free</button>";
 					html += "</td>";
 				}
 				html += "</tr>";
@@ -1071,7 +1089,13 @@ function make_gear_available_list() {
 
 	$(".js-buy-gear").unbind("click");
 	$(".js-buy-gear").click( function() {
-		current_character.add_gear( $(this).attr("ref") );
+		current_character.add_gear(
+			$(this).attr("ref"),
+			null,
+			null,
+			null,
+			$(this).attr("book")
+		);
 		current_character.calculate();
 		localStorage["current_character"] = current_character.export_json(".js-chargen-json-code");
 		propagate_gear_section();
@@ -1079,7 +1103,13 @@ function make_gear_available_list() {
 
 	$(".js-add-gear").unbind("click");
 	$(".js-add-gear").click( function() {
-		current_character.add_gear( $(this).attr("ref") , null, 1, 1);
+		current_character.add_gear(
+			$(this).attr("ref"),
+			null,
+			1,
+			1,
+			$(this).attr("book")
+		);
 		current_character.calculate();
 		localStorage["current_character"] = current_character.export_json(".js-chargen-json-code");
 		propagate_gear_section();
@@ -1088,8 +1118,8 @@ function make_gear_available_list() {
 
 function propagate_attributes_section() {
 	// Fill in Attributes Section
+	display_remaining_attribute_points(".js-chargen-attributes-points-label");
 	if( !current_character.is_complete() ) {
-		display_remaining_attribute_points(".js-chargen-attributes-points-label");
 		propagate_attribute_options(current_character.attributes.agility, "agility");
 		propagate_attribute_options(current_character.attributes.smarts, "smarts");
 		propagate_attribute_options(current_character.attributes.spirit, "spirit");

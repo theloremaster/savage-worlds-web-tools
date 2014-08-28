@@ -1188,9 +1188,13 @@ character_class.prototype = {
 
 		if(this.selected_gear.length > 0) {
 			for(gear_count = 0; gear_count < this.selected_gear.length; gear_count++ ) {
+				book_id = 0;
+				if( this.selected_gear[gear_count].book && this.selected_gear[gear_count].book.id )
+					book_id = this.selected_gear[gear_count].book.id;
 				export_gear = {
 					name: this.selected_gear[gear_count].name,
 					cost: this.selected_gear[gear_count].cost,
+					book: book_id,
 					count: this.selected_gear[gear_count].count,
 					free: this.selected_gear[gear_count].free
 				}
@@ -1246,10 +1250,13 @@ character_class.prototype = {
 		return html_return;
 	},
 
-	add_gear: function( gear_name, gear_cost, gear_count, for_free ) {
+	add_gear: function( gear_name, gear_cost, gear_count, for_free, from_book ) {
 
 		if(!gear_count)
 			gear_count = 1;
+
+		if(!from_book)
+			from_book = 0;
 
 		gear_count = gear_count / 1;
 
@@ -1262,8 +1269,15 @@ character_class.prototype = {
 		for( gear_counter = 0; gear_counter < this.selected_gear.length; gear_counter++) {
 			if( this.selected_gear[gear_counter].name.trim().toLowerCase() == gear_name.trim().toLowerCase() )  {
 				if(this.selected_gear[gear_counter].free == for_free) {
-					this.selected_gear[gear_counter].count += gear_count;
-					return this.selected_gear[gear_counter];
+					if( from_book > 0 ) {
+						if(this.selected_gear[gear_counter].book.id == from_book) {
+							this.selected_gear[gear_counter].count += gear_count;
+							return this.selected_gear[gear_counter];
+						}
+					} else {
+						this.selected_gear[gear_counter].count += gear_count;
+						return this.selected_gear[gear_counter];
+					}
 				}
 			}
 		}
@@ -1272,9 +1286,18 @@ character_class.prototype = {
 
 		for( gear_counter = 0; gear_counter < chargen_gear.length; gear_counter++) {
 			if(gear_name.trim().toLowerCase() == chargen_gear[gear_counter].name.trim().toLowerCase() ) {
-				gear_object = clone_object(chargen_gear[gear_counter])
-				gear_object.count = gear_count;
-				gear_object.free = for_free;
+				if( from_book > 0 ) {
+					if(chargen_gear[gear_counter].book.id == from_book) {
+						gear_object = clone_object(chargen_gear[gear_counter])
+						gear_object.count = gear_count;
+						gear_object.free = for_free;
+					}
+				} else {
+					gear_object = clone_object(chargen_gear[gear_counter])
+					gear_object.count = gear_count;
+					gear_object.free = for_free;
+				}
+
 			}
 		}
 
@@ -1557,11 +1580,14 @@ character_class.prototype = {
 						imported_object.gear[import_gear_counter].free = 0;
 					if(!imported_object.gear[import_gear_counter].count)
 						imported_object.gear[import_gear_counter].count = 1;
+					if(!imported_object.gear[import_gear_counter].book)
+						imported_object.gear[import_gear_counter].book = 0;
 					this.add_gear(
 						imported_object.gear[import_gear_counter].name,
 						imported_object.gear[import_gear_counter].cost,
 						imported_object.gear[import_gear_counter].count,
-						imported_object.gear[import_gear_counter].free
+						imported_object.gear[import_gear_counter].free,
+						imported_object.gear[import_gear_counter].book
 					);
 				}
 			}

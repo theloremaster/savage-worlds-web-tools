@@ -37,11 +37,12 @@
 * Feature Complete
 * Data Entry
 
+###Powers Selection
+* Buy
+* Add for Free
+* Data Entry
 
 ##What Needs To Be Done
 
-###Equipment. 
-* I'll probably only handle the PERSONAL equipment at first, leaving the big stuff like Tank Cannons and Cars out of it.
- 
 ###Advancement
 * There's lots here to think about.... possibly adding XP and then "slots" show up of how to advance your character.
