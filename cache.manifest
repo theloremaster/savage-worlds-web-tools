@@ -4,7 +4,6 @@ CACHE MANIFEST
 # August 27, 2014 revision 4
 # Chargen: Quick renaming of select dropdown, and fix of img 404
 
-
 CACHE:
 http://jdgwf.github.io/savage-worlds-web-tools/extras_view.html
 http://jdgwf.github.io/savage-worlds-web-tools/vehicle_creator.html
@@ -20,6 +19,7 @@ http://jdgwf.github.io/savage-worlds-web-tools/robot_creator.html
 http://jdgwf.github.io/savage-worlds-web-tools/power_armor_creator.html
 http://jdgwf.github.io/savage-worlds-web-tools/walker_creator.html
 http://jdgwf.github.io/savage-worlds-web-tools/index.html
+http://jdgwf.github.io/savage-worlds-web-tools/cards_test.html
 
 http://jdgwf.github.io/savage-worlds-web-tools/js/jquery-1.10.2.min.js
 http://jdgwf.github.io/savage-worlds-web-tools/js/background.js
@@ -41,6 +41,63 @@ http://jdgwf.github.io/savage-worlds-web-tools/img/dice/d6.png
 http://jdgwf.github.io/savage-worlds-web-tools/img/dice/d8.png
 http://jdgwf.github.io/savage-worlds-web-tools/img/dice/d10.png
 http://jdgwf.github.io/savage-worlds-web-tools/img/dice/d12.png
+
+http://jdgwf.github.io/savage-worlds-web-tools/img/cards/10c.svg
+http://jdgwf.github.io/savage-worlds-web-tools/img/cards/10D.svg
+http://jdgwf.github.io/savage-worlds-web-tools/img/cards/10h.svg
+http://jdgwf.github.io/savage-worlds-web-tools/img/cards/10s.svg
+http://jdgwf.github.io/savage-worlds-web-tools/img/cards/2C.svg
+http://jdgwf.github.io/savage-worlds-web-tools/img/cards/2d.svg
+http://jdgwf.github.io/savage-worlds-web-tools/img/cards/2h.svg
+http://jdgwf.github.io/savage-worlds-web-tools/img/cards/2s.svg
+http://jdgwf.github.io/savage-worlds-web-tools/img/cards/3c.svg
+http://jdgwf.github.io/savage-worlds-web-tools/img/cards/3d.svg
+http://jdgwf.github.io/savage-worlds-web-tools/img/cards/3h.svg
+http://jdgwf.github.io/savage-worlds-web-tools/img/cards/3s.svg
+http://jdgwf.github.io/savage-worlds-web-tools/img/cards/4c.svg
+http://jdgwf.github.io/savage-worlds-web-tools/img/cards/4d.svg
+http://jdgwf.github.io/savage-worlds-web-tools/img/cards/4h.svg
+http://jdgwf.github.io/savage-worlds-web-tools/img/cards/4s.svg
+http://jdgwf.github.io/savage-worlds-web-tools/img/cards/5c.svg
+http://jdgwf.github.io/savage-worlds-web-tools/img/cards/5d.svg
+http://jdgwf.github.io/savage-worlds-web-tools/img/cards/5h.svg
+http://jdgwf.github.io/savage-worlds-web-tools/img/cards/5s.svg
+http://jdgwf.github.io/savage-worlds-web-tools/img/cards/6c.svg
+http://jdgwf.github.io/savage-worlds-web-tools/img/cards/6d.svg
+http://jdgwf.github.io/savage-worlds-web-tools/img/cards/6h.svg
+http://jdgwf.github.io/savage-worlds-web-tools/img/cards/6s.svg
+http://jdgwf.github.io/savage-worlds-web-tools/img/cards/7c.svg
+http://jdgwf.github.io/savage-worlds-web-tools/img/cards/7d.svg
+http://jdgwf.github.io/savage-worlds-web-tools/img/cards/7h.svg
+http://jdgwf.github.io/savage-worlds-web-tools/img/cards/7s.svg
+http://jdgwf.github.io/savage-worlds-web-tools/img/cards/8c.svg
+http://jdgwf.github.io/savage-worlds-web-tools/img/cards/8d.svg
+http://jdgwf.github.io/savage-worlds-web-tools/img/cards/8h.svg
+http://jdgwf.github.io/savage-worlds-web-tools/img/cards/8s.svg
+http://jdgwf.github.io/savage-worlds-web-tools/img/cards/9c.svg
+http://jdgwf.github.io/savage-worlds-web-tools/img/cards/9d.svg
+http://jdgwf.github.io/savage-worlds-web-tools/img/cards/9h.svg
+http://jdgwf.github.io/savage-worlds-web-tools/img/cards/9s.svg
+http://jdgwf.github.io/savage-worlds-web-tools/img/cards/ac.svg
+http://jdgwf.github.io/savage-worlds-web-tools/img/cards/ad.svg
+http://jdgwf.github.io/savage-worlds-web-tools/img/cards/ah.svg
+http://jdgwf.github.io/savage-worlds-web-tools/img/cards/as.svg
+http://jdgwf.github.io/savage-worlds-web-tools/img/cards/back_blue.svg
+http://jdgwf.github.io/savage-worlds-web-tools/img/cards/back_red.svg
+http://jdgwf.github.io/savage-worlds-web-tools/img/cards/jc.svg
+http://jdgwf.github.io/savage-worlds-web-tools/img/cards/jd.svg
+http://jdgwf.github.io/savage-worlds-web-tools/img/cards/jh.svg
+http://jdgwf.github.io/savage-worlds-web-tools/img/cards/job.svg
+http://jdgwf.github.io/savage-worlds-web-tools/img/cards/jor.svg
+http://jdgwf.github.io/savage-worlds-web-tools/img/cards/js.svg
+http://jdgwf.github.io/savage-worlds-web-tools/img/cards/kc.svg
+http://jdgwf.github.io/savage-worlds-web-tools/img/cards/kd.svg
+http://jdgwf.github.io/savage-worlds-web-tools/img/cards/kh.svg
+http://jdgwf.github.io/savage-worlds-web-tools/img/cards/ks.svg
+http://jdgwf.github.io/savage-worlds-web-tools/img/cards/qc.svg
+http://jdgwf.github.io/savage-worlds-web-tools/img/cards/qd.svg
+http://jdgwf.github.io/savage-worlds-web-tools/img/cards/qh.svg
+http://jdgwf.github.io/savage-worlds-web-tools/img/cards/qs.svg
 
 http://jdgwf.github.io/savage-worlds-web-tools/fonts/glyphicons-halflings-regular.eot
 http://jdgwf.github.io/savage-worlds-web-tools/fonts/glyphicons-halflings-regular.svg
