@@ -1,0 +1,112 @@
+<!DOCTYPE HTML>
+<html manifest="./cache.manifest">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<title>Savage Worlds Web Tools</title>
+	<meta name="description" value="This web app is a collection of tools to help make your preperation and gameplay in Savage Worlds pen and paper role playing game run much more smoothly. I'm doing my best to make sure that all tools look good from phone-sized screens to full desktop boxes, but I'm targeting iPad sized screens as an optimum.">
+	<meta name="keywords" value="savage worlds web tools,savage worlds online tools,savage worlds ipad app,savage worlds android app,savage worlds iphone app,savage worlds,savage worlds tools">
+	<link rel="stylesheet" href="./css/bootstrap.min.css" type="text/css">
+	<link rel="stylesheet" href="./css/style.css" type="text/css">
+	<link rel="icon" type="image/png" href="./img/sw_fan-78x50.png" />
+	<link rel="apple-touch-icon" href="./img/sw_fan-256.png">
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="format-detection" content="telephone=no">
+</head>
+<body class="">
+<div class="header-bar">
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="bug-tweet pull-right text-right">Found a bug?<br /><a href="https://twitter.com/intent/tweet?screen_name=Gauthic&text=%23SWWebTools%20Main%20Bug%3A%20" class="twitter-mention-button" data-related="Gauthic">Tweet to @Gauthic</a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script></a></div>
+				<h1><a class="ios_app_click" href="./index.html" title="Savage Worlds Web Tools">Savage Worlds Web Tools</a></h1>
+				<p class="js-smarty-comment">This web app is a collection of tools to help make your preperation and gameplay in Savage Worlds pen and paper role playing game run much more smoothly. I'm doing my best to make sure that all tools look good from phone-sized screens to full desktop boxes, but I'm targeting iPad sized screens as an optimum.</p>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="container">
+	<div class="row">
+		<div class="col-xs-12"><h3>Cards Logic Testing</h3></div>
+	</div>
+	<div class="row">
+		<div class="col-xs-3">
+			<h4>Functions</h4>
+			<button class="js-draw-card">Draw A Card</button>
+			<button class="js-shuffle-deck">Shuffle Deck</button>
+		</div>
+		<div class="col-xs-9 ">
+			<h4>Results</h4>
+			<div class="js-cards-remaining"></div>
+			<div class="js-card-results">
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+<div class="footer">
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-12">
+				<a href="https://www.peginc.com/licensing/" title="Click here for more info on Pinnacle Entertainment Groups's licensing policies"><img src="./img/sw_fan-78x50.png" alt="Savage Worlds Fan Logo" /></a>
+				<p>This tool references the Savage Worlds game system, available from Pinnacle Entertainment Group at <a href="http:/www.peginc.com" title="Pinnacle Entertainment Group">www.peginc.com</a>. Savage Worlds and all associated logos and trademarks are copyrights of Pinnacle Entertainment Group. Used with permission. Pinnacle makes no representation or warranty as to the quality, viability, or suitability for purpose of this product.</p>
+
+				<p>Many thanks to <a href="http://glyphicons.com/" title="Glyphicons">Glyphicons</a> for providing their Halflings for users of <a href="http://getbootstrap.com/" title="Bootstrap">Bootstrap 3</a> for free!</p>
+
+				<p>Thanks to <a href="http://iconcubic.deviantart.com/">iconcubic</a> and his <a href="http://www.iconeasy.com/iconset/dnd-dice-icons/">DnD Icons Set</a> for the dice icons. Used for free as per the <a href="http://www.iconeasy.com/icon/license/Object/DnD%20Dice/license.txt">license</a></p>
+
+				<p>You can contribute to this project at <a href="https://github.com/jdgwf/savage-worlds-web-tools">https://github.com/jdgwf/savage-worlds-web-tools</a></p>
+
+
+				<p class="text-right">Updated/Version: 2014-08-27-04</p>
+
+			</div>
+		</div>
+	</div>
+</div>
+
+
+</body>
+
+<script src="./js/jquery-1.10.2.min.js"></script>
+<script src="./js/bootstrap.min.js"></script>
+<script src="./js/swwt.min.js"></script>
+<script>var smarty_comment_section = 'index';</script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-41054868-5', 'jdgwf.github.io');
+  ga('send', 'pageview');
+
+</script>
+<script>
+var deck = new deck_of_cards();
+deck.shuffle();
+print_remaining_cards(deck);
+$(".js-shuffle-deck").click( function() {
+	deck.shuffle();
+	$(".js-card-results").html('');
+	print_remaining_cards(deck) ;
+});
+
+$(".js-draw-card").click( function() {
+	card = deck.draw();
+	current_html = $(".js-card-results").html();
+	current_html += "<img width=\"100px\" src=\"" + card.image  + "\" title=\"" + card.name + "\" />";
+	$(".js-card-results").html(current_html);
+	print_remaining_cards(deck) ;
+});
+
+function print_remaining_cards(deck) {
+	$(".js-cards-remaining").text( deck.cards.length + " cards remaining in this deck");
+}
+
+</script>
+</html>
