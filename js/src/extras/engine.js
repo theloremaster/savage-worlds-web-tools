@@ -348,10 +348,12 @@ function updateLocalStats() {
 
 		$('.js-clear-local').off('click');
 		$(".js-clear-local").click( function() {
-			if(confirm("Are you sure you want to clear out your local selection?")) {
-				localStorage.localStats = JSON.stringify(Array());
-				updateLocalStats();
-			}
+			bootbox.confirm("Are you sure you want to clear out your local selection?", function(ok_clicked) {
+				if(ok_clicked) {
+					localStorage.localStats = JSON.stringify(Array());
+					updateLocalStats();
+				}
+			});
 		});
 
 		$('.js-add-local').off('click');

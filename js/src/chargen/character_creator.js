@@ -185,12 +185,14 @@ function propagate_arcane_background_options() {
 
 	$(".js-delete-power-button").unbind("click");
 	$(".js-delete-power-button").click( function() {
-		if( confirm("Are you sure you want to delete this power?") ) {
-			shortname = $(this).attr("shortname");
-			trapping = $(this).attr("trap");
-			current_character.remove_power( shortname, trapping);
-			refresh_chargen_page();
-		}
+		var shortname = $(this).attr("shortname");
+		var	trapping = $(this).attr("trap");
+		bootbox.confirm("Are you sure you want to delete this power?", function(ok_clicked) {
+			if(ok_clicked) {
+				current_character.remove_power( shortname, trapping);
+				refresh_chargen_page();
+			}
+		});
 
 	});
 
@@ -571,18 +573,23 @@ function propagate_advancement_section() {
 
 	$(".js-complete-character").unbind("click");
 	$(".js-complete-character").click( function() {
-		if( confirm("This will 'finalize' your character creation and change the interface to advancement mode. You will only be able to change attributes, edges, skills via the advancement interface.\n\nWould you like to continue?") ) {
-			current_character.creation_completed = true;
-			refresh_chargen_page();
-		}
+		bootbox.confirm("This will 'finalize' your character creation and change the interface to advancement mode. You will only be able to change attributes, edges, skills via the advancement interface.<br /><br />Would you like to continue?", function(ok_clicked) {
+			if(ok_clicked) {
+
+				current_character.creation_completed = true;
+				refresh_chargen_page();
+			}
+		});
 	});
 
 	$(".js-remove-advancements-character").unbind("click");
 	$(".js-remove-advancements-character").click( function() {
-		if( confirm("This will remove ALL advancements from this character, and you'll have to re-add them manually when you are ready to advance again.\n\nWould you like to continue?") ) {
-			current_character.creation_completed = false;
-			refresh_chargen_page();
-		}
+		bootbox.confirm("This will remove <strong>all</strong> advancements from this character, and you'll have to re-add them manually when you are ready to advance again.<br /><br />Would you like to continue?", function(ok_clicked) {
+			if(ok_clicked) {
+				current_character.creation_completed = false;
+				refresh_chargen_page();
+			}
+		});
 	});
 }
 
@@ -682,14 +689,16 @@ function propagate_hindrances_section() {
 	$(".js-list-hindrances").html(list_hindrance_html);
 	$(".js-delete-hindrance-button").unbind("click");
 	$(".js-delete-hindrance-button").click( function() {
-		if(
-			confirm( "Are you sure you want to remove the hindrance " + $(this).attr("relname") )
-		) {
-			current_character.remove_hindrance(
-				$(this).attr("relname")
-			);
-			refresh_chargen_page();
-		}
+		var remove_hindrance_name = $(this).attr("relname");
+		bootbox.confirm("Are you sure you want to remove the hindrance " + $(this).attr("relname"), function(ok_clicked) {
+			if(ok_clicked) {
+
+				current_character.remove_hindrance(
+					remove_hindrance_name
+				);
+				refresh_chargen_page();
+			}
+		});
 	});
 
 }
@@ -771,14 +780,14 @@ function propagate_edges_section() {
 	$(".js-delete-edge-button").unbind("click");
 	$(".js-delete-edge-button").click( function() {
 		selected_edge = $(this).attr("relname");
-		if(
-			confirm( "Are you sure you want to remove the edge " + selected_edge )
-		) {
-			current_character.remove_edge(
-				selected_edge
-			);
-			refresh_chargen_page();
-		}
+		bootbox.confirm("Are you sure you want to remove the edge " + selected_edge, function(ok_clicked) {
+			if(ok_clicked) {
+				current_character.remove_edge(
+					selected_edge
+				);
+				refresh_chargen_page();
+			}
+		});
 	});
 
 	$(".js-add-edge").html(add_edge_html);
@@ -1172,18 +1181,22 @@ function init_main_buttons() {
 
 	$(".js-new-character").unbind("click");
 	$(".js-new-character").click( function() {
-		if(confirm("Are you sure you want to clear out your current character?") ) {
-			current_character.reset();
-			$(".js-chargen-name").val(current_character.name);
-			$(".js-chargen-description").val(current_character.description);
 
-			current_gear_book = "";
-			current_gear_general = "";
-			current_gear_class = "";
-			current_gear_type = "";
+		bootbox.confirm("Are you sure you want to clear out your current character?", function(ok_clicked) {
+			if(ok_clicked) {
+				current_character.reset();
+				$(".js-chargen-name").val(current_character.name);
+				$(".js-chargen-description").val(current_character.description);
 
-			refresh_chargen_page();
-		}
+				current_gear_book = "";
+				current_gear_general = "";
+				current_gear_class = "";
+				current_gear_type = "";
+
+				refresh_chargen_page();
+			}
+		});
+
 
 	});
 
@@ -1292,25 +1305,28 @@ function propagate_character_load_list() {
 
 	$(".js-delete-char-data").unbind("click");
 	$(".js-delete-char-data").click( function() {
-		if( confirm("Are you sure you want to delete this character?") ) {
-			selectedItemIndex = $(this).attr("ref");
+		var selectedItemIndex = $(this).attr("ref");
+		bootbox.confirm("Are you sure you want to delete this character?", function(ok_clicked) {
 
-			try {
-				current_characters = JSON.parse(localStorage.characters);
-			}
-			catch(e) {
-				current_characters = Array();
-			}
+			if(ok_clicked) {
 
-			if( typeof(current_characters[selectedItemIndex]) != "undefined" ) {
-				if( typeof(current_characters[selectedItemIndex].data) != "undefined" ) {
-					current_characters.splice(selectedItemIndex, 1);
-					localStorage.characters = JSON.stringify(current_characters);
+				try {
+					current_characters = JSON.parse(localStorage.characters);
 				}
-			}
+				catch(e) {
+					current_characters = Array();
+				}
 
-			propagate_character_load_list();
-		}
+				if( typeof(current_characters[selectedItemIndex]) != "undefined" ) {
+					if( typeof(current_characters[selectedItemIndex].data) != "undefined" ) {
+						current_characters.splice(selectedItemIndex, 1);
+						localStorage.characters = JSON.stringify(current_characters);
+					}
+				}
+
+				propagate_character_load_list();
+			}
+		});
 
 	} );
 }
@@ -1356,10 +1372,13 @@ function propagate_perks_section() {
 
 	$(".js-delete-perk-button").unbind("click");
 	$(".js-delete-perk-button").click( function() {
-		if( confirm("Are you sure you want to remove this perk?")) {
-			current_character.remove_perk( $(this).attr("relindex") );
-			refresh_chargen_page();
-		}
+		bootbox.confirm("Are you sure you want to remove this perk?", function(ok_clicked) {
+			if(ok_clicked) {
+
+				current_character.remove_perk( $(this).attr("relindex") );
+				refresh_chargen_page();
+			}
+		});
 	});
 
 	add_perk_html = "";

@@ -209,12 +209,14 @@ function propogate_load_list() {
 	$(".js-load-list").html( html );
 
 	$(".js-delete-data").click( function() {
-		if( confirm("Are you sure you want to delete this item?") ) {
-			selectedItemIndex = $(this).attr("ref");
-			delete_item_from_localstorage(selectedItemIndex);
+		bootbox.confirm("Are you sure you want to delete this item?", function(ok_clicked) {
+			if(ok_clicked) {
+				selectedItemIndex = $(this).attr("ref");
+				delete_item_from_localstorage(selectedItemIndex);
 
-			propogate_load_list();
-		}
+				propogate_load_list();
+			}
+		});
 
 	} );
 
@@ -269,13 +271,15 @@ $(".js-load-data").click( function() {
 
 
 $(".js-new-item").click( function() {
-	if( confirm("Are you sure you want to clear your current " + current_selected_object.object_label + "?")) {
-		current_selected_object.reset();
-		$(".js-set-name").val("");
-		$(".js-set-description").val("");
-		refresh_creator_page();
-		propogate_load_list();
-	}
+	bootbox.confirm("Are you sure you want to clear your current " + current_selected_object.object_label + "?", function(ok_clicked) {
+		if(ok_clicked) {
+			current_selected_object.reset();
+			$(".js-set-name").val("");
+			$(".js-set-description").val("");
+			refresh_creator_page();
+			propogate_load_list();
+		}
+	});
 } );
 
 $(".js-bb-code").click( function() {
