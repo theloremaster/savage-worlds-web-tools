@@ -102,7 +102,7 @@ function propagate_arcane_background_options() {
 	html = "";
 	if( current_character.arcane_background > 0) {
 
-		if( !current_character.is_complete() ) {
+		if( !current_character.is_complete() || 1 == 1) {
 			html += "<label>Arcane Background Type<br />";
 			html += "<select class=\"js-select-arcane-bg\">";
 
@@ -389,8 +389,8 @@ function propagate_skills_sections() {
 		current_skill = current_character.get_skill( chargen_skills[skills_counter].name );
 		skills_of = Array();
 		if( current_skill && !current_skill.specify_text ) {
-			value_label = attribute_images[current_skill.value];
-			if(current_skill.value == 0)
+			value_label = attribute_images[current_skill.total];
+			if(current_skill.total == 0)
 				value_label = " - ";
 
 			html += current_skill.name + ": " + value_label;
@@ -436,8 +436,8 @@ function propagate_skills_sections() {
 			for(specify_skills_counter = 0 ; specify_skills_counter < skills_of.length; specify_skills_counter++) {
 
 				current_sub_skill = skills_of[specify_skills_counter];
-				value_label = attribute_images[current_sub_skill.value];
-				if(current_sub_skill.value == 0)
+				value_label = attribute_images[current_sub_skill.total];
+				if(current_sub_skill.total == 0)
 					value_label = " - ";
 				current_sub_name = current_sub_skill.name + ": " + current_sub_skill.specify_text;
 
@@ -465,8 +465,8 @@ function propagate_skills_sections() {
 		current_skill = current_character.get_skill( current_character.arcane_background_selected.skill.name );
 		skills_of = Array();
 		if( current_skill ) {
-			value_label = attribute_images[current_skill.value];
-			if(current_skill.value == 0)
+			value_label = attribute_images[current_skill.total];
+			if(current_skill.total == 0)
 				value_label = " - ";
 
 			html += current_skill.name + ": " + value_label;
@@ -559,23 +559,188 @@ function propagate_skills_sections() {
 		refresh_chargen_page();
 	});
 }
+function get_advancement_by_short_name( short_name ) {
+	for(gasbsnc = 0; gasbsnc < chargen_advancements.length; gasbsnc++ )
+		if(chargen_advancements[gasbsnc].short_name == short_name)
+			return chargen_advancements[gasbsnc];
 
+	return false;
+}
 function propagate_advancement_section() {
 	html = "";
 	if( current_character.is_complete() ){
 		html += "<p>Your character creation is complete - advancement enabled. If this is not what you want, click the button below.</p>";
 		html += "<button type='button' class='js-remove-advancements-character btn btn-danger'>Remove Advancements</button>";
+		html += "<hr />";
+		html += "<label>Experience Points: <input type=\"numeric\" class=\"numeric-only js-set-xp\" value=\"" + current_character.get_xp() + "\" /></label>";
+		html += "<label>Rank: " + current_character.get_rank_name() + "</label>";
+		html += "<label>Advancement Slots: " + current_character.available_advancements + "</label>";
+		for(advc = 0; advc < current_character.available_advancements; advc++) {
+			if(advc == 0)
+				html += "<h5>Novice</h5>";
+			if(advc == 4)
+				html += "<h5>Seasoned</h5>";
+			if(advc == 8)
+				html += "<h5>Veteran</h5>";
+			if(advc == 12)
+				html += "<h5>Heroic</h5>";
+			if(advc == 16)
+				html += "<h5>Legendary</h5>";
+
+			if( current_character.selected_advancements[advc] ) {
+				html += "<div class=\"adv-line\">";
+				adv_type = get_advancement_by_short_name(current_character.selected_advancements[advc].short_name);
+				html += adv_type.name + ": ";
+				html += current_character.selected_advancements[advc].applies_to1;
+				if( current_character.selected_advancements[advc].applies_to2 != "" && current_character.selected_advancements[advc].applies_to2 != null)
+					html += ", " + current_character.selected_advancements[advc].applies_to2;
+				html += "<button class=\"btn btn-danger btn-xs js-remove-advance\" ref=\"" + advc + "\">Remove</button>";
+				html += "</div>";
+			} else {
+				html += "<div class=\"adv-line\">";
+				html += "( unused slot )";
+				html += "<button class=\"btn btn-primary btn-xs js-add-advance\" ref=\"" + advc + "\">Select</button>";
+				html += "</div>";
+			}
+		}
 	} else {
 		html += "<p>Your novice character is still in creation mode. Click on the complete button below to start standard character advancement.</p>";
 		html += "<button type='button' class='js-complete-character btn btn-primary'>Complete</button>";
 	}
+
 	$(".js-advancement-area").html(html);
+
+	$(".js-add-advance").unbind("click");
+	$(".js-add-advance").click(function(event) {
+		var current_add_advancement = $(this).attr("ref") / 1;
+
+		html = "";
+		// TODO propogate advancement dialog as per the advancement selected
+		for(advc = 0; advc < chargen_advancements.length; advc++){
+			checked = "";
+			if(advc == 0) {
+				checked = " checked='checked'";
+				first_short = chargen_advancements[advc].short_name ;
+			}
+			html += "<label><input type=\"radio\" " + checked + " name=\"js-advance-shortname\" value=\"" + chargen_advancements[advc].short_name + "\"> " + chargen_advancements[advc].full + " </label>";
+		}
+
+		html += "<div class=\"js-advance-details js-advance-edge-box\"><label>New Edge: <select class=\"js-advance-select-edge\">";
+		html += "<option value=\"\">- Select an Edge-</option>";
+		html += get_add_edge_options();
+		html += "</select></label></div>";
+
+		html += "<div style=\"display: none\" class=\"js-advance-details js-advance-skill-box\">";
+		html += "Advance Skill Options";
+		html += "</div>";
+
+		html += "<div style=\"display: none\" class=\"js-advance-details js-advance-2skills-box\">";
+		html += "Advance 2 Skills Options";
+		html += "</div>";
+
+		html += "<div style=\"display: none\" class=\"js-advance-details js-advance-add-skill-box\">";
+		html += "Add Skill Options";
+		html += "</div>";
+
+		html += "<div style=\"display: none\" class=\"js-advance-details js-advance-attribute-box\">";
+		html += "Advance Attribute Options";
+		html += "</div>";
+
+		// change the following to hidden once live....
+		html += "<input type=\"text\" class=\"js-add-advance-index\" value=\"" + current_add_advancement + "\"><br />";
+		html += "<input type=\"text\" class=\"js-add-advance-short\" value=\"" + first_short + "\"><br />";
+		html += "<input type=\"text\" class=\"js-add-advance-applies1\" value=\"\"><br />";
+		html += "<input type=\"text\" class=\"js-add-advance-applies2\" value=\"\"><br />";
+
+		$(".js-advancements-available").html(html);
+
+		$(".js-advance-select-edge").unbind('change');
+		$('.js-advance-select-edge').change( function() {
+			$(".js-add-advance-applies1").val( $(this).val().trim() );
+			$(".js-add-advance-applies2").val('');
+		});
+
+		$("input[name=js-advance-shortname]").unbind('change');
+		$("input[name=js-advance-shortname]").click( function() {
+			selected_val = $(this).val();
+
+			$(".js-add-advance-applies1").val('');
+			$(".js-add-advance-applies2").val('');
+
+			$(".js-advance-details").hide();
+			$(".js-add-advance-short").val( selected_val  );
+
+			if( selected_val == "gain-edge") {
+				$(".js-advance-edge-box").show();
+			}
+			if( selected_val == "increase-skill") {
+				$(".js-advance-skill-box").show();
+			}
+			if( selected_val == "increase-2skills") {
+				$(".js-advance-2skills-box").show();
+			}
+			if( selected_val == "add-skill") {
+				$(".js-advance-add-skill-box").show();
+			}
+			if( selected_val == "increase-attribute") {
+				$(".js-advance-attribute-box").show();
+			}
+
+		});
+
+		$(".js-add-advancement-button").unbind("click");
+		$(".js-add-advancement-button").click( function() {
+			current_character.set_advancement(
+				$(".js-add-advance-index").val() / 1,
+				$(".js-add-advance-short").val(),
+				$(".js-add-advance-applies1").val(),
+				$(".js-add-advance-applies2").val()
+			);
+			refresh_chargen_page();
+		});
+
+		$('.js-advancement-dialog').modal();
+		refresh_chargen_page();
+	});
+
+	$(".js-remove-advance").unbind("click");
+	$(".js-remove-advance").click(function(event) {
+		var current_remove_advancement = $(this).attr("ref") / 1;
+		bootbox.confirm( "Are you sure you want to remove this advancement?<br /><br /><strong>WARNING</strong> - All advancements beyond this will also be removed.", function(clicked_ok) {
+			if(clicked_ok) {
+				current_character.clear_advancement( current_remove_advancement );
+				refresh_chargen_page();
+			}
+		});
+
+	});
+
+
+	$("input.numeric-only").unbind("keypress");
+	$("input.numeric-only").keypress(function(event) {
+		return /\d/.test(String.fromCharCode(event.keyCode));
+	});
+
+	$(".js-set-xp").unbind("change");
+	$(".js-set-xp").change( function() {
+		current_character.set_xp( $(this).val() );
+		refresh_chargen_page();
+		$(".js-set-xp").focus();
+		$(".js-set-xp").val( $(".js-set-xp").val() );
+	});
+
+	$(".js-set-xp").unbind("keyup");
+	$(".js-set-xp").keyup( function() {
+		current_character.set_xp( $(this).val() );
+		refresh_chargen_page();
+		$(".js-set-xp").focus();
+		$(".js-set-xp").val( $(".js-set-xp").val() );
+	});
 
 	$(".js-complete-character").unbind("click");
 	$(".js-complete-character").click( function() {
 		bootbox.confirm("This will 'finalize' your character creation and change the interface to advancement mode. You will only be able to change attributes, edges, skills via the advancement interface.<br /><br />Would you like to continue?", function(ok_clicked) {
 			if(ok_clicked) {
-
 				current_character.creation_completed = true;
 				refresh_chargen_page();
 			}
@@ -723,52 +888,11 @@ function propagate_edges_section() {
 		list_edges_html += "<p>No Edges Selected</p>";
 	}
 
-	add_edge_html = "";
+
 	if(current_character.edges_available > 0 ) {
-		add_edge_html += "<div class=\"row\"><div class=\"col-xs-12\"><h4>Add Edge</h4><select class=\"js-add-edge-select\">";
-		optgroup = "";
-		bookoptgroup = "";
-		for(edge_counter = 0; edge_counter < chargen_edges.length; edge_counter++) {
-			disabled = "";
-			check_this_rank_only = false;
-			if( chargen_edges[edge_counter].once_per_rank && chargen_edges[edge_counter].once_per_rank)
-				check_this_rank_only = true;
+		add_edge_html = "<div class=\"row\"><div class=\"col-xs-12\"><h4>Add Edge</h4><select class=\"js-add-edge-select\">";
+		add_edge_html += get_add_edge_options();
 
-			if( !chargen_edges[edge_counter].retakable )
-				retakable = false;
-			else
-				retakable = chargen_edges[edge_counter].retakable;
-
-			if(
-				( current_character.has_edge( chargen_edges[edge_counter].name, retakable, check_this_rank_only ) == true )
-					||
-				current_character.is_incompatible_with( chargen_edges[edge_counter] ) == true
-					||
-				current_character.edge_available( chargen_edges[edge_counter] ) == false
-
-			) {
-				disabled = " disabled=\"disabled\"";
-			}
-
-			if(!chargen_edges[edge_counter].unlisted || chargen_edges[edge_counter].unlisted < 1) {
-
-				if(bookoptgroup != chargen_edges[edge_counter].book.name ) {
-					if( bookoptgroup != "")
-						add_edge_html += "</optgroup>";
-					add_edge_html += "<optgroup label='" + chargen_edges[edge_counter].book.name + "'>";
-					bookoptgroup = chargen_edges[edge_counter].book.name;
-				}
-
-				if(optgroup != chargen_edges[edge_counter].category ) {
-					if( optgroup != "")
-						add_edge_html += "</optgroup>";
-					add_edge_html += "<optgroup label='&nbsp;&nbsp;&nbsp;&nbsp;" + chargen_edges[edge_counter].category + "'>";
-					optgroup = chargen_edges[edge_counter].category;
-				}
-
-				add_edge_html += "<option" + disabled + ">&nbsp;&nbsp;&nbsp;&nbsp;" + chargen_edges[edge_counter].name + "</option>";
-			}
-		}
 		add_edge_html += "</select></div></div><div class=\"row\">";
 		add_edge_html += "<div class=\"col-xs-12\">";
 		add_edge_html += "<button type\"button\" class=\"btn-sm pull-right btn btn-primary js-add-edge-button\">Add</button>";
@@ -798,6 +922,56 @@ function propagate_edges_section() {
 		refresh_chargen_page();
 	});
 
+}
+
+function get_add_edge_options() {
+
+	add_edge_html = "";
+	optgroup = "";
+	bookoptgroup = "";
+	for(edge_counter = 0; edge_counter < chargen_edges.length; edge_counter++) {
+		disabled = "";
+		check_this_rank_only = false;
+		if( chargen_edges[edge_counter].once_per_rank && chargen_edges[edge_counter].once_per_rank)
+			check_this_rank_only = true;
+
+		if( !chargen_edges[edge_counter].retakable )
+			retakable = false;
+		else
+			retakable = chargen_edges[edge_counter].retakable;
+
+		if(
+			( current_character.has_edge( chargen_edges[edge_counter].name, retakable, check_this_rank_only ) == true )
+				||
+			current_character.is_incompatible_with( chargen_edges[edge_counter] ) == true
+				||
+			current_character.edge_available( chargen_edges[edge_counter] ) == false
+
+		) {
+			disabled = " disabled=\"disabled\"";
+		}
+
+		if(!chargen_edges[edge_counter].unlisted || chargen_edges[edge_counter].unlisted < 1) {
+
+			if(bookoptgroup != chargen_edges[edge_counter].book.name ) {
+				if( bookoptgroup != "")
+					add_edge_html += "</optgroup>";
+				add_edge_html += "<optgroup label='" + chargen_edges[edge_counter].book.name + "'>";
+				bookoptgroup = chargen_edges[edge_counter].book.name;
+			}
+
+			if(optgroup != chargen_edges[edge_counter].category ) {
+				if( optgroup != "")
+					add_edge_html += "</optgroup>";
+				add_edge_html += "<optgroup label='&nbsp;&nbsp;&nbsp;&nbsp;" + chargen_edges[edge_counter].category + "'>";
+				optgroup = chargen_edges[edge_counter].category;
+			}
+
+			add_edge_html += "<option" + disabled + ">&nbsp;&nbsp;&nbsp;&nbsp;" + chargen_edges[edge_counter].name + "</option>";
+		}
+	}
+
+	return add_edge_html;
 }
 
 function propagate_gear_section() {

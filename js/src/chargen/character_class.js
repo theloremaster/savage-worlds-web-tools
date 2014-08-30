@@ -21,6 +21,7 @@ character_class.prototype = {
 		this.selected_powers = Array();
 
 		this.selected_edges = Array();
+		this.advancement_edges = Array();
 		this.selected_hindrances = Array();
 		this.selected_perks = Array();
 		this.selected_skills = Array();
@@ -47,11 +48,11 @@ character_class.prototype = {
 
 		// Attributes..
 		this.attributes_alloc = {
-			agility : 0,
-			smarts : 0,
-			spirit : 0,
-			strength : 0,
-			vigor : 0
+			agility : 1,
+			smarts : 1,
+			spirit : 1,
+			strength : 1,
+			vigor : 1
 		};
 
 		// Derived Stats..
@@ -175,24 +176,29 @@ character_class.prototype = {
 			this.skill_points -= (single_cost + double_cost * 2);
 		}
 
+		// Init final attribute values
 		this.attributes.agility = this.attributes_alloc.agility;
 		this.attributes.smarts = this.attributes_alloc.smarts;
 		this.attributes.spirit = this.attributes_alloc.spirit;
 		this.attributes.strength = this.attributes_alloc.strength;
 		this.attributes.vigor = this.attributes_alloc.vigor;
 
-		this.attribute_points = this.attribute_points - (this.attributes.agility - 1) * this.cost_to_raise.agility;
-		this.attribute_points = this.attribute_points - (this.attributes.smarts - 1) * this.cost_to_raise.smarts;
-		this.attribute_points = this.attribute_points - (this.attributes.spirit - 1) * this.cost_to_raise.spirit;
-		this.attribute_points = this.attribute_points - (this.attributes.strength - 1) * this.cost_to_raise.strength;
-		this.attribute_points = this.attribute_points - (this.attributes.vigor - 1) * this.cost_to_raise.vigor;
+		// remove allocated attribute points as assigned
+		this.attribute_points -= (this.attributes_alloc.agility - 1) * this.cost_to_raise.agility;
+		this.attribute_points -= (this.attributes_alloc.smarts - 1) * this.cost_to_raise.smarts;
+		this.attribute_points -= (this.attributes_alloc.spirit - 1) * this.cost_to_raise.spirit;
+		this.attribute_points -= (this.attributes_alloc.strength - 1) * this.cost_to_raise.strength;
+		this.attribute_points -= (this.attributes_alloc.vigor - 1) * this.cost_to_raise.vigor;
 
-		// Racial Attribute Price Adjustments
+		// Racial Attribute Adjustments
 		this.attributes.agility += this.race.attributes.agility;
 		this.attributes.smarts += this.race.attributes.smarts;
 		this.attributes.spirit += this.race.attributes.spirit;
 		this.attributes.strength += this.race.attributes.strength;
 		this.attributes.vigor += this.race.attributes.vigor;
+
+
+
 
 		// Calculate secondary Attributes
 		this.derived.pace = 6;
@@ -273,20 +279,7 @@ character_class.prototype = {
 			}
 		}
 
-		if( this.arcane_background > 0 ) {
-			if(this.arcane_background_selected) {
-				if(this.arcane_background_selected.power_points)
-					this.power_points_available += this.arcane_background_selected.power_points;
-				if(this.arcane_background_selected.starting_powers)
-					this.powers_available += this.arcane_background_selected.starting_powers;
 
-				this.powers_available -= this.selected_powers.length;
-			}
-		} else {
-			// remove any arcane items
-			this.arcane_background_selected = "";
-			this.selected_powers = Array();
-		}
 
 
 		// calculate parry
@@ -328,35 +321,76 @@ character_class.prototype = {
 		}
 
 
+		// remove bonuses to skills - will be re-added later during advancement processing
+		for(skc = 0; skc < this.selected_skills.length; skc++) {
+			this.selected_skills[skc].bonus = 0;
+		}
+
+		// Init Attributes Bonuses..
+		this.attributes_bonus = {
+			agility : 0,
+			smarts : 0,
+			spirit : 0,
+			strength : 0,
+			vigor : 0
+		};
+		this.advancement_edges = Array();
+
 		/* Advancements */
 		if( this.is_complete() ) {
 
-			if(this.xp < 20 ) {
-				this.rank = 0; // novice
-			} else {
-				if (this.xp <= 20 && this.xp < 40 ) {
-					this.rank = 1; // seasoned
-				} else
-				{
-					if (this.xp <= 40 && this.xp < 60) {
-						this.rank = 2; // veteran
-					} else
-					{
-						if ( this.xp <= 60 && this.xp < 80  ) {
-							this.rank = 3; // heroic
-						} else
-						{
-							this.rank = 4; // legen---waitforit--dary
-						}
-					}
-				}
-			}
+			this.rank = Math.floor(this.xp / 20);
+			if( this.rank > 4)
+				this.rank = 4;
 
 			// this.selected_advancements;
 			this.available_advancements = Math.floor(this.xp / 5);
 
 			// TODO - run through advancements, make effects on character
+			for(adc = 0; adc < this.available_advancements; adc++) {
+				if( typeof(this.selected_advancements[adc]) == "object" ) {
+					this.apply_advancement(
+						adc,
+						this.selected_advancements[adc].short_name,
+						this.selected_advancements[adc].applies_to1,
+						this.selected_advancements[adc].applies_to2
+					);
 
+				} else {
+					this.selected_advancements[adc] = "";
+				}
+			}
+
+			// calculate attributes after bonuses
+			this.attributes.agility += this.attributes_bonus.agility;
+			this.attributes.smarts += this.attributes_bonus.smarts;
+			this.attributes.spirit += this.attributes_bonus.spirit;
+			this.attributes.strength += this.attributes_bonus.strength;
+			this.attributes.vigor += this.attributes_bonus.vigor;
+
+
+			// Apply effects of advance edges
+			if(this.advancement_edges) {
+				for(adv_edge_counter = 0; adv_edge_counter < this.advancement_edges.length; adv_edge_counter++) {
+					if( this.advancement_edges[adv_edge_counter].char_effects )
+						this.advancement_edges[adv_edge_counter].char_effects( this );
+				}
+			}
+
+			if( this.arcane_background > 0 ) {
+				if(this.arcane_background_selected) {
+					if(this.arcane_background_selected.power_points)
+						this.power_points_available += this.arcane_background_selected.power_points;
+					if(this.arcane_background_selected.starting_powers)
+						this.powers_available += this.arcane_background_selected.starting_powers;
+
+					this.powers_available -= this.selected_powers.length;
+				}
+			} else {
+				// remove any arcane items
+				this.arcane_background_selected = "";
+				this.selected_powers = Array();
+			}
 		} else {
 			//reset xp and advancements and rank to 0
 			this.xp = 0;
@@ -376,6 +410,124 @@ character_class.prototype = {
 
 	},
 
+
+	clear_advancement: function( advancement_index ) {
+//		console.log( "clear_advancement: " + advancement_index);
+		advancement_index = advancement_index / 1;
+		for(advc = advancement_index; advc < this.selected_advancements.length; advc++) {
+			if( this.selected_advancements[advc] ) {
+				this.selected_advancements[advc] = "";
+			}
+		}
+
+		return true;
+	},
+
+	set_advancement: function( advancement_index, short_name, applies_to1, applies_to2 ) {
+
+		this.selected_advancements[advancement_index]  = {
+			short_name: short_name,
+			applies_to1: applies_to1,
+			applies_to2: applies_to2
+		};
+
+	},
+
+	advancement_already_taken_at_rank: function(  short_name, advancement_index, rank_level ) {
+		// console.log("advancement_already_taken_at_rank: " + short_name + ", " + advancement_index + ", " + rank_level);
+		advancement_index = advancement_index /1;
+		rank_level = rank_level /1;
+		for( aatarc = 0; aatarc < this.selected_advancements.length; aatarc++) {
+			current_rank = Math.floor(aatarc/4);
+
+			if( short_name.toLowerCase() == this.selected_advancements[aatarc].short_name) {
+				if( current_rank == rank_level && advancement_index != aatarc){
+					// console.log( short_name + ": " + current_rank + " == " + rank_level + " && " + advancement_index + " != " + aatarc);
+					return true;
+				}
+			}
+		}
+		return false;
+	},
+
+	edge_already_taken_at_rank: function( edge_name, edge_index, rank_level ) {
+		edge_index = edge_index /1 ;
+		rank_level = rank_level /1 ;
+		for( eatarc = 0; eatarc < this.selected_edges.length; eatarc++) {
+			current_rank = Math.floor(eatarc/4);
+			if( edge_name.toLowerCase().trim() == this.selected_edges[eatarc].name.toLowerCase().trim() )
+				if( this.selected_edges[eatarc].selected_rank / 1 == rank_level && edge_index != eatarc )
+					return true;
+		}
+		return false;
+	},
+
+	apply_advancement: function( advancement_index, short_name, applies_to1, applies_to2 ) {
+		// console.log( "apply_advancement: " + short_name + ", " + applies_to1 + ", " + applies_to2);
+		chosen_at_rank  = Math.floor(advancement_index/4);
+
+		if( short_name.toLowerCase() == "gain-edge" ) {
+			// Add an edge...
+//			console.log( "Adding edge");
+			return this.add_advancement_edge( applies_to1, advancement_index );
+		} else if( short_name.toLowerCase() == "increase-skill" ) {
+			// Increase a skill equal or greater than linked trait
+			skill1 = this.get_skill( applies_to1 );
+			if(!skill1.bonus)
+				skill1.bonus = 0;
+			skill1.bonus++;
+			this.set_skill_bonus( applies_to1, skill1.bonus );
+			return true;
+		} else if( short_name.toLowerCase() == "increase-2skills" ) {
+			// increase 2 skills less than linked trait
+//			console.log( "Increasing 2 skills");
+			skill1 = this.get_skill( applies_to1 );
+			skill2 = this.get_skill( applies_to2 );
+			if(!skill1.bonus)
+				skill1.bonus = 0;
+			if(!skill2.bonus)
+				skill2.bonus = 0;
+			skill1.bonus++;
+			skill2.bonus++;
+			this.set_skill_bonus( applies_to1, skill1.bonus );
+			this.set_skill_bonus( applies_to2, skill2.bonus );
+			return true;
+		} else if( short_name.toLowerCase() == "add-skill" ) {
+			// Add a new skill
+//			console.log( "Increasing 1 skill");
+			this.set_skill_bonus( applies_to1, 1 );
+		} else if( short_name.toLowerCase() == "increase-attribute" ) {
+			// increase attribute (once per session, handled in front-end)
+//			console.log( "Increasing attribute");
+			if( !this.advancement_already_taken_at_rank(short_name, advancement_index, chosen_at_rank) ) {
+				if( applies_to1.toLowerCase() == "agility" ) {
+
+					this.attributes_bonus.agility++;
+					return true;
+				}
+				if( applies_to1.toLowerCase() == "smarts" ){
+					this.attributes_bonus.smarts++;
+					return true;
+				}
+				if( applies_to1.toLowerCase() == "spirit" ){
+					this.attributes_bonus.spirit++;
+					return true;
+				}
+				if( applies_to1.toLowerCase() == "strength" ){
+					this.attributes_bonus.strength++;
+					return true;
+				}
+				if( applies_to1.toLowerCase() == "vigor" ){
+					this.attributes_bonus.vigor++;
+					return true;
+				}
+			} else {
+//				console.log("Cannot increase attribute " + applies_to1.toLowerCase() + " at " + chosen_at_rank + " (already taken this rank)");
+			}
+		}
+
+		return false;
+	},
 
 	set_base_starting_funds: function (new_value) {
 		new_value = new_value / 1;
@@ -409,6 +561,7 @@ character_class.prototype = {
 					if(skill_specify_name != "")
 						new_skill.specify_text = skill_specify_name;
 					new_skill.value = new_value;
+					new_skill.bonus = 0;
 					this.selected_skills.push( new_skill );
 					return true;
 				} else {
@@ -428,6 +581,60 @@ character_class.prototype = {
 						if( this.selected_skills[set_skill_counter].name.toLowerCase().trim() == skill_base_name.toLowerCase().trim()) {
 							if( this.selected_skills[set_skill_counter].specify_text.toLowerCase().trim() == skill_specify_name.toLowerCase().trim()) {
 								this.selected_skills[set_skill_counter].value = new_value;
+								return true;
+							}
+						}
+					}
+				}
+			}
+		}
+
+		return false;
+	},
+
+
+
+	set_skill_bonus: function(skill_name, new_value) {
+
+		if(skill_name.indexOf(":") > -1) {
+			skill_base_name = skill_name.substring(0, skill_name.indexOf(":") ).trim();
+			skill_specify_name = skill_name.substring(skill_name.indexOf(":") +1).trim();
+		} else {
+			skill_base_name = skill_name.trim();
+			skill_specify_name = "";
+		}
+
+		// if value = 0 remove it entirely
+		if(new_value == 0) {
+			this.remove_skill(skill_base_name, skill_specify_name);
+		} else {
+			// if skill is not listed in the selected_skills list, add it
+			if( !this.has_skill(skill_base_name, skill_specify_name) ) {
+				var new_skill = this.get_raw_skill(skill_base_name);
+				if( new_skill.name ) {
+					if(skill_specify_name != "")
+						new_skill.specify_text = skill_specify_name;
+					new_skill.bonus = new_value;
+					new_skill.value = 0;
+					this.selected_skills.push( new_skill );
+					return true;
+				} else {
+					return false;
+				}
+			} else {
+				// set the value to requested value
+				for(set_skill_counter = 0; set_skill_counter < this.selected_skills.length; set_skill_counter++) {
+					if(skill_specify_name == "") {
+
+						if( this.selected_skills[set_skill_counter].name.toLowerCase().trim() == skill_base_name.toLowerCase().trim()) {
+							this.selected_skills[set_skill_counter].bonus = new_value;
+							return true;
+						}
+					} else {
+
+						if( this.selected_skills[set_skill_counter].name.toLowerCase().trim() == skill_base_name.toLowerCase().trim()) {
+							if( this.selected_skills[set_skill_counter].specify_text.toLowerCase().trim() == skill_specify_name.toLowerCase().trim()) {
+								this.selected_skills[set_skill_counter].bonus = new_value;
 								return true;
 							}
 						}
@@ -479,8 +686,11 @@ character_class.prototype = {
 
 	get_skill: function(skill_name) {
 		for(get_skill_counter = 0; get_skill_counter < this.selected_skills.length; get_skill_counter++) {
-			if( this.selected_skills[get_skill_counter].name.toLowerCase().trim() == skill_name.toLowerCase().trim())
-				return this.selected_skills[get_skill_counter];
+			if( this.selected_skills[get_skill_counter].name.toLowerCase().trim() == skill_name.toLowerCase().trim()) {
+				skill = this.selected_skills[get_skill_counter];
+				skill.total = skill.value + skill.bonus;
+				return skill;
+			}
 		}
 	},
 
@@ -569,9 +779,33 @@ character_class.prototype = {
 							return true;
 			}
 
+
+
 			if(this.selected_edges.length > 0) {
 				for(get_all_edges_count = 0; get_all_edges_count < this.selected_edges.length; get_all_edges_count++ ) {
 					current_edge = this.selected_edges[get_all_edges_count];
+					if(current_edge) {
+						if(retakable && this_rank_only) {
+
+							if( current_edge.name.toLowerCase().trim() == edge_name.toLowerCase().trim() ){
+								if( current_edge.selected_rank == this.rank ) {
+									return true;
+								}
+							}
+
+						} else {
+							if( current_edge.name.toLowerCase().trim() == edge_name.toLowerCase().trim() ) {
+								if(!retakable)
+									return true;
+							}
+						}
+					}
+				}
+			}
+
+			if(this.advancement_edges.length > 0) {
+				for(get_all_edges_count = 0; get_all_edges_count < this.advancement_edges.length; get_all_edges_count++ ) {
+					current_edge = this.advancement_edges[get_all_edges_count];
 					if(current_edge) {
 						if(retakable && this_rank_only) {
 
@@ -634,6 +868,7 @@ character_class.prototype = {
 
 	set_arcane_bg: function( background_shortname ) {
 		return_value = false
+
 		for(set_arcane_count = 0; set_arcane_count < chargen_arcane_backgrounds.length; set_arcane_count++) {
 			if( chargen_arcane_backgrounds[set_arcane_count].short_name == background_shortname ) {
 
@@ -664,22 +899,6 @@ character_class.prototype = {
 		return false;
 	},
 
-
-	add_advancement: function( short_name, option1, option2) {
-		if( !option1 )
-			option1 = "";
-		if( !option2 )
-			option2 = "";
-
-		for(add_advancement_count = 0; add_advancement_count < chagen_advancements.length; add_advancement_count++) {
-			if(chagen_advancements[add_advancement_count].short_name.toLowerCase().trim == short_name.toLowerCase().trim() ) {
-				new_advancement = clone_object( chagen_advancements[add_advancement_count] );
-				new_advancement.option1 = option1;
-				new_advancement.option1 = option2;
-				this.selected_advancements.push( new_advancement );
-			}
-		}
-	},
 
 	remove_power: function( power_shortname, trapping ) {
 		if(!trapping)
@@ -780,15 +999,31 @@ character_class.prototype = {
 		return 0;
 	},
 
-	add_edge: function(edge_name, during_rank) {
-		if(!during_rank)
-			during_rank = 0;
+	add_edge: function(edge_name) {
+
 		if(edge_name) {
 			for( edge_counter = 0; edge_counter < chargen_edges.length; edge_counter++ ) {
 				if(edge_name.toLowerCase().trim() == chargen_edges[edge_counter].name.toLowerCase().trim() ) {
 					found_edge = clone_object( chargen_edges[edge_counter] );
-					found_edge.selected_rank = during_rank;
+					found_edge.selected_rank = during_slot;
 					this.selected_edges.push( found_edge );
+
+					return found_edge;
+				}
+			}
+		}
+		return 0;
+	},
+
+	add_advancement_edge: function(edge_name, during_slot) {
+
+		if(edge_name) {
+			for( edge_counter = 0; edge_counter < chargen_edges.length; edge_counter++ ) {
+				if(edge_name.toLowerCase().trim() == chargen_edges[edge_counter].name.toLowerCase().trim() ) {
+					found_edge = clone_object( chargen_edges[edge_counter] );
+					found_edge.selected_rank = during_slot;
+					found_edge.taken_on_rank = chargen_ranks[Math.floor(during_slot / 4)];
+					this.advancement_edges.push( found_edge );
 					return found_edge;
 				}
 			}
@@ -898,14 +1133,14 @@ character_class.prototype = {
 								items = edge_object.prereqs.skills[edge_available_skill_counter].name.split("||");
 								for(itemcount = 0; itemcount < items.length; itemcount++ ) {
 									verify_skill = this.get_skill( items[itemcount] );
-									if( verify_skill && verify_skill.value >= edge_object.prereqs.skills[edge_available_skill_counter].required) {
+									if( verify_skill && verify_skill.total >= edge_object.prereqs.skills[edge_available_skill_counter].required) {
 										return_value = true;
 									}
 								}
 							} else {
 								// see if the character's skills are up to snuff
 								verify_skill = this.get_skill( edge_object.prereqs.skills[edge_available_skill_counter].name );
-								if( verify_skill && verify_skill.value >= edge_object.prereqs.skills[edge_available_skill_counter].required) {
+								if( verify_skill && verify_skill.total >= edge_object.prereqs.skills[edge_available_skill_counter].required) {
 									return_value = true;
 								}
 
@@ -927,6 +1162,7 @@ character_class.prototype = {
 	get_all_edges: function() {
 		racial_edges = Array();
 		selected_edges = Array();
+		advancement_edges = Array();
 		if(this.race.edges_included) {
 			for(get_all_edges_count = 0; get_all_edges_count < this.racial_edges.length; get_all_edges_count++ )
 				racial_edges.push( this.racial_edges[get_all_edges_count].name  + " (Racial)");
@@ -940,7 +1176,16 @@ character_class.prototype = {
 			}
 		}
 
-		all_edges = racial_edges.concat(selected_edges);
+		if(this.advancement_edges.length > 0) {
+			for(get_all_edges_count = 0; get_all_edges_count < this.advancement_edges.length; get_all_edges_count++ ) {
+				current_edge = this.advancement_edges[get_all_edges_count];
+				if(current_edge) {
+					advancement_edges.push( current_edge.name + " (taken at " + current_edge.taken_on_rank + ")");
+				}
+			}
+		}
+
+		all_edges = advancement_edges.concat(racial_edges.concat(selected_edges));
 		return all_edges;
 	},
 
@@ -1080,11 +1325,11 @@ character_class.prototype = {
 			description: this.description,
 			gender: this.gender,
 			attributes : {
-				agility : this.attributes.agility - this.race.attributes.agility,
-				smarts : this.attributes.smarts - this.race.attributes.smarts,
-				spirit : this.attributes.spirit - this.race.attributes.spirit,
-				strength : this.attributes.strength - this.race.attributes.strength,
-				vigor : this.attributes.vigor - this.race.attributes.vigor
+				agility : this.attributes_alloc.agility,
+				smarts : this.attributes_alloc.smarts,
+				spirit : this.attributes_alloc.spirit,
+				strength : this.attributes_alloc.strength,
+				vigor : this.attributes_alloc.vigor
 			},
 			race : this.race.name,
 			complete: 0,
@@ -1107,8 +1352,12 @@ character_class.prototype = {
 		if(this.selected_edges.length > 0) {
 			for(get_all_edges_count = 0; get_all_edges_count < this.selected_edges.length; get_all_edges_count++ ) {
 				current_edge = this.selected_edges[get_all_edges_count];
-				if(current_edge)
-					export_object.edges.push( current_edge.name );
+				if(current_edge) {
+					if(!current_edge.during_slot)
+						current_edge.during_slot = -1;
+					if(current_edge.during_slot > -1)
+						export_object.edges.push( current_edge.name );
+				}
 			}
 		}
 
@@ -1174,18 +1423,6 @@ character_class.prototype = {
 			}
 		}
 
-		if(this.selected_advancements.length > 0) {
-			for(get_advancements_count = 0; get_advancements_count < this.selected_advancements.length; get_advancements_count++ ) {
-				export_advancement = {
-					name: this.selected_advancements[get_advancements_count].short_name,
-					opt1: this.selected_advancements[get_advancements_count].option1,
-					opt2: this.selected_advancements[get_advancements_count].option2
-				}
-
-				export_object.advancements.push( export_advancement );
-			}
-		}
-
 		if(this.selected_gear.length > 0) {
 			for(gear_count = 0; gear_count < this.selected_gear.length; gear_count++ ) {
 				book_id = 0;
@@ -1200,6 +1437,18 @@ character_class.prototype = {
 				}
 
 				export_object.gear.push( export_gear );
+			}
+		}
+
+		if(this.selected_advancements.length > 0) {
+			for(get_advancements_count = 0; get_advancements_count < this.selected_advancements.length; get_advancements_count++ ) {
+				export_advancement = {
+					name: this.selected_advancements[get_advancements_count].short_name,
+					opt1: this.selected_advancements[get_advancements_count].applies_to1,
+					opt2: this.selected_advancements[get_advancements_count].applies_to2
+				}
+
+				export_object.advancements.push( export_advancement );
 			}
 		}
 
@@ -1527,7 +1776,7 @@ character_class.prototype = {
 
 			if( imported_object.edges ) {
 				for( import_edge_counter = 0; import_edge_counter < imported_object.edges.length; import_edge_counter++)
-					this.add_edge( imported_object.edges[import_edge_counter] );
+					this.add_edge( imported_object.edges[import_edge_counter]);
 			}
 
 			if( imported_object.perks ) {
@@ -1540,16 +1789,6 @@ character_class.prototype = {
 					if( !imported_object.hindrances[import_hindrance_counter].specify )
 						imported_object.hindrances[import_hindrance_counter].specify = "";
 					this.add_hindrance( imported_object.hindrances[import_hindrance_counter].name, imported_object.hindrances[import_hindrance_counter].specify );
-				}
-			}
-
-			if( imported_object.advancements ) {
-				for( import_advancement_counter = 0; import_hindrance_counter < imported_object.advancements.length; import_advancement_counter++) {
-					this.add_advancement (
-						imported_object.advancements[import_advancement_counter].name,
-						imported_object.advancements[import_hindrance_counter].opt1,
-						imported_object.advancements[import_hindrance_counter].opt1
-					);
 				}
 			}
 
@@ -1594,10 +1833,36 @@ character_class.prototype = {
 
 			this.calculate();
 
+			if( imported_object.advancements ) {
+				for( import_advancement_counter = 0; import_advancement_counter < imported_object.advancements.length; import_advancement_counter++) {
+					if( imported_object.advancements[import_advancement_counter] && imported_object.advancements[import_advancement_counter].name ) {
+						this.set_advancement (
+							import_advancement_counter,
+							imported_object.advancements[import_advancement_counter].name,
+							imported_object.advancements[import_advancement_counter].opt1,
+							imported_object.advancements[import_advancement_counter].opt2
+						);
+					}
+				}
+				this.calculate();
+			}
+
 			return true;
 		}
 
 		return false;
 	},
+
+	get_xp: function() {
+		return this.xp;
+	},
+
+
+	get_rank_name: function() {
+		if( chargen_ranks[this.rank] )
+			return chargen_ranks[this.rank];
+		else
+			return "Unknown";
+	}
 
 }

@@ -29,6 +29,7 @@ $(".ios_app_click").click( function(event) {
 });
 
 $("input.numeric-only").keypress(function(event) {
+	console.log("...");
 	return /\d/.test(String.fromCharCode(event.keyCode));
 });
 
