@@ -631,22 +631,23 @@ function propagate_advancement_section() {
 		html += "</select></label></div>";
 
 		html += "<div style=\"display: none\" class=\"js-advance-details js-advance-skill-box\">";
-		html += "Advance Skill Options";
+		html += "<h4>TODO</h4>Advance Skill Options";
 		html += "</div>";
 
 		html += "<div style=\"display: none\" class=\"js-advance-details js-advance-2skills-box\">";
-		html += "Advance 2 Skills Options";
+		html += "<h4>TODO</h4>Advance 2 Skills Options";
 		html += "</div>";
 
 		html += "<div style=\"display: none\" class=\"js-advance-details js-advance-add-skill-box\">";
-		html += "Add Skill Options";
+		html += "<h4>TODO</h4>Add Skill Options";
 		html += "</div>";
 
 		html += "<div style=\"display: none\" class=\"js-advance-details js-advance-attribute-box\">";
-		html += "Advance Attribute Options";
+		html += "<h4>TODO</h4>Advance Attribute Options";
 		html += "</div>";
 
 		// change the following to hidden once live....
+		html += "<h4>Debug Fields</h4>"
 		html += "<input type=\"text\" class=\"js-add-advance-index\" value=\"" + current_add_advancement + "\"><br />";
 		html += "<input type=\"text\" class=\"js-add-advance-short\" value=\"" + first_short + "\"><br />";
 		html += "<input type=\"text\" class=\"js-add-advance-applies1\" value=\"\"><br />";

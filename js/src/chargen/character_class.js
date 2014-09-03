@@ -1000,7 +1000,7 @@ character_class.prototype = {
 	},
 
 	add_edge: function(edge_name) {
-
+		during_slot = -1;
 		if(edge_name) {
 			for( edge_counter = 0; edge_counter < chargen_edges.length; edge_counter++ ) {
 				if(edge_name.toLowerCase().trim() == chargen_edges[edge_counter].name.toLowerCase().trim() ) {
