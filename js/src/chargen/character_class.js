@@ -718,8 +718,10 @@ character_class.prototype = {
 
 		return_value = Array();
 		for(get_skill_counter = 0; get_skill_counter < this.selected_skills.length; get_skill_counter++) {
-			if( this.selected_skills[get_skill_counter].name.toLowerCase().trim() == skill_name.toLowerCase().trim())
+			if( this.selected_skills[get_skill_counter].name.toLowerCase().trim() == skill_name.toLowerCase().trim()) {
+				this.selected_skills[get_skill_counter].total = this.selected_skills[get_skill_counter].value + this.selected_skills[get_skill_counter].bonus;
 				return_value.push(  this.selected_skills[get_skill_counter] );
+			}
 		}
 
 		return_value.sort(

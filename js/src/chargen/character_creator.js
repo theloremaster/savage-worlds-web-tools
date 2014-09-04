@@ -666,7 +666,17 @@ function propagate_advancement_section() {
 		html += "</div>";
 
 		html += "<div style=\"display: none\" class=\"js-advance-details js-advance-add-skill-box\">";
-		html += "<h4>TODO</h4>Add Skill Options";
+		html += "<select class=\"js-advance-add-skill\">";
+		html += "<option value=\"\">- Select a New Skill-</option>";
+		for(skc = 0; skc < chargen_skills.length; skc++) {
+			if( (chargen_skills[skc].specify && chargen_skills[skc].specify > 0) || !current_character.has_skill(chargen_skills[skc].name) )
+				if(chargen_skills[skc].specify && chargen_skills[skc].specify > 0)
+					html += "<option specify=\"1\" value=\"" + chargen_skills[skc].name + "\">" + chargen_skills[skc].name + "</option>";
+				else
+					html += "<option value=\"" + chargen_skills[skc].name + "\">" + chargen_skills[skc].name + "</option>";
+		}
+		html += "</select>"
+		html += "<label style=\"display:none\" class=\"js-advance-add-skill-specify-area\">Please specify: <input type=\"text\" class=\"js-advance-add-skill-specify\" value=\"\" /></label>";
 		html += "</div>";
 
 
@@ -715,12 +725,32 @@ function propagate_advancement_section() {
 			$(".js-add-advance-applies2").val('');
 		});
 
+		$(".js-advance-add-skill").unbind('change');
+		$('.js-advance-add-skill').change( function() {
+
+			if($('option:selected', this).attr('specify') > 0)
+				$(".js-advance-add-skill-specify-area").slideDown();
+			else
+				$(".js-advance-add-skill-specify-area").slideUp();
+
+			$(".js-advance-add-skill-specify").val('');
+			$(".js-add-advance-applies1").val( $(this).val().trim() );
+			$(".js-add-advance-applies2").val('');
+
+		});
+
+		$(".js-advance-add-skill-specify").unbind('keyup');
+		$('.js-advance-add-skill-specify').keyup( function() {
+			$(".js-add-advance-applies1").val( $('.js-advance-add-skill').val() + ": " + $(this).val() );
+		});
+
 		$("input[name=js-advance-shortname]").unbind('change');
 		$("input[name=js-advance-shortname]").click( function() {
 			selected_val = $(this).val();
 
 			$(".js-add-advance-applies1").val('');
 			$(".js-add-advance-applies2").val('');
+			$(".js-advance-add-skill-specify").val('');
 
 			$(".js-advance-details").hide();
 			$(".js-add-advance-short").val( selected_val  );

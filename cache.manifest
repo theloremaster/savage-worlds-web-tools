@@ -1,8 +1,8 @@
 CACHE MANIFEST
 
-# Version 2014-09-03-07
-# September 3, 2014 revision 7
-# Chargen: Added Gear Equip/Unequip buttons - added armor/toughness calc and display - added curent load in derived stats
+# Version 2014-09-03-08
+# September 3, 2014 revision 8
+# Chargen: Added "New Skill" advancement option in 3/5 advancements are in place.
 
 CACHE:
 http://jdgwf.github.io/savage-worlds-web-tools/extras_view.html
@@ -27,6 +27,7 @@ http://jdgwf.github.io/savage-worlds-web-tools/js/background.js
 http://jdgwf.github.io/savage-worlds-web-tools/js/bootstrap.min.js
 http://jdgwf.github.io/savage-worlds-web-tools/js/swwt.min.js
 http://jdgwf.github.io/savage-worlds-web-tools/js/sourcemap.map
+http://jdgwf.github.io/savage-worlds-web-tools/js/jquery-1.10.2.min.map
 
 http://jdgwf.github.io/savage-worlds-web-tools/css/style.css
 http://jdgwf.github.io/savage-worlds-web-tools/css/bootstrap.min.css
