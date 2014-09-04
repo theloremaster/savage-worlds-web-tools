@@ -127,6 +127,10 @@ function create_print_view() {
 		move_print_cart_item_down( item_index );
 		create_print_view();
 	});
+
+	$("img").error(function() {
+   		$(this).remove();
+	});
 }
 
 $(document).ready( function() {

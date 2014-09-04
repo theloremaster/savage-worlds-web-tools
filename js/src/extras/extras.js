@@ -346,7 +346,9 @@ function updateLocalStats() {
 		add_to_print_cart ( displayExtra( extra_item, null, 1) );
 
 	});
-
+	$("img").error(function() {
+   		$(this).remove();
+	});
 }
 
 $(document).ready( function() {
