@@ -659,7 +659,7 @@ function propagate_advancement_section() {
 
 		html += "<div style=\"display: none\" class=\"js-advance-details js-advance-skill-box\">";
 		html += "<select class=\"js-advance-advance-skill\">";
-		html += "<option value=\"\">- Advance Skill Above Trait-</option>";
+		html += "<option value=\"\">- Advance Skill Equal or Above Attribute-</option>";
 		for(skc = 0; skc < current_character.selected_skills.length; skc++) {
 			if(
 				current_character.attributes[current_character.selected_skills[skc].attribute] <= current_character.selected_skills[skc].total
@@ -681,7 +681,43 @@ function propagate_advancement_section() {
 		html += "</div>";
 
 		html += "<div style=\"display: none\" class=\"js-advance-details js-advance-2skills-box\">";
-		html += "<h4>TODO</h4>Advance 2 Skills Options";
+		html += "<select class=\"js-advance-advance-skill1\">";
+		html += "<option value=\"\">- Advance Skill Below Attribute-</option>";
+		for(skc = 0; skc < current_character.selected_skills.length; skc++) {
+			if(
+				current_character.attributes[current_character.selected_skills[skc].attribute] > current_character.selected_skills[skc].total
+			) {
+				current_value = attribute_labels[current_character.selected_skills[skc].total];
+				next_value = attribute_labels[current_character.selected_skills[skc].total + 1];
+				skill_name = current_character.selected_skills[skc].name;
+				if( current_character.selected_skills[skc].specify_text && current_character.selected_skills[skc].specify_text != "")
+					skill_name += ": " + current_character.selected_skills[skc].specify_text;
+				html += "<option value=\"" + skill_name + "\">";
+				html += skill_name;
+				html += " " + current_value + " to " + next_value;
+				html += "</option>";
+			}
+		}
+		html += "</select>"
+
+		html += "<select class=\"js-advance-advance-skill2\">";
+		html += "<option value=\"\">- Advance Skill Below Attribute-</option>";
+		for(skc = 0; skc < current_character.selected_skills.length; skc++) {
+			if(
+				current_character.attributes[current_character.selected_skills[skc].attribute] > current_character.selected_skills[skc].total
+			) {
+				current_value = attribute_labels[current_character.selected_skills[skc].total];
+				next_value = attribute_labels[current_character.selected_skills[skc].total + 1];
+				skill_name = current_character.selected_skills[skc].name;
+				if( current_character.selected_skills[skc].specify_text && current_character.selected_skills[skc].specify_text != "")
+					skill_name += ": " + current_character.selected_skills[skc].specify_text;
+				html += "<option value=\"" + skill_name + "\">";
+				html += skill_name;
+				html += " " + current_value + " to " + next_value;
+				html += "</option>";
+			}
+		}
+		html += "</select>"
 		html += "</div>";
 
 		html += "<div style=\"display: none\" class=\"js-advance-details js-advance-add-skill-box\">";
@@ -724,11 +760,11 @@ function propagate_advancement_section() {
 			html += "</div>";
 		}
 		// change the following to hidden once live....
-		html += "<div style=\"background:#333;padding: 5px\"<h4>Debug Fields</h4>"
+		html += "<div style=\"display: none\" ><h4>Debug Fields</h4>"
 		html += "<input type=\"hidden\" readonly=\"readonly\" class=\"js-add-advance-index\" value=\"" + current_add_advancement + "\"><br />";
-		html += "<input type=\"text\" readonly=\"readonly\" class=\"js-add-advance-short\" value=\"" + first_short + "\"><br />";
-		html += "<input type=\"text\" readonly=\"readonly\" class=\"js-add-advance-applies1\" value=\"\"><br />";
-		html += "<input type=\"text\" readonly=\"readonly\" class=\"js-add-advance-applies2\" value=\"\"><br /></div>";
+		html += "<input type=\"hidden\" readonly=\"readonly\" class=\"js-add-advance-short\" value=\"" + first_short + "\"><br />";
+		html += "<input type=\"hidden\" readonly=\"readonly\" class=\"js-add-advance-applies1\" value=\"\"><br />";
+		html += "<input type=\"hidden\" readonly=\"readonly\" class=\"js-add-advance-applies2\" value=\"\"><br /></div>";
 
 		$(".js-advancements-available").html(html);
 
@@ -736,6 +772,16 @@ function propagate_advancement_section() {
 		$('.js-advance-advance-skill').change( function() {
 			$(".js-add-advance-applies1").val( $(this).val().trim() );
 			$(".js-add-advance-applies2").val('');
+		});
+
+		$(".js-advance-advance-skill1").unbind('change');
+		$('.js-advance-advance-skill1').change( function() {
+			$(".js-add-advance-applies1").val( $(this).val().trim() );
+		});
+
+		$(".js-advance-advance-skill2").unbind('change');
+		$('.js-advance-advance-skill2').change( function() {
+			$(".js-add-advance-applies2").val( $(this).val().trim() );
 		});
 
 		$(".js-advance-select-edge").unbind('change');
