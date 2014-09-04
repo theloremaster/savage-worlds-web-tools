@@ -52,8 +52,19 @@ function print_cart_items_html() {
 	if( current_items.length > 0 ) {
 		$(".js-print-cart-button").html( "<a href=\"print_cart.html\" class=\"ios_app_click btn btn-xs btn-primary\">Print Cart (" + current_items.length + ")</a>" );
 	}
-	else
+	else {
 		$(".js-print-cart-button").html( "" );
+	}
+
+	$(".ios_app_click").unbind("click");
+	$(".ios_app_click").click( function(event) {
+		event.preventDefault();
+		url = $(this).attr("href");
+		if($(this).hasClass("btn-danger"))
+			alert("This function is still under development and will not work as expected");
+	    window.location.assign(url);
+	    return false;
+	});
 }
 
 function remove_print_cart_item(cart_index) {

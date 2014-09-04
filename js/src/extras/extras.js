@@ -345,7 +345,6 @@ function updateLocalStats() {
 		bootstrap_alert( "" + extra_item.name+ " has been added to your print cart.", "success" );
 		add_to_print_cart ( displayExtra( extra_item, null, 1) );
 
-
 	});
 
 }
