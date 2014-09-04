@@ -658,7 +658,26 @@ function propagate_advancement_section() {
 		html += "</select></label></div>";
 
 		html += "<div style=\"display: none\" class=\"js-advance-details js-advance-skill-box\">";
-		html += "<h4>TODO</h4>Advance Skill Options";
+		html += "<select class=\"js-advance-advance-skill\">";
+		html += "<option value=\"\">- Advance Skill Above Trait-</option>";
+		for(skc = 0; skc < current_character.selected_skills.length; skc++) {
+			if(
+				current_character.attributes[current_character.selected_skills[skc].attribute] <= current_character.selected_skills[skc].total
+					&&
+				current_character.selected_skills[skc].value < 	6
+			) {
+				current_value = attribute_labels[current_character.selected_skills[skc].total];
+				next_value = attribute_labels[current_character.selected_skills[skc].total + 1];
+				skill_name = current_character.selected_skills[skc].name;
+				if( current_character.selected_skills[skc].specify_text && current_character.selected_skills[skc].specify_text != "")
+					skill_name += ": " + current_character.selected_skills[skc].specify_text;
+				html += "<option value=\"" + skill_name + "\">";
+				html += skill_name;
+				html += " " + current_value + " to " + next_value;
+				html += "</option>";
+			}
+		}
+		html += "</select>"
 		html += "</div>";
 
 		html += "<div style=\"display: none\" class=\"js-advance-details js-advance-2skills-box\">";
@@ -712,6 +731,12 @@ function propagate_advancement_section() {
 		html += "<input type=\"text\" readonly=\"readonly\" class=\"js-add-advance-applies2\" value=\"\"><br /></div>";
 
 		$(".js-advancements-available").html(html);
+
+		$(".js-advance-advance-skill").unbind('change');
+		$('.js-advance-advance-skill').change( function() {
+			$(".js-add-advance-applies1").val( $(this).val().trim() );
+			$(".js-add-advance-applies2").val('');
+		});
 
 		$(".js-advance-select-edge").unbind('change');
 		$('.js-advance-select-edge').change( function() {

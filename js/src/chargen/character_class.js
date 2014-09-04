@@ -247,6 +247,15 @@ character_class.prototype = {
 			}
 		);
 
+		this.selected_skills.sort(
+			function(a, b)
+			{
+				var nameA = a.name.toLowerCase();
+				var nameB = b.name.toLowerCase();
+				return (nameA < nameB) ? -1 : (nameA > nameB) ? 1 : 0;
+			}
+		);
+
 		// Add Selected Hindrances (these give perks available up to 1 major and 2 minor, rest are ignored)
 		for(selected_hindarance_counter = 0; selected_hindarance_counter < this.selected_hindrances.length; selected_hindarance_counter++) {
 			current_hindarance = this.selected_hindrances[selected_hindarance_counter];
@@ -705,11 +714,27 @@ character_class.prototype = {
 	},
 
 	get_skill: function(skill_name) {
+		if(skill_name.indexOf(":") > -1) {
+			skill_base_name = skill_name.substring(0, skill_name.indexOf(":") ).trim();
+			skill_specify_name = skill_name.substring(skill_name.indexOf(":") +1).trim();
+		} else {
+			skill_base_name = skill_name.trim();
+			skill_specify_name = "";
+		}
+
 		for(get_skill_counter = 0; get_skill_counter < this.selected_skills.length; get_skill_counter++) {
-			if( this.selected_skills[get_skill_counter].name.toLowerCase().trim() == skill_name.toLowerCase().trim()) {
-				skill = this.selected_skills[get_skill_counter];
-				skill.total = skill.value + skill.bonus;
-				return skill;
+			if( this.selected_skills[get_skill_counter].name.toLowerCase().trim() == skill_base_name.toLowerCase().trim()) {
+				if( skill_specify_name == "") {
+					skill = this.selected_skills[get_skill_counter];
+					skill.total = skill.value + skill.bonus;
+					return skill;
+				} else {
+					if( this.selected_skills[get_skill_counter].specify_text.toLowerCase().trim() == skill_specify_name.toLowerCase().trim()) {
+						skill = this.selected_skills[get_skill_counter];
+						skill.total = skill.value + skill.bonus;
+						return skill;
+					}
+				}
 			}
 		}
 	},

@@ -1,8 +1,8 @@
 CACHE MANIFEST
 
-# Version 2014-09-03-08
+# Version 2014-09-03-09
 # September 3, 2014 revision 8
-# Chargen: Added "New Skill" advancement option in 3/5 advancements are in place.
+# Chargen: Added 'Raise skill die type equal to or above linked attribute' advancement
 
 CACHE:
 http://jdgwf.github.io/savage-worlds-web-tools/extras_view.html
