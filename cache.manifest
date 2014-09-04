@@ -1,8 +1,8 @@
 CACHE MANIFEST
 
-# Version 2014-09-03-02
-# September 3, 2014 revision 2
-# Chargen: Added raise attribute to advancments - now at 2/5 advancements
+# Version 2014-09-03-04
+# September 3, 2014 revision 4
+# Cache Manifest STILL is having issues in Chrome Desktop on GitHub's Hosting
 
 CACHE:
 http://jdgwf.github.io/savage-worlds-web-tools/extras_view.html
@@ -20,6 +20,7 @@ http://jdgwf.github.io/savage-worlds-web-tools/power_armor_creator.html
 http://jdgwf.github.io/savage-worlds-web-tools/walker_creator.html
 http://jdgwf.github.io/savage-worlds-web-tools/index.html
 http://jdgwf.github.io/savage-worlds-web-tools/cards_test.html
+http://jdgwf.github.io/savage-worlds-web-tools/
 
 http://jdgwf.github.io/savage-worlds-web-tools/js/jquery-1.10.2.min.js
 http://jdgwf.github.io/savage-worlds-web-tools/js/background.js
@@ -44,10 +45,10 @@ http://jdgwf.github.io/savage-worlds-web-tools/img/dice/d10.png
 http://jdgwf.github.io/savage-worlds-web-tools/img/dice/d12.png
 
 http://jdgwf.github.io/savage-worlds-web-tools/img/cards/10c.svg
-http://jdgwf.github.io/savage-worlds-web-tools/img/cards/10D.svg
+http://jdgwf.github.io/savage-worlds-web-tools/img/cards/10d.svg
 http://jdgwf.github.io/savage-worlds-web-tools/img/cards/10h.svg
 http://jdgwf.github.io/savage-worlds-web-tools/img/cards/10s.svg
-http://jdgwf.github.io/savage-worlds-web-tools/img/cards/2C.svg
+http://jdgwf.github.io/savage-worlds-web-tools/img/cards/2c.svg
 http://jdgwf.github.io/savage-worlds-web-tools/img/cards/2d.svg
 http://jdgwf.github.io/savage-worlds-web-tools/img/cards/2h.svg
 http://jdgwf.github.io/savage-worlds-web-tools/img/cards/2s.svg
