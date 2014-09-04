@@ -566,15 +566,25 @@ function get_advancement_by_short_name( short_name ) {
 
 	return false;
 }
+
+function get_rank_from_slot(slot_id) {
+	return current_rank = Math.floor(slot_id/4);
+}
+
 function propagate_advancement_section() {
 	html = "";
 	if( current_character.is_complete() ){
 		html += "<p>Your character creation is complete - advancement enabled. If this is not what you want, click the button below.</p>";
 		html += "<button type='button' class='js-remove-advancements-character btn btn-danger'>Remove Advancements</button>";
 		html += "<hr />";
-		html += "<label>Experience Points: <input type=\"numeric\" class=\"numeric-only js-set-xp\" value=\"" + current_character.get_xp() + "\" /></label>";
-		html += "<label>Rank: " + current_character.get_rank_name() + "</label>";
-		html += "<label>Advancement Slots: " + current_character.available_advancements + "</label>";
+		html += "<label>Experience Points: <div class=\"input-group spinner\"><input type=\"numeric\" class=\"numeric-only form-control js-set-xp\" value=\"" + current_character.get_xp() + "\" />";
+		html += "<div class=\"input-group-btn-vertical\">";
+		html += "<button class=\"btn btn-default\"><i class=\"glyphicon glyphicon-chevron-up\"></i></button>";
+		html += "<button class=\"btn btn-default\"><i class=\"glyphicon glyphicon-chevron-down\"></i></button>";
+		html += "</div></div>";
+		html += "</label>";
+		html += "<h3>Rank: " + current_character.get_rank_name() + "</h3>";
+		html += "<h4>Advancement Slots: " + current_character.available_advancements + "</h4>";
 		for(advc = 0; advc < current_character.available_advancements; advc++) {
 			if(advc == 0)
 				html += "<h5>Novice</h5>";
@@ -610,6 +620,23 @@ function propagate_advancement_section() {
 
 	$(".js-advancement-area").html(html);
 
+
+	$('.spinner .btn:first-of-type').unbind('click');
+	$('.spinner .btn:first-of-type').on('click', function() {
+		new_val = parseInt($('.spinner input').val(), 10) + 1;
+		$('.spinner input').val( new_val );
+		current_character.set_xp( new_val );
+		refresh_chargen_page();
+	});
+	$('.spinner .btn:last-of-type').unbind('click');
+	$('.spinner .btn:last-of-type').on('click', function() {
+		new_val = parseInt($('.spinner input').val(), 10) - 1;
+		$('.spinner input').val( new_val );
+		current_character.set_xp( new_val );
+		refresh_chargen_page();
+	});
+
+
 	$(".js-add-advance").unbind("click");
 	$(".js-add-advance").click(function(event) {
 		var current_add_advancement = $(this).attr("ref") / 1;
@@ -642,21 +669,48 @@ function propagate_advancement_section() {
 		html += "<h4>TODO</h4>Add Skill Options";
 		html += "</div>";
 
-		html += "<div style=\"display: none\" class=\"js-advance-details js-advance-attribute-box\">";
-		html += "<h4>TODO</h4>Advance Attribute Options";
-		html += "</div>";
 
+		current_rank = get_rank_from_slot(current_add_advancement);
+		if(	current_character.advancement_already_taken_at_rank("increase-attribute", current_add_advancement, current_rank ) ) {
+			html += "<div style=\"display: none\" class=\"js-advance-details js-advance-attribute-box\">";
+			html += "<div class=\"alert alert-warning\" role=\"alert\">You have already selected an attribute increase at this rank</div>";
+			html += "</div>";
+		} else {
+
+			html += "<div style=\"display: none\" class=\"js-advance-details js-advance-attribute-box\">";
+			html += "<select class=\"js-advance-select-attribute\">";
+			html += "<option value=\"\">- Select an Attribute to Increase-</option>";
+			if( current_character.attributes.agility < 5)
+				html += "<option value=\"agility\">Agility " + attribute_labels[current_character.attributes.agility] + " to " + attribute_labels[current_character.attributes.agility + 1] + "</option>";
+			if( current_character.attributes.smarts < 5)
+				html += "<option value=\"smarts\">Smarts " + attribute_labels[current_character.attributes.smarts] + " to " + attribute_labels[current_character.attributes.smarts + 1] + "</option>";
+			if( current_character.attributes.spirit < 5)
+				html += "<option value=\"spirit\">Spirit " + attribute_labels[current_character.attributes.spirit] + " to " + attribute_labels[current_character.attributes.spirit + 1] + "</option>";
+			if( current_character.attributes.strength < 5)
+				html += "<option value=\"strength\">Strength " + attribute_labels[current_character.attributes.strength] + " to " + attribute_labels[current_character.attributes.strength + 1] + "</option>";
+			if( current_character.attributes.vigor < 5)
+				html += "<option value=\"vigor\">Vigor " + attribute_labels[current_character.attributes.vigor] + " to " + attribute_labels[current_character.attributes.vigor + 1] + "</option>";
+
+			html += "</select>";
+			html += "</div>";
+		}
 		// change the following to hidden once live....
-		html += "<h4>Debug Fields</h4>"
-		html += "<input type=\"text\" class=\"js-add-advance-index\" value=\"" + current_add_advancement + "\"><br />";
-		html += "<input type=\"text\" class=\"js-add-advance-short\" value=\"" + first_short + "\"><br />";
-		html += "<input type=\"text\" class=\"js-add-advance-applies1\" value=\"\"><br />";
-		html += "<input type=\"text\" class=\"js-add-advance-applies2\" value=\"\"><br />";
+		html += "<div style=\"background:#333;padding: 5px\"<h4>Debug Fields</h4>"
+		html += "<input type=\"hidden\" readonly=\"readonly\" class=\"js-add-advance-index\" value=\"" + current_add_advancement + "\"><br />";
+		html += "<input type=\"text\" readonly=\"readonly\" class=\"js-add-advance-short\" value=\"" + first_short + "\"><br />";
+		html += "<input type=\"text\" readonly=\"readonly\" class=\"js-add-advance-applies1\" value=\"\"><br />";
+		html += "<input type=\"text\" readonly=\"readonly\" class=\"js-add-advance-applies2\" value=\"\"><br /></div>";
 
 		$(".js-advancements-available").html(html);
 
 		$(".js-advance-select-edge").unbind('change');
 		$('.js-advance-select-edge').change( function() {
+			$(".js-add-advance-applies1").val( $(this).val().trim() );
+			$(".js-add-advance-applies2").val('');
+		});
+
+		$(".js-advance-select-attribute").unbind('change');
+		$('.js-advance-select-attribute').change( function() {
 			$(".js-add-advance-applies1").val( $(this).val().trim() );
 			$(".js-add-advance-applies2").val('');
 		});
@@ -691,13 +745,22 @@ function propagate_advancement_section() {
 
 		$(".js-add-advancement-button").unbind("click");
 		$(".js-add-advancement-button").click( function() {
-			current_character.set_advancement(
-				$(".js-add-advance-index").val() / 1,
-				$(".js-add-advance-short").val(),
-				$(".js-add-advance-applies1").val(),
-				$(".js-add-advance-applies2").val()
-			);
-			refresh_chargen_page();
+			adv_index = $(".js-add-advance-index").val() / 1;
+			adv_short = $(".js-add-advance-short").val().trim();
+			adv_option1 = $(".js-add-advance-applies1").val().trim();
+			adv_option2 = $(".js-add-advance-applies2").val().trim();
+
+			if( adv_short != "" && adv_option1 != "" ) {
+				current_character.set_advancement(
+					adv_index,
+					adv_short,
+					adv_option1,
+					adv_option2
+				);
+				refresh_chargen_page();
+			} else {
+				bootbox.alert("No option selected. Advancement was not added.");
+			}
 		});
 
 		$('.js-advancement-dialog').modal();

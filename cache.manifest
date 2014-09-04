@@ -1,8 +1,8 @@
 CACHE MANIFEST
 
-# Version 2014-09-03-01
-# September 3, 2014 revision 1
-# Chargen: Minor Bugfix on add_edge
+# Version 2014-09-03-02
+# September 3, 2014 revision 2
+# Chargen: Added raise attribute to advancments - now at 2/5 advancements
 
 CACHE:
 http://jdgwf.github.io/savage-worlds-web-tools/extras_view.html
