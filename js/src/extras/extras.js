@@ -254,7 +254,11 @@ function sortExtras() {
 
 function filterExtras(searchTerm) {
 	returnHTML = "";
-	searchTerm = searchTerm.toLowerCase().trim();
+	if(searchTerm && searchTerm != "")
+		searchTerm = searchTerm.toLowerCase().trim();
+	else
+		searchTerm = "";
+
 	console.log(searchTerm);
 	for (var lCount = 0; lCount < extraDatabase.length; lCount++) {
 
