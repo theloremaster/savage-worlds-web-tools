@@ -10,6 +10,7 @@ character_class.prototype = {
 		this.description = "";
 
 		this.bennies = 0;
+		this.encumbrance = 0;
 
 		this.attribute_points = 5;
 		this.skill_points = 15;
@@ -25,7 +26,6 @@ character_class.prototype = {
 		this.selected_hindrances = Array();
 		this.selected_perks = Array();
 		this.selected_skills = Array();
-
 
 		this.edges_available = 0;
 		this.perks_available = 0;
@@ -61,6 +61,8 @@ character_class.prototype = {
 			pace : 0,
 			toughness : 0,
 			parry : 2,
+			armor : 0,
+			encumbrance : 0,
 			size: 1
 		};
 
@@ -80,6 +82,8 @@ character_class.prototype = {
 	calculate: function() {
 		this.attribute_points = 5;
 		this.skill_points = 15;
+
+
 
 		this.starting_funds = this.base_starting_funds;
 
@@ -111,6 +115,8 @@ character_class.prototype = {
 			pace : 0,
 			toughness : 0,
 			parry : 2,
+			armor: 0,
+			encumbrance : 0,
 			size: 1
 		};
 
@@ -404,8 +410,22 @@ character_class.prototype = {
 			if(!this.selected_gear[eq_count].free)
 				this.selected_gear[eq_count].free = 0;
 
+			if(this.selected_gear[eq_count].equipped && this.selected_gear[eq_count].equipped > 0) {
+				this.derived.encumbrance += this.selected_gear[eq_count].weight;
+				// set character's armor rating if it's armor (and higher than current armor)
+				if( this.selected_gear[eq_count].armor && this.selected_gear[eq_count].armor > this.derived.armor )
+					this.derived.armor = this.selected_gear[eq_count].armor;
+			}
+
 			if(typeof(this.selected_gear[eq_count].cost) != "string" && this.selected_gear[eq_count].free == 0 )
 				this.current_funds -= this.selected_gear[eq_count].cost * this.selected_gear[eq_count].count;
+		}
+
+		if( this.derived.armor > 0 ) {
+			this.derived.toughness += this.derived.armor;
+			this.derived.toughness_formatted = this.derived.toughness + " (" + this.derived.armor + ")";
+		} else {
+			this.derived.toughness_formatted = this.derived.toughness;
 		}
 
 	},
@@ -1433,6 +1453,7 @@ character_class.prototype = {
 					cost: this.selected_gear[gear_count].cost,
 					book: book_id,
 					count: this.selected_gear[gear_count].count,
+					equipped: this.selected_gear[gear_count].equipped,
 					free: this.selected_gear[gear_count].free
 				}
 
@@ -1499,7 +1520,11 @@ character_class.prototype = {
 		return html_return;
 	},
 
-	add_gear: function( gear_name, gear_cost, gear_count, for_free, from_book ) {
+
+	add_gear: function( gear_name, gear_cost, gear_count, for_free, equipped, from_book ) {
+
+		if(!equipped)
+			equipped = 0;
 
 		if(!gear_count)
 			gear_count = 1;
@@ -1559,6 +1584,7 @@ character_class.prototype = {
 			};
 		}
 
+		gear_object.equipped = equipped;
 
 		this.selected_gear.push( gear_object );
 		return gear_object;
@@ -1581,6 +1607,26 @@ character_class.prototype = {
 		return false;
 	},
 
+	equip_gear: function( gear_index ) {
+		gear_index = gear_index / 1;
+
+		if( this.selected_gear[gear_index] ) {
+			this.selected_gear[gear_index].equipped = 1;
+			return true;
+		}
+		return false;
+	},
+
+	unequip_gear: function( gear_index ) {
+		gear_index = gear_index / 1;
+
+		if( this.selected_gear[gear_index] ) {
+			this.selected_gear[gear_index].equipped = 1;
+			return true;
+		}
+		return false;
+	},
+
 	export_html: function(selector_name) {
 
 		html_return = "<strong><h3>" +  this.name + "</h3></strong><br />";
@@ -1598,15 +1644,13 @@ character_class.prototype = {
 		html_return += "<strong>Pace</strong>: " + this.derived.pace;
 		html_return += ", <strong>Parry</strong>: " + this.derived.parry;
 
-		if(this.armor && this.armor > 0) {
-			html_return += ", <strong>Toughness</strong>: " + this.derived.toughness + this.armor;
-			html_return += "(" + this.armor + ")";
-		} else {
-			html_return += ", <strong>Toughness</strong>: " + this.derived.toughness;
-		}
+
+		html_return += ", <strong>Toughness</strong>: " + this.derived.toughness_formatted;
 
 		if(this.derived.charisma > 0)
 			html_return += ", <strong>Charisma</strong>: " + this.derived.charisma;
+		if(this.derived.encumbrance > 0)
+			html_return += ", <strong>Load</strong>: " + this.derived.encumbrance;
 
 
 		html_return += "<br />";
@@ -1821,11 +1865,14 @@ character_class.prototype = {
 						imported_object.gear[import_gear_counter].count = 1;
 					if(!imported_object.gear[import_gear_counter].book)
 						imported_object.gear[import_gear_counter].book = 0;
+					if(!imported_object.gear[import_gear_counter].equipped)
+						imported_object.gear[import_gear_counter].equipped = 0;
 					this.add_gear(
 						imported_object.gear[import_gear_counter].name,
 						imported_object.gear[import_gear_counter].cost,
 						imported_object.gear[import_gear_counter].count,
 						imported_object.gear[import_gear_counter].free,
+						imported_object.gear[import_gear_counter].equipped,
 						imported_object.gear[import_gear_counter].book
 					);
 				}

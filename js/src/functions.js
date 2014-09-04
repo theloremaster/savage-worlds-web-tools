@@ -98,11 +98,9 @@ window.addEventListener('load', function(e) {
       // Browser downloaded a new app cache.
       // Swap it in and reload the page to get the new hotness.
       window.applicationCache.swapCache();
-      if (confirm('A new version of this site is available. Load it?')) {
+      if (confirm('A new version of this web app is available. Load it?')) {
         window.location.reload();
       }
-    } else {
-      // Manifest didn't changed. Nothing new to server.
     }
   }, false);
 

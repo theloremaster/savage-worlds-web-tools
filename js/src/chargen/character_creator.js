@@ -1226,6 +1226,7 @@ function propagate_gear_section() {
 	$(".js-gear-search").keyup( function() {
 		current_gear_search = $(".js-gear-search").val();
 		make_gear_available_list() ;
+
 	});
 
 
@@ -1249,6 +1250,10 @@ function propagate_gear_section() {
 		html += "</td>";
 
 		html += "<td><button ref=\"" + gear_count + "\" class=\"js-remove-gear btn btn-xs btn-danger\">Remove</button></td>";
+		if(current_character.selected_gear[gear_count].equipped > 0)
+			html += "<td><button ref=\"" + gear_count + "\" class=\"js-unequip-gear btn btn-xs btn-danger\">Unequip</button></td>";
+		else
+			html += "<td><button ref=\"" + gear_count + "\" class=\"js-equip-gear btn btn-xs btn-primary\">Equip</button></td>";
 		html += "</tr>";
 	}
 	html += "</tbody>";
@@ -1259,9 +1264,19 @@ function propagate_gear_section() {
 	$(".js-remove-gear").unbind("click");
 	$(".js-remove-gear").click( function() {
 		current_character.remove_gear( $(this).attr("ref") / 1 );
-		current_character.calculate();
-		localStorage["current_character"] = current_character.export_json(".js-chargen-json-code");
-		propagate_gear_section();
+		refresh_chargen_page();
+	});
+
+	$(".js-equip-gear").unbind("click");
+	$(".js-equip-gear").click( function() {
+		current_character.equip_gear( $(this).attr("ref") / 1 );
+		refresh_chargen_page();
+	});
+
+	$(".js-unequip-gear").unbind("click");
+	$(".js-unequip-gear").click( function() {
+		current_character.unequip_gear( $(this).attr("ref") / 1 );
+		refresh_chargen_page();
 	});
 
 
@@ -1341,11 +1356,10 @@ function make_gear_available_list() {
 			null,
 			null,
 			null,
+			null,
 			$(this).attr("book")
 		);
-		current_character.calculate();
-		localStorage["current_character"] = current_character.export_json(".js-chargen-json-code");
-		propagate_gear_section();
+		refresh_chargen_page();
 	});
 
 	$(".js-add-gear").unbind("click");
@@ -1355,11 +1369,10 @@ function make_gear_available_list() {
 			null,
 			1,
 			1,
+			1,
 			$(this).attr("book")
 		);
-		current_character.calculate();
-		localStorage["current_character"] = current_character.export_json(".js-chargen-json-code");
-		propagate_gear_section();
+		refresh_chargen_page();
 	});
 }
 
@@ -1669,10 +1682,11 @@ function test_validity() {
 function propagate_derived_stats_section() {
 	html = "";
 
-	html += "<label>Charisma: " + current_character.derived.charisma + "<label>";
-	html += "<label>Pace: " + current_character.derived.pace + "<label>";
-	html += "<label>Parry: " + current_character.derived.parry + "<label>";
-	html += "<label>Toughness: " + current_character.derived.toughness + "<label>";
+	html += "<label>Charisma: " + current_character.derived.charisma + "</label>";
+	html += "<label>Pace: " + current_character.derived.pace + "</label>";
+	html += "<label>Parry: " + current_character.derived.parry + "</label>";
+	html += "<label>Toughness: " + current_character.derived.toughness_formatted + "</label>";
+	html += "<label>Current Load: " + current_character.derived.encumbrance + "</label>";
 
 	$(".derived-stats-data").html( html );
 }
