@@ -352,8 +352,7 @@ function updateLocalStats() {
 
 $(document).ready( function() {
 	sortExtras();
-	updateLocalStats();
-	var extras_search_term = "";
+
 
 	$("#book-checks").html(
 		availableBookChecks()
@@ -367,11 +366,11 @@ $(document).ready( function() {
 		else
 			$("#search-results").html( defaultSearchMessage() );
 
-		updateLocalStats();
 	} else {
 		$("#search-results").html( defaultSearchMessage() );
 	}
 
+	updateLocalStats();
 
 
 	$("#search-box").keyup( function(){
