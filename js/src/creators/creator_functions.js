@@ -251,6 +251,19 @@ $(".js-save-item").click( function() {
 	}
 } );
 
+$(".js-add-item-to-print-cart").click( function() {
+	if( current_selected_object && current_selected_object.size > 0) {
+
+		if(current_selected_object.item_name != "" && current_selected_object.item_name != "(nameless)") {
+			add_to_print_cart( current_selected_object.export_html() );
+			bootstrap_alert( "Your " + current_selected_object.object_label+ " has been added to your print cart.", "success" );
+		} else {
+			bootstrap_alert( "Please name your " + current_selected_object.object_label+ " before adding to print cart", "danger"  );
+		}
+	} else {
+		bootstrap_alert( "Please select a size for your " + current_selected_object.object_label+ " before adding to print cart", "danger"  );
+	}
+} );
 
 function load_selected_item() {
 	selectedItemIndex = $("input[name=selected_load]:checked").val();

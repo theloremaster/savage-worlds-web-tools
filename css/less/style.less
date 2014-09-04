@@ -241,10 +241,10 @@ textarea {
 
 .fade {
 	opacity: 0;
-	-webkit-transition: opacity 1s linear;
-	-moz-transition: opacity 1s linear;
-	-o-transition: opacity 1s linear;
-	transition: opacity 1s linear;
+	-webkit-transition: opacity .1s linear;
+	-moz-transition: opacity .1s linear;
+	-o-transition: opacity .1s linear;
+	transition: opacity .1s linear;
 }
 
 .fade.in {
@@ -391,8 +391,10 @@ and (max-width : 480px) {
     padding-left: 10px;
 }
 
+.js-print-cart-button,
 .bug-tweet {
 	margin-top: 20px;
+	margin-left: 10px;
 }
 
 .col-xs-15 {
@@ -484,6 +486,8 @@ legend {
 	color: @color-black;
 }
 
+
+
 .spinner {
   width: 100px;
 }
@@ -539,4 +543,49 @@ legend {
         width: 20%;
         float: left;
     }
+}
+
+@media screen {
+	.no-screen {
+		visibility: hidden !important;
+		display: none !important;
+	}
+}
+@media print {
+	.no-print {
+		visibility: hidden !important;
+		display: none !important;
+	}
+	h1, h2, h3, h4 {
+		margin: 0 !important;
+		padding: 0 !important;
+	}
+	h1 {
+		text-align: center;
+	}
+	hr {
+		margin: 5px 0 10px 0;
+	}
+	article {
+		border: 1px solid @color-light-gray;
+		border-radius: 20px;
+		padding: 10px;
+		margin-bottom: 10px;
+	}
+	img {
+		float: left;
+		border: 0 10px 10px 0;
+		height: 100px;
+		width: auto;
+	}
+	a, button {
+		visibility: hidden !important;
+		display: none !important;
+	}
+	.c-b {
+		border: none;
+		border-top: 1px solid @color-light-gray;
+		margin: 10px 0 0 0;
+		border-radius: 0;
+	}
 }

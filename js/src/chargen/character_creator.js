@@ -642,7 +642,7 @@ function propagate_advancement_section() {
 		var current_add_advancement = $(this).attr("ref") / 1;
 
 		html = "";
-		// TODO propogate advancement dialog as per the advancement selected
+
 		for(advc = 0; advc < chargen_advancements.length; advc++){
 			checked = "";
 			if(advc == 0) {
@@ -700,6 +700,7 @@ function propagate_advancement_section() {
 		}
 		html += "</select>"
 
+		// TODO - Recreate this list so that someone can't "cheat" to get past the attribute's value
 		html += "<select class=\"js-advance-advance-skill2\">";
 		html += "<option value=\"\">- Advance Skill Below Attribute-</option>";
 		for(skc = 0; skc < current_character.selected_skills.length; skc++) {
@@ -1703,7 +1704,6 @@ function propagate_perks_section() {
 
 	}
 
-	// TODO make list of selected perks
 	//
 	current_perks = current_character.list_perks();
 	list_perks_html = "";
@@ -1839,6 +1839,12 @@ function create_print_popup() {
 	return true;
 
 }
+
+$(".js-chargen-add-printcart").unbind("click");
+$(".js-chargen-add-printcart").click( function() {
+	bootstrap_modal_alert( "Your character has been added to your print cart.", "success" );
+	add_to_print_cart( current_character.export_html() );
+});
 
 $(".js-chargen-import-data").click( function() {
 	if( $(".js-chargen-import-code").val() != "" ) {

@@ -75,6 +75,15 @@ function bootstrap_alert(messageText, alertClass) {
 	window.setTimeout(function() { $(".alert").alert('close'); }, 2000);
 }
 
+function bootstrap_modal_alert(messageText, alertClass) {
+	if( !alertClass )
+		alertClass = "info";
+	dismissButton = '<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>';
+	html = "<div class='alert fade in alert-" + alertClass + "'>" + dismissButton + messageText+ "</div>";
+
+	$(".js-modal-alert-container").html( html );
+	window.setTimeout(function() { $(".alert").alert('close'); }, 2000);
+}
 
 function clone_object(originalObject) {
 	return jQuery.extend({}, originalObject);

@@ -1,8 +1,8 @@
 CACHE MANIFEST
 
-# Version 2014-09-03-10
-# September 3, 2014 revision 8
-# Chargen: Added 'Raise 2 skills die type less than linked attribute' advancement, hid debug fields
+# Version 2014-09-04-01
+# September 4, 2014 revision 1
+# Global: Added Print Cart functionality throughout the site, Character creator set to 'Feature Complete.' Sped up the very annoying dialog fades.
 
 CACHE:
 http://jdgwf.github.io/savage-worlds-web-tools/extras_view.html
@@ -20,6 +20,7 @@ http://jdgwf.github.io/savage-worlds-web-tools/power_armor_creator.html
 http://jdgwf.github.io/savage-worlds-web-tools/walker_creator.html
 http://jdgwf.github.io/savage-worlds-web-tools/index.html
 http://jdgwf.github.io/savage-worlds-web-tools/cards_test.html
+http://jdgwf.github.io/savage-worlds-web-tools/print_cart.html
 http://jdgwf.github.io/savage-worlds-web-tools/
 
 http://jdgwf.github.io/savage-worlds-web-tools/js/jquery-1.10.2.min.js

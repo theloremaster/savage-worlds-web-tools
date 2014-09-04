@@ -29,6 +29,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-xs-12">
+				<div class="pull-right text-right js-print-cart-button"></div>
 				<div class="bug-tweet pull-right text-right">Found a bug?<br /><a href="https://twitter.com/intent/tweet?screen_name=Gauthic&text=%23SWWebTools%20Bug%20CharGen%3A%20" class="twitter-mention-button" data-related="Gauthic">Tweet to @Gauthic</a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script></a></div>
 				<h1><a class="ios_app_click" href="./index.html" title="Savage Worlds Web Tools">Savage Worlds Web Tools</a><br /> Character Creator</h1>
 				<p class="js-smarty-comment">This web app is a rudimentary Character Creator for the Savage Worlds pen and paper role playing game.</p>
@@ -79,13 +80,16 @@
       		<div class="modal-header">
 				<h4 class="modal-title">Print/Copy Character</h4>
 			</div>
+			<div class="js-modal-alert-container"></div>
 			<div class="modal-body js-print-character-content">
 
 			</div>
 
       		<div class="modal-footer">
         		<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-        		<button type="button" class="btn btn-default" onclick="window.print();">Print</button>
+
+        		<button type="button" class="btn btn-default js-chargen-add-printcart">Add to Print Cart</button>
+        		<button type="button" class="btn btn-default" onclick="window.print();">Print Now</button>
       		</div>
 		</div>
 	</div>
@@ -415,7 +419,7 @@
 				<p>You can contribute to this project at <a href="https://github.com/jdgwf/savage-worlds-web-tools">https://github.com/jdgwf/savage-worlds-web-tools</a></p>
 
 
-				<p class="text-right">Updated/Version: 2014-09-03-10</p>
+				<p class="text-right">App Version: 2014-09-04-01</p>
 
 			</div>
 		</div>

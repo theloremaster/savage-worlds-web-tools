@@ -71,10 +71,14 @@ creator_base.prototype = {
 		this.available_sizes = available_sizes
 	},
 
+	export_html: function() {
+		return this.create_stats_block();
+	},
+
 	create_stats_block: function(jquery_selector) {
 		html_return = "";
 
-		html_return += "<h4>" + this.item_name + "</h4>";
+		html_return += "<h3>" + this.item_name + "</h3>";
 		html_return += "<p>";
 
 		html_return += this.object_description + "</p><br />";

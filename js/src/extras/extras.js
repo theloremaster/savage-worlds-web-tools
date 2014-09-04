@@ -79,12 +79,16 @@ function exportToSQL() {
 
 	return sql;
 }
-function displayExtra(extra, indexNumber) {
+function displayExtra(extra, indexNumber, no_buttons) {
 //	extra = getExtra(extraName);
+	if(!no_buttons)
+		no_buttons = 0;
 	extraHTML = "";
 	if(extra != null) {
 		// Name
-		extraHTML += "<div class=\"extra-card\"><button ref=\"" + indexNumber + "\" type=\"button\" class=\"js-add-local btn btn-primary btn-sm pull-right\">Add To Bookmarks</button>";
+		extraHTML += "<div class=\"extra-card\">";
+		if(no_buttons == 0)
+			extraHTML += "<button ref=\"" + indexNumber + "\" type=\"button\" class=\"js-add-local btn btn-primary btn-sm pull-right\">Add To Print Cart</button>";
 		if(extra.wildcard > 0)
 			extraHTML += "<h3 title=\"These " + extra.name.toLowerCase() + " critters are Wildcards\">* " + extra.name + "";
 		else
@@ -108,21 +112,21 @@ function displayExtra(extra, indexNumber) {
 		extraHTML += "<div class=\"extra-stats\">";
 		if(typeof(extra.blurb) == "string") {
 			if(extra.blurb)
-				extraHTML += "<p>" + extra.blurb + "</p>";
+				extraHTML += "<p class=\"no-print\">" + extra.blurb + "</p>";
 
 			if(extra.blurb_extra)
-				extraHTML += "<p>" + extra.blurb_extra + "</p>";
+				extraHTML += "<p class=\"no-print\">" + extra.blurb_extra + "</p>";
 
 			if(extra.blurb_extra2)
-				extraHTML += "<p>" + extra.blurb_extra2 + "</p>";
+				extraHTML += "<p class=\"no-print\">" + extra.blurb_extra2 + "</p>";
 
 			if(extra.blurb_extra3)
-				extraHTML += "<p>" + extra.blurb_extra3 + "</p>";
+				extraHTML += "<p class=\"no-print\">" + extra.blurb_extra3 + "</p>";
 		}
 
 		if(typeof(extra.blurb) == "object" || typeof(extra.blurb) == "Array" ) {
 			for(blurbCount = 0; blurbCount < extra.blurb.length; blurbCount++)
-				extraHTML += "<p>" + extra.blurb[blurbCount] + "</p>";
+				extraHTML += "<p class=\"no-print\">" + extra.blurb[blurbCount] + "</p>";
 		}
 
 		// Attributes
@@ -194,7 +198,7 @@ function displayExtra(extra, indexNumber) {
 		extraHTML += "<strong>Abilities: </strong><br />";
 		abilitiesHTML = "";
 		$.map(extra.abilities, function(ability, abilityName){
-			abilitiesHTML += "<li><strong>" + ability.name + "</strong>: " + ability.description + "</li>";
+			abilitiesHTML += "<li><strong>" + ability.name + "</strong><span class=\"no-print\">: " + ability.description + "</span></li>";
 		});
 		if(abilitiesHTML == "")
 //			abilitiesHTML = abilitiesHTML.substring(0, abilitiesHTML.length -2);
@@ -250,7 +254,8 @@ function sortExtras() {
 
 function filterExtras(searchTerm) {
 	returnHTML = "";
-	searchTerm = searchTerm.toLowerCase();
+	searchTerm = searchTerm.toLowerCase().trim();
+	console.log(searchTerm);
 	for (var lCount = 0; lCount < extraDatabase.length; lCount++) {
 
 		bookIsChecked = false;
@@ -326,63 +331,39 @@ function getAvailableExtrasFromBook(bookName) {
 }
 
 function updateLocalStats() {
-	if(typeof(Storage)!=="undefined") {
 
-		if(!localStorage.localStats)
-			localStorage.localStats = JSON.stringify(Array());
-		var localStats = jQuery.parseJSON( localStorage.localStats );
-		statusHTML = "You have ";
-		statusHTML += localStats.length;
-		statusHTML += " items in your local view<br />";
-		if(localStats.length > 0) {
-			statusHTML += "<button type=\"button\" class=\"btn btn-sm btn-danger small js-clear-local\">Clear</button> ";
-			statusHTML += "<button type=\"button\" class=\"btn btn-sm btn-success small js-view-local\">View</button> ";
-		}
+	$('.js-add-local').unbind('click');
+	$(".js-add-local").click( function() {
 
-		$(".js-local-status").html( statusHTML );
+		extra_item = extraDatabase[ $(this).attr("ref")]
+		bootstrap_alert( "" + extra_item.name+ " has been added to your print cart.", "success" );
+		add_to_print_cart ( displayExtra( extra_item, null, 1) );
 
-		$('.js-view-local').off('click');
-		$(".js-view-local").click( function() {
-			window.open("./extras_view.html");
-		});
 
-		$('.js-clear-local').off('click');
-		$(".js-clear-local").click( function() {
-			bootbox.confirm("Are you sure you want to clear out your local selection?", function(ok_clicked) {
-				if(ok_clicked) {
-					localStorage.localStats = JSON.stringify(Array());
-					updateLocalStats();
-				}
-			});
-		});
+	});
 
-		$('.js-add-local').off('click');
-		$(".js-add-local").click( function() {
-
-			addExtra = extraDatabase[ $(this).attr("ref")];
-			console.log(addExtra);
-			if(addExtra) {
-				var localStats = jQuery.parseJSON( localStorage.localStats );
-
-				localStats.push( addExtra );
-
-				localStorage.localStats = JSON.stringify( localStats );
-
-			}
-			updateLocalStats();
-		});
-	} else {
-		$(".js-add-local").hide();
-	}
 }
 
 $(document).ready( function() {
 	sortExtras();
 	updateLocalStats();
-	$("#search-results").html( defaultSearchMessage() );
+	var extras_search_term = "";
+
 	$("#book-checks").html(
 		availableBookChecks()
 	);
+
+	if( localStorage.extras_search_term != "") {
+		$("#search-box").val(localStorage.extras_search_term);
+
+		$("#search-results").html( filterExtras( localStorage.extras_search_term ) );
+
+		updateLocalStats();
+	} else {
+		$("#search-results").html( defaultSearchMessage() );
+	}
+
+
 
 	$("#search-box").keyup( function(){
 		if($(this).val() != "")
@@ -390,6 +371,7 @@ $(document).ready( function() {
 		else
 			$("#search-results").html( defaultSearchMessage() );
 		updateLocalStats();
+		localStorage.extras_search_term = $("#search-box").val().toLowerCase().trim();
 	});
 
 	$("#book-checks label input[type=checkbox]").change( function() {
@@ -399,6 +381,7 @@ $(document).ready( function() {
 		else
 			$("#search-results").html( defaultSearchMessage() );
 		updateLocalStats();
+		localStorage.extras_search_term = $("#search-box").val();
 	});
 
 });
