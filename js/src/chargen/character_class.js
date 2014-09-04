@@ -392,20 +392,6 @@ character_class.prototype = {
 				}
 			}
 
-			if( this.arcane_background > 0 ) {
-				if(this.arcane_background_selected) {
-					if(this.arcane_background_selected.power_points)
-						this.power_points_available += this.arcane_background_selected.power_points;
-					if(this.arcane_background_selected.starting_powers)
-						this.powers_available += this.arcane_background_selected.starting_powers;
-
-					this.powers_available -= this.selected_powers.length;
-				}
-			} else {
-				// remove any arcane items
-				this.arcane_background_selected = "";
-				this.selected_powers = Array();
-			}
 		} else {
 			//reset xp and advancements and rank to 0
 			this.xp = 0;
@@ -413,6 +399,22 @@ character_class.prototype = {
 			this.selected_advancements = Array();
 		}
 
+
+		// Apply Any Arcane Background items.
+		if( this.arcane_background > 0 ) {
+			if(this.arcane_background_selected) {
+				if(this.arcane_background_selected.power_points)
+					this.power_points_available += this.arcane_background_selected.power_points;
+				if(this.arcane_background_selected.starting_powers)
+					this.powers_available += this.arcane_background_selected.starting_powers;
+
+				this.powers_available -= this.selected_powers.length;
+			}
+		} else {
+			// remove any arcane items
+			this.arcane_background_selected = "";
+			this.selected_powers = Array();
+		}
 		/* Equipment */
 		this.current_funds = this.starting_funds;
 		for( eq_count = 0; eq_count < this.selected_gear.length; eq_count++) {
@@ -1402,7 +1404,7 @@ character_class.prototype = {
 				if(current_edge) {
 					if(!current_edge.during_slot)
 						current_edge.during_slot = -1;
-					if(current_edge.during_slot > -1)
+					if(current_edge.during_slot == -1)
 						export_object.edges.push( current_edge.name );
 				}
 			}
