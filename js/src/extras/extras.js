@@ -1,3 +1,6 @@
+if(!localStorage.extras_search_term)
+	localStorage.extras_search_term = "";
+
 function exportToSQL() {
 	sql = "truncate table `extras`;\n\n";
 	for (var lCount = 0; lCount < extraDatabase.length; lCount++) {
@@ -259,7 +262,6 @@ function filterExtras(searchTerm) {
 	else
 		searchTerm = "";
 
-	console.log(searchTerm);
 	for (var lCount = 0; lCount < extraDatabase.length; lCount++) {
 
 		bookIsChecked = false;
@@ -360,7 +362,10 @@ $(document).ready( function() {
 	if( localStorage.extras_search_term != "") {
 		$("#search-box").val(localStorage.extras_search_term);
 
-		$("#search-results").html( filterExtras( localStorage.extras_search_term ) );
+		if(localStorage.extras_search_term != "")
+			$("#search-results").html( filterExtras( localStorage.extras_search_term ) );
+		else
+			$("#search-results").html( defaultSearchMessage() );
 
 		updateLocalStats();
 	} else {
