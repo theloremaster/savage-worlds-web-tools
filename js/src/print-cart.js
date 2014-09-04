@@ -50,7 +50,7 @@ function add_to_print_cart( html ) {
 function print_cart_items_html() {
 	current_items = get_print_cart_items();
 	if( current_items.length > 0 ) {
-		$(".js-print-cart-button").html( "<a href=\"print_cart.html\" class=\"btn btn-xs btn-primary\">Print Cart (" + current_items.length + ")</a>" );
+		$(".js-print-cart-button").html( "<a href=\"print_cart.html\" class=\"ios_app_click btn btn-xs btn-primary\">Print Cart (" + current_items.length + ")</a>" );
 	}
 	else
 		$(".js-print-cart-button").html( "" );
